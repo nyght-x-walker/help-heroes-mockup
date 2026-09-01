@@ -148,7 +148,7 @@
 
   <div class="w-full max-w-[375px] bg-[#0F172A] text-white rounded-xl px-3 py-2.5 mb-3 flex items-center gap-2.5 shadow-sm lg:hidden">
     <span class="w-7 h-7 rounded-full bg-white/15 border border-white/20 flex items-center justify-center text-[12px]">👋</span>
-    <p class="text-[12px] font-semibold leading-none">Good evening, James! <span class="font-normal text-white/70 hidden sm:inline">— Week 6 prototype with voice walkthrough + videos below</span></p>
+    <p class="text-[12px] font-semibold leading-none">Good evening, James! <span class="font-normal text-white/70 hidden sm:inline">Week 6 prototype with voice walkthrough and videos below</span></p>
     <span class="ml-auto w-2 h-2 bg-emerald-400 rounded-full animate-pulse shrink-0"></span>
   </div>
 
@@ -705,12 +705,12 @@
 
     // ==================== WALKTHROUGH: Animation + Voice (0:00 to 2:00) ====================
     const walkthroughSteps = [
-      { start: 0, end: 15, screen: 'screen-home', title: 'Introduction', text: "Welcome to the 'Help Heroes' wireframe. This is a mobile app designed for first-generation university students like James – students who need help but don't know what to ask, and who feel ashamed to try." },
-      { start: 15, end: 35, screen: 'screen-home', title: 'Screen 1: Home', text: "The home screen gives James a warm, personalized greeting and a quick overview of his assignments and deadlines. But the most important feature is the large, prominent 'Ask for Help' button. This is where the Help Heroes journey begins." },
-      { start: 35, end: 60, screen: 'screen-help-request', title: 'Screen 2: Help Request', text: "On the help request screen, James can ask for help in multiple ways – text, image, or voice. But the key feature is the 'I don't know how to ask' option. This is designed for students like James who feel paralyzed by not knowing what to ask. They're immediately connected to a mentor." },
-      { start: 60, end: 80, screen: 'screen-help-wall', title: 'Screen 3: Help Wall', text: "The Help Wall is an anonymous Q&A display. Students can see what others are asking – and they realize they're not alone. Featured questions highlight common concerns. This builds a sense of community and normalizes help-seeking." },
-      { start: 80, end: 100, screen: 'screen-profile', title: 'Screen 4: Profile', text: "James's profile shows his Help Hero badges. Each badge is earned when he asks for help. This reframes help-seeking as a strength to be celebrated, not a weakness to be hidden. His journey reflection reminds him that he's grown through asking." },
-      { start: 100, end: 120, screen: 'screen-community', title: 'Screen 5: Community', text: "Finally, the Community screen is a text-only, low-bandwidth forum where Help Heroes share their stories. Students like Anna, Maria, and Aisha share what they've learned. This builds a culture of support and belonging." }
+      { start: 0, end: 15, screen: 'screen-home', title: 'Introduction', text: "Help Heroes is for first-gen students like James who need help but don't know what to ask and feel ashamed to try." },
+      { start: 15, end: 35, screen: 'screen-home', title: 'Screen 1: Home', text: "Home shows a greeting and assignments. The main feature is the large Ask for Help button." },
+      { start: 35, end: 60, screen: 'screen-help-request', title: 'Screen 2: Help Request', text: "Help request lets James ask by text, image or voice. The key is the I don't know how to ask option for students who feel stuck. It connects to a mentor." },
+      { start: 60, end: 80, screen: 'screen-help-wall', title: 'Screen 3: Help Wall', text: "Help Wall is anonymous Q and A. Students see others ask the same things and realize they are not alone." },
+      { start: 80, end: 100, screen: 'screen-profile', title: 'Screen 4: Profile', text: "Profile shows Help Hero badges. Each badge is earned by asking. It makes help a strength to celebrate." },
+      { start: 100, end: 120, screen: 'screen-community', title: 'Screen 5: Community', text: "Community is a text only, low bandwidth forum. Help Heroes share stories and support each other." }
     ];
     const totalDuration = 120;
     let walkthroughTimer = null;
@@ -781,7 +781,7 @@
       voices.forEach(v => {
         const opt = document.createElement('option');
         opt.value = v.name;
-        opt.textContent = v.name + ' (' + v.lang + ')' + (v.name === best?.name ? ' – Recommended' : '');
+        opt.textContent = v.name + ' (' + v.lang + ')' + (v.name === best?.name ? ' - Recommended' : '');
         if (v.name === best?.name) opt.selected = true;
         sel.appendChild(opt);
       });
