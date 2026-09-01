@@ -1,996 +1,344 @@
-<!--
-  Help Heroes | App Mockup
-  Name: James First-Generation Student (Persona)
-  Date: August 25, 2026
-  Assignment: Design Thinking Project Help Heroes Mobile App Wireframe (Single HTML File)
-  Description: Mobile-first 375×812 mockup with 5 screens, Tailwind CSS + Font Awesome + Vanilla JS,
-               slide transitions, phone frame container, bottom navigation.
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Help Heroes | App Mockup</title>
-  <!-- Tailwind CSS via CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#2563EB',
-            secondary: '#F59E0B',
-            appBg: '#F8FAFC',
-          },
-          borderRadius: {
-            'card': '12px',
-            'btn': '8px',
-          },
-          fontFamily: {
-            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-          }
-        }
-      }
-    }
-  </script>
-  <!-- Font Awesome via CDN -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
-    /* Screen slide transition left out / right in */
-    .screen {
-      position: absolute;
-      inset: 0;
-      overflow-y: auto;
-      overflow-x: hidden;
-      background: white;
-      padding: 20px;
-      padding-bottom: 92px;
-      will-change: transform, opacity;
-      transition: transform 320ms cubic-bezier(0.32, 0.72, 0, 1), opacity 280ms ease;
-      transform: translateX(100%);
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-    .screen.active {
-      transform: translateX(0);
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-    }
-    .screen.exit-left {
-      transform: translateX(-100%);
-      opacity: 0;
-      visibility: visible;
-      pointer-events: none;
-    }
-    /* subtle pulse for the special 'I don't know' button */
-    @keyframes softPulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.25); }
-      50% { box-shadow: 0 0 0 8px rgba(245, 158, 11, 0); }
-    }
-    .pulse-amber { animation: softPulse 2.4s infinite; }
-    /* hide scrollbar but keep scroll */
-    .screen::-webkit-scrollbar { display: none; }
-    .screen { -ms-overflow-style: none; scrollbar-width: none; }
-    /* hover lift utility */
-    .hover-lift { transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease, background-color 150ms ease; }
-    .hover-lift:hover { transform: translateY(-1px); }
-    .hover-lift:active { transform: translateY(0); }
-  
-    /* Walkthrough caption and progress */
-    #narratorCaption {
-      position: absolute;
-      bottom: 82px;
-      left: 12px;
-      right: 12px;
-      background: rgba(17,24,39,0.92);
-      backdrop-filter: blur(8px);
-      color: white;
-      padding: 12px 14px;
-      border-radius: 12px;
-      font-size: 12px;
-      line-height: 1.45;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
-      z-index: 15;
-      transform: translateY(8px);
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transition: transform 220ms ease, opacity 220ms ease;
-    }
-    #narratorCaption.visible {
-      transform: translateY(0);
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-    }
-    #walkthroughBar {
-      width: 100%;
-      max-width: 375px;
-    }
-    #progressTrack {
-      height: 6px;
-      background: #E5E7EB;
-      border-radius: 999px;
-      overflow: hidden;
-    }
-    #progressFill {
-      height: 100%;
-      width: 0%;
-      background: #2563EB;
-      border-radius: 999px;
-      transition: width 200ms linear;
-    }
-
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Help Heroes Overview | Design Thinking Project</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#2563EB',ink:'#0F172A',muted:'#64748B'},fontFamily:{sans:['Inter','system-ui','sans-serif'],display:['Fraunces','serif']},boxShadow:{card:'0 1px 3px rgba(15,23,42,0.06),0 12px 32px rgba(15,23,42,0.08)'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,800;9..144,900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*{font-family:Inter,system-ui,sans-serif}
+.font-display{font-family:Fraunces,serif}
+.grid-pattern{background-image:linear-gradient(to right,rgba(15,23,42,0.035) 1px,transparent 1px),linear-gradient(to bottom,rgba(15,23,42,0.035) 1px,transparent 1px);background-size:32px 32px}
+.reveal{opacity:0;transform:translateY(10px);animation:reveal 700ms ease forwards}
+.reveal:nth-child(2){animation-delay:90ms}.reveal:nth-child(3){animation-delay:180ms}
+@keyframes reveal{to{opacity:1;transform:none}}
+video{outline:none}
+</style>
 </head>
-<body class="bg-[#F1F5F9] min-h-screen flex flex-col items-center py-0 px-4">
-  <!-- Top Nav: Links to Overview / W5 / Testing -->
-  <nav class="w-full max-w-[1160px] flex items-center justify-between gap-3 py-3 px-1 mb-2">
-    <div class="flex items-center gap-2">
-      <a href="./overview.html" class="w-8 h-8 rounded-xl bg-[#2563EB] text-white flex items-center justify-center text-[14px] shadow-sm">🦸</a>
-      <a href="./overview.html" class="font-display font-[800] text-[14px] tracking-tight hidden sm:block">Help Heroes</a>
-      <span class="hidden sm:inline-flex text-[10px] font-bold tracking-widest uppercase bg-slate-900 text-white px-2 py-1 rounded-full ml-1">Week 6</span>
-      <span class="hidden md:inline text-[11px] text-slate-500 ml-2">Prototype • 375×812 • 5 screens • low-bandwidth</span>
-    </div>
-    <div class="flex items-center gap-1.5 text-[12px] font-semibold">
-      <a href="./overview.html" class="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full hover:bg-white border border-transparent hover:border-slate-200"><i class="fa-solid fa-house text-[11px]"></i> Overview</a>
-      <a href="./week5_project.html" class="hidden sm:inline-flex items-center gap-1.5 bg-white border border-slate-200 px-3 py-1.5 rounded-full hover:bg-slate-50">W5 board</a>
-      <a href="./testing_board.html" class="hidden sm:inline-flex items-center gap-1.5 bg-white border border-slate-200 px-3 py-1.5 rounded-full hover:bg-slate-50">Testing</a>
-      <a href="./wireframe_image.html" class="hidden lg:inline-flex items-center gap-1.5 bg-white border border-slate-200 px-3 py-1.5 rounded-full hover:bg-slate-50">Wireframe</a>
-      <a href="./index_week7.html" class="inline-flex items-center gap-1.5 bg-slate-900 text-white px-3 py-1.5 rounded-full hover:bg-black text-[11px] font-bold">W7 updated <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
-    </div>
-  </nav>
+<body class="bg-[#F8FAFC] text-ink antialiased selection:bg-primary selection:text-white">
+<div class="fixed inset-0 -z-10 pointer-events-none"><div class="absolute inset-0 bg-[#F8FAFC]"></div><div class="absolute inset-0 grid-pattern opacity-[0.5]"></div><div class="absolute -top-[360px] left-1/2 -translate-x-1/2 w-[1400px] h-[760px] rounded-full blur-[100px] opacity-[0.14]" style="background:radial-gradient(ellipse at center,#2563EB 0%,#8B5CF6 34%,transparent 72%)"></div><div class="absolute top-[680px] -right-[200px] w-[600px] h-[600px] rounded-full blur-[90px] opacity-[0.09]" style="background:radial-gradient(circle at center,#F59E0B 0%,transparent 68%)"></div></div>
 
-  <div class="w-full max-w-[375px] bg-[#0F172A] text-white rounded-xl px-3 py-2.5 mb-3 flex items-center gap-2.5 shadow-sm lg:hidden">
-    <span class="w-7 h-7 rounded-full bg-white/15 border border-white/20 flex items-center justify-center text-[12px]">👋</span>
-    <p class="text-[12px] font-semibold leading-none">Good evening, James! <span class="font-normal text-white/70 hidden sm:inline">Week 6 prototype with voice walkthrough and videos below</span></p>
-    <span class="ml-auto w-2 h-2 bg-emerald-400 rounded-full animate-pulse shrink-0"></span>
-  </div>
-
-  <!-- Walkthrough Controls: Animation + Voice (0:00 to 2:00) -->
-  <div id="walkthroughBar" class="bg-white rounded-xl border border-gray-200 shadow-sm p-3 mb-4 flex flex-col gap-2">
-    <div class="flex items-center gap-2">
-      <button id="playBtn" class="bg-[#2563EB] hover:bg-[#1D4ED8] active:bg-[#1E40AF] text-white text-[13px] font-bold px-4 py-2 rounded-lg flex items-center gap-2 shadow-sm hover:shadow-md transition-all shrink-0">
-        <i class="fa-solid fa-play text-[11px]"></i> <span id="playLabel">Play</span>
-      </button>
-      <div class="flex-1 min-w-0">
-        <div class="flex items-center justify-between mb-1">
-          <span class="text-[11px] font-bold text-gray-700" id="stepLabel">Ready to play walkthrough</span>
-          <span class="text-[11px] font-mono text-gray-500" id="timeLabel">0:00 / 2:00</span>
-        </div>
-        <div id="progressTrack"><div id="progressFill"></div></div>
-      </div>
+<!-- Sticky Nav -->
+<nav class="sticky top-0 z-40 backdrop-blur-xl bg-white/80 border-b border-slate-200">
+  <div class="max-w-[1160px] mx-auto px-4 sm:px-6 lg:px-8 h-[56px] flex items-center justify-between gap-4">
+    <a href="./overview.html" class="flex items-center gap-2.5">
+      <span class="w-8 h-8 rounded-xl bg-[#2563EB] text-white flex items-center justify-center text-[16px] shadow-sm">🦸</span>
+      <span class="font-display font-[900] tracking-tight text-[17px] leading-none">Help Heroes</span>
+      <span class="hidden sm:inline-flex text-[11px] font-bold tracking-widest uppercase bg-slate-900 text-white px-2 py-1 rounded-full ml-1">Overview</span>
+    </a>
+    <div class="hidden md:flex items-center gap-1.5 text-[12px] font-semibold">
+      <a href="./week5_project.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 5</a>
+      <a href="./week6.html" class="px-3 py-1.5 rounded-full bg-[#EFF6FF] text-primary border border-blue-200">Week 6 prototype</a>
+      <a href="./index_week7.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 7</a>
+      <span class="w-px h-4 bg-slate-200 mx-1"></span>
+      <a href="./testing_board.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Testing</a>
+      <a href="./wireframe_image.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Wireframe</a>
     </div>
-    <div class="flex items-center justify-between gap-2">
-      <div class="flex items-center gap-2 text-[11px] text-gray-600 flex-wrap">
-        <label class="flex items-center gap-1.5 cursor-pointer select-none hover:text-gray-800"><input type="checkbox" id="voiceToggle" checked class="rounded border-gray-300 text-[#2563EB] focus:ring-[#2563EB]"> Voice</label>
-        <select id="voiceSelect" class="text-[10px] border border-gray-200 rounded-md px-1.5 py-1 bg-white text-gray-700 max-w-[140px] truncate focus:outline-none focus:ring-1 focus:ring-[#2563EB] focus:border-[#2563EB]" title="Choose voice - Google Natural recommended"></select>
-        <span class="w-px h-3 bg-gray-300 hidden sm:block"></span>
-        <label class="flex items-center gap-1.5 cursor-pointer select-none hover:text-gray-800"><input type="checkbox" id="captionToggle" checked class="rounded border-gray-300 text-[#2563EB] focus:ring-[#2563EB]"> Captions</label>
-      </div>
-      <div class="flex items-center gap-1">
-        <button id="restartBtn" class="text-[11px] font-semibold text-gray-500 hover:text-[#2563EB] px-2 py-1 rounded hover:bg-gray-100 transition-colors"><i class="fa-solid fa-rotate-left mr-1"></i>Restart</button>
-      </div>
+    <div class="flex items-center gap-1.5">
+      <a href="./week5_project.html" class="hidden sm:inline-flex items-center gap-1.5 bg-white border border-slate-200 px-3 py-1.5 rounded-full text-[12px] font-semibold hover:bg-slate-50">W5 board</a>
+      <a href="./week6.html" class="inline-flex items-center gap-1.5 bg-[#2563EB] text-white px-3.5 py-1.5 rounded-full text-[12px] font-bold hover:bg-[#1D4ED8] shadow-sm">Open prototype <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
     </div>
   </div>
+</nav>
 
-  <!-- Phone frame / container mimics iPhone 375x812 -->
-  <div class="w-full max-w-[375px] bg-white rounded-[28px] shadow-[0_25px_60px_rgba(15,23,42,0.18),0_10px_24px_rgba(15,23,42,0.12),0_0_0_1px_rgba(15,23,42,0.06)] overflow-hidden border border-gray-200/70 flex flex-col min-h-[812px] h-[812px] relative">
+<main class="max-w-[1160px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
 
-    <!-- Status bar -->
-    <div class="h-[28px] bg-white flex items-center justify-between px-6 pt-2 text-[12px] font-semibold text-gray-900 shrink-0 z-10">
-      <span>9:41</span>
-      <div class="flex items-center gap-1.5">
-        <i class="fa-solid fa-signal text-[11px]"></i>
-        <i class="fa-solid fa-wifi text-[11px]"></i>
-        <i class="fa-solid fa-battery-three-quarters text-[13px]"></i>
-      </div>
-    </div>
-
-    <!-- Scrollable main content relative for slide -->
-    <main class="flex-1 relative overflow-hidden bg-white">
-
-      <!-- ==================== SCREEN 1: HOME ==================== -->
-      <section id="screen-home" class="screen active">
-        <!-- Greeting -->
-        <div class="mb-5">
-          <h1 class="text-[23px] font-extrabold text-gray-900 leading-tight tracking-tight">Good evening, James! 👋</h1>
-          <p class="text-[14px] text-gray-500 mt-1 font-medium">You're on track. Keep it up!</p>
-        </div>
-
-        <!-- Status cards -->
-        <div class="grid grid-cols-2 gap-3 mb-6">
-          <!-- Assignments -->
-          <div class="bg-[#EFF6FF] border border-[#DBEAFE] rounded-card p-4 shadow-sm hover:shadow-md hover-lift">
-            <div class="flex items-center gap-2 mb-2">
-              <span class="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm text-[#2563EB]">
-                <i class="fa-solid fa-book-open text-[13px]"></i>
-              </span>
-              <span class="text-[11px] font-semibold tracking-wide text-gray-600 uppercase">Assignments</span>
-            </div>
-            <p class="text-[20px] font-extrabold text-gray-900 leading-none">3 Due</p>
-            <p class="text-[12px] text-gray-500 mt-1">This week</p>
-          </div>
-          <!-- Upcoming Deadlines -->
-          <div class="bg-[#FEF3C7] border border-[#FDE68A] rounded-card p-4 shadow-sm hover:shadow-md hover-lift">
-            <div class="flex items-center gap-2 mb-2">
-              <span class="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm text-[#D97706]">
-                <i class="fa-regular fa-clock text-[13px]"></i>
-              </span>
-              <span class="text-[11px] font-semibold tracking-wide text-gray-600 uppercase">Upcoming</span>
-            </div>
-            <p class="text-[20px] font-extrabold text-gray-900 leading-none">Tomorrow</p>
-            <p class="text-[12px] text-gray-500 mt-1">Deadlines</p>
-          </div>
-        </div>
-
-        <!-- Primary CTA -->
-        <button onclick="showScreen('screen-help-request')" class="w-full bg-[#2563EB] hover:bg-[#1D4ED8] active:bg-[#1E40AF] text-white font-extrabold text-[18px] tracking-wide py-[18px] px-6 rounded-[16px] shadow-[0_10px_24px_rgba(37,99,235,0.38)] flex items-center justify-center gap-3 hover:shadow-[0_12px_28px_rgba(37,99,235,0.42)] hover:-translate-y-[1px] active:translate-y-0 transition-all duration-150">
-          <span class="text-[22px] leading-none">🦸</span>
-          <span>ASK FOR HELP</span>
-        </button>
-        <p class="text-center text-[12px] text-gray-400 mt-3 mb-6 font-medium">No question is too small help is strength 💙</p>
-
-        <!-- Three smaller action buttons -->
-        <div class="grid grid-cols-3 gap-3">
-          <button onclick="showScreen('screen-help-wall')" class="bg-white border border-gray-200 rounded-card py-4 px-2 flex flex-col items-center gap-2.5 shadow-sm hover:shadow-md hover:border-[#2563EB]/25 hover:-translate-y-[1px] transition-all">
-            <span class="w-11 h-11 rounded-full bg-[#EFF6FF] flex items-center justify-center text-[#2563EB]">
-              <i class="fa-solid fa-layer-group text-[16px]"></i>
-            </span>
-            <span class="text-[11px] font-bold text-gray-800 leading-tight text-center">Help Wall</span>
-          </button>
-          <button onclick="showScreen('screen-community')" class="bg-white border border-gray-200 rounded-card py-4 px-2 flex flex-col items-center gap-2.5 shadow-sm hover:shadow-md hover:border-[#F59E0B]/25 hover:-translate-y-[1px] transition-all">
-            <span class="w-11 h-11 rounded-full bg-[#FFFBEB] flex items-center justify-center text-[#D97706] border border-[#FDE68A]">
-              <i class="fa-solid fa-users text-[15px]"></i>
-            </span>
-            <span class="text-[11px] font-bold text-gray-800 leading-tight text-center">Help Heroes</span>
-          </button>
-          <button onclick="showScreen('screen-profile')" class="bg-white border border-gray-200 rounded-card py-4 px-2 flex flex-col items-center gap-2.5 shadow-sm hover:shadow-md hover:border-[#F59E0B]/25 hover:-translate-y-[1px] transition-all">
-            <span class="w-11 h-11 rounded-full bg-[#FFFBEB] flex items-center justify-center text-[#D97706] border border-[#FDE68A]">
-              <i class="fa-solid fa-award text-[16px]"></i>
-            </span>
-            <span class="text-[11px] font-bold text-gray-800 leading-tight text-center">My Badge</span>
-          </button>
-        </div>
-      </section>
-
-      <!-- ==================== SCREEN 2: HELP REQUEST ==================== -->
-      <section id="screen-help-request" class="screen">
-        <!-- Header -->
-        <div class="flex items-center justify-between mb-5">
-          <button onclick="showScreen('screen-home')" class="text-[14px] font-semibold text-gray-600 hover:text-[#2563EB] flex items-center gap-1.5 transition-colors">
-            <i class="fa-solid fa-arrow-left text-[12px]"></i> Back
-          </button>
-          <h2 class="text-[16px] font-extrabold text-gray-900">Ask for Help</h2>
-          <span class="w-10"></span>
-        </div>
-
-        <!-- Prompt -->
-        <h3 class="text-[18px] font-bold text-gray-900 mb-3">What do you need help with?</h3>
-
-        <!-- Text input area -->
-        <div class="bg-white border border-gray-200 rounded-card p-3 shadow-sm focus-within:ring-2 focus-within:ring-[#2563EB]/20 focus-within:border-[#2563EB]/50 transition-all mb-4 hover:border-gray-300">
-          <textarea placeholder="I'm struggling with..." rows="4" class="w-full resize-none outline-none text-[14px] text-gray-800 placeholder:text-gray-400 bg-transparent"></textarea>
-          <div class="flex justify-between items-center pt-2 border-t border-gray-100 mt-2">
-            <span class="text-[11px] text-gray-400"><i class="fa-regular fa-circle-question mr-1"></i>Anonymous by default</span>
-            <span class="text-[11px] text-gray-400">0 / 500</span>
-          </div>
-        </div>
-
-        <!-- Two icon buttons -->
-        <div class="grid grid-cols-2 gap-3 mb-4">
-          <button class="bg-white border border-gray-200 rounded-card py-3.5 px-3 flex items-center justify-center gap-2 shadow-sm hover:shadow-md hover:border-[#2563EB]/20 hover:bg-[#F8FAFC] hover:-translate-y-[1px] transition-all group">
-            <span class="w-8 h-8 rounded-full bg-[#EFF6FF] group-hover:bg-[#DBEAFE] flex items-center justify-center text-[16px] transition-colors">📷</span>
-            <span class="text-[13px] font-semibold text-gray-700">Upload image</span>
-          </button>
-          <button class="bg-white border border-gray-200 rounded-card py-3.5 px-3 flex items-center justify-center gap-2 shadow-sm hover:shadow-md hover:border-[#2563EB]/20 hover:bg-[#F8FAFC] hover:-translate-y-[1px] transition-all group">
-            <span class="w-8 h-8 rounded-full bg-[#EFF6FF] group-hover:bg-[#DBEAFE] flex items-center justify-center text-[16px] transition-colors">🎙️</span>
-            <span class="text-[13px] font-semibold text-gray-700 leading-none text-left">Record<br><span class="font-medium text-[11px] text-gray-500">voice memo</span></span>
-          </button>
-        </div>
-
-        <!-- Find Help button -->
-        <button class="w-full bg-white border-2 border-[#2563EB] text-[#2563EB] hover:bg-[#EFF6FF] active:bg-[#DBEAFE] font-bold text-[15px] py-3.5 rounded-card flex items-center justify-center gap-2 hover:shadow-md hover:-translate-y-[1px] active:translate-y-0 transition-all mb-3">
-          <span>🔍</span> Find Help
-        </button>
-        <p class="text-center text-[11px] text-gray-400 mb-4">Search existing answers before posting</p>
-
-        <!-- Divider -->
-        <div class="flex items-center gap-3 my-4">
-          <div class="flex-1 h-px bg-gray-200"></div>
-          <span class="text-[11px] font-semibold text-gray-400 uppercase tracking-widest">or</span>
-          <div class="flex-1 h-px bg-gray-200"></div>
-        </div>
-
-        <!-- Special button: I don't know how to ask -->
-        <button class="w-full bg-[#FFFBEB] border-2 border-[#F59E0B] text-[#92400E] hover:bg-[#FEF3C7] active:bg-[#FDE68A] font-extrabold text-[15px] py-4 px-4 rounded-[16px] flex flex-col items-center justify-center gap-1 shadow-[0_6px_18px_rgba(245,158,11,0.18)] pulse-amber hover:shadow-[0_8px_22px_rgba(245,158,11,0.26)] hover:-translate-y-[1px] active:translate-y-0 transition-all">
-          <span class="flex items-center gap-2"><span class="text-[18px]">🆘</span> I don't know how to ask</span>
-          <span class="text-[11px] font-medium text-[#B45309]">We'll help you phrase it no judgment</span>
-        </button>
-        <p class="text-center text-[11px] text-[#D97706]/80 mt-2 font-medium">✨ Many Help Heroes started here</p>
-      </section>
-
-      <!-- ==================== SCREEN 3: HELP WALL ==================== -->
-      <section id="screen-help-wall" class="screen">
-        <!-- Header -->
-        <div class="flex items-center justify-between mb-5">
-          <button onclick="showScreen('screen-home')" class="text-[14px] font-semibold text-gray-600 hover:text-[#2563EB] flex items-center gap-1.5 transition-colors">
-            <i class="fa-solid fa-arrow-left text-[12px]"></i> Back
-          </button>
-          <h2 class="text-[16px] font-extrabold text-gray-900">Help Wall</h2>
-          <span class="w-10"></span>
-        </div>
-
-        <!-- Featured question card -->
-        <div class="bg-[#EFF6FF] border-2 border-[#2563EB] rounded-card p-4 shadow-[0_4px_14px_rgba(37,99,235,0.12)] mb-4 relative overflow-hidden hover:shadow-[0_6px_20px_rgba(37,99,235,0.16)] hover-lift">
-          <div class="absolute top-0 left-0 w-full h-1 bg-[#2563EB]"></div>
-          <div class="flex items-start gap-2.5">
-            <span class="text-[18px] leading-none mt-0.5">📌</span>
-            <div class="flex-1">
-              <h3 class="text-[14px] font-bold text-gray-900 leading-snug">How do I email my professor?</h3>
-              <p class="text-[12px] text-[#2563EB] font-semibold mt-1.5 flex items-center gap-1.5">
-                <i class="fa-solid fa-heart text-[11px]"></i> 145 students found this helpful
-              </p>
-            </div>
-            <span class="bg-[#2563EB] text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide shrink-0">Featured</span>
-          </div>
-        </div>
-
-        <!-- Three question cards -->
-        <div class="space-y-3 mb-5">
-          <!-- Card 1 -->
-          <div class="bg-white border border-gray-200 rounded-card p-4 shadow-sm hover:shadow-md hover:border-gray-300 hover-lift">
-            <div class="flex items-start gap-2.5">
-              <span class="text-[16px] leading-none mt-0.5">❓</span>
-              <div class="flex-1">
-                <h4 class="text-[13.5px] font-semibold text-gray-900 leading-snug">How do I change my course registration?</h4>
-                <p class="text-[11.5px] text-gray-500 mt-1.5 flex items-center gap-2">
-                  <span class="flex items-center gap-1"><i class="fa-regular fa-comment text-[11px]"></i> 3 replies</span>
-                  <span class="w-1 h-1 bg-gray-300 rounded-full"></span>
-                  <span class="flex items-center gap-1 text-[#2563EB] font-medium"><i class="fa-regular fa-heart text-[11px]"></i> 24 helpful</span>
-                </p>
-              </div>
-              <i class="fa-solid fa-chevron-right text-[11px] text-gray-300 mt-1"></i>
-            </div>
-          </div>
-          <!-- Card 2 -->
-          <div class="bg-white border border-gray-200 rounded-card p-4 shadow-sm hover:shadow-md hover:border-gray-300 hover-lift">
-            <div class="flex items-start gap-2.5">
-              <span class="text-[16px] leading-none mt-0.5">❓</span>
-              <div class="flex-1">
-                <h4 class="text-[13.5px] font-semibold text-gray-900 leading-snug">Can I get an extension because of internet issues?</h4>
-                <p class="text-[11.5px] text-gray-500 mt-1.5 flex items-center gap-2">
-                  <span class="flex items-center gap-1"><i class="fa-regular fa-comment text-[11px]"></i> 7 replies</span>
-                  <span class="w-1 h-1 bg-gray-300 rounded-full"></span>
-                  <span class="flex items-center gap-1 text-[#2563EB] font-medium"><i class="fa-regular fa-heart text-[11px]"></i> 56 helpful</span>
-                </p>
-              </div>
-              <i class="fa-solid fa-chevron-right text-[11px] text-gray-300 mt-1"></i>
-            </div>
-          </div>
-          <!-- Card 3 -->
-          <div class="bg-white border border-gray-200 rounded-card p-4 shadow-sm hover:shadow-md hover:border-gray-300 hover-lift">
-            <div class="flex items-start gap-2.5">
-              <span class="text-[16px] leading-none mt-0.5">❓</span>
-              <div class="flex-1">
-                <h4 class="text-[13.5px] font-semibold text-gray-900 leading-snug">What's the policy on using AI for assignments?</h4>
-                <p class="text-[11.5px] text-gray-500 mt-1.5 flex items-center gap-2">
-                  <span class="flex items-center gap-1"><i class="fa-regular fa-comment text-[11px]"></i> 12 replies</span>
-                  <span class="w-1 h-1 bg-gray-300 rounded-full"></span>
-                  <span class="flex items-center gap-1 text-[#2563EB] font-medium"><i class="fa-regular fa-heart text-[11px]"></i> 89 helpful</span>
-                </p>
-              </div>
-              <i class="fa-solid fa-chevron-right text-[11px] text-gray-300 mt-1"></i>
-            </div>
-          </div>
-        </div>
-
-        <!-- Ask a new question button -->
-        <button onclick="showScreen('screen-help-request')" class="w-full bg-[#2563EB] hover:bg-[#1D4ED8] active:bg-[#1E40AF] text-white font-bold text-[14px] py-3.5 rounded-card flex items-center justify-center gap-2 shadow-[0_6px_16px_rgba(37,99,235,0.28)] hover:shadow-[0_8px_20px_rgba(37,99,235,0.34)] hover:-translate-y-[1px] active:translate-y-0 transition-all">
-          <span>📝</span> Ask a new question
-        </button>
-      </section>
-
-      <!-- ==================== SCREEN 4: PROFILE ==================== -->
-      <section id="screen-profile" class="screen">
-        <!-- Header -->
-        <div class="flex items-center justify-between mb-5">
-          <button onclick="showScreen('screen-home')" class="text-[14px] font-semibold text-gray-600 hover:text-[#2563EB] flex items-center gap-1.5 transition-colors">
-            <i class="fa-solid fa-arrow-left text-[12px]"></i> Back
-          </button>
-          <h2 class="text-[16px] font-extrabold text-gray-900">My Profile</h2>
-          <span class="w-10"></span>
-        </div>
-
-        <!-- Profile section -->
-        <div class="bg-white border border-gray-200 rounded-[16px] p-6 shadow-sm flex flex-col items-center text-center mb-5 hover:shadow-md hover-lift">
-          <div class="w-20 h-20 rounded-full bg-gradient-to-br from-[#EFF6FF] to-[#DBEAFE] border-2 border-[#BFDBFE] flex items-center justify-center text-[36px] shadow-sm mb-3">
-            🦸
-          </div>
-          <h3 class="text-[18px] font-extrabold text-gray-900">James</h3>
-          <p class="text-[13px] text-gray-500 font-medium">First-Generation Student</p>
-          <div class="mt-3 bg-[#FFFBEB] border border-[#FDE68A] text-[#92400E] text-[12px] font-semibold px-3 py-1.5 rounded-full flex items-center gap-1.5">
-            <span>✨</span> Help Hero since Aug 2026
-          </div>
-        </div>
-
-        <!-- Help Hero Badges -->
-        <div class="mb-5">
-          <h4 class="text-[13px] font-extrabold text-gray-900 flex items-center gap-2 mb-3">
-            <span>🏆</span> Help Hero Badges
-          </h4>
-          <div class="grid grid-cols-3 gap-3">
-            <!-- Badge 1 -->
-            <div class="bg-[#FFFBEB] border border-[#FDE68A] rounded-card p-3 flex flex-col items-center text-center shadow-sm hover:shadow-md hover:-translate-y-[1px] transition-all">
-              <div class="w-11 h-11 rounded-full bg-white border border-[#FDE68A] flex items-center justify-center text-[20px] shadow-sm mb-2">🆕</div>
-              <p class="text-[11px] font-bold text-[#92400E] leading-tight">First Help</p>
-              <p class="text-[10px] text-[#B45309] mt-0.5">Asked first question</p>
-            </div>
-            <!-- Badge 2 -->
-            <div class="bg-[#FFFBEB] border border-[#FDE68A] rounded-card p-3 flex flex-col items-center text-center shadow-sm hover:shadow-md hover:-translate-y-[1px] transition-all">
-              <div class="w-11 h-11 rounded-full bg-white border border-[#FDE68A] flex items-center justify-center text-[20px] shadow-sm mb-2">📚</div>
-              <p class="text-[11px] font-bold text-[#92400E] leading-tight">Study Guide</p>
-              <p class="text-[10px] text-[#B45309] mt-0.5">Shared notes</p>
-            </div>
-            <!-- Badge 3 -->
-            <div class="bg-[#FFFBEB] border border-[#FDE68A] rounded-card p-3 flex flex-col items-center text-center shadow-sm hover:shadow-md hover:-translate-y-[1px] transition-all">
-              <div class="w-11 h-11 rounded-full bg-white border border-[#FDE68A] flex items-center justify-center text-[20px] shadow-sm mb-2">🤝</div>
-              <p class="text-[11px] font-bold text-[#92400E] leading-tight">Peer Mentor</p>
-              <p class="text-[10px] text-[#B45309] mt-0.5">Helped 5 peers</p>
-            </div>
-          </div>
-          <!-- Counter -->
-          <div class="mt-3 bg-white border border-[#FDE68A] rounded-full py-2 px-4 flex items-center justify-center gap-2 shadow-sm hover:shadow-sm transition-shadow">
-            <span class="text-[14px]">🏅</span>
-            <span class="text-[13px] font-bold text-[#92400E]">3 badges earned</span>
-            <span class="text-[11px] text-[#D97706]"> Keep going!</span>
-          </div>
-        </div>
-
-        <!-- Help Hero Journey -->
-        <div class="bg-[#F8FAFC] border border-gray-200 rounded-card p-4 hover:border-gray-300 transition-colors">
-          <h4 class="text-[13px] font-extrabold text-gray-900 flex items-center gap-2 mb-2">
-            <span>🤝</span> Help Hero Journey
-          </h4>
-          <p class="text-[12px] font-semibold text-gray-700 mb-2">What I've learned by asking:</p>
-          <ul class="space-y-1.5">
-            <li class="flex items-start gap-2 text-[12.5px] text-gray-600">
-              <span class="text-[#2563EB] mt-0.5">•</span> It's okay to ask for help
-            </li>
-            <li class="flex items-start gap-2 text-[12.5px] text-gray-600">
-              <span class="text-[#2563EB] mt-0.5">•</span> I'm not alone
-            </li>
-            <li class="flex items-start gap-2 text-[12.5px] text-gray-600">
-              <span class="text-[#2563EB] mt-0.5">•</span> Asking helps others too
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- ==================== SCREEN 5: COMMUNITY ==================== -->
-      <section id="screen-community" class="screen">
-        <!-- Header -->
-        <div class="flex items-center justify-between mb-4">
-          <button onclick="showScreen('screen-home')" class="text-[14px] font-semibold text-gray-600 hover:text-[#2563EB] flex items-center gap-1.5 transition-colors">
-            <i class="fa-solid fa-arrow-left text-[12px]"></i> Back
-          </button>
-          <h2 class="text-[16px] font-extrabold text-gray-900">Community</h2>
-          <span class="w-10"></span>
-        </div>
-
-        <!-- Banner -->
-        <div class="bg-[#ECFDF5] border border-[#A7F3D0] rounded-card p-3 flex items-start gap-2.5 mb-5">
-          <span class="w-7 h-7 rounded-full bg-white border border-[#A7F3D0] flex items-center justify-center text-[14px] shrink-0">💬</span>
-          <div>
-            <p class="text-[12px] font-bold text-[#065F46] leading-none">Low-Bandwidth Mode Text-only</p>
-            <p class="text-[11px] text-[#047857] mt-1 leading-snug">Uses minimal data. No images or video perfect for slow connections.</p>
-          </div>
-          <span class="ml-auto w-2 h-2 bg-[#10B981] rounded-full animate-pulse shrink-0 mt-1.5"></span>
-        </div>
-
-        <!-- Community posts -->
-        <div class="space-y-3 mb-5">
-          <!-- Post 1 Anna -->
-          <div class="bg-white border border-gray-200 rounded-card p-4 shadow-sm hover:shadow-md hover:border-gray-300 hover-lift">
-            <div class="flex items-center gap-2.5 mb-2">
-              <div class="w-8 h-8 rounded-full bg-[#EFF6FF] border border-[#DBEAFE] flex items-center justify-center text-[12px] font-bold text-[#2563EB]">A</div>
-              <div>
-                <p class="text-[13px] font-bold text-gray-900 leading-none">Anna</p>
-                <p class="text-[11px] text-gray-400">Help Hero • 2h ago</p>
-              </div>
-              <span class="ml-auto text-[10px] bg-[#EFF6FF] text-[#2563EB] font-semibold px-2 py-1 rounded-full">Text-only</span>
-            </div>
-            <p class="text-[13.5px] text-gray-800 leading-snug">I asked for help with my essay. Got great feedback! ✨</p>
-            <button class="mt-2.5 text-[12px] font-semibold text-[#2563EB] hover:text-[#1D4ED8] flex items-center gap-1 transition-colors">
-              <span>→ 12 responses</span> <i class="fa-solid fa-chevron-right text-[10px]"></i>
-            </button>
-          </div>
-          <!-- Post 2 Maria -->
-          <div class="bg-white border border-gray-200 rounded-card p-4 shadow-sm hover:shadow-md hover:border-gray-300 hover-lift">
-            <div class="flex items-center gap-2.5 mb-2">
-              <div class="w-8 h-8 rounded-full bg-[#FEF3C7] border border-[#FDE68A] flex items-center justify-center text-[12px] font-bold text-[#92400E]">M</div>
-              <div>
-                <p class="text-[13px] font-bold text-gray-900 leading-none">Maria</p>
-                <p class="text-[11px] text-gray-400">Help Hero • 5h ago</p>
-              </div>
-              <span class="ml-auto text-[10px] bg-[#FFFBEB] text-[#D97706] font-semibold px-2 py-1 rounded-full border border-[#FDE68A]">Tip</span>
-            </div>
-            <p class="text-[13.5px] text-gray-800 leading-snug">Downloaded the slides at the library today. So much better than screenshotting! 📚</p>
-            <button class="mt-2.5 text-[12px] font-semibold text-[#2563EB] hover:text-[#1D4ED8] flex items-center gap-1 transition-colors">
-              <span>→ 8 responses</span> <i class="fa-solid fa-chevron-right text-[10px]"></i>
-            </button>
-          </div>
-          <!-- Post 3 Aisha -->
-          <div class="bg-white border border-gray-200 rounded-card p-4 shadow-sm hover:shadow-md hover:border-gray-300 hover-lift">
-            <div class="flex items-center gap-2.5 mb-2">
-              <div class="w-8 h-8 rounded-full bg-[#F3E8FF] border border-[#E9D5FF] flex items-center justify-center text-[12px] font-bold text-[#7C3AED]">A</div>
-              <div>
-                <p class="text-[13px] font-bold text-gray-900 leading-none">Aisha</p>
-                <p class="text-[11px] text-gray-400">Help Hero • 1d ago</p>
-              </div>
-              <span class="ml-auto text-[10px] bg-[#F3E8FF] text-[#7C3AED] font-semibold px-2 py-1 rounded-full">Workaround</span>
-            </div>
-            <p class="text-[13.5px] text-gray-800 leading-snug">Found a workaround for offline assignments! Happy to share. 🙌</p>
-            <button class="mt-2.5 text-[12px] font-semibold text-[#2563EB] hover:text-[#1D4ED8] flex items-center gap-1 transition-colors">
-              <span>→ 15 responses</span> <i class="fa-solid fa-chevron-right text-[10px]"></i>
-            </button>
-          </div>
-        </div>
-
-        <!-- Share button -->
-        <button class="w-full bg-[#2563EB] hover:bg-[#1D4ED8] active:bg-[#1E40AF] text-white font-bold text-[14px] py-3.5 rounded-card flex items-center justify-center gap-2 shadow-[0_6px_16px_rgba(37,99,235,0.28)] hover:shadow-[0_8px_20px_rgba(37,99,235,0.34)] hover:-translate-y-[1px] active:translate-y-0 transition-all">
-          <span>💬</span> Share your story
-        </button>
-        <p class="text-center text-[11px] text-gray-400 mt-2">Text-only • ~2 KB per post</p>
-      </section>
-
-    </main>
-
-        <!-- Narrator Caption Overlay (for walkthrough) -->
-    <div id="narratorCaption" role="status" aria-live="polite">
-      <div class="flex items-start gap-2.5">
-        <span class="w-7 h-7 rounded-full bg-[#2563EB] flex items-center justify-center text-[13px] shrink-0">🎙️</span>
+<!-- HERO -->
+<header class="reveal">
+  <div class="bg-white rounded-[24px] border border-slate-200 shadow-card overflow-hidden">
+    <div class="h-[5px] w-full bg-gradient-to-r from-blue-600 via-violet-500 to-amber-500"></div>
+    <div class="px-6 sm:px-8 lg:px-10 py-7 sm:py-8">
+      <div class="flex flex-col lg:flex-row gap-8">
         <div class="flex-1 min-w-0">
-          <p class="hidden" id="captionTitle">Introduction</p>
-          <p class="text-[12px] leading-snug text-white" id="captionText"></p>
+          <div class="flex flex-wrap items-center gap-2 mb-3">
+            <span class="inline-flex items-center gap-2 bg-slate-900 text-white text-[11px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full"><i class="fa-solid fa-graduation-cap text-amber-300 text-[10px]"></i> German University of Digital Science</span>
+            <span class="inline-flex items-center gap-1.5 bg-blue-50 border border-blue-200 text-primary text-[11px] font-bold px-2.5 py-1 rounded-full"><i class="fa-solid fa-bezier-curve text-[10px]"></i> Design Thinking Project</span>
+            <span class="inline-flex items-center gap-1.5 text-[11px] font-medium text-slate-500"><i class="fa-regular fa-calendar"></i> Aug - Sep 2026 • Weeks 5-7</span>
+          </div>
+          <h1 class="font-display text-[32px] sm:text-[42px] lg:text-[48px] font-[900] leading-[0.9] tracking-[-0.03em]">Help Heroes <span class="text-primary">-</span> <span class="text-slate-500 font-[800]">Overview</span></h1>
+          <p class="mt-3 text-[13.5px] leading-relaxed text-slate-600 max-w-[720px]">Redesign for first-gen students with unreliable internet. James apologizes for needing help and finds unwritten university rules hard to follow. Help Heroes makes asking a strength.</p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="inline-flex items-center gap-1.5 bg-blue-50 border border-blue-200 text-primary text-[12px] font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-mobile-screen text-[11px]"></i> 375×812 • 5 screens</span>
+            <span class="inline-flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 text-emerald-700 text-[12px] font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-signal text-[11px]"></i> ~2 KB/post • text-only</span>
+            <span class="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-200 text-amber-700 text-[12px] font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-users text-[11px]"></i> Tested with Maria & James</span>
+            <span class="inline-flex items-center gap-1.5 bg-violet-50 border border-violet-200 text-violet-700 text-[12px] font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-award text-[11px]"></i> Help Hero badges</span>
+          </div>
+          <div class="mt-5 flex flex-wrap gap-2">
+            <a href="#week5" class="inline-flex items-center gap-1.5 bg-slate-900 text-white text-[12px] font-bold px-4 py-2 rounded-full hover:bg-black shadow-sm">Jump to Week 5 <i class="fa-solid fa-arrow-down text-[10px]"></i></a>
+            <a href="#week6" class="inline-flex items-center gap-1.5 bg-[#2563EB] text-white text-[12px] font-bold px-4 py-2 rounded-full hover:bg-[#1D4ED8] shadow-sm">Week 6 prototype <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+            <a href="#week7" class="inline-flex items-center gap-1.5 bg-white border border-slate-200 text-slate-700 text-[12px] font-bold px-4 py-2 rounded-full hover:bg-slate-50">Week 7 iteration</a>
+          </div>
         </div>
-        <button onclick="hideCaption()" class="text-white/60 hover:text-white p-1 -mr-1 shrink-0" aria-label="Close caption"><i class="fa-solid fa-xmark text-[12px]"></i></button>
+        <div class="lg:w-[360px] shrink-0 flex flex-col gap-3">
+          <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+            <p class="text-[11px] font-bold tracking-widest uppercase text-slate-500">How to view: 3 steps</p>
+            <div class="mt-3 space-y-2.5">
+              <a href="#week5" class="flex items-center gap-3 bg-white border border-slate-200 rounded-xl px-3 py-2.5 hover:border-blue-200 hover:bg-blue-50/50 transition-colors"><span class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-[12px] font-bold">5</span><div class="flex-1 min-w-0"><p class="text-[12px] font-bold leading-none">Week 5: Ideation</p><p class="text-[11px] text-slate-500">PoV, 15 stickies, 40 crazy 8s</p></div><i class="fa-solid fa-chevron-right text-[10px] text-slate-400"></i></a>
+              <a href="#week6" class="flex items-center gap-3 bg-white border-2 border-blue-200 rounded-xl px-3 py-2.5 shadow-sm hover:border-blue-300 transition-colors"><span class="w-7 h-7 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[12px] font-bold">6</span><div class="flex-1 min-w-0"><p class="text-[12px] font-bold leading-none">Week 6: Prototype</p><p class="text-[11px] text-slate-500">5 screens + testing</p></div><span class="text-[10px] font-bold bg-[#2563EB] text-white px-2 py-1 rounded-full">YOU ARE HERE</span></a>
+              <a href="#week7" class="flex items-center gap-3 bg-white border border-slate-200 rounded-xl px-3 py-2.5 hover:border-slate-300 transition-colors"><span class="w-7 h-7 rounded-full bg-slate-900 text-white flex items-center justify-center text-[12px] font-bold">7</span><div class="flex-1 min-w-0"><p class="text-[12px] font-bold leading-none">Week 7: Iteration</p><p class="text-[11px] text-slate-500">Feedback → dark mode, offline</p></div><i class="fa-solid fa-chevron-right text-[10px] text-slate-400"></i></a>
+            </div>
+          </div>
+          <div class="bg-gradient-to-br from-blue-600 to-violet-600 rounded-2xl p-4 text-white relative overflow-hidden">
+            <div class="absolute inset-0 opacity-20 grid-pattern"></div>
+            <div class="relative">
+              <p class="text-[11px] font-bold tracking-widest uppercase text-white/80">Persona</p>
+              <p class="text-[15px] font-extrabold mt-1 flex items-center gap-2">James 🦸 <span class="text-[11px] font-semibold bg-white/20 px-2 py-0.5 rounded-full">First-gen • 20</span></p>
+              <p class="text-[12.5px] leading-snug text-white/90 mt-2">“I don’t know how to ask - that’s literally me.” He shares a device, studies at night, and wants help to feel normal, not shameful.</p>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-
-    <!-- ==================== BOTTOM NAVIGATION ==================== -->
-    <nav class="absolute bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-gray-200 flex justify-around items-center px-1 py-2 rounded-b-[28px] shadow-[0_-6px_20px_rgba(0,0,0,0.06)] z-20">
-      <button data-target="screen-home" onclick="showScreen('screen-home')" class="nav-btn flex flex-col items-center gap-1 py-1.5 px-3.5 rounded-xl text-[#2563EB] bg-[#EFF6FF] transition-all hover:bg-[#DBEAFE]">
-        <i class="fa-solid fa-house text-[17px]"></i>
-        <span class="text-[10px] font-bold leading-none">Home</span>
-      </button>
-
-      <button data-target="screen-help-request" onclick="showScreen('screen-help-request')" class="nav-btn relative flex flex-col items-center gap-1 py-1.5 px-3.5 rounded-xl bg-[#FFFBEB] border border-[#FDE68A] text-[#D97706] shadow-sm hover:bg-[#FEF3C7] hover:border-[#FCD34D] hover:shadow-md hover:-translate-y-[1px] transition-all">
-        <span class="relative">
-          <i class="fa-solid fa-handshake-angle text-[17px]"></i>
-          <span class="absolute -top-1.5 -right-1.5 min-w-[16px] h-[16px] px-1 bg-[#F59E0B] text-white text-[9px] font-extrabold leading-[16px] text-center rounded-full ring-2 ring-white flex items-center justify-center">•</span>
-        </span>
-        <span class="text-[10px] font-bold leading-none">Help</span>
-      </button>
-
-      <button data-target="screen-help-wall" onclick="showScreen('screen-help-wall')" class="nav-btn flex flex-col items-center gap-1 py-1.5 px-3.5 rounded-xl text-gray-400 hover:text-[#2563EB] hover:bg-gray-50 transition-all">
-        <i class="fa-solid fa-layer-group text-[17px]"></i>
-        <span class="text-[10px] font-semibold leading-none">Wall</span>
-      </button>
-
-      <button data-target="screen-profile" onclick="showScreen('screen-profile')" class="nav-btn flex flex-col items-center gap-1 py-1.5 px-3.5 rounded-xl text-gray-400 hover:text-[#2563EB] hover:bg-gray-50 transition-all">
-        <i class="fa-solid fa-award text-[17px]"></i>
-        <span class="text-[10px] font-semibold leading-none">Badge</span>
-      </button>
-
-      <button data-target="screen-community" onclick="showScreen('screen-community')" class="nav-btn flex flex-col items-center gap-1 py-1.5 px-3.5 rounded-xl text-gray-400 hover:text-[#2563EB] hover:bg-gray-50 transition-all">
-        <i class="fa-solid fa-users text-[17px]"></i>
-        <span class="text-[10px] font-semibold leading-none">Community</span>
-      </button>
-    </nav>
-
-  </div>
-
-  <!-- Week 6 Mockup Video Deliverable -->
-  <div class="w-full max-w-[375px] mt-6 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-    <div class="px-4 py-3 border-b border-slate-200 flex items-center gap-2">
-      <span class="w-7 h-7 rounded-full bg-[#2563EB] text-white flex items-center justify-center text-[12px]"><i class="fa-solid fa-video"></i></span>
-      <div class="flex-1 min-w-0">
-        <p class="text-[13px] font-extrabold text-slate-900 leading-none">Week 6 Mockup Video</p>
-        <p class="text-[11px] text-slate-500 font-medium">Deliverable: s-01141_WEEK_6_Help_Heroes_mockup.mp4 • 2:56</p>
-      </div>
-      <span class="text-[10px] font-bold bg-blue-50 border border-blue-200 text-[#2563EB] px-2 py-1 rounded-full">W6</span>
-    </div>
-    <div class="bg-slate-900">
-      <video controls preload="metadata" class="w-full aspect-video bg-black">
-        <source src="./s-01141_WEEK_6_Help_Heroes_mockup.mp4" type="video/mp4">
-        <source src="./Week6_Mockup.mp4" type="video/mp4">
-        Your browser does not support the video tag. <a href="./s-01141_WEEK_6_Help_Heroes_mockup.mp4" class="underline text-blue-400">Download video</a>
-      </video>
-    </div>
-    <div class="px-4 py-3 bg-slate-50 flex flex-wrap items-center justify-between gap-2">
-      <span class="text-[11px] text-slate-600 font-medium flex items-center gap-1.5"><i class="fa-solid fa-file-video text-slate-400"></i> Interactive 5-screen prototype walkthrough</span>
-      <div class="flex items-center gap-2">
-        <a href="./s-01141_WEEK_6_Help_Heroes_mockup.mp4" download class="inline-flex items-center gap-1.5 bg-slate-900 text-white text-[11px] font-bold px-3 py-1.5 rounded-full hover:bg-black"><i class="fa-solid fa-download text-[10px]"></i> Download MP4</a>
-        <a href="./wireframe_image.html" class="inline-flex items-center gap-1.5 bg-white border border-slate-200 text-slate-700 text-[11px] font-semibold px-3 py-1.5 rounded-full hover:bg-slate-50">Wireframe <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>
+      <!-- Stats strip -->
+      <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div class="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 flex items-center gap-3"><span class="w-9 h-9 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-700"><i class="fa-solid fa-lightbulb text-[13px] text-amber-500"></i></span><div><p class="text-[18px] font-extrabold leading-none">55</p><p class="text-[11px] font-semibold text-slate-500">ideas (15+40)</p></div></div>
+        <div class="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 flex items-center gap-3"><span class="w-9 h-9 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-primary"><i class="fa-solid fa-mobile-screen text-[13px]"></i></span><div><p class="text-[18px] font-extrabold leading-none">5</p><p class="text-[11px] font-semibold text-slate-500">screens 375×812</p></div></div>
+        <div class="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 flex items-center gap-3"><span class="w-9 h-9 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-emerald-600"><i class="fa-solid fa-users text-[13px]"></i></span><div><p class="text-[18px] font-extrabold leading-none">2</p><p class="text-[11px] font-semibold text-slate-500">users tested</p></div></div>
+        <div class="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 flex items-center gap-3"><span class="w-9 h-9 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-violet-600"><i class="fa-solid fa-award text-[13px]"></i></span><div><p class="text-[18px] font-extrabold leading-none">3</p><p class="text-[11px] font-semibold text-slate-500">badges earned</p></div></div>
       </div>
     </div>
   </div>
+</header>
 
-  <!-- Week 5 Story Video (also available) -->
-  <div class="w-full max-w-[375px] mt-3 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-    <div class="px-4 py-3 flex items-center gap-2">
-      <span class="w-7 h-7 rounded-full bg-amber-500 text-white flex items-center justify-center text-[12px]"><i class="fa-solid fa-circle-play"></i></span>
-      <div class="flex-1 min-w-0">
-        <p class="text-[13px] font-extrabold text-slate-900 leading-none">Week 5 Story Video</p>
-        <p class="text-[11px] text-slate-500 font-medium">Solution Space ideation story</p>
+<!-- FLOW BAR -->
+<div class="mt-6 reveal bg-white border border-slate-200 rounded-2xl p-2 flex items-center gap-2 overflow-x-auto">
+  <span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 px-2 shrink-0">Flow</span>
+  <div class="flex items-center gap-2 min-w-0 flex-1">
+    <a href="#week5" class="inline-flex items-center gap-1.5 bg-blue-50 border border-blue-200 text-primary text-[11px] font-bold px-2.5 py-1 rounded-full shrink-0">W5 Ideation <i class="fa-solid fa-arrow-right text-[9px]"></i></a>
+    <span class="w-6 h-px bg-slate-300 shrink-0 hidden sm:block"></span>
+    <a href="#week6" class="inline-flex items-center gap-1.5 bg-slate-900 text-white text-[11px] font-bold px-2.5 py-1 rounded-full shrink-0"><i class="fa-solid fa-mobile-screen text-[10px]"></i> W6 Prototype</a>
+    <span class="w-6 h-px bg-slate-300 shrink-0 hidden sm:block"></span>
+    <a href="#week7" class="inline-flex items-center gap-1.5 bg-white border border-slate-200 text-slate-700 text-[11px] font-semibold px-2.5 py-1 rounded-full shrink-0 hover:bg-slate-50">W7 Iteration</a>
+    <span class="w-6 h-px bg-slate-300 shrink-0 hidden sm:block"></span>
+    <span class="text-[11px] text-slate-500 font-medium shrink-0 hidden lg:inline">Aug 25 - Sep 01, 2026</span>
+  </div>
+  <span class="hidden sm:inline-flex items-center gap-1.5 text-[11px] font-semibold bg-emerald-50 border border-emerald-200 text-emerald-700 px-2.5 py-1 rounded-full shrink-0"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span> Deliverables ready</span>
+</div>
+
+<!-- WEEK 5 -->
+<section id="week5" class="mt-6 scroll-mt-[72px] reveal">
+  <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+    <div class="px-6 sm:px-8 pt-6 flex flex-wrap items-start justify-between gap-3">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-[13px] font-bold">5</span>
+          <h2 class="text-[18px] sm:text-[20px] font-extrabold tracking-tight">Week 5: Solution Space</h2>
+          <span class="text-[11px] font-bold bg-blue-50 border border-blue-200 text-blue-700 px-2.5 py-1 rounded-full">Ideation</span>
+          <span class="hidden sm:inline-flex items-center gap-1 text-[11px] font-bold bg-slate-900 text-white px-2.5 py-1 rounded-full"><i class="fa-solid fa-video text-[10px] text-amber-300"></i> Video embedded</span>
+        </div>
+        <p class="text-[13px] text-slate-600 mt-1.5 max-w-[760px]">PoV + HMW, silent brainstorm (15 stickies), Crazy Eights (40 sketches), reverse brainstorm, tower building, dot-voting → <span class="font-semibold text-ink">Help Heroes</span> + <span class="font-semibold text-ink">Offline-First Learning OS</span> selected.</p>
       </div>
-      <a href="./week5_project.html#week5-video" class="text-[11px] font-bold text-[#2563EB] hover:underline">View board →</a>
+      <div class="flex items-center gap-2 shrink-0">
+        <span class="hidden sm:inline-flex text-[11px] font-semibold bg-amber-50 border border-amber-200 text-amber-700 px-2.5 py-1 rounded-full">5 members</span>
+        <a href="./week5_project.html" class="inline-flex items-center gap-1.5 bg-slate-900 text-white text-[12px] font-bold px-3.5 py-1.5 rounded-full hover:bg-black">Open board <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>
+      </div>
     </div>
-    <div class="px-4 pb-3">
-      <video controls preload="metadata" class="w-full rounded-xl bg-black aspect-video" poster="">
-        <source src="./Week5_Story.mp4" type="video/mp4">
-        <source src="./Week5_Solution_Space_Help_Heroes_Story.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
-      <p class="text-[11px] text-slate-500 mt-2 text-center">Full story from <a href="./week5_project.html#week5-video" class="underline font-semibold">Week 5 board</a> • <a href="./Week5_Story.mp4" class="underline">Download</a></p>
+    <div class="px-6 sm:px-8 pb-6 pt-5 grid lg:grid-cols-[1.15fr_0.85fr] gap-5">
+      <div class="rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 shadow-[0_12px_30px_rgba(15,23,42,0.18)]">
+        <video controls preload="metadata" class="w-full aspect-video bg-black" poster="">
+          <source src="./Week5_Story.mp4" type="video/mp4">
+          <source src="./Week5_Solution_Space_Help_Heroes_Story.mp4" type="video/mp4">
+          <source src="./Week5_Solution_Space–Ideation_and_Prototyping_Help_Heroes_Story.mp4" type="video/mp4">
+          Your browser does not support the video tag. <a href="./Week5_Story.mp4" class="underline text-blue-400">Download</a>
+        </video>
+        <div class="px-4 py-3 bg-slate-900 flex flex-wrap items-center justify-between gap-2">
+          <span class="text-[11px] text-slate-300 flex items-center gap-1.5"><i class="fa-solid fa-file-video"></i> Week5_Solution_Space-Ideation_and_Prototyping_Help_Heroes_Story.mp4 • 26 MB</span>
+          <div class="flex gap-1.5">
+            <a href="./Week5_Story.mp4" download class="inline-flex items-center gap-1 bg-white text-slate-900 text-[11px] font-bold px-3 py-1.5 rounded-full hover:bg-slate-100"><i class="fa-solid fa-download text-[10px]"></i> Download</a>
+            <a href="./Week5_Solution_Space–Ideation_and_Prototyping_Help_Heroes_Story.mp4" download class="hidden sm:inline-flex items-center gap-1 bg-slate-800 border border-slate-700 text-white text-[11px] font-semibold px-3 py-1.5 rounded-full hover:bg-slate-700">Original name</a>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col gap-3">
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+          <p class="text-[11px] font-bold tracking-widest uppercase text-slate-500">On the board</p>
+          <ul class="mt-2 space-y-1.5 text-[13px] leading-snug text-slate-700">
+            <li class="flex gap-2"><span class="text-blue-600">•</span> PoV for James + HMW: help him ask confidently & belong</li>
+            <li class="flex gap-2"><span class="text-emerald-600">•</span> 15 stickies by color (Linh, Keisha, Carlos, Rajiv, Tobias)</li>
+            <li class="flex gap-2"><span class="text-amber-600">•</span> 40 Crazy 8 squares + clustering into 4 themes</li>
+            <li class="flex gap-2"><span class="text-violet-600">•</span> Reverse “make it worse” → Help Heroes + Offline First</li>
+            <li class="flex gap-2"><span class="text-slate-500">•</span> Tower 10 levels → 2 winners to prototype</li>
+          </ul>
+          <div class="mt-3 flex flex-wrap gap-1.5">
+            <a href="./week5_project.html#section1" class="text-[11px] font-semibold bg-white border border-slate-200 px-2.5 py-1 rounded-full hover:bg-slate-50">PoV & HMW</a>
+            <a href="./week5_project.html#section2" class="text-[11px] font-semibold bg-white border border-slate-200 px-2.5 py-1 rounded-full hover:bg-slate-50">Silent brainstorm</a>
+            <a href="./week5_project.html#section3" class="text-[11px] font-semibold bg-white border border-slate-200 px-2.5 py-1 rounded-full hover:bg-slate-50">Crazy Eights</a>
+            <a href="./week5_project.html#week5-video" class="text-[11px] font-bold bg-[#2563EB] text-white px-2.5 py-1 rounded-full">▶ Video</a>
+          </div>
+        </div>
+        <div class="grid grid-cols-3 gap-2 text-center">
+          <div class="bg-blue-50 border border-blue-200 rounded-xl p-3"><p class="text-[11px] font-bold tracking-widest uppercase text-blue-700">Deliverable</p><p class="text-[12px] font-bold mt-1">Story video</p><p class="text-[10px] text-slate-500">26 MB</p></div>
+          <div class="bg-amber-50 border border-amber-200 rounded-xl p-3"><p class="text-[11px] font-bold tracking-widest uppercase text-amber-700">Board</p><p class="text-[12px] font-bold mt-1">MURAL</p><p class="text-[10px] text-slate-500">6 sections</p></div>
+          <div class="bg-white border border-slate-200 rounded-xl p-3"><p class="text-[11px] font-bold tracking-widest uppercase text-slate-500">Team</p><p class="text-[12px] font-bold mt-1">5</p><p class="text-[10px] text-slate-500">roles</p></div>
+        </div>
+      </div>
     </div>
   </div>
+</section>
 
-  <!-- Footer note -->
-  <p class="text-[12.5px] text-slate-500 mt-5 font-medium tracking-tight">Help Heroes | Prototype for Design Thinking Project</p>
-  <p class="text-[11px] text-slate-400 mt-1 text-center"><a href="./overview.html" class="underline hover:text-slate-600">Overview with all videos</a> • <a href="./week5_project.html" class="underline hover:text-slate-600">Week 5 board</a> • <a href="./testing_board.html" class="underline hover:text-slate-600">Testing board</a></p>
+<!-- WEEK 6 -->
+<section id="week6" class="mt-6 scroll-mt-[72px] reveal">
+  <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+    <div class="px-6 sm:px-8 pt-6 flex flex-wrap items-start justify-between gap-3">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[13px] font-bold">6</span>
+          <h2 class="text-[18px] sm:text-[20px] font-extrabold tracking-tight">Week 6: Prototype & Testing</h2>
+          <span class="text-[11px] font-bold bg-emerald-50 border border-emerald-200 text-emerald-700 px-2.5 py-1 rounded-full">5 screens • 375×812</span>
+          <span class="hidden sm:inline-flex items-center gap-1 text-[11px] font-bold bg-slate-900 text-white px-2.5 py-1 rounded-full"><i class="fa-solid fa-video text-emerald-300 text-[10px]"></i> Video embedded</span>
+        </div>
+        <p class="text-[13px] text-slate-600 mt-1.5 max-w-[760px]">Interactive Help Heroes mockup: Home → Ask for Help → Help Wall → Profile → Community. Low-bandwidth text-only (~2 KB/post). Tested with <span class="font-semibold text-ink">Maria</span> (rural, library WiFi) & <span class="font-semibold text-ink">James</span> (shared device). Killer feature: “I don’t know how to ask”.</p>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <a href="./week6.html" class="inline-flex items-center gap-1.5 bg-[#2563EB] text-white text-[12px] font-bold px-3.5 py-1.5 rounded-full hover:bg-[#1D4ED8] shadow-sm">Open prototype <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+      </div>
+    </div>
+    <div class="px-6 sm:px-8 pb-6 pt-5 grid lg:grid-cols-[1.15fr_0.85fr] gap-5">
+      <div class="rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 shadow-[0_12px_30px_rgba(15,23,42,0.18)]">
+        <video controls preload="metadata" class="w-full aspect-video bg-black" poster="">
+          <source src="./s-01141_WEEK_6_Help_Heroes_mockup.mp4" type="video/mp4">
+          <source src="./Week6_Mockup.mp4" type="video/mp4">
+          Your browser does not support the video tag. <a href="./s-01141_WEEK_6_Help_Heroes_mockup.mp4" class="underline text-blue-400">Download</a>
+        </video>
+        <div class="px-4 py-3 bg-slate-900 flex flex-wrap items-center justify-between gap-2">
+          <span class="text-[11px] text-slate-300 flex items-center gap-1.5"><i class="fa-solid fa-file-video"></i> s-01141_WEEK_6_Help_Heroes_mockup.mp4 • 2:56 • 176s</span>
+          <div class="flex gap-1.5">
+            <a href="./s-01141_WEEK_6_Help_Heroes_mockup.mp4" download class="inline-flex items-center gap-1 bg-white text-slate-900 text-[11px] font-bold px-3 py-1.5 rounded-full hover:bg-slate-100"><i class="fa-solid fa-download text-[10px]"></i> Download MP4</a>
+            <a href="./Week6_Mockup.mp4" download class="hidden sm:inline-flex items-center gap-1 bg-slate-800 border border-slate-700 text-white text-[11px] font-semibold px-3 py-1.5 rounded-full hover:bg-slate-700">Alt name</a>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col gap-3">
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+          <p class="text-[11px] font-bold tracking-widest uppercase text-slate-500">Prototype map</p>
+          <div class="mt-2 grid grid-cols-2 gap-2 text-[12px] font-semibold">
+            <span class="bg-white border border-slate-200 rounded-xl px-3 py-2 flex items-center gap-2"><i class="fa-solid fa-house text-primary text-[11px]"></i> Home</span>
+            <span class="bg-amber-50 border border-amber-200 rounded-xl px-3 py-2 flex items-center gap-2"><i class="fa-solid fa-circle-question text-amber-600 text-[11px]"></i> Ask for Help ⭐</span>
+            <span class="bg-white border border-slate-200 rounded-xl px-3 py-2 flex items-center gap-2"><i class="fa-solid fa-layer-group text-violet-600 text-[11px]"></i> Help Wall</span>
+            <span class="bg-white border border-slate-200 rounded-xl px-3 py-2 flex items-center gap-2"><i class="fa-solid fa-award text-amber-600 text-[11px]"></i> Profile badges</span>
+            <span class="col-span-2 bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-2 flex items-center gap-2"><i class="fa-solid fa-users text-emerald-600 text-[11px]"></i> Community - text-only low bandwidth</span>
+          </div>
+          <div class="mt-3 flex flex-wrap gap-1.5">
+            <a href="./wireframe_image.html" class="text-[11px] font-semibold bg-white border border-slate-200 px-2.5 py-1 rounded-full hover:bg-slate-50">Wireframe overview <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>
+            <a href="./testing_board.html" class="text-[11px] font-semibold bg-white border border-slate-200 px-2.5 py-1 rounded-full hover:bg-slate-50">Testing board (Maria & James)</a>
+            <a href="./week6.html" class="text-[11px] font-bold bg-blue-50 border border-blue-200 text-primary px-2.5 py-1 rounded-full">▶ Interactive + voice walkthrough</a>
+          </div>
+        </div>
+        <div class="bg-[#0F172A] text-white rounded-2xl p-4 relative overflow-hidden">
+          <div class="absolute -top-8 -right-8 w-24 h-24 rounded-full bg-white opacity-[0.06] blur-xl"></div>
+          <p class="text-[11px] font-bold tracking-widest uppercase text-amber-300">Key testing insight</p>
+          <p class="text-[13px] font-semibold mt-1">“I don’t know how to ask” felt like “it was designed for me” - James</p>
+          <p class="text-[11px] text-white/70 mt-1">Made visible on Home after testing; validated low-bandwidth & badges create pride.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <script>
-    // Help Heroes navigation with smooth slide transitions
-    // Current slides out to left, new slides in from right
-    let currentScreenId = 'screen-home';
-    let isAnimating = false;
+<!-- WEEK 7 -->
+<section id="week7" class="mt-6 scroll-mt-[72px] reveal">
+  <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+    <div class="px-6 sm:px-8 pt-6 flex flex-wrap items-start justify-between gap-3">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="w-8 h-8 rounded-full bg-[#0F172A] text-white flex items-center justify-center text-[13px] font-bold">7</span>
+          <h2 class="text-[18px] sm:text-[20px] font-extrabold tracking-tight">Week 7: Iteration & Implementation</h2>
+          <span class="text-[11px] font-bold bg-slate-900 text-white px-2.5 py-1 rounded-full">Updated</span>
+          <span class="hidden sm:inline-flex items-center gap-1 text-[11px] font-bold bg-violet-50 border border-violet-200 text-violet-700 px-2.5 py-1 rounded-full"><i class="fa-solid fa-video text-[10px]"></i> Video embedded</span>
+        </div>
+        <p class="text-[13px] text-slate-600 mt-1.5 max-w-[760px]">Small changes shipped (Home CTA duplication, offline save, similar questions, Help Hero of Month, dark mode) + “what needs more work” reflection. From testing → next steps, with stakeholder & implementation lens (Lewrick, Norman, Rittel).</p>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <a href="./index_week7.html" class="inline-flex items-center gap-1.5 bg-[#0F172A] text-white text-[12px] font-bold px-3.5 py-1.5 rounded-full hover:bg-black">Open updated <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+      </div>
+    </div>
+    <div class="px-6 sm:px-8 pb-6 pt-5 grid lg:grid-cols-[1.15fr_0.85fr] gap-5">
+      <div class="rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 shadow-[0_12px_30px_rgba(15,23,42,0.18)]">
+        <video controls preload="metadata" class="w-full aspect-video bg-black" poster="">
+          <source src="./Help_Heroes_Week7_Iteration_Video.mp4" type="video/mp4">
+          Your browser does not support the video tag. <a href="./Help_Heroes_Week7_Iteration_Video.mp4" class="underline text-blue-400">Download</a>
+        </video>
+        <div class="px-4 py-3 bg-slate-900 flex flex-wrap items-center justify-between gap-2">
+          <span class="text-[11px] text-slate-300 flex items-center gap-1.5"><i class="fa-solid fa-file-video"></i> Help_Heroes_Week7_Iteration_Video.mp4 • walkthrough</span>
+          <div class="flex gap-1.5">
+            <a href="./Help_Heroes_Week7_Iteration_Video.mp4" download class="inline-flex items-center gap-1 bg-white text-slate-900 text-[11px] font-bold px-3 py-1.5 rounded-full hover:bg-slate-100"><i class="fa-solid fa-download text-[10px]"></i> Download</a>
+            <a href="./wireframe_image_week7.html" class="hidden sm:inline-flex items-center gap-1 bg-slate-800 border border-slate-700 text-white text-[11px] font-semibold px-3 py-1.5 rounded-full hover:bg-slate-700">Updated wireframe</a>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col gap-3">
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+          <p class="text-[11px] font-bold tracking-widest uppercase text-slate-500">What shipped</p>
+          <ul class="mt-2 space-y-1.5 text-[12.5px] leading-snug text-slate-700">
+            <li class="flex gap-2"><span class="text-emerald-600">✓</span> “I don’t know how to ask” on Home (killer feature visible)</li>
+            <li class="flex gap-2"><span class="text-emerald-600">✓</span> Help Wall offline save + “similar questions”</li>
+            <li class="flex gap-2"><span class="text-emerald-600">✓</span> Community Help Hero of Month + dark mode + toast</li>
+          </ul>
+          <p class="text-[11px] font-bold tracking-widest uppercase text-amber-700 mt-3">What needs more work</p>
+          <ul class="mt-1.5 space-y-1 text-[12px] text-slate-600">
+            <li class="flex gap-1.5"><span class="text-amber-500">•</span> Safety beyond badges → interview families</li>
+            <li class="flex gap-1.5"><span class="text-amber-500">•</span> Offline-first campus hubs → not in prototype</li>
+            <li class="flex gap-1.5"><span class="text-amber-500">•</span> Rollout needs faculty/IT early + funding/moderation</li>
+          </ul>
+          <div class="mt-3 flex flex-wrap gap-1.5">
+            <a href="./wireframe_image_week7.html" class="text-[11px] font-semibold bg-white border border-slate-200 px-2.5 py-1 rounded-full hover:bg-slate-50">Updated wireframe</a>
+            <a href="./week7_reflection.md" class="text-[11px] font-semibold bg-white border border-slate-200 px-2.5 py-1 rounded-full hover:bg-slate-50">Reflection (Task 2)</a>
+            <a href="./index_week7.html" class="text-[11px] font-bold bg-violet-50 border border-violet-200 text-violet-700 px-2.5 py-1 rounded-full">▶ Updated prototype + changelog</a>
+          </div>
+        </div>
+        <div class="bg-gradient-to-br from-violet-600 to-blue-600 rounded-2xl p-4 text-white relative overflow-hidden">
+          <div class="absolute inset-0 opacity-15 grid-pattern"></div>
+          <div class="relative">
+            <p class="text-[11px] font-bold tracking-widest uppercase text-white/80">Reflection - Norman & Lewrick</p>
+            <p class="text-[12.5px] leading-snug mt-1">“Good design is threatened by unnecessary features and short-term thinking” - iteration works, but implementation needs stakeholders from week 2/3, not as afterthought.</p>
+            <a href="./week7_reflection.md" class="mt-2 inline-flex items-center gap-1 text-[11px] font-bold bg-white text-ink px-2.5 py-1 rounded-full">Read reflection <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    function showScreen(targetId) {
-      if (targetId === currentScreenId || isAnimating) return;
-      isAnimating = true;
+<!-- FILES -->
+<section class="mt-6 reveal">
+  <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+    <div class="px-6 sm:px-8 pt-5 flex items-center gap-2">
+      <span class="w-8 h-8 rounded-xl bg-slate-900 text-white flex items-center justify-center"><i class="fa-solid fa-folder-open text-[12px]"></i></span>
+      <h3 class="text-[15px] font-extrabold">All files: open locally, no build</h3>
+      <span class="hidden sm:inline-flex text-[11px] font-bold bg-slate-50 border border-slate-200 px-2.5 py-1 rounded-full ml-auto">Relative links</span>
+    </div>
+    <div class="px-6 sm:px-8 pb-6 pt-4 grid sm:grid-cols-2 lg:grid-cols-3 gap-3 text-[12px]">
+      <a href="./week5_project.html" class="flex items-center gap-2.5 bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-3 hover:border-blue-200 hover:bg-blue-50/50"><span class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-[12px]">5</span><span class="font-semibold">week5_project.html</span><span class="ml-auto text-slate-400">Board</span></a>
+      <a href="./Week5_Story.mp4" class="flex items-center gap-2.5 bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-3 hover:border-blue-200"><span class="w-8 h-8 rounded-full bg-slate-900 text-white flex items-center justify-center"><i class="fa-solid fa-video text-[11px]"></i></span><span class="font-semibold">Week5_Story.mp4</span><span class="ml-auto text-slate-400">26 MB</span></a>
+      <a href="./s-01141_WEEK_6_Help_Heroes_mockup.mp4" class="flex items-center gap-2.5 bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-3 hover:border-emerald-200"><span class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center"><i class="fa-solid fa-video text-[11px]"></i></span><span class="font-semibold">s-01141_WEEK_6…mp4</span><span class="ml-auto text-slate-400">4.5 MB</span></a>
+      <a href="./week6.html" class="flex items-center gap-2.5 bg-blue-50 border border-blue-200 rounded-xl px-3.5 py-3"><span class="w-8 h-8 rounded-full bg-[#2563EB] text-white flex items-center justify-center"><i class="fa-solid fa-mobile-screen text-[11px]"></i></span><span class="font-semibold">week6.html</span><span class="ml-auto text-primary">Prototype</span></a>
+      <a href="./wireframe_image.html" class="flex items-center gap-2.5 bg-white border border-slate-200 rounded-xl px-3.5 py-3 hover:bg-slate-50"><span class="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center"><i class="fa-solid fa-table-cells text-[11px]"></i></span><span class="font-semibold">wireframe_image.html</span></a>
+      <a href="./testing_board.html" class="flex items-center gap-2.5 bg-white border border-slate-200 rounded-xl px-3.5 py-3 hover:bg-slate-50"><span class="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center"><i class="fa-solid fa-flask text-[11px]"></i></span><span class="font-semibold">testing_board.html</span></a>
+      <a href="./index_week7.html" class="flex items-center gap-2.5 bg-slate-900 text-white rounded-xl px-3.5 py-3"><span class="w-8 h-8 rounded-full bg-white text-slate-900 flex items-center justify-center"><i class="fa-solid fa-rotate text-[11px]"></i></span><span class="font-semibold">index_week7.html</span><span class="ml-auto text-white/70">Updated</span></a>
+      <a href="./Help_Heroes_Week7_Iteration_Video.mp4" class="flex items-center gap-2.5 bg-white border border-slate-200 rounded-xl px-3.5 py-3 hover:bg-slate-50"><span class="w-8 h-8 rounded-full bg-slate-900 text-white flex items-center justify-center"><i class="fa-solid fa-video text-[11px]"></i></span><span class="font-semibold">Week7_Iteration_Video.mp4</span><span class="ml-auto text-slate-400">3.2 MB</span></a>
+      <a href="./week7_reflection.md" class="flex items-center gap-2.5 bg-white border border-slate-200 rounded-xl px-3.5 py-3 hover:bg-slate-50"><span class="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center"><i class="fa-solid fa-file-lines text-[11px]"></i></span><span class="font-semibold">week7_reflection.md</span></a>
+    </div>
+  </div>
+</section>
 
-      const current = document.getElementById(currentScreenId);
-      const next = document.getElementById(targetId);
-      const buttons = document.querySelectorAll('.nav-btn');
+<div class="mt-6 bg-white border border-slate-200 rounded-2xl p-5 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+  <div>
+    <p class="text-[12px] font-bold tracking-widest uppercase text-slate-500">About</p>
+    <p class="text-[13px] text-slate-700 mt-1 leading-snug max-w-[720px]">Help Heroes makes asking a strength: Help Wall anonymizes questions, badges reward asking, community is text only. Week 5 MURAL to Week 6 mockup to Week 7 iteration. James is first-gen with unreliable internet.</p>
+  </div>
+  <div class="flex gap-2 shrink-0">
+    <a href="./week5_project.html" class="text-[12px] font-bold bg-white border border-slate-200 px-4 py-2 rounded-full hover:bg-slate-50">W5 board</a>
+    <a href="./week6.html" class="text-[12px] font-bold bg-[#2563EB] text-white px-4 py-2 rounded-full hover:bg-[#1D4ED8]">Prototype</a>
+  </div>
+</div>
 
-      // Prepare next: ensure it starts off-screen right (already default) then activate
-      // Current will exit to left
-      current.classList.remove('active');
-      current.classList.add('exit-left');
-
-      // Force reflow so transition triggers for next
-      void next.offsetWidth;
-      next.classList.add('active');
-
-      // Update bottom nav active state immediately for responsiveness
-      buttons.forEach(btn => {
-        const isActive = btn.dataset.target === targetId;
-        // Help button has special inactive style (amber) vs others (gray)
-        const isHelp = btn.dataset.target === 'screen-help-request';
-        if (isActive) {
-          btn.classList.remove('text-gray-400', 'hover:bg-gray-50', 'bg-[#FFFBEB]', 'border', 'border-[#FDE68A]', 'text-[#D97706]', 'shadow-sm');
-          btn.classList.add('text-[#2563EB]', 'bg-[#EFF6FF]');
-          if (isHelp) btn.classList.remove('hover:bg-[#FEF3C7]', 'hover:border-[#FCD34D]');
-          btn.querySelector('span:last-child').classList.remove('font-semibold');
-          btn.querySelector('span:last-child').classList.add('font-bold');
-        } else {
-          btn.classList.remove('text-[#2563EB]', 'bg-[#EFF6FF]');
-          if (isHelp) {
-            btn.classList.add('bg-[#FFFBEB]', 'border', 'border-[#FDE68A]', 'text-[#D97706]', 'shadow-sm');
-          } else {
-            btn.classList.add('text-gray-400', 'hover:bg-gray-50');
-          }
-          btn.querySelector('span:last-child').classList.add('font-semibold');
-          btn.querySelector('span:last-child').classList.remove('font-bold');
-        }
-      });
-
-      // After animation, clean up previous screen
-      setTimeout(() => {
-        current.classList.remove('exit-left');
-        // Reset scroll for new screen
-        next.scrollTop = 0;
-        currentScreenId = targetId;
-        isAnimating = false;
-      }, 320);
-    }
-
-
-    // ==================== WALKTHROUGH: Animation + Voice (0:00 to 2:00) ====================
-    const walkthroughSteps = [
-      { start: 0, end: 15, screen: 'screen-home', title: 'Introduction', text: "Help Heroes is for first-gen students like James who need help but don't know what to ask and feel ashamed to try." },
-      { start: 15, end: 35, screen: 'screen-home', title: 'Screen 1: Home', text: "Home shows a greeting and assignments. The main feature is the large Ask for Help button." },
-      { start: 35, end: 60, screen: 'screen-help-request', title: 'Screen 2: Help Request', text: "Help request lets James ask by text, image or voice. The key is the I don't know how to ask option for students who feel stuck. It connects to a mentor." },
-      { start: 60, end: 80, screen: 'screen-help-wall', title: 'Screen 3: Help Wall', text: "Help Wall is anonymous Q and A. Students see others ask the same things and realize they are not alone." },
-      { start: 80, end: 100, screen: 'screen-profile', title: 'Screen 4: Profile', text: "Profile shows Help Hero badges. Each badge is earned by asking. It makes help a strength to celebrate." },
-      { start: 100, end: 120, screen: 'screen-community', title: 'Screen 5: Community', text: "Community is a text only, low bandwidth forum. Help Heroes share stories and support each other." }
-    ];
-    const totalDuration = 120;
-    let walkthroughTimer = null;
-    let walkthroughStartTime = null;
-    let pausedElapsed = 0;
-    let isWalkthroughPlaying = false;
-    let currentStepIndex = -1;
-
-    const playBtn = () => document.getElementById('playBtn');
-    const playLabel = () => document.getElementById('playLabel');
-    const stepLabel = () => document.getElementById('stepLabel');
-    const timeLabel = () => document.getElementById('timeLabel');
-    const progressFill = () => document.getElementById('progressFill');
-    const captionEl = () => document.getElementById('narratorCaption');
-    const captionTitleEl = () => document.getElementById('captionTitle');
-    const captionTextEl = () => document.getElementById('captionText');
-    const voiceToggle = () => document.getElementById('voiceToggle');
-    const captionToggle = () => document.getElementById('captionToggle');
-
-    function formatTime(s) {
-      const m = Math.floor(s / 60);
-      const sec = Math.floor(s % 60).toString().padStart(2,'0');
-      return m + ':' + sec;
-    }
-
-    // Enhanced voice: prefer Google Natural / Microsoft Natural voices for less cranky output
-    let selectedVoice = null;
-
-    function getBestVoices() {
-      if (!('speechSynthesis' in window)) return [];
-      return window.speechSynthesis.getVoices();
-    }
-
-    function pickBestVoice() {
-      const voices = getBestVoices();
-      if (!voices.length) return null;
-      // scoring: Google Natural > Microsoft Natural > Google > Microsoft > Apple > other en
-      const score = (v) => {
-        let s = 0;
-        const n = v.name.toLowerCase();
-        const lang = v.lang.toLowerCase();
-        if (lang.startsWith('en-us')) s += 100;
-        else if (lang.startsWith('en-gb')) s += 80;
-        else if (lang.startsWith('en')) s += 50;
-        else return -1; // prefer English
-        if (n.includes('google') && n.includes('natural')) s += 200;
-        else if (n.includes('microsoft') && n.includes('natural')) s += 180;
-        else if (n.includes('google')) s += 150;
-        else if (n.includes('microsoft')) s += 120;
-        else if (n.includes('apple') || n.includes('samantha') || n.includes('karen')) s += 60;
-        if (n.includes('female')) s += 5;
-        // Prefer Online/Natural over legacy
-        if (n.includes('online')) s += 20;
-        return s;
-      };
-      const ranked = [...voices].sort((a,b) => score(b) - score(a));
-      return ranked[0] || voices.find(v => v.lang.startsWith('en')) || voices[0];
-    }
-
-    function populateVoiceSelector() {
-      const sel = document.getElementById('voiceSelect');
-      if (!sel || !('speechSynthesis' in window)) return;
-      const voices = getBestVoices();
-      if (!voices.length) return;
-      // clear
-      sel.innerHTML = '';
-      const best = pickBestVoice();
-      voices.forEach(v => {
-        const opt = document.createElement('option');
-        opt.value = v.name;
-        opt.textContent = v.name + ' (' + v.lang + ')' + (v.name === best?.name ? ' - Recommended' : '');
-        if (v.name === best?.name) opt.selected = true;
-        sel.appendChild(opt);
-      });
-      selectedVoice = best;
-      sel.addEventListener('change', () => {
-        const chosen = voices.find(v => v.name === sel.value);
-        if (chosen) selectedVoice = chosen;
-        // preview
-        if (voiceToggle() && voiceToggle().checked) {
-          window.speechSynthesis.cancel();
-          const preview = new SpeechSynthesisUtterance('Hello, I am ' + selectedVoice.name);
-          preview.voice = selectedVoice;
-          preview.rate = 0.95;
-          window.speechSynthesis.speak(preview);
-        }
-      });
-    }
-
-    function speakText(text) {
-      if (!voiceToggle() || !voiceToggle().checked) return;
-      if (!('speechSynthesis' in window)) return;
-      // Chrome needs voices loaded
-      let voices = getBestVoices();
-      if (!voices.length) {
-        // try again shortly
-        setTimeout(() => speakText(text), 250);
-        return;
-      }
-      window.speechSynthesis.cancel();
-      // Split long text into chunks for more natural prosody and to avoid 200-char Google limits
-      const chunks = text.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [text];
-      let idx = 0;
-      function speakChunk() {
-        if (idx >= chunks.length) return;
-        // respect pause/stop
-        if (!isWalkthroughPlaying) return;
-        const utter = new SpeechSynthesisUtterance(chunks[idx].trim());
-        utter.rate = 0.95;
-        utter.pitch = 1.02;
-        utter.volume = 1;
-        utter.lang = selectedVoice?.lang || 'en-US';
-        if (selectedVoice) utter.voice = selectedVoice;
-        utter.onend = () => {
-          idx++;
-          // small natural pause between sentences
-          setTimeout(speakChunk, 180);
-        };
-        utter.onerror = () => {
-          idx++;
-          setTimeout(speakChunk, 180);
-        };
-        window.speechSynthesis.speak(utter);
-      }
-      speakChunk();
-    }
-
-    function stopSpeech() {
-      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
-    }
-
-    function showCaption(step) {
-      if (!captionToggle() || !captionToggle().checked) {
-        captionEl().classList.remove('visible');
-        return;
-      }
-      captionTextEl().textContent = step.text;
-      captionEl().classList.add('visible');
-    }
-
-    function hideCaption() {
-      captionEl().classList.remove('visible');
-    }
-    // expose for inline button
-    window.hideCaption = hideCaption;
-
-    function updateWalkthrough() {
-      if (!isWalkthroughPlaying) return;
-      const elapsed = (Date.now() - walkthroughStartTime) / 1000 + pausedElapsed;
-      const clamped = Math.min(elapsed, totalDuration);
-      // progress
-      progressFill().style.width = (clamped / totalDuration * 100) + '%';
-      timeLabel().textContent = formatTime(clamped) + ' / 2:00';
-      // find current step
-      let stepIdx = walkthroughSteps.findIndex(s => clamped >= s.start && clamped < s.end);
-      if (clamped >= totalDuration) stepIdx = walkthroughSteps.length - 1;
-      if (stepIdx !== -1 && stepIdx !== currentStepIndex) {
-        currentStepIndex = stepIdx;
-        const step = walkthroughSteps[stepIdx];
-        stepLabel().textContent = step.title;
-        showCaption(step);
-        // slide to screen (use existing showScreen but bypass isAnimating guard for walkthrough)
-        if (step.screen !== currentScreenId) {
-          // temporarily allow walkthrough to force navigation even if isAnimating
-          const prevAnimating = isAnimating;
-          isAnimating = false;
-          showScreen(step.screen);
-          isAnimating = false;
-          // restore after short delay to avoid race
-          setTimeout(() => { isAnimating = false; }, 350);
-        }
-        speakText(step.text);
-      }
-      if (clamped >= totalDuration) {
-        // finished
-        pauseWalkthrough();
-        stepLabel().textContent = 'Finished  2:00';
-        playBtn().querySelector('i').className = 'fa-solid fa-rotate-left text-[11px]';
-        playLabel().textContent = 'Replay';
-        return;
-      }
-      walkthroughTimer = requestAnimationFrame(updateWalkthrough);
-    }
-
-    function playWalkthrough() {
-      if (isWalkthroughPlaying) return;
-      // if finished, restart
-      if (pausedElapsed >= totalDuration) {
-        pausedElapsed = 0;
-        currentStepIndex = -1;
-      }
-      isWalkthroughPlaying = true;
-      walkthroughStartTime = Date.now();
-      playBtn().querySelector('i').className = 'fa-solid fa-pause text-[11px]';
-      playLabel().textContent = 'Pause';
-      stepLabel().textContent = 'Playing...';
-      // ensure voices loaded
-      if ('speechSynthesis' in window) window.speechSynthesis.getVoices();
-      walkthroughTimer = requestAnimationFrame(updateWalkthrough);
-    }
-
-    function pauseWalkthrough() {
-      if (!isWalkthroughPlaying) return;
-      isWalkthroughPlaying = false;
-      pausedElapsed += (Date.now() - walkthroughStartTime) / 1000;
-      walkthroughStartTime = null;
-      if (walkthroughTimer) cancelAnimationFrame(walkthroughTimer);
-      stopSpeech();
-      playBtn().querySelector('i').className = 'fa-solid fa-play text-[11px]';
-      playLabel().textContent = 'Play';
-      stepLabel().textContent = 'Paused at ' + formatTime(pausedElapsed);
-    }
-
-    function restartWalkthrough() {
-      pauseWalkthrough();
-      stopSpeech();
-      pausedElapsed = 0;
-      currentStepIndex = -1;
-      progressFill().style.width = '0%';
-      timeLabel().textContent = '0:00 / 2:00';
-      stepLabel().textContent = 'Ready to play walkthrough';
-      hideCaption();
-      showScreen('screen-home');
-      playBtn().querySelector('i').className = 'fa-solid fa-play text-[11px]';
-      playLabel().textContent = 'Play';
-    }
-
-    function togglePlay() {
-      if (isWalkthroughPlaying) pauseWalkthrough();
-      else playWalkthrough();
-    }
-
-    // Hook up controls after DOM ready
-    document.addEventListener('DOMContentLoaded', () => {
-      const pb = document.getElementById('playBtn');
-      const rb = document.getElementById('restartBtn');
-      if (pb) pb.addEventListener('click', togglePlay);
-      if (rb) rb.addEventListener('click', restartWalkthrough);
-      // pause walkthrough if user manually navigates
-      const origShowScreen = window.showScreen;
-      window.showScreen = function(targetId) {
-        // if walkthrough playing and user clicks different screen, pause walkthrough
-        if (isWalkthroughPlaying && targetId !== walkthroughSteps[currentStepIndex]?.screen) {
-          pauseWalkthrough();
-        }
-        return origShowScreen(targetId);
-      };
-      // preload voices and populate selector with Google Natural preference
-      if ('speechSynthesis' in window) {
-        const loadVoices = () => {
-          populateVoiceSelector();
-        };
-        window.speechSynthesis.onvoiceschanged = loadVoices;
-        // Chrome loads async, try now and after delay
-        setTimeout(loadVoices, 100);
-        setTimeout(loadVoices, 600);
-        loadVoices();
-      }
-      // caption toggle listener
-      const ct = document.getElementById('captionToggle');
-      if (ct) ct.addEventListener('change', () => {
-        if (!ct.checked) hideCaption();
-        else if (currentStepIndex >=0) showCaption(walkthroughSteps[currentStepIndex]);
-      });
-    });
-
-    // Ensure Home is active on load
-    document.addEventListener('DOMContentLoaded', () => {
-      // All screens already have correct classes in HTML, just sync nav
-      const buttons = document.querySelectorAll('.nav-btn');
-      buttons.forEach(btn => {
-        const isActive = btn.dataset.target === 'screen-home';
-        const isHelp = btn.dataset.target === 'screen-help-request';
-        if (!isActive && isHelp) {
-          // keep Help's amber standout when inactive
-          btn.classList.add('bg-[#FFFBEB]', 'border', 'border-[#FDE68A]', 'text-[#D97706]', 'shadow-sm');
-          btn.classList.remove('text-gray-400', 'hover:bg-gray-50');
-        }
-      });
-    });
-  </script>
+</main>
+<footer class="max-w-[1160px] mx-auto px-6 lg:px-8 pb-10 pt-6 text-[11px] text-slate-500 flex flex-wrap gap-2 justify-between">
+  <span>Help Heroes - Design Thinking Project - German University of Digital Science - Sep 01, 2026 - Weeks 5·6·7</span>
+  <span class="flex gap-2"><a href="./week6.html" class="underline hover:text-ink">Prototype</a> • <a href="./week5_project.html" class="underline hover:text-ink">Week 5</a> • <a href="./week7_reflection.md" class="underline hover:text-ink">Reflection</a></span>
+</footer>
 </body>
 </html>
