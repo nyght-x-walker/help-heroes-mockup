@@ -3,93 +3,342 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Help Heroes Overview</title>
+<title>Help Heroes — Overview | Design Thinking Project</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,800&display=swap" rel="stylesheet">
+<script>tailwind.config={theme:{extend:{colors:{primary:'#2563EB',ink:'#0F172A',muted:'#64748B'},fontFamily:{sans:['Inter','system-ui','sans-serif'],display:['Fraunces','serif']},boxShadow:{card:'0 1px 3px rgba(15,23,42,0.06),0 12px 32px rgba(15,23,42,0.08)'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,800;9..144,900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<style>body{font-family:Inter,system-ui,sans-serif}.font-display{font-family:Fraunces,serif}</style>
+<style>
+*{font-family:Inter,system-ui,sans-serif}
+.font-display{font-family:Fraunces,serif}
+.grid-pattern{background-image:linear-gradient(to right,rgba(15,23,42,0.035) 1px,transparent 1px),linear-gradient(to bottom,rgba(15,23,42,0.035) 1px,transparent 1px);background-size:32px 32px}
+.reveal{opacity:0;transform:translateY(10px);animation:reveal 700ms ease forwards}
+.reveal:nth-child(2){animation-delay:90ms}.reveal:nth-child(3){animation-delay:180ms}
+@keyframes reveal{to{opacity:1;transform:none}}
+video{outline:none}
+</style>
 </head>
-<body class="bg-[#F8FAFC] text-slate-900">
-<header class="bg-white border-b border-slate-200">
-  <div class="max-w-[1100px] mx-auto px-6 py-8">
-    <div class="flex items-start gap-4">
-      <div class="w-12 h-12 rounded-2xl bg-[#2563EB] text-white flex items-center justify-center text-[22px]">🦸</div>
-      <div>
-        <p class="text-[11px] font-bold tracking-widest uppercase text-slate-500">Design Thinking Project German University of Digital Science</p>
-        <h1 class="font-display text-[30px] font-[800] tracking-tight leading-none mt-1">Help Heroes</h1>
-        <p class="text-[13px] text-slate-600 mt-2 max-w-[700px] leading-snug">Redesigning online learning for first generation university students where high speed internet is unreliable. Persona James, first generation student, often apologizes for needing help and finds unwritten university rules hard to follow.</p>
+<body class="bg-[#F8FAFC] text-ink antialiased selection:bg-primary selection:text-white">
+<div class="fixed inset-0 -z-10 pointer-events-none"><div class="absolute inset-0 bg-[#F8FAFC]"></div><div class="absolute inset-0 grid-pattern opacity-[0.5]"></div><div class="absolute -top-[360px] left-1/2 -translate-x-1/2 w-[1400px] h-[760px] rounded-full blur-[100px] opacity-[0.14]" style="background:radial-gradient(ellipse at center,#2563EB 0%,#8B5CF6 34%,transparent 72%)"></div><div class="absolute top-[680px] -right-[200px] w-[600px] h-[600px] rounded-full blur-[90px] opacity-[0.09]" style="background:radial-gradient(circle at center,#F59E0B 0%,transparent 68%)"></div></div>
+
+<!-- Sticky Nav -->
+<nav class="sticky top-0 z-40 backdrop-blur-xl bg-white/80 border-b border-slate-200">
+  <div class="max-w-[1160px] mx-auto px-4 sm:px-6 lg:px-8 h-[56px] flex items-center justify-between gap-4">
+    <a href="./overview.html" class="flex items-center gap-2.5">
+      <span class="w-8 h-8 rounded-xl bg-[#2563EB] text-white flex items-center justify-center text-[16px] shadow-sm">🦸</span>
+      <span class="font-display font-[900] tracking-tight text-[17px] leading-none">Help Heroes</span>
+      <span class="hidden sm:inline-flex text-[11px] font-bold tracking-widest uppercase bg-slate-900 text-white px-2 py-1 rounded-full ml-1">Overview</span>
+    </a>
+    <div class="hidden md:flex items-center gap-1.5 text-[12px] font-semibold">
+      <a href="./week5_project.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 5</a>
+      <a href="./index.html" class="px-3 py-1.5 rounded-full bg-[#EFF6FF] text-primary border border-blue-200">Week 6 prototype</a>
+      <a href="./index_week7.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 7</a>
+      <span class="w-px h-4 bg-slate-200 mx-1"></span>
+      <a href="./testing_board.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Testing</a>
+      <a href="./wireframe_image.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Wireframe</a>
+    </div>
+    <div class="flex items-center gap-1.5">
+      <a href="./week5_project.html" class="hidden sm:inline-flex items-center gap-1.5 bg-white border border-slate-200 px-3 py-1.5 rounded-full text-[12px] font-semibold hover:bg-slate-50">W5 board</a>
+      <a href="./index.html" class="inline-flex items-center gap-1.5 bg-[#2563EB] text-white px-3.5 py-1.5 rounded-full text-[12px] font-bold hover:bg-[#1D4ED8] shadow-sm">Open prototype <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+    </div>
+  </div>
+</nav>
+
+<main class="max-w-[1160px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+
+<!-- HERO -->
+<header class="reveal">
+  <div class="bg-white rounded-[24px] border border-slate-200 shadow-card overflow-hidden">
+    <div class="h-[5px] w-full bg-gradient-to-r from-blue-600 via-violet-500 to-amber-500"></div>
+    <div class="px-6 sm:px-8 lg:px-10 py-7 sm:py-8">
+      <div class="flex flex-col lg:flex-row gap-8">
+        <div class="flex-1 min-w-0">
+          <div class="flex flex-wrap items-center gap-2 mb-3">
+            <span class="inline-flex items-center gap-2 bg-slate-900 text-white text-[11px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full"><i class="fa-solid fa-graduation-cap text-amber-300 text-[10px]"></i> German University of Digital Science</span>
+            <span class="inline-flex items-center gap-1.5 bg-blue-50 border border-blue-200 text-primary text-[11px] font-bold px-2.5 py-1 rounded-full"><i class="fa-solid fa-bezier-curve text-[10px]"></i> Design Thinking Project</span>
+            <span class="inline-flex items-center gap-1.5 text-[11px] font-medium text-slate-500"><i class="fa-regular fa-calendar"></i> Aug — Sep 2026 • Weeks 5-7</span>
+          </div>
+          <h1 class="font-display text-[32px] sm:text-[42px] lg:text-[48px] font-[900] leading-[0.9] tracking-[-0.03em]">Help Heroes <span class="text-primary">—</span> <span class="text-slate-500 font-[800]">Overview</span></h1>
+          <p class="mt-3 text-[13.5px] leading-relaxed text-slate-600 max-w-[720px]">Redesign online learning for <span class="font-semibold text-ink underline decoration-amber-300 decoration-2 underline-offset-2">first-generation students</span> where high-speed internet is unreliable. Persona <span class="font-semibold text-ink">James</span> often apologizes for needing help and finds the university's unwritten rules hard to follow. Help Heroes reframes asking as strength.</p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="inline-flex items-center gap-1.5 bg-blue-50 border border-blue-200 text-primary text-[12px] font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-mobile-screen text-[11px]"></i> 375×812 • 5 screens</span>
+            <span class="inline-flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 text-emerald-700 text-[12px] font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-signal text-[11px]"></i> ~2 KB/post • text-only</span>
+            <span class="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-200 text-amber-700 text-[12px] font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-users text-[11px]"></i> Tested with Maria & James</span>
+            <span class="inline-flex items-center gap-1.5 bg-violet-50 border border-violet-200 text-violet-700 text-[12px] font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-award text-[11px]"></i> Help Hero badges</span>
+          </div>
+          <div class="mt-5 flex flex-wrap gap-2">
+            <a href="#week5" class="inline-flex items-center gap-1.5 bg-slate-900 text-white text-[12px] font-bold px-4 py-2 rounded-full hover:bg-black shadow-sm">Jump to Week 5 <i class="fa-solid fa-arrow-down text-[10px]"></i></a>
+            <a href="#week6" class="inline-flex items-center gap-1.5 bg-[#2563EB] text-white text-[12px] font-bold px-4 py-2 rounded-full hover:bg-[#1D4ED8] shadow-sm">Week 6 prototype <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+            <a href="#week7" class="inline-flex items-center gap-1.5 bg-white border border-slate-200 text-slate-700 text-[12px] font-bold px-4 py-2 rounded-full hover:bg-slate-50">Week 7 iteration</a>
+          </div>
+        </div>
+        <div class="lg:w-[360px] shrink-0 flex flex-col gap-3">
+          <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+            <p class="text-[11px] font-bold tracking-widest uppercase text-slate-500">How to view — 3 steps</p>
+            <div class="mt-3 space-y-2.5">
+              <a href="#week5" class="flex items-center gap-3 bg-white border border-slate-200 rounded-xl px-3 py-2.5 hover:border-blue-200 hover:bg-blue-50/50 transition-colors"><span class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-[12px] font-bold">5</span><div class="flex-1 min-w-0"><p class="text-[12px] font-bold leading-none">Week 5 — Ideation</p><p class="text-[11px] text-slate-500">PoV, 15 stickies, 40 crazy 8s</p></div><i class="fa-solid fa-chevron-right text-[10px] text-slate-400"></i></a>
+              <a href="#week6" class="flex items-center gap-3 bg-white border-2 border-blue-200 rounded-xl px-3 py-2.5 shadow-sm hover:border-blue-300 transition-colors"><span class="w-7 h-7 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[12px] font-bold">6</span><div class="flex-1 min-w-0"><p class="text-[12px] font-bold leading-none">Week 6 — Prototype</p><p class="text-[11px] text-slate-500">5 screens + testing</p></div><span class="text-[10px] font-bold bg-[#2563EB] text-white px-2 py-1 rounded-full">YOU ARE HERE</span></a>
+              <a href="#week7" class="flex items-center gap-3 bg-white border border-slate-200 rounded-xl px-3 py-2.5 hover:border-slate-300 transition-colors"><span class="w-7 h-7 rounded-full bg-slate-900 text-white flex items-center justify-center text-[12px] font-bold">7</span><div class="flex-1 min-w-0"><p class="text-[12px] font-bold leading-none">Week 7 — Iteration</p><p class="text-[11px] text-slate-500">Feedback → dark mode, offline</p></div><i class="fa-solid fa-chevron-right text-[10px] text-slate-400"></i></a>
+            </div>
+          </div>
+          <div class="bg-gradient-to-br from-blue-600 to-violet-600 rounded-2xl p-4 text-white relative overflow-hidden">
+            <div class="absolute inset-0 opacity-20 grid-pattern"></div>
+            <div class="relative">
+              <p class="text-[11px] font-bold tracking-widest uppercase text-white/80">Persona</p>
+              <p class="text-[15px] font-extrabold mt-1 flex items-center gap-2">James 🦸 <span class="text-[11px] font-semibold bg-white/20 px-2 py-0.5 rounded-full">First-gen • 20</span></p>
+              <p class="text-[12.5px] leading-snug text-white/90 mt-2">“I don’t know how to ask — that’s literally me.” He shares a device, studies at night, and wants help to feel normal, not shameful.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Stats strip -->
+      <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div class="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 flex items-center gap-3"><span class="w-9 h-9 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-700"><i class="fa-solid fa-lightbulb text-[13px] text-amber-500"></i></span><div><p class="text-[18px] font-extrabold leading-none">55</p><p class="text-[11px] font-semibold text-slate-500">ideas (15+40)</p></div></div>
+        <div class="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 flex items-center gap-3"><span class="w-9 h-9 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-primary"><i class="fa-solid fa-mobile-screen text-[13px]"></i></span><div><p class="text-[18px] font-extrabold leading-none">5</p><p class="text-[11px] font-semibold text-slate-500">screens 375×812</p></div></div>
+        <div class="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 flex items-center gap-3"><span class="w-9 h-9 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-emerald-600"><i class="fa-solid fa-users text-[13px]"></i></span><div><p class="text-[18px] font-extrabold leading-none">2</p><p class="text-[11px] font-semibold text-slate-500">users tested</p></div></div>
+        <div class="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 flex items-center gap-3"><span class="w-9 h-9 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-violet-600"><i class="fa-solid fa-award text-[13px]"></i></span><div><p class="text-[18px] font-extrabold leading-none">3</p><p class="text-[11px] font-semibold text-slate-500">badges earned</p></div></div>
       </div>
     </div>
   </div>
 </header>
 
-<main class="max-w-[1100px] mx-auto px-6 py-8">
-  <div class="bg-[#0F172A] text-white rounded-2xl p-6 flex flex-col md:flex-row gap-6">
-    <div class="flex-1">
-      <p class="text-[11px] font-bold tracking-widest uppercase text-sky-200">How to view</p>
-      <p class="text-[14px] leading-snug mt-1 text-slate-100">Start with Week 5, then Week 6, then Week 7. Each section below links to the prototype, wireframe, testing notes, video and reflection. All files are in this folder and work with relative links.</p>
+<!-- FLOW BAR -->
+<div class="mt-6 reveal bg-white border border-slate-200 rounded-2xl p-2 flex items-center gap-2 overflow-x-auto">
+  <span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 px-2 shrink-0">Flow</span>
+  <div class="flex items-center gap-2 min-w-0 flex-1">
+    <a href="#week5" class="inline-flex items-center gap-1.5 bg-blue-50 border border-blue-200 text-primary text-[11px] font-bold px-2.5 py-1 rounded-full shrink-0">W5 Ideation <i class="fa-solid fa-arrow-right text-[9px]"></i></a>
+    <span class="w-6 h-px bg-slate-300 shrink-0 hidden sm:block"></span>
+    <a href="#week6" class="inline-flex items-center gap-1.5 bg-slate-900 text-white text-[11px] font-bold px-2.5 py-1 rounded-full shrink-0"><i class="fa-solid fa-mobile-screen text-[10px]"></i> W6 Prototype</a>
+    <span class="w-6 h-px bg-slate-300 shrink-0 hidden sm:block"></span>
+    <a href="#week7" class="inline-flex items-center gap-1.5 bg-white border border-slate-200 text-slate-700 text-[11px] font-semibold px-2.5 py-1 rounded-full shrink-0 hover:bg-slate-50">W7 Iteration</a>
+    <span class="w-6 h-px bg-slate-300 shrink-0 hidden sm:block"></span>
+    <span class="text-[11px] text-slate-500 font-medium shrink-0 hidden lg:inline">Aug 25 — Sep 01, 2026</span>
+  </div>
+  <span class="hidden sm:inline-flex items-center gap-1.5 text-[11px] font-semibold bg-emerald-50 border border-emerald-200 text-emerald-700 px-2.5 py-1 rounded-full shrink-0"><span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span> Deliverables ready</span>
+</div>
+
+<!-- WEEK 5 -->
+<section id="week5" class="mt-6 scroll-mt-[72px] reveal">
+  <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+    <div class="px-6 sm:px-8 pt-6 flex flex-wrap items-start justify-between gap-3">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-[13px] font-bold">5</span>
+          <h2 class="text-[18px] sm:text-[20px] font-extrabold tracking-tight">Week 5 — Solution Space</h2>
+          <span class="text-[11px] font-bold bg-blue-50 border border-blue-200 text-blue-700 px-2.5 py-1 rounded-full">Ideation</span>
+          <span class="hidden sm:inline-flex items-center gap-1 text-[11px] font-bold bg-slate-900 text-white px-2.5 py-1 rounded-full"><i class="fa-solid fa-video text-[10px] text-amber-300"></i> Video embedded</span>
+        </div>
+        <p class="text-[13px] text-slate-600 mt-1.5 max-w-[760px]">PoV + HMW, silent brainstorm (15 stickies), Crazy Eights (40 sketches), reverse brainstorm, tower building, dot-voting → <span class="font-semibold text-ink">Help Heroes</span> + <span class="font-semibold text-ink">Offline-First Learning OS</span> selected.</p>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <span class="hidden sm:inline-flex text-[11px] font-semibold bg-amber-50 border border-amber-200 text-amber-700 px-2.5 py-1 rounded-full">5 members</span>
+        <a href="./week5_project.html" class="inline-flex items-center gap-1.5 bg-slate-900 text-white text-[12px] font-bold px-3.5 py-1.5 rounded-full hover:bg-black">Open board <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>
+      </div>
     </div>
-    <div class="md:w-[260px] bg-white/10 rounded-xl p-4">
-      <p class="text-[12px] font-bold text-white">Quick links</p>
-      <div class="mt-2 flex flex-col gap-2 text-[12px]">
-        <a href="./week5_project.html" class="bg-white text-slate-900 font-semibold px-3 py-2 rounded-full text-center hover:bg-slate-100">Week 5 board</a>
-        <a href="./index.html" class="bg-[#2563EB] text-white font-semibold px-3 py-2 rounded-full text-center hover:bg-[#1D4ED8]">Week 6 prototype</a>
-        <a href="./index_week7.html" class="bg-white text-slate-900 font-semibold px-3 py-2 rounded-full text-center hover:bg-slate-100">Week 7 updated prototype</a>
+    <div class="px-6 sm:px-8 pb-6 pt-5 grid lg:grid-cols-[1.15fr_0.85fr] gap-5">
+      <div class="rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 shadow-[0_12px_30px_rgba(15,23,42,0.18)]">
+        <video controls preload="metadata" class="w-full aspect-video bg-black" poster="">
+          <source src="./Week5_Story.mp4" type="video/mp4">
+          <source src="./Week5_Solution_Space_Help_Heroes_Story.mp4" type="video/mp4">
+          <source src="./Week5_Solution_Space–Ideation_and_Prototyping_Help_Heroes_Story.mp4" type="video/mp4">
+          Your browser does not support the video tag. <a href="./Week5_Story.mp4" class="underline text-blue-400">Download</a>
+        </video>
+        <div class="px-4 py-3 bg-slate-900 flex flex-wrap items-center justify-between gap-2">
+          <span class="text-[11px] text-slate-300 flex items-center gap-1.5"><i class="fa-solid fa-file-video"></i> Week5_Solution_Space–Ideation_and_Prototyping_Help_Heroes_Story.mp4 • 26 MB</span>
+          <div class="flex gap-1.5">
+            <a href="./Week5_Story.mp4" download class="inline-flex items-center gap-1 bg-white text-slate-900 text-[11px] font-bold px-3 py-1.5 rounded-full hover:bg-slate-100"><i class="fa-solid fa-download text-[10px]"></i> Download</a>
+            <a href="./Week5_Solution_Space–Ideation_and_Prototyping_Help_Heroes_Story.mp4" download class="hidden sm:inline-flex items-center gap-1 bg-slate-800 border border-slate-700 text-white text-[11px] font-semibold px-3 py-1.5 rounded-full hover:bg-slate-700">Original name</a>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col gap-3">
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+          <p class="text-[11px] font-bold tracking-widest uppercase text-slate-500">On the board</p>
+          <ul class="mt-2 space-y-1.5 text-[13px] leading-snug text-slate-700">
+            <li class="flex gap-2"><span class="text-blue-600">•</span> PoV for James + HMW: help him ask confidently & belong</li>
+            <li class="flex gap-2"><span class="text-emerald-600">•</span> 15 stickies by color (Linh, Keisha, Carlos, Rajiv, Tobias)</li>
+            <li class="flex gap-2"><span class="text-amber-600">•</span> 40 Crazy 8 squares + clustering into 4 themes</li>
+            <li class="flex gap-2"><span class="text-violet-600">•</span> Reverse “make it worse” → Help Heroes + Offline First</li>
+            <li class="flex gap-2"><span class="text-slate-500">•</span> Tower 10 levels → 2 winners to prototype</li>
+          </ul>
+          <div class="mt-3 flex flex-wrap gap-1.5">
+            <a href="./week5_project.html#section1" class="text-[11px] font-semibold bg-white border border-slate-200 px-2.5 py-1 rounded-full hover:bg-slate-50">PoV & HMW</a>
+            <a href="./week5_project.html#section2" class="text-[11px] font-semibold bg-white border border-slate-200 px-2.5 py-1 rounded-full hover:bg-slate-50">Silent brainstorm</a>
+            <a href="./week5_project.html#section3" class="text-[11px] font-semibold bg-white border border-slate-200 px-2.5 py-1 rounded-full hover:bg-slate-50">Crazy Eights</a>
+            <a href="./week5_project.html#week5-video" class="text-[11px] font-bold bg-[#2563EB] text-white px-2.5 py-1 rounded-full">▶ Video</a>
+          </div>
+        </div>
+        <div class="grid grid-cols-3 gap-2 text-center">
+          <div class="bg-blue-50 border border-blue-200 rounded-xl p-3"><p class="text-[11px] font-bold tracking-widest uppercase text-blue-700">Deliverable</p><p class="text-[12px] font-bold mt-1">Story video</p><p class="text-[10px] text-slate-500">26 MB</p></div>
+          <div class="bg-amber-50 border border-amber-200 rounded-xl p-3"><p class="text-[11px] font-bold tracking-widest uppercase text-amber-700">Board</p><p class="text-[12px] font-bold mt-1">MURAL</p><p class="text-[10px] text-slate-500">6 sections</p></div>
+          <div class="bg-white border border-slate-200 rounded-xl p-3"><p class="text-[11px] font-bold tracking-widest uppercase text-slate-500">Team</p><p class="text-[12px] font-bold mt-1">5</p><p class="text-[10px] text-slate-500">roles</p></div>
+        </div>
       </div>
     </div>
   </div>
+</section>
 
-  <section class="mt-8">
-    <div class="flex items-center gap-3">
-      <span class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-[13px] font-bold">5</span>
-      <h2 class="text-[18px] font-extrabold tracking-tight">Week 5 Solution Space</h2>
-      <span class="text-[11px] font-bold bg-white border border-slate-200 px-2.5 py-1 rounded-full">Ideation</span>
+<!-- WEEK 6 -->
+<section id="week6" class="mt-6 scroll-mt-[72px] reveal">
+  <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+    <div class="px-6 sm:px-8 pt-6 flex flex-wrap items-start justify-between gap-3">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[13px] font-bold">6</span>
+          <h2 class="text-[18px] sm:text-[20px] font-extrabold tracking-tight">Week 6 — Prototype & Testing</h2>
+          <span class="text-[11px] font-bold bg-emerald-50 border border-emerald-200 text-emerald-700 px-2.5 py-1 rounded-full">5 screens • 375×812</span>
+          <span class="hidden sm:inline-flex items-center gap-1 text-[11px] font-bold bg-slate-900 text-white px-2.5 py-1 rounded-full"><i class="fa-solid fa-video text-emerald-300 text-[10px]"></i> Video embedded</span>
+        </div>
+        <p class="text-[13px] text-slate-600 mt-1.5 max-w-[760px]">Interactive Help Heroes mockup: Home → Ask for Help → Help Wall → Profile → Community. Low-bandwidth text-only (~2 KB/post). Tested with <span class="font-semibold text-ink">Maria</span> (rural, library WiFi) & <span class="font-semibold text-ink">James</span> (shared device). Killer feature: “I don’t know how to ask”.</p>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <a href="./index.html" class="inline-flex items-center gap-1.5 bg-[#2563EB] text-white text-[12px] font-bold px-3.5 py-1.5 rounded-full hover:bg-[#1D4ED8] shadow-sm">Open prototype <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+      </div>
     </div>
-    <p class="text-[13px] text-slate-600 mt-2 max-w-[700px]">Point of view and How Might We, silent brainstorming with 15 ideas, Crazy Eights with 40 sketches, and selection of two concepts for prototyping. Team of five with different backgrounds.</p>
-    <div class="mt-3 flex flex-wrap gap-2">
-      <a href="./week5_project.html" class="inline-flex items-center gap-1.5 bg-white border border-slate-200 px-4 py-2 rounded-full text-[12px] font-semibold hover:bg-slate-50">Open Week 5 board <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>
-      <a href="./Week5_Story.mp4" class="inline-flex items-center gap-1.5 bg-white border border-slate-200 px-4 py-2 rounded-full text-[12px] font-semibold hover:bg-slate-50">Week 5 video</a>
+    <div class="px-6 sm:px-8 pb-6 pt-5 grid lg:grid-cols-[1.15fr_0.85fr] gap-5">
+      <div class="rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 shadow-[0_12px_30px_rgba(15,23,42,0.18)]">
+        <video controls preload="metadata" class="w-full aspect-video bg-black" poster="">
+          <source src="./s-01141_WEEK_6_Help_Heroes_mockup.mp4" type="video/mp4">
+          <source src="./Week6_Mockup.mp4" type="video/mp4">
+          Your browser does not support the video tag. <a href="./s-01141_WEEK_6_Help_Heroes_mockup.mp4" class="underline text-blue-400">Download</a>
+        </video>
+        <div class="px-4 py-3 bg-slate-900 flex flex-wrap items-center justify-between gap-2">
+          <span class="text-[11px] text-slate-300 flex items-center gap-1.5"><i class="fa-solid fa-file-video"></i> s-01141_WEEK_6_Help_Heroes_mockup.mp4 • 2:56 • 176s</span>
+          <div class="flex gap-1.5">
+            <a href="./s-01141_WEEK_6_Help_Heroes_mockup.mp4" download class="inline-flex items-center gap-1 bg-white text-slate-900 text-[11px] font-bold px-3 py-1.5 rounded-full hover:bg-slate-100"><i class="fa-solid fa-download text-[10px]"></i> Download MP4</a>
+            <a href="./Week6_Mockup.mp4" download class="hidden sm:inline-flex items-center gap-1 bg-slate-800 border border-slate-700 text-white text-[11px] font-semibold px-3 py-1.5 rounded-full hover:bg-slate-700">Alt name</a>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col gap-3">
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+          <p class="text-[11px] font-bold tracking-widest uppercase text-slate-500">Prototype map</p>
+          <div class="mt-2 grid grid-cols-2 gap-2 text-[12px] font-semibold">
+            <span class="bg-white border border-slate-200 rounded-xl px-3 py-2 flex items-center gap-2"><i class="fa-solid fa-house text-primary text-[11px]"></i> Home</span>
+            <span class="bg-amber-50 border border-amber-200 rounded-xl px-3 py-2 flex items-center gap-2"><i class="fa-solid fa-circle-question text-amber-600 text-[11px]"></i> Ask for Help ⭐</span>
+            <span class="bg-white border border-slate-200 rounded-xl px-3 py-2 flex items-center gap-2"><i class="fa-solid fa-layer-group text-violet-600 text-[11px]"></i> Help Wall</span>
+            <span class="bg-white border border-slate-200 rounded-xl px-3 py-2 flex items-center gap-2"><i class="fa-solid fa-award text-amber-600 text-[11px]"></i> Profile badges</span>
+            <span class="col-span-2 bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-2 flex items-center gap-2"><i class="fa-solid fa-users text-emerald-600 text-[11px]"></i> Community — text-only low bandwidth</span>
+          </div>
+          <div class="mt-3 flex flex-wrap gap-1.5">
+            <a href="./wireframe_image.html" class="text-[11px] font-semibold bg-white border border-slate-200 px-2.5 py-1 rounded-full hover:bg-slate-50">Wireframe overview <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>
+            <a href="./testing_board.html" class="text-[11px] font-semibold bg-white border border-slate-200 px-2.5 py-1 rounded-full hover:bg-slate-50">Testing board (Maria & James)</a>
+            <a href="./index.html" class="text-[11px] font-bold bg-blue-50 border border-blue-200 text-primary px-2.5 py-1 rounded-full">▶ Interactive + voice walkthrough</a>
+          </div>
+        </div>
+        <div class="bg-[#0F172A] text-white rounded-2xl p-4 relative overflow-hidden">
+          <div class="absolute -top-8 -right-8 w-24 h-24 rounded-full bg-white opacity-[0.06] blur-xl"></div>
+          <p class="text-[11px] font-bold tracking-widest uppercase text-amber-300">Key testing insight</p>
+          <p class="text-[13px] font-semibold mt-1">“I don’t know how to ask” felt like “it was designed for me” — James</p>
+          <p class="text-[11px] text-white/70 mt-1">Made visible on Home after testing; validated low-bandwidth & badges create pride.</p>
+        </div>
+      </div>
     </div>
-  </section>
-
-  <section class="mt-8">
-    <div class="flex items-center gap-3">
-      <span class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[13px] font-bold">6</span>
-      <h2 class="text-[18px] font-extrabold tracking-tight">Week 6 Prototype and Testing</h2>
-      <span class="text-[11px] font-bold bg-white border border-slate-200 px-2.5 py-1 rounded-full">5 screens • 375 x 812</span>
-    </div>
-    <p class="text-[13px] text-slate-600 mt-2 max-w-[700px]">Mobile prototype with Home, Ask for Help, Help Wall, Profile and Community. Text only low bandwidth mode around 2 KB per post. Tested with Maria and James.</p>
-    <div class="mt-3 flex flex-wrap gap-2">
-      <a href="./index.html" class="inline-flex items-center gap-1.5 bg-[#2563EB] text-white px-4 py-2 rounded-full text-[12px] font-semibold hover:bg-[#1D4ED8]">Open prototype</a>
-      <a href="./wireframe_image.html" class="inline-flex items-center gap-1.5 bg-white border border-slate-200 px-4 py-2 rounded-full text-[12px] font-semibold hover:bg-slate-50">Wireframe overview</a>
-      <a href="./testing_board.html" class="inline-flex items-center gap-1.5 bg-white border border-slate-200 px-4 py-2 rounded-full text-[12px] font-semibold hover:bg-slate-50">Testing board</a>
-      <a href="./Week6_Mockup.mp4" class="inline-flex items-center gap-1.5 bg-white border border-slate-200 px-4 py-2 rounded-full text-[12px] font-semibold hover:bg-slate-50">Week 6 video</a>
-    </div>
-  </section>
-
-  <section class="mt-8">
-    <div class="flex items-center gap-3">
-      <span class="w-8 h-8 rounded-full bg-[#0F172A] text-white flex items-center justify-center text-[13px] font-bold">7</span>
-      <h2 class="text-[18px] font-extrabold tracking-tight">Week 7 Iteration and Reflection</h2>
-      <span class="text-[11px] font-bold bg-white border border-slate-200 px-2.5 py-1 rounded-full">Implementation</span>
-    </div>
-    <p class="text-[13px] text-slate-600 mt-2 max-w-[700px]">Updated prototype based on feedback from testing. Small changes included and larger questions noted for further research. Also includes wireframe update, video walkthrough and process reflection.</p>
-    <div class="mt-3 flex flex-wrap gap-2">
-      <a href="./index_week7.html" class="inline-flex items-center gap-1.5 bg-[#2563EB] text-white px-4 py-2 rounded-full text-[12px] font-semibold hover:bg-[#1D4ED8]">Open updated prototype</a>
-      <a href="./wireframe_image_week7.html" class="inline-flex items-center gap-1.5 bg-white border border-slate-200 px-4 py-2 rounded-full text-[12px] font-semibold hover:bg-slate-50">Updated wireframe</a>
-      <a href="./Help_Heroes_Week7_Iteration_Video.mp4" class="inline-flex items-center gap-1.5 bg-white border border-slate-200 px-4 py-2 rounded-full text-[12px] font-semibold hover:bg-slate-50">Video walkthrough</a>
-      <a href="./week7_reflection.md" class="inline-flex items-center gap-1.5 bg-white border border-slate-200 px-4 py-2 rounded-full text-[12px] font-semibold hover:bg-slate-50">Reflection</a>
-    </div>
-  </section>
-
-  <div class="mt-10 bg-white border border-slate-200 rounded-2xl p-5">
-    <p class="text-[12px] font-bold tracking-widest uppercase text-slate-500">About</p>
-    <p class="text-[13px] text-slate-700 mt-1 leading-snug">Help Heroes reframes asking for help as a strength. The Help Wall shows anonymized questions, badges celebrate asking, and community is text only to stay low bandwidth. Persona James is a first generation student. This overview links Week 5 to Week 7 in order.</p>
   </div>
-</main>
+</section>
 
-<footer class="max-w-[1100px] mx-auto px-6 pb-10 pt-4 text-[11px] text-slate-500">
-  Help Heroes Design Thinking Project Sep 01, 2026
+<!-- WEEK 7 -->
+<section id="week7" class="mt-6 scroll-mt-[72px] reveal">
+  <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+    <div class="px-6 sm:px-8 pt-6 flex flex-wrap items-start justify-between gap-3">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="w-8 h-8 rounded-full bg-[#0F172A] text-white flex items-center justify-center text-[13px] font-bold">7</span>
+          <h2 class="text-[18px] sm:text-[20px] font-extrabold tracking-tight">Week 7 — Iteration & Implementation</h2>
+          <span class="text-[11px] font-bold bg-slate-900 text-white px-2.5 py-1 rounded-full">Updated</span>
+          <span class="hidden sm:inline-flex items-center gap-1 text-[11px] font-bold bg-violet-50 border border-violet-200 text-violet-700 px-2.5 py-1 rounded-full"><i class="fa-solid fa-video text-[10px]"></i> Video embedded</span>
+        </div>
+        <p class="text-[13px] text-slate-600 mt-1.5 max-w-[760px]">Small changes shipped (Home CTA duplication, offline save, similar questions, Help Hero of Month, dark mode) + “what needs more work” reflection. From testing → next steps, with stakeholder & implementation lens (Lewrick, Norman, Rittel).</p>
+      </div>
+      <div class="flex items-center gap-2 shrink-0">
+        <a href="./index_week7.html" class="inline-flex items-center gap-1.5 bg-[#0F172A] text-white text-[12px] font-bold px-3.5 py-1.5 rounded-full hover:bg-black">Open updated <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+      </div>
+    </div>
+    <div class="px-6 sm:px-8 pb-6 pt-5 grid lg:grid-cols-[1.15fr_0.85fr] gap-5">
+      <div class="rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 shadow-[0_12px_30px_rgba(15,23,42,0.18)]">
+        <video controls preload="metadata" class="w-full aspect-video bg-black" poster="">
+          <source src="./Help_Heroes_Week7_Iteration_Video.mp4" type="video/mp4">
+          Your browser does not support the video tag. <a href="./Help_Heroes_Week7_Iteration_Video.mp4" class="underline text-blue-400">Download</a>
+        </video>
+        <div class="px-4 py-3 bg-slate-900 flex flex-wrap items-center justify-between gap-2">
+          <span class="text-[11px] text-slate-300 flex items-center gap-1.5"><i class="fa-solid fa-file-video"></i> Help_Heroes_Week7_Iteration_Video.mp4 • walkthrough</span>
+          <div class="flex gap-1.5">
+            <a href="./Help_Heroes_Week7_Iteration_Video.mp4" download class="inline-flex items-center gap-1 bg-white text-slate-900 text-[11px] font-bold px-3 py-1.5 rounded-full hover:bg-slate-100"><i class="fa-solid fa-download text-[10px]"></i> Download</a>
+            <a href="./wireframe_image_week7.html" class="hidden sm:inline-flex items-center gap-1 bg-slate-800 border border-slate-700 text-white text-[11px] font-semibold px-3 py-1.5 rounded-full hover:bg-slate-700">Updated wireframe</a>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col gap-3">
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+          <p class="text-[11px] font-bold tracking-widest uppercase text-slate-500">What shipped</p>
+          <ul class="mt-2 space-y-1.5 text-[12.5px] leading-snug text-slate-700">
+            <li class="flex gap-2"><span class="text-emerald-600">✓</span> “I don’t know how to ask” on Home (killer feature visible)</li>
+            <li class="flex gap-2"><span class="text-emerald-600">✓</span> Help Wall offline save + “similar questions”</li>
+            <li class="flex gap-2"><span class="text-emerald-600">✓</span> Community Help Hero of Month + dark mode + toast</li>
+          </ul>
+          <p class="text-[11px] font-bold tracking-widest uppercase text-amber-700 mt-3">What needs more work</p>
+          <ul class="mt-1.5 space-y-1 text-[12px] text-slate-600">
+            <li class="flex gap-1.5"><span class="text-amber-500">•</span> Safety beyond badges → interview families</li>
+            <li class="flex gap-1.5"><span class="text-amber-500">•</span> Offline-first campus hubs → not in prototype</li>
+            <li class="flex gap-1.5"><span class="text-amber-500">•</span> Rollout needs faculty/IT early + funding/moderation</li>
+          </ul>
+          <div class="mt-3 flex flex-wrap gap-1.5">
+            <a href="./wireframe_image_week7.html" class="text-[11px] font-semibold bg-white border border-slate-200 px-2.5 py-1 rounded-full hover:bg-slate-50">Updated wireframe</a>
+            <a href="./week7_reflection.md" class="text-[11px] font-semibold bg-white border border-slate-200 px-2.5 py-1 rounded-full hover:bg-slate-50">Reflection (Task 2)</a>
+            <a href="./index_week7.html" class="text-[11px] font-bold bg-violet-50 border border-violet-200 text-violet-700 px-2.5 py-1 rounded-full">▶ Updated prototype + changelog</a>
+          </div>
+        </div>
+        <div class="bg-gradient-to-br from-violet-600 to-blue-600 rounded-2xl p-4 text-white relative overflow-hidden">
+          <div class="absolute inset-0 opacity-15 grid-pattern"></div>
+          <div class="relative">
+            <p class="text-[11px] font-bold tracking-widest uppercase text-white/80">Reflection — Norman & Lewrick</p>
+            <p class="text-[12.5px] leading-snug mt-1">“Good design is threatened by unnecessary features and short-term thinking” — iteration works, but implementation needs stakeholders from week 2/3, not as afterthought.</p>
+            <a href="./week7_reflection.md" class="mt-2 inline-flex items-center gap-1 text-[11px] font-bold bg-white text-ink px-2.5 py-1 rounded-full">Read reflection <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FILES -->
+<section class="mt-6 reveal">
+  <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+    <div class="px-6 sm:px-8 pt-5 flex items-center gap-2">
+      <span class="w-8 h-8 rounded-xl bg-slate-900 text-white flex items-center justify-center"><i class="fa-solid fa-folder-open text-[12px]"></i></span>
+      <h3 class="text-[15px] font-extrabold">All files — open locally, no build</h3>
+      <span class="hidden sm:inline-flex text-[11px] font-bold bg-slate-50 border border-slate-200 px-2.5 py-1 rounded-full ml-auto">Relative links</span>
+    </div>
+    <div class="px-6 sm:px-8 pb-6 pt-4 grid sm:grid-cols-2 lg:grid-cols-3 gap-3 text-[12px]">
+      <a href="./week5_project.html" class="flex items-center gap-2.5 bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-3 hover:border-blue-200 hover:bg-blue-50/50"><span class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-[12px]">5</span><span class="font-semibold">week5_project.html</span><span class="ml-auto text-slate-400">Board</span></a>
+      <a href="./Week5_Story.mp4" class="flex items-center gap-2.5 bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-3 hover:border-blue-200"><span class="w-8 h-8 rounded-full bg-slate-900 text-white flex items-center justify-center"><i class="fa-solid fa-video text-[11px]"></i></span><span class="font-semibold">Week5_Story.mp4</span><span class="ml-auto text-slate-400">26 MB</span></a>
+      <a href="./s-01141_WEEK_6_Help_Heroes_mockup.mp4" class="flex items-center gap-2.5 bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-3 hover:border-emerald-200"><span class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center"><i class="fa-solid fa-video text-[11px]"></i></span><span class="font-semibold">s-01141_WEEK_6…mp4</span><span class="ml-auto text-slate-400">4.5 MB</span></a>
+      <a href="./index.html" class="flex items-center gap-2.5 bg-blue-50 border border-blue-200 rounded-xl px-3.5 py-3"><span class="w-8 h-8 rounded-full bg-[#2563EB] text-white flex items-center justify-center"><i class="fa-solid fa-mobile-screen text-[11px]"></i></span><span class="font-semibold">index.html</span><span class="ml-auto text-primary">Prototype</span></a>
+      <a href="./wireframe_image.html" class="flex items-center gap-2.5 bg-white border border-slate-200 rounded-xl px-3.5 py-3 hover:bg-slate-50"><span class="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center"><i class="fa-solid fa-table-cells text-[11px]"></i></span><span class="font-semibold">wireframe_image.html</span></a>
+      <a href="./testing_board.html" class="flex items-center gap-2.5 bg-white border border-slate-200 rounded-xl px-3.5 py-3 hover:bg-slate-50"><span class="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center"><i class="fa-solid fa-flask text-[11px]"></i></span><span class="font-semibold">testing_board.html</span></a>
+      <a href="./index_week7.html" class="flex items-center gap-2.5 bg-slate-900 text-white rounded-xl px-3.5 py-3"><span class="w-8 h-8 rounded-full bg-white text-slate-900 flex items-center justify-center"><i class="fa-solid fa-rotate text-[11px]"></i></span><span class="font-semibold">index_week7.html</span><span class="ml-auto text-white/70">Updated</span></a>
+      <a href="./Help_Heroes_Week7_Iteration_Video.mp4" class="flex items-center gap-2.5 bg-white border border-slate-200 rounded-xl px-3.5 py-3 hover:bg-slate-50"><span class="w-8 h-8 rounded-full bg-slate-900 text-white flex items-center justify-center"><i class="fa-solid fa-video text-[11px]"></i></span><span class="font-semibold">Week7_Iteration_Video.mp4</span><span class="ml-auto text-slate-400">3.2 MB</span></a>
+      <a href="./week7_reflection.md" class="flex items-center gap-2.5 bg-white border border-slate-200 rounded-xl px-3.5 py-3 hover:bg-slate-50"><span class="w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center"><i class="fa-solid fa-file-lines text-[11px]"></i></span><span class="font-semibold">week7_reflection.md</span></a>
+    </div>
+  </div>
+</section>
+
+<div class="mt-6 bg-white border border-slate-200 rounded-2xl p-5 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+  <div>
+    <p class="text-[12px] font-bold tracking-widest uppercase text-slate-500">About</p>
+    <p class="text-[13px] text-slate-700 mt-1 leading-snug max-w-[720px]">Help Heroes reframes asking as strength — Help Wall anonymizes questions, badges celebrate asking, community is text-only for low bandwidth. From Week 5 MURAL to Week 6 mockup to Week 7 iteration (dark mode, offline, Help Hero of Month). Persona James, first-gen, low/unreliable internet.</p>
+  </div>
+  <div class="flex gap-2 shrink-0">
+    <a href="./week5_project.html" class="text-[12px] font-bold bg-white border border-slate-200 px-4 py-2 rounded-full hover:bg-slate-50">W5 board</a>
+    <a href="./index.html" class="text-[12px] font-bold bg-[#2563EB] text-white px-4 py-2 rounded-full hover:bg-[#1D4ED8]">Prototype</a>
+  </div>
+</div>
+
+</main>
+<footer class="max-w-[1160px] mx-auto px-6 lg:px-8 pb-10 pt-6 text-[11px] text-slate-500 flex flex-wrap gap-2 justify-between">
+  <span>Help Heroes — Design Thinking Project — German University of Digital Science — Sep 01, 2026 — Weeks 5·6·7</span>
+  <span class="flex gap-2"><a href="./index.html" class="underline hover:text-ink">Prototype</a> • <a href="./week5_project.html" class="underline hover:text-ink">Week 5</a> • <a href="./week7_reflection.md" class="underline hover:text-ink">Reflection</a></span>
 </footer>
 </body>
 </html>

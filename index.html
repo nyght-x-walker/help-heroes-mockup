@@ -128,7 +128,30 @@
 
   </style>
 </head>
-<body class="bg-[#F1F5F9] min-h-screen flex flex-col items-center py-6 px-4">
+<body class="bg-[#F1F5F9] min-h-screen flex flex-col items-center py-0 px-4">
+  <!-- Top Nav: Links to Overview / W5 / Testing -->
+  <nav class="w-full max-w-[1160px] flex items-center justify-between gap-3 py-3 px-1 mb-2">
+    <div class="flex items-center gap-2">
+      <a href="./overview.html" class="w-8 h-8 rounded-xl bg-[#2563EB] text-white flex items-center justify-center text-[14px] shadow-sm">🦸</a>
+      <a href="./overview.html" class="font-display font-[800] text-[14px] tracking-tight hidden sm:block">Help Heroes</a>
+      <span class="hidden sm:inline-flex text-[10px] font-bold tracking-widest uppercase bg-slate-900 text-white px-2 py-1 rounded-full ml-1">Week 6</span>
+      <span class="hidden md:inline text-[11px] text-slate-500 ml-2">Prototype • 375×812 • 5 screens • low-bandwidth</span>
+    </div>
+    <div class="flex items-center gap-1.5 text-[12px] font-semibold">
+      <a href="./overview.html" class="hidden md:inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full hover:bg-white border border-transparent hover:border-slate-200"><i class="fa-solid fa-house text-[11px]"></i> Overview</a>
+      <a href="./week5_project.html" class="hidden sm:inline-flex items-center gap-1.5 bg-white border border-slate-200 px-3 py-1.5 rounded-full hover:bg-slate-50">W5 board</a>
+      <a href="./testing_board.html" class="hidden sm:inline-flex items-center gap-1.5 bg-white border border-slate-200 px-3 py-1.5 rounded-full hover:bg-slate-50">Testing</a>
+      <a href="./wireframe_image.html" class="hidden lg:inline-flex items-center gap-1.5 bg-white border border-slate-200 px-3 py-1.5 rounded-full hover:bg-slate-50">Wireframe</a>
+      <a href="./index_week7.html" class="inline-flex items-center gap-1.5 bg-slate-900 text-white px-3 py-1.5 rounded-full hover:bg-black text-[11px] font-bold">W7 updated <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+    </div>
+  </nav>
+
+  <div class="w-full max-w-[375px] bg-[#0F172A] text-white rounded-xl px-3 py-2.5 mb-3 flex items-center gap-2.5 shadow-sm lg:hidden">
+    <span class="w-7 h-7 rounded-full bg-white/15 border border-white/20 flex items-center justify-center text-[12px]">👋</span>
+    <p class="text-[12px] font-semibold leading-none">Good evening, James! <span class="font-normal text-white/70 hidden sm:inline">— Week 6 prototype with voice walkthrough + videos below</span></p>
+    <span class="ml-auto w-2 h-2 bg-emerald-400 rounded-full animate-pulse shrink-0"></span>
+  </div>
+
   <!-- Walkthrough Controls: Animation + Voice (0:00 to 2:00) -->
   <div id="walkthroughBar" class="bg-white rounded-xl border border-gray-200 shadow-sm p-3 mb-4 flex flex-col gap-2">
     <div class="flex items-center gap-2">
@@ -573,8 +596,55 @@
 
   </div>
 
+  <!-- Week 6 Mockup Video Deliverable -->
+  <div class="w-full max-w-[375px] mt-6 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+    <div class="px-4 py-3 border-b border-slate-200 flex items-center gap-2">
+      <span class="w-7 h-7 rounded-full bg-[#2563EB] text-white flex items-center justify-center text-[12px]"><i class="fa-solid fa-video"></i></span>
+      <div class="flex-1 min-w-0">
+        <p class="text-[13px] font-extrabold text-slate-900 leading-none">Week 6 Mockup Video</p>
+        <p class="text-[11px] text-slate-500 font-medium">Deliverable: s-01141_WEEK_6_Help_Heroes_mockup.mp4 • 2:56</p>
+      </div>
+      <span class="text-[10px] font-bold bg-blue-50 border border-blue-200 text-[#2563EB] px-2 py-1 rounded-full">W6</span>
+    </div>
+    <div class="bg-slate-900">
+      <video controls preload="metadata" class="w-full aspect-video bg-black">
+        <source src="./s-01141_WEEK_6_Help_Heroes_mockup.mp4" type="video/mp4">
+        <source src="./Week6_Mockup.mp4" type="video/mp4">
+        Your browser does not support the video tag. <a href="./s-01141_WEEK_6_Help_Heroes_mockup.mp4" class="underline text-blue-400">Download video</a>
+      </video>
+    </div>
+    <div class="px-4 py-3 bg-slate-50 flex flex-wrap items-center justify-between gap-2">
+      <span class="text-[11px] text-slate-600 font-medium flex items-center gap-1.5"><i class="fa-solid fa-file-video text-slate-400"></i> Interactive 5-screen prototype walkthrough</span>
+      <div class="flex items-center gap-2">
+        <a href="./s-01141_WEEK_6_Help_Heroes_mockup.mp4" download class="inline-flex items-center gap-1.5 bg-slate-900 text-white text-[11px] font-bold px-3 py-1.5 rounded-full hover:bg-black"><i class="fa-solid fa-download text-[10px]"></i> Download MP4</a>
+        <a href="./wireframe_image.html" class="inline-flex items-center gap-1.5 bg-white border border-slate-200 text-slate-700 text-[11px] font-semibold px-3 py-1.5 rounded-full hover:bg-slate-50">Wireframe <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Week 5 Story Video (also available) -->
+  <div class="w-full max-w-[375px] mt-3 bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+    <div class="px-4 py-3 flex items-center gap-2">
+      <span class="w-7 h-7 rounded-full bg-amber-500 text-white flex items-center justify-center text-[12px]"><i class="fa-solid fa-circle-play"></i></span>
+      <div class="flex-1 min-w-0">
+        <p class="text-[13px] font-extrabold text-slate-900 leading-none">Week 5 Story Video</p>
+        <p class="text-[11px] text-slate-500 font-medium">Solution Space ideation story</p>
+      </div>
+      <a href="./week5_project.html#week5-video" class="text-[11px] font-bold text-[#2563EB] hover:underline">View board →</a>
+    </div>
+    <div class="px-4 pb-3">
+      <video controls preload="metadata" class="w-full rounded-xl bg-black aspect-video" poster="">
+        <source src="./Week5_Story.mp4" type="video/mp4">
+        <source src="./Week5_Solution_Space_Help_Heroes_Story.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <p class="text-[11px] text-slate-500 mt-2 text-center">Full story from <a href="./week5_project.html#week5-video" class="underline font-semibold">Week 5 board</a> • <a href="./Week5_Story.mp4" class="underline">Download</a></p>
+    </div>
+  </div>
+
   <!-- Footer note -->
   <p class="text-[12.5px] text-slate-500 mt-5 font-medium tracking-tight">Help Heroes | Prototype for Design Thinking Project</p>
+  <p class="text-[11px] text-slate-400 mt-1 text-center"><a href="./overview.html" class="underline hover:text-slate-600">Overview with all videos</a> • <a href="./week5_project.html" class="underline hover:text-slate-600">Week 5 board</a> • <a href="./testing_board.html" class="underline hover:text-slate-600">Testing board</a></p>
 
   <script>
     // Help Heroes navigation with smooth slide transitions
