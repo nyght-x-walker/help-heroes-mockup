@@ -1,0 +1,546 @@
+<!doctype html><html lang="en"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Help Heroes Testing Board</title><script src="https://cdn.tailwindcss.com"></script><script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#2563EB",
+              ink: "#0F172A",
+              muted: "#64748B",
+              amberBrand: "#F59E0B",
+              violetBrand: "#8B5CF6",
+              emeraldBrand: "#10B981",
+            },
+            fontFamily: {
+              sans: ["Inter", "system-ui", "-apple-system", "sans-serif"],
+              display: ["Fraunces", "Inter", "serif"],
+            },
+            boxShadow: {
+              card: "0 1px 3px rgba(15,23,42,0.06), 0 8px 24px rgba(15,23,42,0.06)",
+              "card-hover": "0 8px 30px rgba(15,23,42,0.10), 0 2px 8px rgba(15,23,42,0.06)",
+              soft: "0 4px 20px rgba(15,23,42,0.06)",
+            },
+          },
+        },
+      };
+    </script><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800;9..144,900&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" /><style>
+      * {
+        font-family:
+          Inter,
+          system-ui,
+          -apple-system,
+          sans-serif;
+      }
+      .font-display {
+        font-family: Fraunces, Inter, serif;
+      }
+      body {
+        background: #f8fafc;
+      }
+      .grid-pattern {
+        background-image:
+          linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+        background-size: 32px 32px;
+      }
+      .noise {
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+      }
+      .quote-card {
+        transition:
+          transform 150ms ease,
+          box-shadow 150ms ease,
+          border-color 150ms ease;
+      }
+      .quote-card:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+      /* subtle entrance */
+      .reveal {
+        opacity: 0;
+        transform: translateY(8px);
+        animation: reveal 600ms ease forwards;
+      }
+      .reveal:nth-child(1) {
+        animation-delay: 40ms;
+      }
+      .reveal:nth-child(2) {
+        animation-delay: 120ms;
+      }
+      .reveal:nth-child(3) {
+        animation-delay: 200ms;
+      }
+      @keyframes reveal {
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      @media print {
+        body {
+          background: white;
+        }
+        .no-print {
+          display: none;
+        }
+        .shadow-card,
+        .shadow-card-hover {
+          box-shadow: none !important;
+        }
+      }
+    </style></head><body class="text-ink antialiased selection:bg-primary selection:text-white"><!-- Decorative background --><div class="fixed inset-0 -z-10 pointer-events-none"><div class="absolute inset-0 bg-[#F8FAFC]"></div><div class="absolute inset-0 grid-pattern opacity-[0.55]"></div><div
+        class="absolute -top-[280px] left-1/2 -translate-x-1/2 w-[1200px] h-[680px] rounded-full blur-[80px] opacity-[0.16]"
+        style="background: radial-gradient(ellipse at center, #2563eb 0%, #8b5cf6 35%, transparent 70%)"
+      ></div><div
+        class="absolute top-[520px] -right-[200px] w-[560px] h-[560px] rounded-full blur-[90px] opacity-[0.10]"
+        style="background: radial-gradient(circle at center, #f59e0b 0%, transparent 68%)"
+      ></div><div
+        class="absolute top-[900px] -left-[160px] w-[520px] h-[520px] rounded-full blur-[80px] opacity-[0.08]"
+        style="background: radial-gradient(circle at center, #10b981 0%, transparent 70%)"
+      ></div></div><div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8"><!-- Top breadcrumb --><div class="flex items-center justify-between gap-4 mb-6 reveal"><a
+          href="./index.html"
+          class="group inline-flex items-center gap-2 text-[13px] font-semibold text-muted hover:text-ink transition-colors"
+        ><span
+            class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center group-hover:border-slate-300 group-hover:bg-slate-50 shadow-sm transition-colors"
+            ><i class="fa-solid fa-arrow-left text-[11px]"></i
+          ></span>
+          Back to prototype
+        </a><div class="hidden sm:flex items-center gap-2 text-[11px] font-semibold tracking-wide uppercase text-slate-500"><span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          Week 6 · Testing with Users · Qualitative
+          <span class="hidden lg:inline-flex items-center gap-1.5 ml-2 pl-3 border-l border-slate-200"
+            ><i class="fa-regular fa-calendar text-[11px]"></i> Aug 25, 2026</span
+          ></div></div><!-- Hero header --><header class="reveal"><div class="bg-white rounded-[24px] border border-slate-200 shadow-card overflow-hidden"><!-- top accent --><div class="h-[4px] w-full bg-gradient-to-r from-primary via-violetBrand to-amberBrand"></div><div class="px-6 sm:px-8 lg:px-10 py-7 sm:py-8"><div class="flex flex-col lg:flex-row lg:items-start justify-between gap-6"><div class="flex-1 min-w-0"><div class="flex flex-wrap items-center gap-3 mb-3"><span
+                    class="inline-flex items-center gap-2 bg-slate-900 text-white text-[11px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full"
+                  ><i class="fa-solid fa-flask text-[10px] text-amber-300"></i> Testing Board
+                  </span><span
+                    class="inline-flex items-center gap-1.5 text-[12px] font-semibold text-slate-600 bg-slate-50 border border-slate-200 px-2.5 py-1 rounded-full"
+                  ><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> 2 sessions completed
+                  </span><span class="inline-flex items-center gap-1.5 text-[12px] font-medium text-slate-500"><i class="fa-regular fa-clock"></i> 60 min each · moderated
+                  </span></div><h1
+                  class="font-display text-[30px] sm:text-[38px] lg:text-[44px] font-[900] leading-[0.95] tracking-[-0.03em] text-ink"
+                >
+                  Testing with Users
+                  <span class="inline-flex items-center gap-2"><span class="text-primary">Help Heroes</span><span
+                      class="hidden sm:inline-flex w-8 h-8 rounded-full bg-amber-50 border border-amber-200 items-center justify-center text-[16px]"
+                      >🦸</span
+                    ></span></h1><p class="mt-3 max-w-[680px] text-[15px] sm:text-[16px] leading-relaxed text-slate-600">
+                  We tested core hypotheses with real students: is the
+                  <span class="font-semibold text-ink">“Ask for Help”</span> button discoverable and safe? Does
+                  <span class="font-semibold text-ink">“I don’t know how to ask”</span> reduce stigma? And do the
+                  <span class="font-semibold text-ink">Help Wall</span> &amp;
+                  <span class="font-semibold text-ink">Hero badges</span> reframe help-seeking as strength?
+                </p><div class="mt-4 flex flex-wrap gap-2"><span
+                    class="inline-flex items-center gap-1.5 bg-blue-50 border border-blue-200 text-primary text-[12px] font-semibold px-3 py-1.5 rounded-full"
+                    ><i class="fa-solid fa-bullseye text-[11px]"></i> 4 hypotheses</span
+                  ><span
+                    class="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-200 text-amber-700 text-[12px] font-semibold px-3 py-1.5 rounded-full"
+                    ><i class="fa-solid fa-lightbulb text-[11px]"></i> Killer feature found</span
+                  ><span
+                    class="inline-flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 text-emerald-700 text-[12px] font-semibold px-3 py-1.5 rounded-full"
+                    ><i class="fa-solid fa-signal text-[11px]"></i> Low-bandwidth validated</span
+                  ><span
+                    class="inline-flex items-center gap-1.5 bg-violet-50 border border-violet-200 text-violet-700 text-[12px] font-semibold px-3 py-1.5 rounded-full"
+                    ><i class="fa-solid fa-users text-[11px]"></i> First-gen students</span
+                  ></div></div><!-- Right stat card --><div class="lg:w-[360px] shrink-0"><div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-5"><div class="flex items-center justify-between mb-3"><p class="text-[11px] font-bold tracking-widest uppercase text-slate-500">Session snapshot</p><span
+                      class="text-[11px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-1 rounded-full"
+                      >✓ Synthesized</span
+                    ></div><div class="grid grid-cols-3 gap-3"><div class="bg-white rounded-xl border border-slate-200 p-3 text-center shadow-sm"><div class="text-[22px] font-extrabold text-ink leading-none">2</div><div class="text-[10px] font-bold tracking-wide uppercase text-slate-500 mt-1">Users</div></div><div class="bg-white rounded-xl border border-slate-200 p-3 text-center shadow-sm"><div class="text-[22px] font-extrabold text-ink leading-none">10</div><div class="text-[10px] font-bold tracking-wide uppercase text-slate-500 mt-1">Quotes</div></div><div class="bg-white rounded-xl border border-slate-200 p-3 text-center shadow-sm"><div class="text-[22px] font-extrabold text-primary leading-none">5</div><div class="text-[10px] font-bold tracking-wide uppercase text-slate-500 mt-1">Iterations</div></div></div><div
+                    class="mt-3 flex items-center gap-2 text-[12px] text-slate-600 bg-white border border-slate-200 rounded-xl px-3 py-2.5"
+                  ><span
+                      class="w-7 h-7 rounded-full bg-blue-50 border border-blue-200 flex items-center justify-center text-primary shrink-0"
+                      ><i class="fa-solid fa-trophy text-[12px]"></i
+                    ></span><span class="leading-tight"
+                      ><span class="font-semibold text-ink">Top insight:</span> “I don’t know how to ask” is the killer
+                      feature, users felt seen.</span
+                    ></div></div></div></div><!-- Tested features strip --><div class="mt-6 grid grid-cols-2 lg:grid-cols-4 gap-3"><div
+                class="group flex items-center gap-3 bg-white border border-slate-200 rounded-xl px-3.5 py-3 hover:border-blue-200 hover:bg-blue-50/50 transition-colors"
+              ><span
+                  class="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-sm shrink-0"
+                  ><i class="fa-solid fa-hand-sparkles text-[13px]"></i
+                ></span><div class="min-w-0"><div class="text-[12px] font-bold text-ink leading-none">Ask for Help</div><div class="text-[11px] text-slate-500">Huge, friendly CTA</div></div><span class="ml-auto w-2 h-2 rounded-full bg-emerald-500 shrink-0" title="Validated"></span></div><div
+                class="group flex items-center gap-3 bg-white border border-slate-200 rounded-xl px-3.5 py-3 hover:border-amber-200 hover:bg-amber-50/50 transition-colors"
+              ><span
+                  class="w-9 h-9 rounded-xl bg-amber-500 text-white flex items-center justify-center shadow-sm shrink-0"
+                  ><i class="fa-solid fa-circle-question text-[14px]"></i
+                ></span><div class="min-w-0"><div class="text-[12px] font-bold text-ink leading-none">I don’t know how to ask</div><div class="text-[11px] text-slate-500">Stigma-free entry</div></div><span class="ml-auto w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span></div><div
+                class="group flex items-center gap-3 bg-white border border-slate-200 rounded-xl px-3.5 py-3 hover:border-violet-200 hover:bg-violet-50/50 transition-colors"
+              ><span
+                  class="w-9 h-9 rounded-xl bg-violet-600 text-white flex items-center justify-center shadow-sm shrink-0"
+                  ><i class="fa-solid fa-layer-group text-[13px]"></i
+                ></span><div class="min-w-0"><div class="text-[12px] font-bold text-ink leading-none">Help Wall</div><div class="text-[11px] text-slate-500">Anonymous Q&A</div></div><span class="ml-auto w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span></div><div
+                class="group flex items-center gap-3 bg-white border border-slate-200 rounded-xl px-3.5 py-3 hover:border-emerald-200 hover:bg-emerald-50/50 transition-colors"
+              ><span
+                  class="w-9 h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center shadow-sm shrink-0"
+                  ><i class="fa-solid fa-medal text-[13px]"></i
+                ></span><div class="min-w-0"><div class="text-[12px] font-bold text-ink leading-none">Hero Badges</div><div class="text-[11px] text-slate-500">Strength reframing</div></div><span class="ml-auto w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span></div></div></div></div></header><!-- Users --><section class="mt-6 grid lg:grid-cols-2 gap-6"><!-- Maria --><article
+          class="reveal bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden hover:shadow-card-hover transition-shadow"
+        ><!-- cover --><div class="relative h-[88px] bg-gradient-to-br from-[#2563EB] via-[#3B82F6] to-[#06B6D4] overflow-hidden"><div class="absolute inset-0 opacity-20 grid-pattern"></div><div class="absolute inset-0 noise"></div><!-- floating pills on cover --><div class="absolute top-3 right-3 flex gap-1.5"><span
+                class="bg-white/90 backdrop-blur text-[11px] font-bold text-slate-700 px-2.5 py-1 rounded-full border border-white/60 shadow-sm inline-flex items-center gap-1"
+                ><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Rural</span
+              ><span
+                class="bg-white/90 backdrop-blur text-[11px] font-bold text-slate-700 px-2.5 py-1 rounded-full border border-white/60 shadow-sm"
+                >1st-year</span
+              ></div></div><!-- header --><div class="px-6 sm:px-7"><div class="flex gap-4 -mt-8 relative"><div class="w-[64px] h-[64px] rounded-2xl bg-white p-1 shadow-soft shrink-0"><div
+                  class="w-full h-full rounded-[13px] bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white font-extrabold text-[22px]"
+                >
+                  M
+                </div></div><div class="pt-2.5 min-w-0 flex-1"><h2 class="text-[18px] font-extrabold tracking-tight text-ink leading-none">
+                  Maria, The Rural Student
+                </h2><p class="text-[13px] text-slate-500 font-medium mt-1">
+                  19 · first-year · limited broadband · phone-first
+                </p></div><span
+                class="hidden sm:inline-flex self-start mt-3 bg-blue-50 border border-blue-200 text-primary text-[11px] font-bold px-2.5 py-1 rounded-full"
+                >User 01</span
+              ></div><div class="mt-3 flex flex-wrap gap-1.5"><span
+                class="text-[11px] font-semibold bg-slate-50 border border-slate-200 text-slate-600 px-2.5 py-1 rounded-full"
+                >Shares library wifi</span
+              ><span
+                class="text-[11px] font-semibold bg-slate-50 border border-slate-200 text-slate-600 px-2.5 py-1 rounded-full"
+                >Data-sensitive</span
+              ><span
+                class="text-[11px] font-semibold bg-slate-50 border border-slate-200 text-slate-600 px-2.5 py-1 rounded-full"
+                >Voice-memo lover</span
+              ></div></div><div class="px-6 sm:px-7 pb-6"><!-- Quotes --><div class="mt-5"><h3 class="flex items-center gap-2 text-[11px] font-bold tracking-widest uppercase text-slate-500 mb-3"><span
+                  class="w-6 h-6 rounded-full bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600"
+                  ><i class="fa-solid fa-quote-left text-[10px]"></i
+                ></span>
+                Key quotations
+                <span
+                  class="ml-auto text-[11px] font-semibold normal-case tracking-normal bg-slate-50 border border-slate-200 px-2 py-1 rounded-full text-slate-600"
+                  >5 verbatims</span
+                ></h3><div class="space-y-2.5"><div class="quote-card bg-blue-50/70 border border-blue-200 rounded-xl px-4 py-3 flex gap-3"><span
+                    class="w-7 h-7 rounded-full bg-white border border-blue-200 flex items-center justify-center text-[12px] shrink-0"
+                    >💬</span
+                  ><div class="min-w-0 flex-1"><p class="text-[13.5px] font-semibold leading-snug text-ink italic">
+                      “Wow, it’s really big and obvious. I like that.”
+                    </p><p class="text-[11px] font-semibold text-blue-700 mt-1 flex items-center gap-1.5"><span class="w-1 h-1 rounded-full bg-blue-500"></span> on the “Ask for Help” button
+                    </p></div><span
+                    class="hidden sm:inline-flex text-[10px] font-bold tracking-wide uppercase bg-white border border-blue-200 text-blue-700 px-2 py-1 rounded-full self-start"
+                    >Positive</span
+                  ></div><div class="quote-card bg-amber-50/70 border border-amber-200 rounded-xl px-4 py-3 flex gap-3"><span
+                    class="w-7 h-7 rounded-full bg-white border border-amber-200 flex items-center justify-center text-[12px] shrink-0"
+                    >💬</span
+                  ><div class="min-w-0 flex-1"><p class="text-[13.5px] font-semibold leading-snug text-ink italic">
+                      “Oh, that’s me! That’s exactly how I feel.”
+                    </p><p class="text-[11px] font-semibold text-amber-700 mt-1 flex items-center gap-1.5"><span class="w-1 h-1 rounded-full bg-amber-500"></span> on the “I don’t know how to ask” option
+                    </p></div><span
+                    class="hidden sm:inline-flex text-[10px] font-bold tracking-wide uppercase bg-white border border-amber-200 text-amber-700 px-2 py-1 rounded-full self-start"
+                    >Resonance</span
+                  ></div><div class="quote-card bg-violet-50/70 border border-violet-200 rounded-xl px-4 py-3 flex gap-3"><span
+                    class="w-7 h-7 rounded-full bg-white border border-violet-200 flex items-center justify-center text-[12px] shrink-0"
+                    >💬</span
+                  ><div class="min-w-0 flex-1"><p class="text-[13.5px] font-semibold leading-snug text-ink italic">
+                      “Other students are asking the same things I want to ask. I don’t feel so alone.”
+                    </p><p class="text-[11px] font-semibold text-violet-700 mt-1 flex items-center gap-1.5"><span class="w-1 h-1 rounded-full bg-violet-500"></span> on the Help Wall
+                    </p></div></div><div class="quote-card bg-emerald-50/70 border border-emerald-200 rounded-xl px-4 py-3 flex gap-3"><span
+                    class="w-7 h-7 rounded-full bg-white border border-emerald-200 flex items-center justify-center text-[12px] shrink-0"
+                    >💬</span
+                  ><div class="min-w-0 flex-1"><p class="text-[13.5px] font-semibold leading-snug text-ink italic">
+                      “I would be proud to have these. It shows I’m not afraid to learn.”
+                    </p><p class="text-[11px] font-semibold text-emerald-700 mt-1 flex items-center gap-1.5"><span class="w-1 h-1 rounded-full bg-emerald-500"></span> on Help Hero badges
+                    </p></div></div><div class="quote-card bg-violet-50/70 border border-violet-200 rounded-xl px-4 py-3 flex gap-3"><span
+                    class="w-7 h-7 rounded-full bg-white border border-violet-200 flex items-center justify-center text-[12px] shrink-0"
+                    >💬</span
+                  ><div class="min-w-0 flex-1"><p class="text-[13.5px] font-semibold leading-snug text-ink italic">
+                      “This uses almost no data. I could access this even on my phone.”
+                    </p><p class="text-[11px] font-semibold text-violet-700 mt-1 flex items-center gap-1.5"><span class="w-1 h-1 rounded-full bg-violet-500"></span> on text-only forum
+                    </p></div></div></div></div><!-- Feedback Grid --><div class="mt-6"><h3 class="flex items-center gap-2 text-[11px] font-bold tracking-widest uppercase text-slate-500 mb-3"><span class="w-6 h-6 rounded-full bg-slate-900 text-white flex items-center justify-center"
+                  ><i class="fa-solid fa-table-cells-large text-[10px]"></i
+                ></span>
+                Feedback grid
+              </h3><div class="grid grid-cols-1 sm:grid-cols-2 gap-3"><div class="rounded-xl border border-blue-200 bg-blue-50/60 p-3.5"><div class="flex items-center gap-1.5 mb-2"><span
+                      class="w-6 h-6 rounded-full bg-white border border-blue-200 flex items-center justify-center text-[12px]"
+                      >❤️</span
+                    ><span class="text-[11px] font-extrabold tracking-wide uppercase text-blue-700">What I Like</span></div><ul class="space-y-1.5 text-[12.5px] leading-snug text-slate-700"><li class="flex gap-1.5"><span class="text-blue-500 mt-0.5">•</span
+                      ><span>“Ask for Help” button is huge, I can’t miss it</span></li><li class="flex gap-1.5"><span class="text-blue-500 mt-0.5">•</span
+                      ><span>Voice memo, can ask privately at the library</span></li><li class="flex gap-1.5"><span class="text-blue-500 mt-0.5">•</span
+                      ><span>“I don’t know how to ask”, it’s literally me</span></li><li class="flex gap-1.5"><span class="text-blue-500 mt-0.5">•</span><span>Text-only forum, uses almost no data</span></li><li class="flex gap-1.5"><span class="text-blue-500 mt-0.5">•</span><span>Help Hero badges make me proud</span></li><li class="flex gap-1.5"><span class="text-blue-500 mt-0.5">•</span><span>Seeing others ask = I’m not alone</span></li></ul></div><div class="rounded-xl border border-amber-200 bg-amber-50/60 p-3.5"><div class="flex items-center gap-1.5 mb-2"><span
+                      class="w-6 h-6 rounded-full bg-white border border-amber-200 flex items-center justify-center text-[12px]"
+                      >✨</span
+                    ><span class="text-[11px] font-extrabold tracking-wide uppercase text-amber-700">What I Wish</span></div><ul class="space-y-1.5 text-[12.5px] leading-snug text-slate-700"><li class="flex gap-1.5"><span class="text-amber-500 mt-0.5">•</span
+                      ><span>Wish “I don’t know how to ask” was on the main screen</span></li><li class="flex gap-1.5"><span class="text-amber-500 mt-0.5">•</span
+                      ><span>Wish I could download the Help Wall for offline reading</span></li><li class="flex gap-1.5"><span class="text-amber-500 mt-0.5">•</span
+                      ><span>Wish I could set a reminder for when I need to ask something</span></li></ul></div><div class="rounded-xl border border-violet-200 bg-violet-50/60 p-3.5"><div class="flex items-center gap-1.5 mb-2"><span
+                      class="w-6 h-6 rounded-full bg-white border border-violet-200 flex items-center justify-center text-[12px]"
+                      >💡</span
+                    ><span class="text-[11px] font-extrabold tracking-wide uppercase text-violet-700">What If…</span></div><ul class="space-y-1.5 text-[12.5px] leading-snug text-slate-700"><li class="flex gap-1.5"><span class="text-violet-500 mt-0.5">•</span
+                      ><span>What if I could send a voice memo from the main screen?</span></li><li class="flex gap-1.5"><span class="text-violet-500 mt-0.5">•</span
+                      ><span>What if the app worked completely offline?</span></li><li class="flex gap-1.5"><span class="text-violet-500 mt-0.5">•</span
+                      ><span>What if I got a reminder to check the Help Wall?</span></li><li class="flex gap-1.5"><span class="text-violet-500 mt-0.5">•</span
+                      ><span>What if my Help Hero badges were visible to others?</span></li></ul></div><div class="rounded-xl border border-emerald-200 bg-emerald-50/60 p-3.5"><div class="flex items-center gap-1.5 mb-2"><span
+                      class="w-6 h-6 rounded-full bg-white border border-emerald-200 flex items-center justify-center text-[12px]"
+                      >🎯</span
+                    ><span class="text-[11px] font-extrabold tracking-wide uppercase text-emerald-700"
+                      >What Is the Benefit</span
+                    ></div><ul class="space-y-1.5 text-[12.5px] leading-snug text-slate-700"><li class="flex gap-1.5"><span class="text-emerald-500 mt-0.5">•</span
+                      ><span>I don’t feel stupid, help is always available</span></li><li class="flex gap-1.5"><span class="text-emerald-500 mt-0.5">•</span
+                      ><span>I can ask for help even when I don’t have internet</span></li><li class="flex gap-1.5"><span class="text-emerald-500 mt-0.5">•</span><span>I can learn from others’ questions</span></li><li class="flex gap-1.5"><span class="text-emerald-500 mt-0.5">•</span
+                      ><span>I would feel proud and others would see it’s okay to ask</span></li></ul></div></div></div></div></article><!-- James --><article
+          class="reveal bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden hover:shadow-card-hover transition-shadow"
+        ><div class="relative h-[88px] bg-gradient-to-br from-[#F59E0B] via-[#F97316] to-[#EF4444] overflow-hidden"><div class="absolute inset-0 opacity-20 grid-pattern"></div><div class="absolute inset-0 noise"></div><div class="absolute top-3 right-3 flex gap-1.5"><span
+                class="bg-white/90 backdrop-blur text-[11px] font-bold text-slate-700 px-2.5 py-1 rounded-full border border-white/60 shadow-sm inline-flex items-center gap-1"
+                ><span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span> Shared device</span
+              ><span
+                class="bg-white/90 backdrop-blur text-[11px] font-bold text-slate-700 px-2.5 py-1 rounded-full border border-white/60 shadow-sm"
+                >2nd-year</span
+              ></div></div><div class="px-6 sm:px-7"><div class="flex gap-4 -mt-8 relative"><div class="w-[64px] h-[64px] rounded-2xl bg-white p-1 shadow-soft shrink-0"><div
+                  class="w-full h-full rounded-[13px] bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center text-white font-extrabold text-[22px]"
+                >
+                  J
+                </div></div><div class="pt-2.5 min-w-0 flex-1"><h2 class="text-[18px] font-extrabold tracking-tight text-ink leading-none">
+                  James, The Sharing Student
+                </h2><p class="text-[13px] text-slate-500 font-medium mt-1">
+                  20 · second-year · shares device + data with family
+                </p></div><span
+                class="hidden sm:inline-flex self-start mt-3 bg-amber-50 border border-amber-200 text-amber-700 text-[11px] font-bold px-2.5 py-1 rounded-full"
+                >User 02</span
+              ></div><div class="mt-3 flex flex-wrap gap-1.5"><span
+                class="text-[11px] font-semibold bg-slate-50 border border-slate-200 text-slate-600 px-2.5 py-1 rounded-full"
+                >Night-time studier</span
+              ><span
+                class="text-[11px] font-semibold bg-slate-50 border border-slate-200 text-slate-600 px-2.5 py-1 rounded-full"
+                >Motivated by badges</span
+              ><span
+                class="text-[11px] font-semibold bg-slate-50 border border-slate-200 text-slate-600 px-2.5 py-1 rounded-full"
+                >Wants visibility</span
+              ></div></div><div class="px-6 sm:px-7 pb-6"><div class="mt-5"><h3 class="flex items-center gap-2 text-[11px] font-bold tracking-widest uppercase text-slate-500 mb-3"><span
+                  class="w-6 h-6 rounded-full bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600"
+                  ><i class="fa-solid fa-quote-left text-[10px]"></i
+                ></span>
+                Key quotations
+                <span
+                  class="ml-auto text-[11px] font-semibold normal-case tracking-normal bg-slate-50 border border-slate-200 px-2 py-1 rounded-full text-slate-600"
+                  >5 verbatims</span
+                ></h3><div class="space-y-2.5"><div class="quote-card bg-blue-50/70 border border-blue-200 rounded-xl px-4 py-3 flex gap-3"><span
+                    class="w-7 h-7 rounded-full bg-white border border-blue-200 flex items-center justify-center text-[12px] shrink-0"
+                    >💬</span
+                  ><div class="min-w-0 flex-1"><p class="text-[13.5px] font-semibold leading-snug text-ink italic">
+                      “It says ‘Good evening, James.’ That’s nice, it feels personal.”
+                    </p><p class="text-[11px] font-semibold text-blue-700 mt-1 flex items-center gap-1.5"><span class="w-1 h-1 rounded-full bg-blue-500"></span> on the greeting
+                    </p></div><span
+                    class="hidden sm:inline-flex text-[10px] font-bold tracking-wide uppercase bg-white border border-blue-200 text-blue-700 px-2 py-1 rounded-full self-start"
+                    >Delight</span
+                  ></div><div class="quote-card bg-amber-50/70 border border-amber-200 rounded-xl px-4 py-3 flex gap-3"><span
+                    class="w-7 h-7 rounded-full bg-white border border-amber-200 flex items-center justify-center text-[12px] shrink-0"
+                    >💬</span
+                  ><div class="min-w-0 flex-1"><p class="text-[13.5px] font-semibold leading-snug text-ink italic">
+                      “I would actually press this. It doesn’t feel scary.”
+                    </p><p class="text-[11px] font-semibold text-amber-700 mt-1 flex items-center gap-1.5"><span class="w-1 h-1 rounded-full bg-amber-500"></span> on the “Ask for Help” button
+                    </p></div></div><div class="quote-card bg-violet-50/70 border border-violet-200 rounded-xl px-4 py-3 flex gap-3"><span
+                    class="w-7 h-7 rounded-full bg-white border border-violet-200 flex items-center justify-center text-[12px] shrink-0"
+                    >💬</span
+                  ><div class="min-w-0 flex-1"><p class="text-[13.5px] font-semibold leading-snug text-ink italic">
+                      “This is exactly what I said in the interview! ‘I don’t know what I don’t know.’ It’s like it was
+                      designed for me.”
+                    </p><p class="text-[11px] font-semibold text-violet-700 mt-1 flex items-center gap-1.5"><span class="w-1 h-1 rounded-full bg-violet-500"></span> on “I don’t know how to ask”
+                    </p></div><span
+                    class="hidden sm:inline-flex text-[10px] font-bold tracking-wide uppercase bg-white border border-violet-200 text-violet-700 px-2 py-1 rounded-full self-start"
+                    >Killer</span
+                  ></div><div class="quote-card bg-emerald-50/70 border border-emerald-200 rounded-xl px-4 py-3 flex gap-3"><span
+                    class="w-7 h-7 rounded-full bg-white border border-emerald-200 flex items-center justify-center text-[12px] shrink-0"
+                    >💬</span
+                  ><div class="min-w-0 flex-1"><p class="text-[13.5px] font-semibold leading-snug text-ink italic">
+                      “I love this. It’s like a reward for being brave enough to ask.”
+                    </p><p class="text-[11px] font-semibold text-emerald-700 mt-1 flex items-center gap-1.5"><span class="w-1 h-1 rounded-full bg-emerald-500"></span> on Help Hero badges
+                    </p></div></div><div class="quote-card bg-violet-50/70 border border-violet-200 rounded-xl px-4 py-3 flex gap-3"><span
+                    class="w-7 h-7 rounded-full bg-white border border-violet-200 flex items-center justify-center text-[12px] shrink-0"
+                    >💬</span
+                  ><div class="min-w-0 flex-1"><p class="text-[13.5px] font-semibold leading-snug text-ink italic">
+                      “I would share my story to help others. It’s like paying it forward.”
+                    </p><p class="text-[11px] font-semibold text-violet-700 mt-1 flex items-center gap-1.5"><span class="w-1 h-1 rounded-full bg-violet-500"></span> on community stories
+                    </p></div></div></div></div><div class="mt-6"><h3 class="flex items-center gap-2 text-[11px] font-bold tracking-widest uppercase text-slate-500 mb-3"><span class="w-6 h-6 rounded-full bg-slate-900 text-white flex items-center justify-center"
+                  ><i class="fa-solid fa-table-cells-large text-[10px]"></i
+                ></span>
+                Feedback grid
+              </h3><div class="grid grid-cols-1 sm:grid-cols-2 gap-3"><div class="rounded-xl border border-blue-200 bg-blue-50/60 p-3.5"><div class="flex items-center gap-1.5 mb-2"><span
+                      class="w-6 h-6 rounded-full bg-white border border-blue-200 flex items-center justify-center text-[12px]"
+                      >❤️</span
+                    ><span class="text-[11px] font-extrabold tracking-wide uppercase text-blue-700">What I Like</span></div><ul class="space-y-1.5 text-[12.5px] leading-snug text-slate-700"><li class="flex gap-1.5"><span class="text-blue-500 mt-0.5">•</span><span>Personal greeting, feels like it’s for me</span></li><li class="flex gap-1.5"><span class="text-blue-500 mt-0.5">•</span><span>“I don’t know how to ask”, designed for me</span></li><li class="flex gap-1.5"><span class="text-blue-500 mt-0.5">•</span><span>Help Hero badges, reward for bravery</span></li><li class="flex gap-1.5"><span class="text-blue-500 mt-0.5">•</span><span>Text-only forum, uses almost no data</span></li><li class="flex gap-1.5"><span class="text-blue-500 mt-0.5">•</span><span>Seeing others ask = I’m not alone</span></li><li class="flex gap-1.5"><span class="text-blue-500 mt-0.5">•</span
+                      ><span>Journey reflection, shows how far I’ve come</span></li></ul></div><div class="rounded-xl border border-amber-200 bg-amber-50/60 p-3.5"><div class="flex items-center gap-1.5 mb-2"><span
+                      class="w-6 h-6 rounded-full bg-white border border-amber-200 flex items-center justify-center text-[12px]"
+                      >✨</span
+                    ><span class="text-[11px] font-extrabold tracking-wide uppercase text-amber-700">What I Wish</span></div><ul class="space-y-1.5 text-[12.5px] leading-snug text-slate-700"><li class="flex gap-1.5"><span class="text-amber-500 mt-0.5">•</span><span>Wish the app was fully offline</span></li><li class="flex gap-1.5"><span class="text-amber-500 mt-0.5">•</span
+                      ><span>Wish I could see how many others asked the same thing</span></li><li class="flex gap-1.5"><span class="text-amber-500 mt-0.5">•</span><span>Wish I could customize my profile</span></li></ul></div><div class="rounded-xl border border-violet-200 bg-violet-50/60 p-3.5"><div class="flex items-center gap-1.5 mb-2"><span
+                      class="w-6 h-6 rounded-full bg-white border border-violet-200 flex items-center justify-center text-[12px]"
+                      >💡</span
+                    ><span class="text-[11px] font-extrabold tracking-wide uppercase text-violet-700">What If…</span></div><ul class="space-y-1.5 text-[12.5px] leading-snug text-slate-700"><li class="flex gap-1.5"><span class="text-violet-500 mt-0.5">•</span
+                      ><span>What if I could share my Help Hero badges on LinkedIn?</span></li><li class="flex gap-1.5"><span class="text-violet-500 mt-0.5">•</span
+                      ><span>What if there was a “Help Hero of the Month”?</span></li><li class="flex gap-1.5"><span class="text-violet-500 mt-0.5">•</span
+                      ><span>What if I got a notification when someone answers?</span></li><li class="flex gap-1.5"><span class="text-violet-500 mt-0.5">•</span><span>What if the app had a dark mode?</span></li></ul></div><div class="rounded-xl border border-emerald-200 bg-emerald-50/60 p-3.5"><div class="flex items-center gap-1.5 mb-2"><span
+                      class="w-6 h-6 rounded-full bg-white border border-emerald-200 flex items-center justify-center text-[12px]"
+                      >🎯</span
+                    ><span class="text-[11px] font-extrabold tracking-wide uppercase text-emerald-700"
+                      >What Is the Benefit</span
+                    ></div><ul class="space-y-1.5 text-[12.5px] leading-snug text-slate-700"><li class="flex gap-1.5"><span class="text-emerald-500 mt-0.5">•</span><span>Show employers I’m not afraid to learn</span></li><li class="flex gap-1.5"><span class="text-emerald-500 mt-0.5">•</span><span>Would inspire me to ask more questions</span></li><li class="flex gap-1.5"><span class="text-emerald-500 mt-0.5">•</span><span>I’d know help is coming</span></li><li class="flex gap-1.5"><span class="text-emerald-500 mt-0.5">•</span
+                      ><span>I could study at night without waking my family</span></li></ul></div></div></div></div></article></section><!-- Section divider label --><div class="mt-8 flex items-center gap-4 reveal"><div class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-300 to-slate-300"></div><span
+          class="inline-flex items-center gap-2 bg-slate-900 text-white text-[11px] font-bold tracking-widest uppercase px-4 py-1.5 rounded-full shadow-sm"
+        ><i class="fa-solid fa-wand-magic-sparkles text-[11px] text-amber-300"></i> Synthesis &amp; Next Steps
+        </span><div class="h-px flex-1 bg-gradient-to-l from-transparent via-slate-300 to-slate-300"></div></div><!-- Bottom synthesis --><section class="mt-6 grid lg:grid-cols-2 gap-6"><!-- Summary --><div class="reveal bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden"><div class="px-6 sm:px-7 pt-6 pb-2"><div class="flex items-start justify-between gap-4"><div><h3 class="flex items-center gap-2.5 text-[16px] font-extrabold tracking-tight text-ink"><span class="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-sm"
+                    ><i class="fa-solid fa-chart-simple text-[13px]"></i
+                  ></span>
+                  Summary of Findings
+                </h3><p class="text-[12.5px] text-slate-500 font-medium mt-1">
+                  What testing proved, and what to fix before build.
+                </p></div><span
+                class="hidden sm:inline-flex bg-emerald-50 border border-emerald-200 text-emerald-700 text-[11px] font-bold px-2.5 py-1 rounded-full"
+                >Validated ✓</span
+              ></div></div><div class="px-6 sm:px-7 pb-6"><!-- What worked --><div class="mt-4"><div class="flex items-center gap-2 mb-3"><span class="w-5 h-0.5 rounded-full bg-emerald-500"></span><h4 class="text-[11px] font-extrabold tracking-widest uppercase text-emerald-700">What Worked Well</h4><span
+                  class="ml-auto text-[11px] font-bold bg-emerald-50 border border-emerald-200 text-emerald-700 px-2 py-0.5 rounded-full"
+                  >5 strengths</span
+                ></div><div class="space-y-2.5"><div class="flex gap-3 bg-emerald-50/50 border border-emerald-100 rounded-xl px-3.5 py-3"><span
+                    class="w-8 h-8 rounded-xl bg-white border border-emerald-200 flex items-center justify-center text-[14px] shrink-0"
+                    >🟦</span
+                  ><div class="min-w-0"><div class="text-[13px] font-bold text-ink leading-tight">“Ask for Help” button</div><div class="text-[12.5px] text-slate-600 leading-snug">
+                      Visible, non-intimidating, impossible to miss, both users tapped it without hesitation.
+                    </div></div></div><div class="flex gap-3 bg-amber-50/70 border border-amber-200 rounded-xl px-3.5 py-3"><span
+                    class="w-8 h-8 rounded-xl bg-white border border-amber-200 flex items-center justify-center text-[14px] shrink-0"
+                    >🟨</span
+                  ><div class="min-w-0"><div class="text-[13px] font-bold text-ink leading-tight">“I don’t know how to ask”</div><div class="text-[12.5px] text-slate-600 leading-snug">
+                      Directly addresses the Week 4 insight, users said “that’s literally me”.
+                    </div></div></div><div class="flex gap-3 bg-amber-50/40 border border-amber-100 rounded-xl px-3.5 py-3"><span
+                    class="w-8 h-8 rounded-xl bg-white border border-amber-200 flex items-center justify-center text-[14px] shrink-0"
+                    >🏆</span
+                  ><div class="min-w-0"><div class="text-[13px] font-bold text-ink leading-tight">Help Hero badges</div><div class="text-[12.5px] text-slate-600 leading-snug">
+                      Reframes help-seeking as strength, creates genuine pride, not shame.
+                    </div></div></div><div class="flex gap-3 bg-violet-50/60 border border-violet-200 rounded-xl px-3.5 py-3"><span
+                    class="w-8 h-8 rounded-xl bg-white border border-violet-200 flex items-center justify-center text-[14px] shrink-0"
+                    >🟪</span
+                  ><div class="min-w-0"><div class="text-[13px] font-bold text-ink leading-tight">Anonymous Help Wall</div><div class="text-[12.5px] text-slate-600 leading-snug">
+                      Normalizes help-seeking, “I’m not alone” was repeated across sessions.
+                    </div></div></div><div class="flex gap-3 bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-3"><span
+                    class="w-8 h-8 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-[14px] shrink-0"
+                    >💬</span
+                  ><div class="min-w-0"><div class="text-[13px] font-bold text-ink leading-tight">Text-only community</div><div class="text-[12.5px] text-slate-600 leading-snug">
+                      Low-bandwidth is non-negotiable, validated as ~2 KB/post, phone-friendly.
+                    </div></div></div></div></div><div class="mt-6"><div class="flex items-center gap-2 mb-3"><span class="w-5 h-0.5 rounded-full bg-amber-500"></span><h4 class="text-[11px] font-extrabold tracking-widest uppercase text-amber-700">
+                  What Needs Improvement
+                </h4><span
+                  class="ml-auto text-[11px] font-bold bg-amber-50 border border-amber-200 text-amber-700 px-2 py-0.5 rounded-full"
+                  >3 gaps</span
+                ></div><div class="space-y-2.5"><div class="flex gap-3 bg-white border border-slate-200 rounded-xl px-3.5 py-3 shadow-sm"><span
+                    class="w-8 h-8 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-600 shrink-0"
+                    ><i class="fa-solid fa-up-right-from-square text-[12px]"></i
+                  ></span><div class="min-w-0"><div class="text-[13px] font-bold text-ink">“I don’t know how to ask” should be more visible</div><div class="text-[12.5px] text-slate-600">
+                      Move it to the main screen, it’s the killer feature, don’t bury it.
+                    </div></div></div><div class="flex gap-3 bg-white border border-slate-200 rounded-xl px-3.5 py-3 shadow-sm"><span
+                    class="w-8 h-8 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-primary shrink-0"
+                    ><i class="fa-solid fa-download text-[12px]"></i
+                  ></span><div class="min-w-0"><div class="text-[13px] font-bold text-ink">Offline access is critical</div><div class="text-[12.5px] text-slate-600">
+                      Add download for Help Wall, users need answers with no internet.
+                    </div></div></div><div class="flex gap-3 bg-white border border-slate-200 rounded-xl px-3.5 py-3 shadow-sm"><span
+                    class="w-8 h-8 rounded-xl bg-violet-50 border border-violet-200 flex items-center justify-center text-violet-600 shrink-0"
+                    ><i class="fa-solid fa-magnifying-glass text-[12px]"></i
+                  ></span><div class="min-w-0"><div class="text-[13px] font-bold text-ink">Show “how many others asked this”</div><div class="text-[12.5px] text-slate-600">
+                      Add “Similar questions” / “Popular now” to speed up finding answers.
+                    </div></div></div></div></div></div></div><!-- Iteration plan --><div class="reveal bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden flex flex-col"><div class="px-6 sm:px-7 pt-6"><h3 class="flex items-center gap-2.5 text-[16px] font-extrabold tracking-tight text-ink"><span class="w-8 h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center shadow-sm"
+                ><i class="fa-solid fa-rotate text-[13px]"></i
+              ></span>
+              Iteration Plan
+            </h3><p class="text-[12.5px] text-slate-500 font-medium mt-1">
+              Prioritized changes directly from testing feedback.
+            </p></div><div class="px-6 sm:px-7 py-5 flex-1"><div class="relative"><!-- vertical line --><div class="absolute left-[18px] top-[14px] bottom-[14px] w-px bg-slate-200 hidden sm:block"></div><div class="space-y-3"><!-- 01 --><div
+                  class="relative flex gap-3.5 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 hover:border-blue-200 hover:bg-blue-50/40 transition-colors"
+                ><span
+                    class="hidden sm:flex w-9 h-9 rounded-xl bg-blue-600 text-white items-center justify-center text-[12px] font-extrabold shadow-sm shrink-0 z-10"
+                    >01</span
+                  ><span
+                    class="sm:hidden w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-[11px] font-bold shrink-0"
+                    >1</span
+                  ><div class="flex-1 min-w-0 grid sm:grid-cols-[1.2fr_1fr] gap-2 sm:gap-4"><div class="text-[13px] font-bold text-ink leading-snug">
+                      Move “I don’t know how to ask” to the main screen
+                    </div><div class="text-[12.5px] text-slate-600 leading-snug">
+                      Users identified with this instantly, it should be immediately visible
+                    </div></div><span
+                    class="hidden sm:inline-flex self-start text-[10px] font-bold tracking-wide uppercase bg-white border border-blue-200 text-blue-700 px-2 py-1 rounded-full"
+                    >High priority</span
+                  ></div><!-- 02 --><div
+                  class="relative flex gap-3.5 bg-white border border-slate-200 rounded-xl px-4 py-3.5 shadow-sm hover:border-slate-300 transition-colors"
+                ><span
+                    class="hidden sm:flex w-9 h-9 rounded-xl bg-slate-900 text-white items-center justify-center text-[12px] font-extrabold shadow-sm shrink-0 z-10"
+                    >02</span
+                  ><span
+                    class="sm:hidden w-7 h-7 rounded-full bg-slate-900 text-white flex items-center justify-center text-[11px] font-bold shrink-0"
+                    >2</span
+                  ><div class="flex-1 min-w-0 grid sm:grid-cols-[1.2fr_1fr] gap-2 sm:gap-4"><div class="text-[13px] font-bold text-ink leading-snug">Add offline download for Help Wall</div><div class="text-[12.5px] text-slate-600 leading-snug">
+                      Users need access to Q&A even without internet, cache + sync
+                    </div></div><span
+                    class="hidden sm:inline-flex self-start text-[10px] font-bold tracking-wide uppercase bg-slate-50 border border-slate-200 text-slate-700 px-2 py-1 rounded-full"
+                    >Must have</span
+                  ></div><!-- 03 --><div
+                  class="relative flex gap-3.5 bg-white border border-slate-200 rounded-xl px-4 py-3.5 shadow-sm hover:border-slate-300 transition-colors"
+                ><span
+                    class="hidden sm:flex w-9 h-9 rounded-xl bg-violet-600 text-white items-center justify-center text-[12px] font-extrabold shadow-sm shrink-0 z-10"
+                    >03</span
+                  ><span
+                    class="sm:hidden w-7 h-7 rounded-full bg-violet-600 text-white flex items-center justify-center text-[11px] font-bold shrink-0"
+                    >3</span
+                  ><div class="flex-1 min-w-0 grid sm:grid-cols-[1.2fr_1fr] gap-2 sm:gap-4"><div class="text-[13px] font-bold text-ink leading-snug">Add “Similar questions” feature</div><div class="text-[12.5px] text-slate-600 leading-snug">
+                      Helps users find answers to what they’re struggling with, reduce duplicate asks
+                    </div></div></div><!-- 04 --><div
+                  class="relative flex gap-3.5 bg-white border border-slate-200 rounded-xl px-4 py-3.5 shadow-sm hover:border-slate-300 transition-colors"
+                ><span
+                    class="hidden sm:flex w-9 h-9 rounded-xl bg-amber-500 text-white items-center justify-center text-[12px] font-extrabold shadow-sm shrink-0 z-10"
+                    >04</span
+                  ><span
+                    class="sm:hidden w-7 h-7 rounded-full bg-amber-500 text-white flex items-center justify-center text-[11px] font-bold shrink-0"
+                    >4</span
+                  ><div class="flex-1 min-w-0 grid sm:grid-cols-[1.2fr_1fr] gap-2 sm:gap-4"><div class="text-[13px] font-bold text-ink leading-snug">Add “Help Hero of the Month”</div><div class="text-[12.5px] text-slate-600 leading-snug">
+                      Gamification to encourage more help-seeking, social proof + motivation
+                    </div></div></div><!-- 05 --><div
+                  class="relative flex gap-3.5 bg-white border border-slate-200 rounded-xl px-4 py-3.5 shadow-sm hover:border-slate-300 transition-colors"
+                ><span
+                    class="hidden sm:flex w-9 h-9 rounded-xl bg-slate-700 text-white items-center justify-center text-[12px] font-extrabold shadow-sm shrink-0 z-10"
+                    >05</span
+                  ><span
+                    class="sm:hidden w-7 h-7 rounded-full bg-slate-700 text-white flex items-center justify-center text-[11px] font-bold shrink-0"
+                    >5</span
+                  ><div class="flex-1 min-w-0 grid sm:grid-cols-[1.2fr_1fr] gap-2 sm:gap-4"><div class="text-[13px] font-bold text-ink leading-snug">Add dark mode</div><div class="text-[12.5px] text-slate-600 leading-snug">
+                      Allows study at night without disturbing family on shared device
+                    </div></div><span
+                    class="hidden sm:inline-flex self-start text-[10px] font-bold tracking-wide uppercase bg-slate-50 border border-slate-200 text-slate-600 px-2 py-1 rounded-full"
+                    ><i class="fa-regular fa-moon mr-1"></i> Nice to have</span
+                  ></div></div></div><!-- Key learnings --><div
+              class="mt-5 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 text-white p-5 relative overflow-hidden"
+            ><div class="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-white opacity-[0.06] blur-2xl"></div><div class="absolute inset-0 noise opacity-30"></div><div class="relative"><h4 class="flex items-center gap-2 text-[13px] font-extrabold tracking-tight"><span class="w-7 h-7 rounded-full bg-white/15 border border-white/20 flex items-center justify-center"
+                    ><i class="fa-solid fa-lightbulb text-[12px] text-amber-300"></i
+                  ></span>
+                  Key Learnings
+                </h4><ul class="mt-3 space-y-2"><li class="flex gap-2.5 text-[13px] leading-snug"><span class="text-amber-300 mt-0.5"><i class="fa-solid fa-check text-[11px]"></i></span
+                    ><span
+                      ><span class="font-semibold">The “Help Heroes” concept resonates deeply</span><span class="text-slate-300">with first-generation students</span></span
+                    ></li><li class="flex gap-2.5 text-[13px] leading-snug"><span class="text-amber-300 mt-0.5"><i class="fa-solid fa-check text-[11px]"></i></span
+                    ><span
+                      ><span class="font-semibold">“I don’t know how to ask” is the killer feature</span><span class="text-slate-300">, highest emotional resonance</span></span
+                    ></li><li class="flex gap-2.5 text-[13px] leading-snug"><span class="text-amber-300 mt-0.5"><i class="fa-solid fa-check text-[11px]"></i></span
+                    ><span
+                      ><span class="font-semibold">Help Hero badges create genuine pride</span><span class="text-slate-300">, shame to strength reframing works</span></span
+                    ></li><li class="flex gap-2.5 text-[13px] leading-snug"><span class="text-amber-300 mt-0.5"><i class="fa-solid fa-check text-[11px]"></i></span
+                    ><span
+                      ><span class="font-semibold">Community is essential</span><span class="text-slate-300">, normalizes help-seeking, reduces isolation</span></span
+                    ></li><li class="flex gap-2.5 text-[13px] leading-snug"><span class="text-amber-300 mt-0.5"><i class="fa-solid fa-check text-[11px]"></i></span
+                    ><span
+                      ><span class="font-semibold">Low-bandwidth design is non-negotiable</span><span class="text-slate-300">, access &gt; aesthetics</span></span
+                    ></li></ul></div></div></div></div></section><!-- Footer --><footer
+        class="mt-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-[12.5px] text-slate-500 border-t border-slate-200 pt-5 reveal"
+      ><div class="flex items-center gap-2"><span class="w-7 h-7 rounded-full bg-slate-900 text-white flex items-center justify-center text-[12px]"
+            >🦸</span
+          ><span class="font-semibold text-slate-700">Help Heroes</span><span class="hidden sm:inline text-slate-400">
+            Design Thinking Project · Testing with Users · 2 users tested</span
+          ><span class="sm:hidden text-slate-400">· Testing with Users</span></div><div class="flex items-center gap-2 no-print"><a
+            href="./index.html"
+            class="inline-flex items-center gap-1.5 bg-white border border-slate-200 hover:border-slate-300 hover:bg-slate-50 text-slate-700 font-semibold px-3.5 py-1.5 rounded-full shadow-sm transition-colors"
+          ><i class="fa-solid fa-mobile-screen text-[11px]"></i> View prototype
+          </a><button
+            onclick="window.print()"
+            class="inline-flex items-center gap-1.5 bg-slate-900 hover:bg-black text-white font-semibold px-3.5 py-1.5 rounded-full shadow-sm transition-colors"
+          ><i class="fa-solid fa-print text-[11px]"></i> Print board
+          </button></div></footer></div></body></html>

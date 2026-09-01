@@ -1,0 +1,794 @@
+<!--
+  Help Heroes | App Mockup
+  Name: James First-Generation Student
+  Date: September 01, 2026
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help Heroes | App Mockup</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#2563EB',
+            secondary: '#F59E0B',
+            appBg: '#F8FAFC',
+          },
+          borderRadius: { 'card': '12px', 'btn': '8px' },
+          fontFamily: { sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+    .screen {
+      position: absolute; inset: 0; overflow-y: auto; overflow-x: hidden;
+      background: white; padding: 20px; padding-bottom: 92px;
+      will-change: transform, opacity;
+      transition: transform 320ms cubic-bezier(0.32, 0.72, 0, 1), opacity 280ms ease;
+      transform: translateX(100%); opacity: 0; visibility: hidden; pointer-events: none;
+    }
+    .screen.active { transform: translateX(0); opacity: 1; visibility: visible; pointer-events: auto; }
+    .screen.exit-left { transform: translateX(-100%); opacity: 0; visibility: visible; pointer-events: none; }
+    @keyframes softPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(245, 158, 11, 0.25); }
+      50% { box-shadow: 0 0 0 8px rgba(245, 158, 11, 0); }
+    }
+    .pulse-amber { animation: softPulse 2.4s infinite; }
+    .screen::-webkit-scrollbar { display: none; }
+    .screen { -ms-overflow-style: none; scrollbar-width: none; }
+    .hover-lift { transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease, background-color 150ms ease; }
+    .hover-lift:hover { transform: translateY(-1px); }
+    .hover-lift:active { transform: translateY(0); }
+    #narratorCaption {
+      position: absolute; bottom: 82px; left: 12px; right: 12px;
+      background: rgba(17,24,39,0.92); backdrop-filter: blur(8px);
+      color: white; padding: 12px 14px; border-radius: 12px; font-size: 12px; line-height: 1.45;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25); z-index: 15;
+      transform: translateY(8px); opacity: 0; visibility: hidden; pointer-events: none;
+      transition: transform 220ms ease, opacity 220ms ease;
+    }
+    #narratorCaption.visible { transform: translateY(0); opacity: 1; visibility: visible; pointer-events: auto; }
+    #walkthroughBar { width: 100%; max-width: 375px; }
+    #progressTrack { height: 6px; background: #E5E7EB; border-radius: 999px; overflow: hidden; }
+    #progressFill { height: 100%; width: 0%; background: #2563EB; border-radius: 999px; transition: width 200ms linear; }
+    /* highlight pulse */
+    @keyframes iterationGlow {
+      0%,100% { box-shadow: 0 0 0 0 rgba(37,99,235,0.18); }
+      50% { box-shadow: 0 0 0 6px rgba(37,99,235,0); }
+    }
+    .iteration-highlight { animation: iterationGlow 2s infinite; border-color:#2563EB !important; }
+    /* Toast */
+    #toast {
+      position: absolute; bottom: 92px; left: 50%; transform: translateX(-50%) translateY(12px);
+      background: #0F172A; color: white; font-size: 12px; font-weight: 600;
+      padding: 10px 14px; border-radius: 999px; display: flex; align-items:center; gap:8px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.22); z-index: 30;
+      opacity:0; visibility:hidden; transition: all 220ms ease; pointer-events:none;
+    }
+    #toast.show { opacity:1; visibility:visible; transform: translateX(-50%) translateY(0); }
+    /* Dark mode */
+    html.dark body { background:#0F172A !important; }
+    html.dark #walkthroughBar, html.dark #iterationBanner { background:#1E293B !important; border-color:#334155 !important; color:#E2E8F0 !important; }
+    html.dark .phone-frame { background:#0F172A !important; border-color:#334155 !important; }
+    html.dark .phone-frame .screen { background:#0F172A !important; color:#E2E8F0 !important; }
+    html.dark .phone-frame main { background:#0F172A !important; }
+    html.dark .phone-frame nav { background: rgba(15,23,42,0.92) !important; border-color:#334155 !important; }
+    html.dark .card-white { background:#1E293B !important; border-color:#334155 !important; color:#E2E8F0 !important; }
+  </style>
+</head>
+<body class="bg-[#F1F5F9] min-h-screen flex flex-col items-center py-6 px-4">
+
+  <div id="iterationBanner" class="w-full max-w-[375px] bg-white border border-gray-200 rounded-xl shadow-sm px-3 py-2.5 mb-3 flex items-center gap-2.5">
+    <span class="w-7 h-7 rounded-full bg-[#2563EB] text-white flex items-center justify-center shrink-0 text-[13px]"><i class="fa-solid fa-heart"></i></span>
+    <div class="flex-1 min-w-0">
+      <p class="text-[12px] font-semibold text-gray-800 leading-snug">Help Heroes</p>
+      <p class="text-[11px] text-gray-500">Feedback from testing with students</p>
+    </div>
+    <a href="./index.html" class="text-[11px] font-semibold text-[#2563EB] underline">View original</a>
+  </div>
+
+  <!-- Walkthrough Controls -->
+  <div id="walkthroughBar" class="bg-white rounded-xl border border-gray-200 shadow-sm p-3 mb-4 flex flex-col gap-2">
+    <div class="flex items-center gap-2">
+      <button id="playBtn" class="bg-[#2563EB] hover:bg-[#1D4ED8] active:bg-[#1E40AF] text-white text-[13px] font-bold px-4 py-2 rounded-lg flex items-center gap-2 shadow-sm hover:shadow-md transition-all shrink-0">
+        <i class="fa-solid fa-play text-[11px]"></i> <span id="playLabel">Play</span>
+      </button>
+      <div class="flex-1 min-w-0">
+        <div class="flex items-center justify-between mb-1">
+          <span class="text-[11px] font-bold text-gray-700" id="stepLabel">Walkthrough</span>
+          <span class="text-[11px] font-mono text-gray-500" id="timeLabel">0:00 / 2:30</span>
+        </div>
+        <div id="progressTrack"><div id="progressFill"></div></div>
+      </div>
+    </div>
+    <div class="flex items-center justify-between gap-2">
+      <div class="flex items-center gap-2 text-[11px] text-gray-600 flex-wrap">
+        <label class="flex items-center gap-1.5 cursor-pointer select-none hover:text-gray-800"><input type="checkbox" id="voiceToggle" checked class="rounded border-gray-300 text-[#2563EB] focus:ring-[#2563EB]"> Voice</label>
+        <select id="voiceSelect" class="text-[10px] border border-gray-200 rounded-md px-1.5 py-1 bg-white text-gray-700 max-w-[140px] truncate focus:outline-none focus:ring-1 focus:ring-[#2563EB] focus:border-[#2563EB]" title="Choose voice - Google Natural recommended"></select>
+        <span class="w-px h-3 bg-gray-300 hidden sm:block"></span>
+        <label class="flex items-center gap-1.5 cursor-pointer select-none hover:text-gray-800"><input type="checkbox" id="captionToggle" checked class="rounded border-gray-300 text-[#2563EB] focus:ring-[#2563EB]"> Captions</label>
+        <button onclick="toggleDarkMode()" id="darkModeBtn" class="ml-1 inline-flex items-center gap-1 text-[11px] font-bold bg-slate-900 text-white px-2.5 py-1 rounded-full hover:bg-black"><i class="fa-regular fa-moon text-[11px]"></i> Dark</button>
+      </div>
+      <div class="flex items-center gap-1">
+        <button id="restartBtn" class="text-[11px] font-semibold text-gray-500 hover:text-[#2563EB] px-2 py-1 rounded hover:bg-gray-100 transition-colors"><i class="fa-solid fa-rotate-left mr-1"></i>Restart</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phone frame / container mimics iPhone 375x812 -->
+  <div class="phone-frame w-full max-w-[375px] bg-white rounded-[28px] shadow-[0_25px_60px_rgba(15,23,42,0.18),0_10px_24px_rgba(15,23,42,0.12),0_0_0_1px_rgba(15,23,42,0.06)] overflow-hidden border border-gray-200/70 flex flex-col min-h-[812px] h-[812px] relative">
+
+    <!-- Status bar -->
+    <div class="h-[28px] bg-white flex items-center justify-between px-6 pt-2 text-[12px] font-semibold text-gray-900 shrink-0 z-10">
+      <span>9:41</span>
+      <div class="flex items-center gap-1.5">
+        <i class="fa-solid fa-signal text-[11px]"></i>
+        <i class="fa-solid fa-wifi text-[11px]"></i>
+        <i class="fa-solid fa-battery-three-quarters text-[13px]"></i>
+      </div>
+    </div>
+    <!-- Toolbar -->
+    <div class="mx-3 mt-1 mb-0 bg-[#F8FAFC] border border-gray-200 rounded-xl px-3 py-2 flex items-center justify-between shrink-0">
+      <div class="flex items-center gap-2">
+        <span class="w-6 h-6 rounded-full bg-[#2563EB] text-white flex items-center justify-center text-[11px]"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+        <div>
+          <p class="text-[11px] font-extrabold tracking-wide text-gray-900 leading-none">Help Heroes</p>
+          <p class="text-[10px] text-gray-500 font-medium">Offline ready • Dark mode</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <span id="offlineBadge" class="hidden sm:inline-flex items-center gap-1 text-[10px] font-bold bg-[#ECFDF5] border border-[#A7F3D0] text-[#065F46] px-2 py-1 rounded-full"><span class="w-1.5 h-1.5 bg-[#10B981] rounded-full animate-pulse"></span> Offline ready</span>
+        <button onclick="toggleDarkMode()" class="w-7 h-7 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-700 hover:bg-gray-50 shadow-sm" title="Toggle dark mode"><i class="fa-regular fa-moon text-[12px]"></i></button>
+      </div>
+    </div>
+
+    <!-- Scrollable main content relative for slide -->
+    <main class="flex-1 relative overflow-hidden bg-white">
+
+      <!-- Home -->
+      <section id="screen-home" class="screen active">
+        <!-- Greeting -->
+        <div class="mb-5">
+          <h1 class="text-[26px] font-extrabold text-gray-900 leading-[1.05] tracking-tight">Good evening, James! 👋</h1>
+          <p class="text-[12.5px] text-gray-500 mt-1.5 font-medium">You're on track. Keep it up! • <span class="text-[#065F46] bg-[#ECFDF5] border border-[#A7F3D0] px-1.5 py-0.5 rounded-full text-[11px] font-bold">3 due</span></p>
+        </div>
+
+        <!-- Status cards -->
+        <div class="grid grid-cols-2 gap-3 mb-5">
+          <div class="bg-[#EFF6FF] border border-[#BFDBFE] rounded-card p-4 shadow-sm hover:shadow-md hover-lift">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm text-[#2563EB]">
+                <i class="fa-solid fa-book-open text-[13px]"></i>
+              </span>
+              <span class="text-[10.5px] font-bold tracking-widest text-gray-600 uppercase">Assignments</span>
+            </div>
+            <p class="text-[22px] font-extrabold text-gray-900 leading-none">3 Due</p>
+            <p class="text-[11.5px] text-gray-500 mt-1">This week • ~2 KB</p>
+          </div>
+          <div class="bg-[#FFFBEB] border border-[#FCD34D] rounded-card p-4 shadow-sm hover:shadow-md hover-lift">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm text-[#78350F] border border-[#FDE68A]">
+                <i class="fa-regular fa-clock text-[13px]"></i>
+              </span>
+              <span class="text-[10.5px] font-bold tracking-widest text-gray-600 uppercase">Upcoming</span>
+            </div>
+            <p class="text-[22px] font-extrabold text-gray-900 leading-none">Tomorrow</p>
+            <p class="text-[11.5px] text-gray-500 mt-1">Deadlines • offline ✓</p>
+          </div>
+        </div>
+
+        <!-- Primary action -->
+        <button onclick="showScreen('screen-help-request')" class="w-full bg-[#2563EB] hover:bg-[#1D4ED8] active:bg-[#1E40AF] text-white font-extrabold text-[18px] tracking-wide py-[18px] px-6 rounded-[16px] shadow-[0_10px_24px_rgba(37,99,235,0.38)] flex items-center justify-center gap-3 hover:shadow-[0_12px_28px_rgba(37,99,235,0.42)] hover:-translate-y-[1px] active:translate-y-0 transition-all duration-150">
+          <span class="text-[22px] leading-none">🦸</span>
+          <span>ASK FOR HELP</span>
+        </button>
+        <p class="text-center text-[11.5px] text-gray-500 mt-2.5 mb-3 font-medium">No question is too small, help is strength 💙</p>
+
+        <!-- Secondary action -->
+        <button onclick="showScreen('screen-help-request')" class="w-full bg-[#FFFBEB] border-2 border-[#F59E0B] text-[#78350F] hover:bg-[#FEF3C7] active:bg-[#FDE68A] font-extrabold text-[14.5px] py-3.5 px-4 rounded-[14px] flex flex-col items-center justify-center gap-1 shadow-[0_6px_18px_rgba(245,158,11,0.18)] pulse-amber iteration-highlight hover:shadow-[0_8px_22px_rgba(245,158,11,0.26)] hover:-translate-y-[1px] active:translate-y-0 transition-all">
+          <span class="flex items-center gap-2"><span class="text-[18px]">🆘</span> I don't know how to ask</span>
+          <span class="text-[11px] font-semibold text-[#92400E]">We'll help you phrase it, no judgment • Takes 30 sec</span>
+        </button>
+        <p class="text-center text-[11px] text-gray-500 mt-1.5 mb-4">Many students start here</p>
+
+        <!-- Quick links -->
+        <div class="grid grid-cols-3 gap-3">
+          <button onclick="showScreen('screen-help-wall')" class="bg-white border border-gray-200 rounded-card py-4 px-2 flex flex-col items-center gap-2.5 shadow-sm hover:shadow-md hover:border-[#2563EB]/25 hover:-translate-y-[1px] transition-all">
+            <span class="w-11 h-11 rounded-full bg-[#EFF6FF] flex items-center justify-center text-[#2563EB] border border-[#BFDBFE]">
+              <i class="fa-solid fa-layer-group text-[16px]"></i>
+            </span>
+            <span class="text-[11px] font-bold text-gray-800 leading-tight text-center">Help Wall</span>
+            <span class="text-[10px] bg-[#EFF6FF] text-[#1D4ED8] font-bold px-2 py-0.5 rounded-full">145 helpful</span>
+          </button>
+          <button onclick="showScreen('screen-community')" class="bg-white border border-gray-200 rounded-card py-4 px-2 flex flex-col items-center gap-2.5 shadow-sm hover:shadow-md hover:border-[#F59E0B]/25 hover:-translate-y-[1px] transition-all">
+            <span class="w-11 h-11 rounded-full bg-[#FFFBEB] flex items-center justify-center text-[#78350F] border border-[#FCD34D]">
+              <i class="fa-solid fa-users text-[15px]"></i>
+            </span>
+            <span class="text-[11px] font-bold text-gray-800 leading-tight text-center">Help Heroes</span>
+            <span class="text-[10px] bg-[#FFFBEB] border border-[#FDE68A] text-[#78350F] font-bold px-2 py-0.5 rounded-full">~2 KB</span>
+          </button>
+          <button onclick="showScreen('screen-profile')" class="bg-white border border-gray-200 rounded-card py-4 px-2 flex flex-col items-center gap-2.5 shadow-sm hover:shadow-md hover:border-[#F59E0B]/25 hover:-translate-y-[1px] transition-all">
+            <span class="w-11 h-11 rounded-full bg-[#FFFBEB] flex items-center justify-center text-[#78350F] border border-[#FCD34D]">
+              <i class="fa-solid fa-award text-[16px]"></i>
+            </span>
+            <span class="text-[11px] font-bold text-gray-800 leading-tight text-center">My Badge</span>
+            <span class="text-[10px] bg-[#FFFBEB] border border-[#FDE68A] text-[#78350F] font-bold px-2 py-0.5 rounded-full">3 earned</span>
+          </button>
+        </div>
+        
+      </section>
+
+      <!-- Ask for Help -->
+      <section id="screen-help-request" class="screen">
+        <div class="flex items-center justify-between mb-4">
+          <button onclick="showScreen('screen-home')" class="text-[14px] font-semibold text-gray-600 hover:text-[#2563EB] flex items-center gap-1.5 transition-colors">
+            <i class="fa-solid fa-arrow-left text-[12px]"></i> Back
+          </button>
+          <h2 class="text-[16px] font-extrabold text-gray-900">Ask for Help</h2>
+          <span class="w-10"></span>
+        </div>
+
+        <h3 class="text-[18px] font-bold text-gray-900 mb-2">What do you need help with?</h3>
+
+        <!-- Similar questions -->
+        <div class="mb-3 bg-[#F8FAFC] border border-gray-200 rounded-xl p-2.5">
+          <p class="text-[11px] font-bold tracking-wide uppercase text-gray-500 mb-1.5 flex items-center gap-1.5"><i class="fa-solid fa-magnifying-glass text-[10px]"></i> Similar questions, tap to preview</p>
+          <div class="flex flex-wrap gap-1.5">
+            <button onclick="fillExample('How do I email my professor properly?')" class="text-[11px] font-semibold bg-white border border-[#BFDBFE] text-[#1D4ED8] px-2.5 py-1 rounded-full hover:bg-[#EFF6FF]">📌 email professor • 145</button>
+            <button onclick="fillExample('Can I get extension for internet issues?')" class="text-[11px] font-semibold bg-white border border-gray-200 text-gray-700 px-2.5 py-1 rounded-full hover:bg-gray-50">❓ extension • 56</button>
+            <button onclick="fillExample('Question about AI policy for assignments')" class="text-[11px] font-semibold bg-white border border-gray-200 text-gray-700 px-2.5 py-1 rounded-full hover:bg-gray-50">AI policy • 89</button>
+          </div>
+          <p class="text-[10px] text-gray-500 mt-1.5">See similar questions before posting</p>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-card p-3 shadow-sm focus-within:ring-2 focus-within:ring-[#2563EB]/20 focus-within:border-[#2563EB]/50 transition-all mb-4 hover:border-gray-300">
+          <textarea id="helpTextarea" placeholder="I'm struggling with..." rows="4" class="w-full resize-none outline-none text-[14px] text-gray-800 placeholder:text-gray-400 bg-transparent"></textarea>
+          <div class="flex justify-between items-center pt-2 border-t border-gray-100 mt-2">
+            <span class="text-[11px] text-gray-500"><i class="fa-regular fa-circle-question mr-1"></i>Anonymous by default • ~2 KB</span>
+            <span class="text-[11px] text-gray-400" id="charCount">0 / 500</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 mb-4">
+          <button onclick="showToast('📷 Image upload, queued for when you\'re online')" class="bg-white border border-gray-200 rounded-card py-3.5 px-3 flex items-center justify-center gap-2 shadow-sm hover:shadow-md hover:border-[#2563EB]/20 hover:bg-[#F8FAFC] hover:-translate-y-[1px] transition-all group">
+            <span class="w-8 h-8 rounded-full bg-[#EFF6FF] group-hover:bg-[#DBEAFE] flex items-center justify-center text-[16px] transition-colors">📷</span>
+            <span class="text-[13px] font-semibold text-gray-700">Upload image</span>
+          </button>
+          <button onclick="showToast('🎙️ Voice memo, records offline, sends when connected')" class="bg-white border border-gray-200 rounded-card py-3.5 px-3 flex items-center justify-center gap-2 shadow-sm hover:shadow-md hover:border-[#2563EB]/20 hover:bg-[#F8FAFC] hover:-translate-y-[1px] transition-all group">
+            <span class="w-8 h-8 rounded-full bg-[#EFF6FF] group-hover:bg-[#DBEAFE] flex items-center justify-center text-[16px] transition-colors">🎙️</span>
+            <span class="text-[13px] font-semibold text-gray-700 leading-none text-left">Record<br><span class="font-medium text-[11px] text-gray-500">voice memo</span></span>
+          </button>
+        </div>
+
+        <button onclick="showToast('🔍 Searching existing answers first, saves data')" class="w-full bg-white border-2 border-[#2563EB] text-[#2563EB] hover:bg-[#EFF6FF] active:bg-[#DBEAFE] font-bold text-[15px] py-3.5 rounded-card flex items-center justify-center gap-2 hover:shadow-md hover:-translate-y-[1px] active:translate-y-0 transition-all mb-2">
+          <span>🔍</span> Find Help
+        </button>
+        <p class="text-center text-[11px] text-gray-400 mb-3">Search existing answers before posting, saves data</p>
+
+        <div class="flex items-center gap-3 my-3">
+          <div class="flex-1 h-px bg-gray-200"></div>
+          <span class="text-[11px] font-semibold text-gray-400 uppercase tracking-widest">or</span>
+          <div class="flex-1 h-px bg-gray-200"></div>
+        </div>
+
+        
+        <button onclick="showToast('🆘 Mentor will help you phrase it, anonymous, no judgment')" class="w-full bg-[#FFFBEB] border-2 border-[#F59E0B] text-[#78350F] hover:bg-[#FEF3C7] active:bg-[#FDE68A] font-extrabold text-[15px] py-4 px-4 rounded-[16px] flex flex-col items-center justify-center gap-1 shadow-[0_6px_18px_rgba(245,158,11,0.18)] pulse-amber hover:shadow-[0_8px_22px_rgba(245,158,11,0.26)] hover:-translate-y-[1px] active:translate-y-0 transition-all">
+          <span class="flex items-center gap-2"><span class="text-[18px]">🆘</span> I don't know how to ask</span>
+          <span class="text-[11px] font-semibold text-[#92400E]">We'll help you phrase it, no judgment</span>
+        </button>
+        <p class="text-center text-[11px] text-gray-500 mt-2">Many students start here</p>
+      </section>
+
+      <!-- Help Wall -->
+      <section id="screen-help-wall" class="screen">
+        <div class="flex items-center justify-between mb-3">
+          <button onclick="showScreen('screen-home')" class="text-[14px] font-semibold text-gray-600 hover:text-[#2563EB] flex items-center gap-1.5 transition-colors">
+            <i class="fa-solid fa-arrow-left text-[12px]"></i> Back
+          </button>
+          <h2 class="text-[16px] font-extrabold text-gray-900">Help Wall</h2>
+          <button onclick="toggleOfflineDownload()" id="offlineToggleBtn" class="text-[11px] font-bold bg-[#ECFDF5] border border-[#A7F3D0] text-[#065F46] px-2.5 py-1 rounded-full flex items-center gap-1 hover:bg-[#D1FAE5]">
+            <i class="fa-solid fa-download text-[10px]"></i> <span id="offlineToggleLabel">Offline: On</span>
+          </button>
+        </div>
+
+        <!-- Offline option -->
+        <div id="offlineBar" class="bg-[#ECFDF5] border border-[#A7F3D0] rounded-card p-2.5 flex items-center gap-2.5 mb-3">
+          <span class="w-7 h-7 rounded-full bg-white border border-[#A7F3D0] flex items-center justify-center text-[#065F46] shrink-0"><i class="fa-solid fa-download text-[12px]"></i></span>
+          <div class="flex-1 min-w-0">
+            <p class="text-[12px] font-bold text-[#065F46] leading-none">Available offline • Synced 2h ago</p>
+            <p class="text-[11px] text-[#047857] mt-0.5">12 questions • 48 KB total • Auto-syncs at library WiFi</p>
+          </div>
+          <label class="relative inline-flex items-center cursor-pointer shrink-0">
+            <input type="checkbox" id="offlineToggle" checked class="sr-only peer">
+            <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#10B981]"></div>
+          </label>
+        </div>
+
+        <!-- Featured -->
+        <div class="bg-[#EFF6FF] border-2 border-[#2563EB] rounded-card p-4 shadow-[0_4px_14px_rgba(37,99,235,0.12)] mb-3 relative overflow-hidden hover:shadow-[0_6px_20px_rgba(37,99,235,0.16)] hover-lift">
+          <div class="absolute top-0 left-0 w-full h-1 bg-[#2563EB]"></div>
+          <div class="flex items-start gap-2.5">
+            <span class="text-[18px] leading-none mt-0.5">📌</span>
+            <div class="flex-1">
+              <h3 class="text-[14px] font-bold text-gray-900 leading-snug">How do I email my professor?</h3>
+              <p class="text-[12px] text-[#1D4ED8] font-semibold mt-1.5 flex items-center gap-1.5">
+                <i class="fa-solid fa-heart text-[11px]"></i> 145 students found this helpful • <span class="text-[#065F46] bg-white border border-[#A7F3D0] px-1.5 py-0.5 rounded-full text-[10px]">⬇ cached offline</span>
+              </p>
+            </div>
+            <span class="bg-[#2563EB] text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide shrink-0">Featured</span>
+          </div>
+        </div>
+
+        <!-- Popular -->
+        <div class="mb-3 flex items-center gap-1.5 flex-wrap">
+          <span class="text-[10px] font-bold tracking-widest uppercase text-gray-500">Popular now:</span>
+          <span class="text-[11px] font-semibold bg-white border border-[#BFDBFE] text-[#1D4ED8] px-2 py-1 rounded-full cursor-pointer hover:bg-[#EFF6FF]" onclick="showToast('Showing 145 related to email professor')">email professor • 145</span>
+          <span class="text-[11px] font-semibold bg-white border border-gray-200 text-gray-700 px-2 py-1 rounded-full cursor-pointer hover:bg-gray-50" onclick="showToast('56 found this helpful, extension')">extension • 56</span>
+          <span class="text-[11px] font-semibold bg-white border border-gray-200 text-gray-700 px-2 py-1 rounded-full cursor-pointer hover:bg-gray-50" onclick="showToast('89 discuss AI policy')">AI policy • 89</span>
+          <button onclick="showToast('Suggested: registration, 24 helpful')" class="text-[11px] font-bold text-[#2563EB] underline">More →</button>
+        </div>
+
+        <!-- Questions -->
+        <div class="space-y-3 mb-4">
+          <div class="bg-white border border-gray-200 rounded-card p-4 shadow-sm hover:shadow-md hover:border-gray-300 hover-lift cursor-pointer" onclick="showToast('Opening: course registration, 3 replies, cached')">
+            <div class="flex items-start gap-2.5">
+              <span class="text-[16px] leading-none mt-0.5">❓</span>
+              <div class="flex-1">
+                <h4 class="text-[13.5px] font-semibold text-gray-900 leading-snug">How do I change my course registration?</h4>
+                <p class="text-[11.5px] text-gray-500 mt-1.5 flex items-center gap-2 flex-wrap">
+                  <span class="flex items-center gap-1"><i class="fa-regular fa-comment text-[11px]"></i> 3 replies</span>
+                  <span class="w-1 h-1 bg-gray-300 rounded-full"></span>
+                  <span class="flex items-center gap-1 text-[#1D4ED8] font-medium"><i class="fa-regular fa-heart text-[11px]"></i> 24 helpful</span>
+                  <span class="text-[#065F46] bg-[#ECFDF5] border border-[#A7F3D0] px-1 py-0.5 rounded-full text-[10px] font-semibold">⬇ offline</span>
+                </p>
+              </div>
+              <i class="fa-solid fa-chevron-right text-[11px] text-gray-300 mt-1"></i>
+            </div>
+          </div>
+          <div class="bg-white border border-gray-200 rounded-card p-4 shadow-sm hover:shadow-md hover:border-gray-300 hover-lift cursor-pointer" onclick="showToast('Opening: extension, 7 replies')">
+            <div class="flex items-start gap-2.5">
+              <span class="text-[16px] leading-none mt-0.5">❓</span>
+              <div class="flex-1">
+                <h4 class="text-[13.5px] font-semibold text-gray-900 leading-snug">Can I get an extension because of internet issues?</h4>
+                <p class="text-[11.5px] text-gray-500 mt-1.5 flex items-center gap-2 flex-wrap">
+                  <span class="flex items-center gap-1"><i class="fa-regular fa-comment text-[11px]"></i> 7 replies</span>
+                  <span class="w-1 h-1 bg-gray-300 rounded-full"></span>
+                  <span class="flex items-center gap-1 text-[#1D4ED8] font-medium"><i class="fa-regular fa-heart text-[11px]"></i> 56 helpful</span>
+                  <span class="text-[#065F46] bg-[#ECFDF5] border border-[#A7F3D0] px-1 py-0.5 rounded-full text-[10px] font-semibold">⬇ offline</span>
+                </p>
+              </div>
+              <i class="fa-solid fa-chevron-right text-[11px] text-gray-300 mt-1"></i>
+            </div>
+          </div>
+          <div class="bg-white border border-gray-200 rounded-card p-4 shadow-sm hover:shadow-md hover:border-gray-300 hover-lift cursor-pointer" onclick="showToast('Opening: AI policy, 12 replies')">
+            <div class="flex items-start gap-2.5">
+              <span class="text-[16px] leading-none mt-0.5">❓</span>
+              <div class="flex-1">
+                <h4 class="text-[13.5px] font-semibold text-gray-900 leading-snug">What's the policy on using AI for assignments?</h4>
+                <p class="text-[11.5px] text-gray-500 mt-1.5 flex items-center gap-2 flex-wrap">
+                  <span class="flex items-center gap-1"><i class="fa-regular fa-comment text-[11px]"></i> 12 replies</span>
+                  <span class="w-1 h-1 bg-gray-300 rounded-full"></span>
+                  <span class="flex items-center gap-1 text-[#1D4ED8] font-medium"><i class="fa-regular fa-heart text-[11px]"></i> 89 helpful</span>
+                  <span class="text-[#065F46] bg-[#ECFDF5] border border-[#A7F3D0] px-1 py-0.5 rounded-full text-[10px] font-semibold">⬇ offline</span>
+                </p>
+              </div>
+              <i class="fa-solid fa-chevron-right text-[11px] text-gray-300 mt-1"></i>
+            </div>
+          </div>
+        </div>
+
+        <button onclick="showScreen('screen-help-request')" class="w-full bg-[#2563EB] hover:bg-[#1D4ED8] active:bg-[#1E40AF] text-white font-bold text-[14px] py-3.5 rounded-card flex items-center justify-center gap-2 shadow-[0_6px_16px_rgba(37,99,235,0.28)] hover:shadow-[0_8px_20px_rgba(37,99,235,0.34)] hover:-translate-y-[1px] active:translate-y-0 transition-all">
+          <span>📝</span> Ask a new question
+        </button>
+        
+      </section>
+
+      <!-- Profile -->
+      <section id="screen-profile" class="screen">
+        <div class="flex items-center justify-between mb-4">
+          <button onclick="showScreen('screen-home')" class="text-[14px] font-semibold text-gray-600 hover:text-[#2563EB] flex items-center gap-1.5 transition-colors">
+            <i class="fa-solid fa-arrow-left text-[12px]"></i> Back
+          </button>
+          <h2 class="text-[16px] font-extrabold text-gray-900">My Profile</h2>
+          <button onclick="toggleDarkMode()" class="w-8 h-8 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-600 hover:bg-gray-50" title="Dark mode"><i class="fa-regular fa-moon text-[12px]"></i></button>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-[16px] p-6 shadow-sm flex flex-col items-center text-center mb-4 hover:shadow-md hover-lift card-white">
+          <div class="w-20 h-20 rounded-full bg-gradient-to-br from-[#EFF6FF] to-[#DBEAFE] border-2 border-[#BFDBFE] flex items-center justify-center text-[36px] shadow-sm mb-3">
+            🦸
+          </div>
+          <h3 class="text-[18px] font-extrabold text-gray-900">James</h3>
+          <p class="text-[13px] text-gray-500 font-medium">First-Generation Student</p>
+          <div class="mt-3 bg-[#FFFBEB] border border-[#FCD34D] text-[#78350F] text-[12px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5">
+            <span>✨</span> Help Hero since Aug 2026
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <h4 class="text-[13px] font-extrabold text-gray-900 flex items-center gap-2 mb-3">
+            <span>🏆</span> Help Hero Badges
+            <span class="ml-auto text-[11px] font-semibold bg-white border border-[#FDE68A] text-[#78350F] px-2 py-1 rounded-full cursor-pointer hover:bg-[#FFFBEB]" onclick="showToast('Share badges to LinkedIn, requested by James')">Share →</span>
+          </h4>
+          <div class="grid grid-cols-3 gap-3">
+            <div class="bg-[#FFFBEB] border border-[#FCD34D] rounded-card p-3 flex flex-col items-center text-center shadow-sm hover:shadow-md hover:-translate-y-[1px] transition-all">
+              <div class="w-11 h-11 rounded-full bg-white border border-[#FDE68A] flex items-center justify-center text-[20px] shadow-sm mb-2">🆕</div>
+              <p class="text-[11px] font-bold text-[#78350F] leading-tight">First Help</p>
+              <p class="text-[10px] text-[#92400E] mt-0.5">Asked first</p>
+            </div>
+            <div class="bg-[#FFFBEB] border border-[#FCD34D] rounded-card p-3 flex flex-col items-center text-center shadow-sm hover:shadow-md hover:-translate-y-[1px] transition-all">
+              <div class="w-11 h-11 rounded-full bg-white border border-[#FDE68A] flex items-center justify-center text-[20px] shadow-sm mb-2">📚</div>
+              <p class="text-[11px] font-bold text-[#78350F] leading-tight">Study Guide</p>
+              <p class="text-[10px] text-[#92400E] mt-0.5">Shared notes</p>
+            </div>
+            <div class="bg-[#FFFBEB] border border-[#FCD34D] rounded-card p-3 flex flex-col items-center text-center shadow-sm hover:shadow-md hover:-translate-y-[1px] transition-all">
+              <div class="w-11 h-11 rounded-full bg-white border border-[#FDE68A] flex items-center justify-center text-[20px] shadow-sm mb-2">🤝</div>
+              <p class="text-[11px] font-bold text-[#78350F] leading-tight">Peer Mentor</p>
+              <p class="text-[10px] text-[#92400E] mt-0.5">Helped 5</p>
+            </div>
+          </div>
+          <div class="mt-3 bg-white border border-[#FCD34D] rounded-full py-2 px-4 flex items-center justify-center gap-2 shadow-sm">
+            <span class="text-[14px]">🏅</span>
+            <span class="text-[13px] font-bold text-[#78350F]">3 badges earned</span>
+            <span class="text-[11px] text-[#92400E]"> Keep going!</span>
+          </div>
+        </div>
+
+        <div class="bg-[#F8FAFC] border border-gray-200 rounded-card p-4 hover:border-gray-300 transition-colors card-white">
+          <h4 class="text-[13px] font-extrabold text-gray-900 flex items-center gap-2 mb-2">
+            <span>🤝</span> Help Hero Journey
+          </h4>
+          <p class="text-[12px] font-semibold text-gray-700 mb-2">What I've learned by asking:</p>
+          <ul class="space-y-1.5">
+            <li class="flex items-start gap-2 text-[12.5px] text-gray-600"><span class="text-[#2563EB] mt-0.5">•</span> It's okay to ask for help</li>
+            <li class="flex items-start gap-2 text-[12.5px] text-gray-600"><span class="text-[#2563EB] mt-0.5">•</span> I'm not alone</li>
+            <li class="flex items-start gap-2 text-[12.5px] text-gray-600"><span class="text-[#2563EB] mt-0.5">•</span> Asking helps others too</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Community -->
+      <section id="screen-community" class="screen">
+        <div class="flex items-center justify-between mb-3">
+          <button onclick="showScreen('screen-home')" class="text-[14px] font-semibold text-gray-600 hover:text-[#2563EB] flex items-center gap-1.5 transition-colors">
+            <i class="fa-solid fa-arrow-left text-[12px]"></i> Back
+          </button>
+          <h2 class="text-[16px] font-extrabold text-gray-900">Community</h2>
+          <span class="w-10"></span>
+        </div>
+
+        <div class="bg-[#ECFDF5] border border-[#A7F3D0] rounded-card p-3 flex items-start gap-2.5 mb-3">
+          <span class="w-7 h-7 rounded-full bg-white border border-[#A7F3D0] flex items-center justify-center text-[14px] shrink-0">💬</span>
+          <div>
+            <p class="text-[12px] font-bold text-[#065F46] leading-none">Low-Bandwidth Mode Text-only</p>
+            <p class="text-[11px] text-[#047857] mt-1 leading-snug">Uses minimal data. No images or video perfect for slow connections.</p>
+          </div>
+          <span class="ml-auto w-2 h-2 bg-[#10B981] rounded-full animate-pulse shrink-0 mt-1.5"></span>
+        </div>
+
+        <!-- Highlight -->
+        <div class="bg-gradient-to-br from-[#FFFBEB] to-[#FEF3C7] border-2 border-[#F59E0B] rounded-card p-3.5 mb-3 shadow-sm relative overflow-hidden">
+          <div class="absolute -top-6 -right-6 w-20 h-20 bg-[#F59E0B]/10 rounded-full blur-xl"></div>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="w-7 h-7 rounded-full bg-[#F59E0B] text-white flex items-center justify-center text-[12px]"><i class="fa-solid fa-trophy"></i></span>
+            <h3 class="text-[13px] font-extrabold text-[#78350F]">Help Hero of the Month</h3>
+            
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-[#F3E8FF] border-2 border-white shadow-sm flex items-center justify-center text-[13px] font-bold text-[#7C3AED]">A</div>
+            <div class="flex-1">
+              <p class="text-[13px] font-bold text-[#78350F] leading-none">Aisha • 15 answers • 89 helpful</p>
+              <p class="text-[11px] text-[#92400E] mt-1">“Found a workaround for offline assignments! Happy to share. 🙌”</p>
+            </div>
+            <button onclick="showToast('🏆 Congrats Aisha, nominated!')" class="text-[11px] font-bold bg-[#78350F] text-white px-3 py-1.5 rounded-full hover:bg-[#92400E]">Cheer</button>
+          </div>
+          <p class="text-[10.5px] text-[#92400E] mt-2 font-medium"><span class="underline">View leaderboard</span></p>
+        </div>
+
+        <div class="space-y-3 mb-4">
+          <div class="bg-white border border-gray-200 rounded-card p-4 shadow-sm hover:shadow-md hover:border-gray-300 hover-lift card-white">
+            <div class="flex items-center gap-2.5 mb-2">
+              <div class="w-8 h-8 rounded-full bg-[#EFF6FF] border border-[#DBEAFE] flex items-center justify-center text-[12px] font-bold text-[#2563EB]">A</div>
+              <div>
+                <p class="text-[13px] font-bold text-gray-900 leading-none">Anna</p>
+                <p class="text-[11px] text-gray-400">Help Hero • 2h ago</p>
+              </div>
+              <span class="ml-auto text-[10px] bg-[#EFF6FF] text-[#2563EB] font-semibold px-2 py-1 rounded-full">Text-only</span>
+            </div>
+            <p class="text-[13.5px] text-gray-800 leading-snug">I asked for help with my essay. Got great feedback! ✨</p>
+            <button class="mt-2.5 text-[12px] font-semibold text-[#2563EB] hover:text-[#1D4ED8] flex items-center gap-1 transition-colors">
+              <span>→ 12 responses</span> <i class="fa-solid fa-chevron-right text-[10px]"></i>
+            </button>
+          </div>
+          <div class="bg-white border border-gray-200 rounded-card p-4 shadow-sm hover:shadow-md hover:border-gray-300 hover-lift card-white">
+            <div class="flex items-center gap-2.5 mb-2">
+              <div class="w-8 h-8 rounded-full bg-[#FEF3C7] border border-[#FDE68A] flex items-center justify-center text-[12px] font-bold text-[#78350F]">M</div>
+              <div>
+                <p class="text-[13px] font-bold text-gray-900 leading-none">Maria</p>
+                <p class="text-[11px] text-gray-400">Help Hero • 5h ago</p>
+              </div>
+              <span class="ml-auto text-[10px] bg-[#FFFBEB] text-[#78350F] font-semibold px-2 py-1 rounded-full border border-[#FDE68A]">Tip</span>
+            </div>
+            <p class="text-[13.5px] text-gray-800 leading-snug">Downloaded the slides at the library today. So much better than screenshotting! 📚</p>
+            <button class="mt-2.5 text-[12px] font-semibold text-[#2563EB] hover:text-[#1D4ED8] flex items-center gap-1 transition-colors">
+              <span>→ 8 responses</span> <i class="fa-solid fa-chevron-right text-[10px]"></i>
+            </button>
+          </div>
+          <div class="bg-white border border-gray-200 rounded-card p-4 shadow-sm hover:shadow-md hover:border-gray-300 hover-lift card-white">
+            <div class="flex items-center gap-2.5 mb-2">
+              <div class="w-8 h-8 rounded-full bg-[#F3E8FF] border border-[#E9D5FF] flex items-center justify-center text-[12px] font-bold text-[#7C3AED]">A</div>
+              <div>
+                <p class="text-[13px] font-bold text-gray-900 leading-none">Aisha</p>
+                <p class="text-[11px] text-gray-400">Help Hero • 1d ago</p>
+              </div>
+              <span class="ml-auto text-[10px] bg-[#F3E8FF] text-[#7C3AED] font-semibold px-2 py-1 rounded-full">Workaround</span>
+            </div>
+            <p class="text-[13.5px] text-gray-800 leading-snug">Found a workaround for offline assignments! Happy to share. 🙌</p>
+            <button class="mt-2.5 text-[12px] font-semibold text-[#2563EB] hover:text-[#1D4ED8] flex items-center gap-1 transition-colors">
+              <span>→ 15 responses</span> <i class="fa-solid fa-chevron-right text-[10px]"></i>
+            </button>
+          </div>
+        </div>
+
+        <button onclick="showToast('💬 Story saved offline, will post when online')" class="w-full bg-[#2563EB] hover:bg-[#1D4ED8] active:bg-[#1E40AF] text-white font-bold text-[14px] py-3.5 rounded-card flex items-center justify-center gap-2 shadow-[0_6px_16px_rgba(37,99,235,0.28)] hover:shadow-[0_8px_20px_rgba(37,99,235,0.34)] hover:-translate-y-[1px] active:translate-y-0 transition-all">
+          <span>💬</span> Share your story
+        </button>
+        <p class="text-center text-[11px] text-gray-400 mt-2">Text only • ~2 KB per post</p>
+      </section>
+
+    </main>
+
+    <div id="narratorCaption" role="status" aria-live="polite">
+      <div class="flex items-start gap-2.5">
+        <span class="w-7 h-7 rounded-full bg-[#2563EB] flex items-center justify-center text-[13px] shrink-0">🎙️</span>
+        <div class="flex-1 min-w-0">
+          <p class="hidden" id="captionTitle">Introduction</p>
+          <p class="text-[12px] leading-snug text-white" id="captionText"></p>
+        </div>
+        <button onclick="hideCaption()" class="text-white/60 hover:text-white p-1 -mr-1 shrink-0" aria-label="Close caption"><i class="fa-solid fa-xmark text-[12px]"></i></button>
+      </div>
+    </div>
+    <div id="toast"><i class="fa-solid fa-circle-check text-[#10B981]"></i> <span id="toastText">Saved offline</span></div>
+
+    <!-- Bottom Nav -->
+    <nav class="absolute bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-gray-200 flex justify-around items-center px-1 py-2 rounded-b-[28px] shadow-[0_-6px_20px_rgba(0,0,0,0.06)] z-20">
+      <button data-target="screen-home" onclick="showScreen('screen-home')" class="nav-btn flex flex-col items-center gap-1 py-1.5 px-3.5 rounded-xl text-[#2563EB] bg-[#EFF6FF] transition-all hover:bg-[#DBEAFE]">
+        <i class="fa-solid fa-house text-[17px]"></i>
+        <span class="text-[10px] font-bold leading-none">Home</span>
+      </button>
+      <button data-target="screen-help-request" onclick="showScreen('screen-help-request')" class="nav-btn relative flex flex-col items-center gap-1 py-1.5 px-3.5 rounded-xl bg-[#FFFBEB] border border-[#FCD34D] text-[#78350F] shadow-sm hover:bg-[#FEF3C7] hover:border-[#FDE68A] hover:shadow-md hover:-translate-y-[1px] transition-all">
+        <span class="relative">
+          <i class="fa-solid fa-handshake-angle text-[17px]"></i>
+          <span class="absolute -top-1.5 -right-1.5 min-w-[16px] h-[16px] px-1 bg-[#F59E0B] text-white text-[9px] font-extrabold leading-[16px] text-center rounded-full ring-2 ring-white flex items-center justify-center">•</span>
+        </span>
+        <span class="text-[10px] font-bold leading-none">Help</span>
+      </button>
+      <button data-target="screen-help-wall" onclick="showScreen('screen-help-wall')" class="nav-btn flex flex-col items-center gap-1 py-1.5 px-3.5 rounded-xl text-gray-400 hover:text-[#2563EB] hover:bg-gray-50 transition-all">
+        <i class="fa-solid fa-layer-group text-[17px]"></i>
+        <span class="text-[10px] font-semibold leading-none">Wall</span>
+      </button>
+      <button data-target="screen-profile" onclick="showScreen('screen-profile')" class="nav-btn flex flex-col items-center gap-1 py-1.5 px-3.5 rounded-xl text-gray-400 hover:text-[#2563EB] hover:bg-gray-50 transition-all">
+        <i class="fa-solid fa-award text-[17px]"></i>
+        <span class="text-[10px] font-semibold leading-none">Badge</span>
+      </button>
+      <button data-target="screen-community" onclick="showScreen('screen-community')" class="nav-btn flex flex-col items-center gap-1 py-1.5 px-3.5 rounded-xl text-gray-400 hover:text-[#2563EB] hover:bg-gray-50 transition-all">
+        <i class="fa-solid fa-users text-[17px]"></i>
+        <span class="text-[10px] font-semibold leading-none">Community</span>
+      </button>
+    </nav>
+  </div>
+
+  <p class="text-[12.5px] text-slate-500 mt-5 font-medium tracking-tight text-center">Help Heroes • Prototype</p>
+
+  <!-- Changelog Modal -->
+  <div id="changelogModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-[520px] w-full max-h-[86vh] overflow-hidden shadow-2xl flex flex-col">
+      <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between shrink-0">
+        <div>
+          <h3 class="text-[15px] font-extrabold text-gray-900 flex items-center gap-2"><i class="fa-solid fa-rotate text-[#2563EB]"></i> Notes</h3>
+          <p class="text-[11px] text-gray-500 font-medium">What changed and what needs more work</p>
+        </div>
+        <button onclick="closeChangelog()" class="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-600"><i class="fa-solid fa-xmark text-[13px]"></i></button>
+      </div>
+      <div class="overflow-y-auto p-6 space-y-4">
+        <div>
+          <h4 class="text-[12px] font-extrabold tracking-widest uppercase text-[#1D4ED8] flex items-center gap-2"><span class="w-1.5 h-6 bg-[#2563EB] rounded-full"></span> What changed</h4>
+          <div class="mt-2 space-y-2">
+            <div class="bg-[#EFF6FF] border border-[#BFDBFE] rounded-xl p-3 flex gap-2.5"><span class="text-[14px]">✅</span><div><p class="text-[13px] font-bold text-gray-900">I do not know how to ask on Home</p><p class="text-[11.5px] text-gray-600">The option is now on the home screen as a second button. It keeps the same supportive wording and is easy to find.</p></div></div>
+            <div class="bg-[#ECFDF5] border border-[#A7F3D0] rounded-xl p-3 flex gap-2.5"><span class="text-[14px]">✅</span><div><p class="text-[13px] font-bold text-gray-900">Save Help Wall offline</p><p class="text-[11.5px] text-gray-600">Questions can be saved for offline reading. A bar shows what is saved and when it was last synced.</p></div></div>
+            <div class="bg-[#F3E8FF] border border-[#E9D5FF] rounded-xl p-3 flex gap-2.5"><span class="text-[14px]">✅</span><div><p class="text-[13px] font-bold text-gray-900">Similar questions</p><p class="text-[11.5px] text-gray-600">Similar questions are shown when asking for help and on the Help Wall. This helps find an existing answer quickly.</p></div></div>
+            <div class="bg-[#FFFBEB] border border-[#FDE68A] rounded-xl p-3 flex gap-2.5"><span class="text-[14px]">✅</span><div><p class="text-[13px] font-bold text-gray-900">Community highlight</p><p class="text-[11.5px] text-gray-600">Community shows a highlighted student who has helped others. This celebrates support among students.</p></div></div>
+            <div class="bg-slate-900 text-white rounded-xl p-3 flex gap-2.5"><span class="text-[14px]">🌙</span><div><p class="text-[13px] font-bold">Dark mode</p><p class="text-[11.5px] text-slate-300">A dark mode option is available for studying at night. Text contrast and spacing were adjusted for easier reading.</p></div></div>
+          </div>
+        </div>
+        <div>
+          <h4 class="text-[12px] font-extrabold tracking-widest uppercase text-amber-700 flex items-center gap-2"><span class="w-1.5 h-6 bg-[#F59E0B] rounded-full"></span> What needs more work</h4>
+          <div class="mt-2 space-y-2">
+            <div class="bg-[#FFFBEB] border border-[#FDE68A] rounded-xl p-3"><p class="text-[12px] font-bold text-[#78350F]">Feeling safe to ask</p><p class="text-[11.5px] text-gray-700 mt-1">Whether badges alone reduce worry about asking would need more interviews and observation with students and families.</p></div>
+            <div class="bg-[#FFF1F2] border border-[#FECDD3] rounded-xl p-3"><p class="text-[12px] font-bold text-[#9F1239]">Support in the moment</p><p class="text-[11.5px] text-gray-700 mt-1">Ideas like campus hubs and offline first support were not built into this prototype and would need more exploration.</p></div>
+            <div class="bg-[#F3E8FF] border border-[#E9D5FF] rounded-xl p-3"><p class="text-[12px] font-bold text-[#6D28D9]">Getting it into use</p><p class="text-[11.5px] text-gray-700 mt-1">Rollout would need input from faculty, IT and support teams early, plus thought on funding and moderation.</p></div>
+            <div class="bg-[#F1F5F9] border border-gray-200 rounded-xl p-3"><p class="text-[12px] font-bold text-gray-900">Long term use</p><p class="text-[11.5px] text-gray-600">An app alone does not change wider barriers. That would take more time, policy work and ongoing testing.</p></div>
+          </div>
+        </div>
+        <div class="bg-[#F8FAFC] border border-gray-200 rounded-xl p-3 flex items-start gap-2">
+          <span class="text-[14px]">🎬</span>
+          <p class="text-[11.5px] text-gray-600 leading-snug">The prototype shows the updated screens and the video walks through them.</p>
+        </div>
+      </div>
+      <div class="px-6 py-3 border-t border-gray-200 flex items-center justify-between bg-gray-50 shrink-0">
+        <span class="text-[11px] text-gray-500">Help Heroes</span>
+        <button onclick="closeChangelog()" class="bg-[#2563EB] text-white text-[12px] font-bold px-4 py-2 rounded-full hover:bg-[#1D4ED8]">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentScreenId = 'screen-home';
+    let isAnimating = false;
+    function showScreen(targetId) {
+      if (targetId === currentScreenId || isAnimating) return;
+      isAnimating = true;
+      const current = document.getElementById(currentScreenId);
+      const next = document.getElementById(targetId);
+      const buttons = document.querySelectorAll('.nav-btn');
+      current.classList.remove('active'); current.classList.add('exit-left');
+      void next.offsetWidth; next.classList.add('active');
+      buttons.forEach(btn => {
+        const isActive = btn.dataset.target === targetId;
+        const isHelp = btn.dataset.target === 'screen-help-request';
+        if (isActive) {
+          btn.classList.remove('text-gray-400','hover:bg-gray-50','bg-[#FFFBEB]','border','border-[#FCD34D]','text-[#78350F]','shadow-sm');
+          btn.classList.add('text-[#2563EB]','bg-[#EFF6FF]');
+          if (isHelp) btn.classList.remove('hover:bg-[#FEF3C7]','hover:border-[#FDE68A]');
+          btn.querySelector('span:last-child').classList.remove('font-semibold'); btn.querySelector('span:last-child').classList.add('font-bold');
+        } else {
+          btn.classList.remove('text-[#2563EB]','bg-[#EFF6FF]');
+          if (isHelp) btn.classList.add('bg-[#FFFBEB]','border','border-[#FCD34D]','text-[#78350F]','shadow-sm');
+          else btn.classList.add('text-gray-400','hover:bg-gray-50');
+          btn.querySelector('span:last-child').classList.add('font-semibold'); btn.querySelector('span:last-child').classList.remove('font-bold');
+        }
+      });
+      setTimeout(() => { current.classList.remove('exit-left'); next.scrollTop = 0; currentScreenId = targetId; isAnimating = false; }, 320);
+    }
+    function showToast(msg) {
+      const t = document.getElementById('toast'); const txt = document.getElementById('toastText');
+      txt.textContent = msg; t.classList.add('show');
+      setTimeout(()=> t.classList.remove('show'), 2200);
+    }
+    function fillExample(txt) { const a = document.getElementById('helpTextarea'); if (a) { a.value = txt; a.focus(); document.getElementById('charCount').textContent = txt.length + ' / 500'; showToast('✨ Filled example, edit as needed'); } }
+    document.getElementById('helpTextarea')?.addEventListener('input', e => { document.getElementById('charCount').textContent = e.target.value.length + ' / 500'; });
+    function toggleOfflineDownload() {
+      const cb = document.getElementById('offlineToggle'); cb.checked = !cb.checked;
+      document.getElementById('offlineToggleLabel').textContent = cb.checked ? 'Offline: On' : 'Offline: Off';
+      document.getElementById('offlineBar').style.opacity = cb.checked ? '1' : '0.55';
+      showToast(cb.checked ? '⬇ Offline cache enabled • 48KB will sync' : 'Offline cache paused');
+    }
+    document.getElementById('offlineToggle')?.addEventListener('change', e => {
+      document.getElementById('offlineToggleLabel').textContent = e.target.checked ? 'Offline: On' : 'Offline: Off';
+      document.getElementById('offlineBar').style.opacity = e.target.checked ? '1' : '0.55';
+      showToast(e.target.checked ? '⬇ Offline enabled' : 'Offline paused');
+    });
+    function toggleDarkMode() {
+      document.documentElement.classList.toggle('dark');
+      const isDark = document.documentElement.classList.contains('dark');
+      showToast(isDark ? '🌙 Dark mode, night study friendly' : '☀️ Light mode');
+      document.getElementById('darkModeBtn').innerHTML = isDark ? '<i class="fa-solid fa-sun text-[11px]"></i> Light' : '<i class="fa-regular fa-moon text-[11px]"></i> Dark';
+    }
+    function openChangelog(e){ if(e) e.preventDefault(); document.getElementById('changelogModal').classList.remove('hidden'); document.getElementById('changelogModal').classList.add('flex'); }
+    function closeChangelog(){ document.getElementById('changelogModal').classList.add('hidden'); document.getElementById('changelogModal').classList.remove('flex'); }
+    document.getElementById('changelogModal')?.addEventListener('click', e => { if(e.target.id==='changelogModal') closeChangelog(); });
+
+    // Walkthrough
+    const walkthroughSteps = [
+      { start: 0, end: 14, screen: 'screen-home', title: 'Welcome', text: "Welcome to Help Heroes. This app is designed for first generation students who want to ask for help but are not sure how to start." },
+      { start: 14, end: 32, screen: 'screen-home', title: 'Home', text: "The home screen greets James and shows his assignments. The large Ask for Help button is easy to find, and the I do not know how to ask option is right below it for students who feel stuck." },
+      { start: 32, end: 54, screen: 'screen-help-request', title: 'Ask for Help', text: "Here James can write, add a photo, or record a voice memo. Similar questions are shown first so he can see if someone already asked the same thing." },
+      { start: 54, end: 78, screen: 'screen-help-wall', title: 'Help Wall', text: "The Help Wall shows anonymized questions from other students. Featured questions and popular topics help James see he is not alone, and questions can be saved for offline reading." },
+      { start: 78, end: 96, screen: 'screen-community', title: 'Community', text: "In Community, students share short text only stories. Low bandwidth mode keeps posts small. The highlighted student of the month celebrates people who help others." },
+      { start: 96, end: 112, screen: 'screen-profile', title: 'Profile', text: "The profile shows Help Hero badges earned by asking and helping. Students can share their progress and see what they have learned by asking." },
+      { start: 112, end: 150, screen: 'screen-home', title: 'Next Steps', text: "Some topics need more work beyond this prototype, like deeper offline support, campus hubs, and how the app fits with university processes. Those would need more observation and testing." }
+    ];
+    const totalDuration = 150;
+    let walkthroughTimer = null, walkthroughStartTime = null, pausedElapsed = 0, isWalkthroughPlaying = false, currentStepIndex = -1;
+    const playBtn = () => document.getElementById('playBtn');
+    const playLabel = () => document.getElementById('playLabel');
+    const stepLabel = () => document.getElementById('stepLabel');
+    const timeLabel = () => document.getElementById('timeLabel');
+    const progressFill = () => document.getElementById('progressFill');
+    const captionEl = () => document.getElementById('narratorCaption');
+    const captionTextEl = () => document.getElementById('captionText');
+    const voiceToggle = () => document.getElementById('voiceToggle');
+    const captionToggle = () => document.getElementById('captionToggle');
+    function formatTime(s){ const m=Math.floor(s/60); const sec=Math.floor(s%60).toString().padStart(2,'0'); return m+':'+sec; }
+    let selectedVoice = null;
+    function getBestVoices(){ if(!('speechSynthesis' in window)) return []; return window.speechSynthesis.getVoices(); }
+    function pickBestVoice(){
+      const voices=getBestVoices(); if(!voices.length) return null;
+      const score=v=>{ let s=0; const n=v.name.toLowerCase(), lang=v.lang.toLowerCase();
+        if(lang.startsWith('en-us')) s+=100; else if(lang.startsWith('en-gb')) s+=80; else if(lang.startsWith('en')) s+=50; else return -1;
+        if(n.includes('google')&&n.includes('natural')) s+=200; else if(n.includes('microsoft')&&n.includes('natural')) s+=180; else if(n.includes('google')) s+=150; else if(n.includes('microsoft')) s+=120; else if(n.includes('apple')||n.includes('samantha')) s+=60; if(n.includes('female')) s+=5; if(n.includes('online')) s+=20; return s; };
+      return [...voices].sort((a,b)=>score(b)-score(a))[0] || voices.find(v=>v.lang.startsWith('en')) || voices[0];
+    }
+    function populateVoiceSelector(){
+      const sel=document.getElementById('voiceSelect'); if(!sel||!('speechSynthesis' in window)) return;
+      const voices=getBestVoices(); if(!voices.length) return; sel.innerHTML='';
+      const best=pickBestVoice(); voices.forEach(v=>{ const opt=document.createElement('option'); opt.value=v.name; opt.textContent=v.name+' ('+v.lang+')'+(v.name===best?.name?', Recommended':''); if(v.name===best?.name) opt.selected=true; sel.appendChild(opt); });
+      selectedVoice=best;
+      sel.addEventListener('change', ()=>{ const chosen=voices.find(v=>v.name===sel.value); if(chosen) selectedVoice=chosen; if(voiceToggle()&&voiceToggle().checked){ window.speechSynthesis.cancel(); const p=new SpeechSynthesisUtterance('Hello, I am '+selectedVoice.name); p.voice=selectedVoice; p.rate=0.95; window.speechSynthesis.speak(p);} });
+    }
+    function speakText(text){
+      if(!voiceToggle()||!voiceToggle().checked) return; if(!('speechSynthesis' in window)) return;
+      let voices=getBestVoices(); if(!voices.length){ setTimeout(()=>speakText(text),250); return; }
+      window.speechSynthesis.cancel();
+      const chunks=text.match(/[^.!?]+[.!?]+|[^.!?]+$/g)||[text]; let idx=0;
+      function speakChunk(){
+        if(idx>=chunks.length) return; if(!isWalkthroughPlaying) return;
+        const u=new SpeechSynthesisUtterance(chunks[idx].trim()); u.rate=0.95; u.pitch=1.02; u.volume=1; u.lang=selectedVoice?.lang||'en-US'; if(selectedVoice) u.voice=selectedVoice;
+        u.onend=()=>{ idx++; setTimeout(speakChunk,180); }; u.onerror=()=>{ idx++; setTimeout(speakChunk,180); }; window.speechSynthesis.speak(u);
+      } speakChunk();
+    }
+    function stopSpeech(){ if('speechSynthesis' in window) window.speechSynthesis.cancel(); }
+    function showCaption(step){ if(!captionToggle()||!captionToggle().checked){ captionEl().classList.remove('visible'); return; } captionTextEl().textContent=step.text; captionEl().classList.add('visible'); }
+    function hideCaption(){ captionEl().classList.remove('visible'); } window.hideCaption=hideCaption;
+    function updateWalkthrough(){
+      if(!isWalkthroughPlaying) return;
+      const elapsed=(Date.now()-walkthroughStartTime)/1000+pausedElapsed, clamped=Math.min(elapsed,totalDuration);
+      progressFill().style.width=(clamped/totalDuration*100)+'%'; timeLabel().textContent=formatTime(clamped)+' / 2:30';
+      let stepIdx=walkthroughSteps.findIndex(s=>clamped>=s.start&&clamped<s.end); if(clamped>=totalDuration) stepIdx=walkthroughSteps.length-1;
+      if(stepIdx!==-1&&stepIdx!==currentStepIndex){
+        currentStepIndex=stepIdx; const step=walkthroughSteps[stepIdx]; stepLabel().textContent=step.title; showCaption(step);
+        if(step.screen!==currentScreenId){ isAnimating=false; showScreen(step.screen); isAnimating=false; setTimeout(()=>isAnimating=false,350); }
+        speakText(step.text);
+      }
+      if(clamped>=totalDuration){ pauseWalkthrough(); stepLabel().textContent='Finished  2:30'; playBtn().querySelector('i').className='fa-solid fa-rotate-left text-[11px]'; playLabel().textContent='Replay'; return; }
+      walkthroughTimer=requestAnimationFrame(updateWalkthrough);
+    }
+    function playWalkthrough(){
+      if(isWalkthroughPlaying) return;
+      if(pausedElapsed>=totalDuration){ pausedElapsed=0; currentStepIndex=-1; }
+      isWalkthroughPlaying=true; walkthroughStartTime=Date.now();
+      playBtn().querySelector('i').className='fa-solid fa-pause text-[11px]'; playLabel().textContent='Pause'; stepLabel().textContent='Playing...';
+      if('speechSynthesis' in window) window.speechSynthesis.getVoices();
+      walkthroughTimer=requestAnimationFrame(updateWalkthrough);
+    }
+    function pauseWalkthrough(){
+      if(!isWalkthroughPlaying) return;
+      isWalkthroughPlaying=false; pausedElapsed+=(Date.now()-walkthroughStartTime)/1000; walkthroughStartTime=null;
+      if(walkthroughTimer) cancelAnimationFrame(walkthroughTimer); stopSpeech();
+      playBtn().querySelector('i').className='fa-solid fa-play text-[11px]'; playLabel().textContent='Play'; stepLabel().textContent='Paused at '+formatTime(pausedElapsed);
+    }
+    function restartWalkthrough(){
+      pauseWalkthrough(); stopSpeech(); pausedElapsed=0; currentStepIndex=-1;
+      progressFill().style.width='0%'; timeLabel().textContent='0:00 / 2:30'; stepLabel().textContent='Walkthrough'; hideCaption(); showScreen('screen-home');
+      playBtn().querySelector('i').className='fa-solid fa-play text-[11px]'; playLabel().textContent='Play';
+    }
+    function togglePlay(){ if(isWalkthroughPlaying) pauseWalkthrough(); else playWalkthrough(); }
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const pb=document.getElementById('playBtn'), rb=document.getElementById('restartBtn');
+      if(pb) pb.addEventListener('click', togglePlay); if(rb) rb.addEventListener('click', restartWalkthrough);
+      const origShowScreen=window.showScreen; window.showScreen=function(targetId){ if(isWalkthroughPlaying&&targetId!==walkthroughSteps[currentStepIndex]?.screen) pauseWalkthrough(); return origShowScreen(targetId); };
+      if('speechSynthesis' in window){
+        const loadVoices=()=>populateVoiceSelector();
+        window.speechSynthesis.onvoiceschanged=loadVoices;
+        setTimeout(loadVoices,100); setTimeout(loadVoices,600); loadVoices();
+      }
+      const ct=document.getElementById('captionToggle');
+      if(ct) ct.addEventListener('change', ()=>{ if(!ct.checked) hideCaption(); else if(currentStepIndex>=0) showCaption(walkthroughSteps[currentStepIndex]); });
+    });
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const buttons=document.querySelectorAll('.nav-btn');
+      buttons.forEach(btn=>{ const isActive=btn.dataset.target==='screen-home'; const isHelp=btn.dataset.target==='screen-help-request';
+        if(!isActive&&isHelp){ btn.classList.add('bg-[#FFFBEB]','border','border-[#FCD34D]','text-[#78350F]','shadow-sm'); btn.classList.remove('text-gray-400','hover:bg-gray-50'); }
+      });
+    });
+  </script>
+</body>
+</html>

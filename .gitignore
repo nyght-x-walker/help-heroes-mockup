@@ -1,0 +1,9 @@
+# exclude agent instructions
+AGENTIC.md
+AGENT.md
+wreframe_image.html
+.DS_Store
+Thumbs.db
+*.log
+/tmp/
+week5_project.html
