@@ -1,3 +1,23 @@
+# Help Heroes - Weeks 5 to 7 - Live Project
+
+**Live site:** https://nyght-x-walker.github.io/help-heroes-mockup/ (starts on Overview, then Week 5, Week 6, Week 7)
+
+**Project links:**
+- Overview with all videos: https://nyght-x-walker.github.io/help-heroes-mockup/ (also ./overview.html)
+- Week 5 board and story video: https://nyght-x-walker.github.io/help-heroes-mockup/week5_project.html#week5-video
+- Week 6 prototype: https://nyght-x-walker.github.io/help-heroes-mockup/week6.html (also ./index.html was Week 6 prototype, now overview is landing)
+- Week 6 wireframe: https://nyght-x-walker.github.io/help-heroes-mockup/wireframe_image.html
+- Testing board (Maria and James): https://nyght-x-walker.github.io/help-heroes-mockup/testing_board.html
+- Week 7 updated prototype: https://nyght-x-walker.github.io/help-heroes-mockup/index_week7.html
+- Videos: Week 5 Story (Week5_Story.mp4), Week 6 Mockup (s-01141_WEEK_6_Help_Heroes_mockup.mp4), Week 7 Iteration (Help_Heroes_Week7_Iteration_Video.mp4) - all embedded on overview
+
+**Deliverable videos in repo:**
+- WEEK_5/Deliverables/Week5_Solution_Space-Ideation_and_Prototyping_Help_Heroes_Story.mp4
+- WEEK_6/Deliverables/s-01141_WEEK_6_Help_Heroes_mockup.mp4
+- WEEK_7/Deliverables/Help_Heroes_Week7_Iteration_Video.mp4
+
+---
+
 ## Task 2: Process Reflection
 
 ### I Liked:
