@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Week 5: Ideation and Prototyping | Help Heroes Board</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        primary: '#2563EB',
+        ink: '#0F172A',
+        muted: '#64748B',
+        amberBrand: '#F59E0B',
+        violetBrand: '#8B5CF6',
+        emeraldBrand: '#10B981',
+      },
+      fontFamily: {
+        sans: ['Inter','system-ui','-apple-system','sans-serif'],
+        display: ['Fraunces','Inter','serif'],
+        hand: ['Caveat','Inter','sans-serif'],
+      },
+      boxShadow: {
+        card: '0 1px 3px rgba(15,23,42,0.06), 0 8px 24px rgba(15,23,42,0.06)',
+        'card-hover': '0 8px 30px rgba(15,23,42,0.10), 0 2px 8px rgba(15,23,42,0.06)',
+        sticky: '0 2px 8px rgba(15,23,42,0.08), 0 4px 16px rgba(15,23,42,0.06)',
+      }
+    }
+  }
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fraunces:opsz,wght@9..144,700;9..144,800;9..144,900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  *{font-family:Inter,system-ui,-apple-system,sans-serif}
+  .font-display{font-family:Fraunces,Inter,serif}
+  .font-hand{font-family:Caveat,Inter,sans-serif}
+  body{background:#F8FAFC}
+  .grid-pattern{
+    background-image:
+      linear-gradient(to right, rgba(15,23,42,0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(15,23,42,0.035) 1px, transparent 1px);
+    background-size:32px 32px;
+  }
+  .noise{
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+  }
+  .sticky-note{
+    transition: transform 150ms ease, box-shadow 150ms ease;
+  }
+  .sticky-note:hover{
+    transform: translateY(-2px) rotate(0deg) !important;
+    box-shadow:0 8px 20px rgba(15,23,42,0.10),0 2px 8px rgba(15,23,42,0.08);
+  }
+  .crazy-cell{
+    transition: transform 120ms ease, border-color 120ms ease, background-color 120ms ease;
+  }
+  .crazy-cell:hover{
+    transform: translateY(-1px);
+  }
+  .reveal{opacity:0;transform:translateY(8px);animation:reveal 600ms ease forwards}
+  .reveal:nth-child(1){animation-delay:40ms}
+  .reveal:nth-child(2){animation-delay:110ms}
+  .reveal:nth-child(3){animation-delay:180ms}
+  .reveal:nth-child(4){animation-delay:250ms}
+  @keyframes reveal{to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  @media print{
+    body{background:white!important}
+    .no-print{display:none!important}
+    .shadow-card{box-shadow:none!important}
+    a[href]:after{content:""!important}
+  }
+  ::-webkit-scrollbar{width:8px;height:8px}
+  ::-webkit-scrollbar-thumb{background:#CBD5E1;border-radius:999px}
+  ::-webkit-scrollbar-track{background:transparent}
+</style>
+</head>
+<body class="text-ink antialiased selection:bg-primary selection:text-white">
+<div class="fixed inset-0 -z-10 pointer-events-none">
+  <div class="absolute inset-0 bg-[#F8FAFC]"></div>
+  <div class="absolute inset-0 grid-pattern opacity-[0.6]"></div>
+  <div class="absolute -top-[320px] left-1/2 -translate-x-1/2 w-[1400px] h-[700px] rounded-full blur-[90px] opacity-[0.13]" style="background: radial-gradient(ellipse at center, #2563EB 0%, #8B5CF6 32%, transparent 70%)"></div>
+  <div class="absolute top-[680px] -right-[180px] w-[600px] h-[600px] rounded-full blur-[90px] opacity-[0.09]" style="background: radial-gradient(circle at center, #F59E0B 0%, transparent 68%)"></div>
+  <div class="absolute top-[1200px] -left-[160px] w-[520px] h-[520px] rounded-full blur-[90px] opacity-[0.07]" style="background: radial-gradient(circle at center, #10B981 0%, transparent 70%)"></div>
+</div>
+
+<div class="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+  <div class="flex flex-wrap items-center justify-between gap-3 mb-6 reveal">
+    <div class="flex items-center gap-2">
+      <a href="./index.html" class="group inline-flex items-center gap-2 text-[13px] font-semibold text-muted hover:text-ink transition-colors">
+        <span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center group-hover:border-slate-300 shadow-sm"><i class="fa-solid fa-arrow-left text-[11px]"></i></span>
+        <span class="hidden sm:inline">Back to prototype</span>
+        <span class="sm:hidden">Prototype</span>
+      </a>
+      <span class="text-slate-300">/</span>
+      <span class="inline-flex items-center gap-1.5 text-[11px] font-bold tracking-widest uppercase text-slate-500 bg-white border border-slate-200 px-2.5 py-1 rounded-full"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> Week 5 Ideation Board</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <a href="./wireframe_image.html" class="hidden sm:inline-flex items-center gap-1.5 text-[12px] font-semibold bg-white border border-slate-200 px-3 py-1.5 rounded-full hover:bg-slate-50 shadow-sm">Wireframe overview <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>
+      <a href="./testing_board.html" class="hidden sm:inline-flex items-center gap-1.5 text-[12px] font-semibold bg-white border border-slate-200 px-3 py-1.5 rounded-full hover:bg-slate-50 shadow-sm">Testing board <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>
+      <button onclick="window.print()" class="no-print inline-flex items-center gap-1.5 bg-slate-900 hover:bg-black text-white text-[12px] font-bold px-3.5 py-1.5 rounded-full shadow-sm"><i class="fa-solid fa-print text-[11px]"></i> Print</button>
+    </div>
+  </div>
+
+  <div class="reveal mb-6 bg-white border border-slate-200 rounded-2xl p-2 flex items-center gap-2 overflow-x-auto">
+    <span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 px-2 shrink-0">Flow</span>
+    <div class="flex items-center gap-2 min-w-0 flex-1">
+      <span class="inline-flex items-center gap-1.5 bg-slate-900 text-white text-[11px] font-bold px-2.5 py-1 rounded-full shrink-0"><i class="fa-regular fa-lightbulb text-[11px] text-amber-300"></i> W5 Ideation</span>
+      <span class="w-6 h-px bg-slate-300 shrink-0 hidden sm:block"></span>
+      <span class="inline-flex items-center gap-1.5 bg-white border border-slate-200 text-slate-600 text-[11px] font-semibold px-2.5 py-1 rounded-full shrink-0">W5 Prototyping</span>
+      <span class="w-6 h-px bg-slate-300 shrink-0 hidden sm:block"></span>
+      <a href="./index.html" class="inline-flex items-center gap-1.5 bg-blue-50 border border-blue-200 text-primary text-[11px] font-semibold px-2.5 py-1 rounded-full shrink-0 hover:bg-blue-100">W6 Mockup <i class="fa-solid fa-arrow-right text-[9px]"></i></a>
+      <span class="w-6 h-px bg-slate-300 shrink-0 hidden sm:block"></span>
+      <a href="./testing_board.html" class="inline-flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 text-emerald-700 text-[11px] font-semibold px-2.5 py-1 rounded-full shrink-0 hover:bg-emerald-100">W6 Testing</a>
+    </div>
+    <span class="text-[11px] text-slate-500 font-medium shrink-0 hidden lg:inline">Aug 2026 Week 5</span>
+  </div>
+
+  <header class="reveal">
+    <div class="bg-white rounded-[24px] border border-slate-200 shadow-card overflow-hidden">
+      <div class="h-[5px] w-full bg-gradient-to-r from-blue-600 via-violet-500 to-amber-500"></div>
+      <div class="px-6 sm:px-8 lg:px-10 py-7 sm:py-8">
+        <div class="flex flex-col lg:flex-row gap-7">
+          <div class="flex-1 min-w-0">
+            <div class="flex flex-wrap items-center gap-2.5 mb-3">
+              <span class="inline-flex items-center gap-2 bg-slate-900 text-white text-[11px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full"><i class="fa-solid fa-bezier-curve text-amber-300 text-[10px]"></i> Project Assignment 5</span>
+              <span class="inline-flex items-center gap-1.5 bg-blue-50 border border-blue-200 text-primary text-[11px] font-bold px-2.5 py-1 rounded-full">Ideation and Prototyping</span>
+              <span class="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-200 text-amber-700 text-[11px] font-bold px-2.5 py-1 rounded-full">MURAL Board</span>
+              <span class="inline-flex items-center gap-1.5 text-[12px] font-medium text-slate-500"><i class="fa-regular fa-calendar"></i> Week 5 Aug 2026</span>
+            </div>
+            <h1 class="font-display text-[30px] sm:text-[40px] lg:text-[46px] font-[900] leading-[0.9] tracking-[-0.03em] text-ink">
+              Ideation <span class="text-primary">and</span> Prototyping
+              <span class="inline-flex items-center gap-2 ml-1"><span class="w-9 h-9 rounded-xl bg-amber-400 border border-amber-500 flex items-center justify-center text-[18px] shadow-sm">🦸</span></span>
+            </h1>
+            <div class="mt-3 inline-flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2">
+              <span class="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center shrink-0"><i class="fa-solid fa-bullseye text-[13px]"></i></span>
+              <div>
+                <p class="text-[11px] font-bold tracking-widest uppercase text-slate-500 leading-none">Design Challenge</p>
+                <p class="text-[13px] font-semibold text-ink leading-snug">Redesign the online learning experience for <span class="underline decoration-amber-300 decoration-2 underline-offset-2">first-generation university students</span> in a world where high-speed internet is unreliable.</p>
+              </div>
+            </div>
+            <p class="mt-3 text-[13.5px] leading-relaxed text-slate-600 max-w-[720px]">Focus on James, a first-generation student who often apologizes for needing help and finds the unwritten rules of university hard to follow. The board below shows how we explored ideas for him.</p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <a href="#section1" class="inline-flex items-center gap-1.5 bg-blue-600 text-white text-[12px] font-bold px-3 py-1.5 rounded-full hover:bg-blue-700 shadow-sm">Jump to board <i class="fa-solid fa-arrow-down text-[10px]"></i></a>
+              <span class="inline-flex items-center gap-1.5 bg-slate-50 border border-slate-200 text-slate-600 text-[12px] font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-users text-[11px]"></i> 5 team members</span>
+              <span class="inline-flex items-center gap-1.5 bg-slate-50 border border-slate-200 text-slate-600 text-[12px] font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-sticky-note text-[11px]"></i> 15 silent plus 40 crazy 8s</span>
+              <span class="inline-flex items-center gap-1.5 bg-violet-50 border border-violet-200 text-violet-700 text-[12px] font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-trophy text-[11px]"></i> 2 selected for prototype</span>
+            </div>
+          </div>
+          <div class="lg:w-[360px] shrink-0 flex flex-col gap-3">
+            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+              <div class="flex items-center justify-between mb-3">
+                <p class="text-[11px] font-bold tracking-widest uppercase text-slate-500">Board index</p>
+                <span class="text-[10px] font-bold tracking-wide uppercase bg-white border border-slate-200 text-slate-600 px-2 py-1 rounded-full">6 sections</span>
+              </div>
+              <nav class="grid grid-cols-2 gap-2 text-[12px] font-semibold">
+                <a href="#section1" class="flex items-center gap-2 bg-white border border-slate-200 rounded-xl px-3 py-2.5 hover:border-blue-200 hover:bg-blue-50/60"><span class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-[10px] font-extrabold shrink-0">01</span> PoV and HMW</a>
+                <a href="#section2" class="flex items-center gap-2 bg-white border border-slate-200 rounded-xl px-3 py-2.5 hover:border-emerald-200 hover:bg-emerald-50/60"><span class="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px] font-extrabold shrink-0">02</span> Silent Brainstorm</a>
+                <a href="#section3" class="flex items-center gap-2 bg-white border border-slate-200 rounded-xl px-3 py-2.5 hover:border-amber-200 hover:bg-amber-50/60"><span class="w-6 h-6 rounded-full bg-amber-500 text-white flex items-center justify-center text-[10px] font-extrabold shrink-0">03</span> Crazy Eights</a>
+                <a href="#section4" class="flex items-center gap-2 bg-white border border-slate-200 rounded-xl px-3 py-2.5 hover:border-red-200 hover:bg-red-50/60"><span class="w-6 h-6 rounded-full bg-red-500 text-white flex items-center justify-center text-[10px] font-extrabold shrink-0">04</span> Reverse</a>
+                <a href="#section5" class="flex items-center gap-2 bg-white border border-slate-200 rounded-xl px-3 py-2.5 hover:border-violet-200 hover:bg-violet-50/60"><span class="w-6 h-6 rounded-full bg-violet-600 text-white flex items-center justify-center text-[10px] font-extrabold shrink-0">05</span> Building</a>
+                <a href="#section6" class="flex items-center gap-2 bg-white border border-slate-200 rounded-xl px-3 py-2.5 hover:border-blue-200 hover:bg-blue-50/60 ring-1 ring-blue-100"><span class="w-6 h-6 rounded-full bg-slate-900 text-white flex items-center justify-center text-[10px] font-extrabold shrink-0">06</span> Selection</a>
+              </nav>
+              <div class="mt-3 flex items-center gap-2 bg-white border border-amber-200 rounded-xl px-3 py-2.5">
+                <span class="w-7 h-7 rounded-full bg-amber-500 text-white flex items-center justify-center shrink-0"><i class="fa-solid fa-lightbulb text-[12px]"></i></span>
+                <p class="text-[12px] leading-tight text-ink"><span class="font-bold">Outcome:</span> Help Heroes plus Offline First Learning OS to Week 6 mockup</p>
+              </div>
+            </div>
+            <div class="bg-gradient-to-br from-blue-600 to-violet-600 rounded-2xl p-4 text-white relative overflow-hidden">
+              <div class="absolute inset-0 opacity-20 grid-pattern"></div>
+              <div class="relative">
+                <p class="text-[11px] font-bold tracking-widest uppercase text-white/80">Persona</p>
+                <p class="text-[16px] font-extrabold leading-none mt-1 flex items-center gap-2">James <span class="text-[14px]">🦸</span> <span class="text-[11px] font-semibold bg-white/20 px-2 py-0.5 rounded-full">First gen</span></p>
+                <p class="text-[12.5px] leading-snug text-white/90 mt-2">Has learned to apologize for late work, for missed meetings, for needing help, and has internalized the belief that he is a burden to the system.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
+          <div class="flex items-center gap-2.5 bg-blue-50 border border-blue-200 rounded-xl px-3 py-2.5">
+            <span class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-[12px] font-bold shrink-0">LT</span>
+            <div class="min-w-0"><p class="text-[12px] font-bold text-ink leading-none">Linh Tran</p><p class="text-[11px] text-blue-700 font-medium">UX Low Resource</p></div>
+            <span class="ml-auto w-2.5 h-2.5 rounded-full bg-blue-600 shrink-0"></span>
+          </div>
+          <div class="flex items-center gap-2.5 bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-2.5">
+            <span class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[12px] font-bold shrink-0">KB</span>
+            <div class="min-w-0"><p class="text-[12px] font-bold text-ink leading-none">Keisha Brown</p><p class="text-[11px] text-emerald-700 font-medium">Learning Design</p></div>
+            <span class="ml-auto w-2.5 h-2.5 rounded-full bg-emerald-600 shrink-0"></span>
+          </div>
+          <div class="flex items-center gap-2.5 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2.5">
+            <span class="w-8 h-8 rounded-full bg-amber-500 text-white flex items-center justify-center text-[12px] font-bold shrink-0">CJ</span>
+            <div class="min-w-0"><p class="text-[12px] font-bold text-ink leading-none">Carlos Jimenez</p><p class="text-[11px] text-amber-700 font-medium">Community Dev</p></div>
+            <span class="ml-auto w-2.5 h-2.5 rounded-full bg-amber-500 shrink-0"></span>
+          </div>
+          <div class="flex items-center gap-2.5 bg-violet-50 border border-violet-200 rounded-xl px-3 py-2.5">
+            <span class="w-8 h-8 rounded-full bg-violet-600 text-white flex items-center justify-center text-[12px] font-bold shrink-0">RM</span>
+            <div class="min-w-0"><p class="text-[12px] font-bold text-ink leading-none">Rajiv Menon</p><p class="text-[11px] text-violet-700 font-medium">AI Product</p></div>
+            <span class="ml-auto w-2.5 h-2.5 rounded-full bg-violet-500 shrink-0"></span>
+          </div>
+          <div class="flex items-center gap-2.5 bg-red-50 border border-red-200 rounded-xl px-3 py-2.5 col-span-2 sm:col-span-1">
+            <span class="w-8 h-8 rounded-full bg-red-500 text-white flex items-center justify-center text-[12px] font-bold shrink-0">TS</span>
+            <div class="min-w-0"><p class="text-[12px] font-bold text-ink leading-none">Tobias Schafer</p><p class="text-[11px] text-red-700 font-medium">Innovation Ethics</p></div>
+            <span class="ml-auto w-2.5 h-2.5 rounded-full bg-red-500 shrink-0"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="section1" class="mt-6 scroll-mt-6 reveal">
+    <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+      <div class="px-6 sm:px-7 lg:px-8 pt-6">
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="inline-flex items-center gap-2 bg-slate-900 text-white text-[11px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full"><span class="w-6 h-6 rounded-full bg-blue-600 flex items-center justify-center text-[11px]">01</span> Section 1</span>
+          <h2 class="text-[18px] sm:text-[20px] font-extrabold tracking-tight text-ink">Point of View and HMW Question</h2>
+        </div>
+        <p class="text-[12.5px] text-slate-500 font-medium mt-1">Who we design for and the question that guided ideation.</p>
+      </div>
+      <div class="px-6 sm:px-7 lg:px-8 pb-7 pt-5 grid lg:grid-cols-[1.35fr_0.95fr] gap-6">
+        <div class="bg-[#FFFBF0] border border-amber-200 rounded-2xl overflow-hidden shadow-sm">
+          <div class="h-1.5 w-full bg-gradient-to-r from-amber-400 to-orange-400"></div>
+          <div class="px-5 sm:px-6 py-5">
+            <div class="flex items-center gap-2 mb-3">
+              <span class="w-8 h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center"><i class="fa-solid fa-eye text-[13px]"></i></span>
+              <h3 class="text-[14px] font-extrabold tracking-tight text-ink">PoV Statement</h3>
+            </div>
+            <div class="space-y-3 text-[13.5px] leading-relaxed text-slate-700">
+              <p class="flex gap-2.5"><span class="w-6 h-6 rounded-full bg-white border border-amber-200 flex items-center justify-center text-[11px] shrink-0 mt-0.5">1</span><span><span class="font-semibold text-ink">I met James</span>, a first-generation student who has learned to apologize for late work, for missed meetings, for needing help, and who has internalized the belief that he is a burden to the system.</span></p>
+              <p class="flex gap-2.5"><span class="w-6 h-6 rounded-full bg-white border border-amber-200 flex items-center justify-center text-[11px] shrink-0 mt-0.5">2</span><span><span class="font-semibold text-ink">I was inspired to discover</span> that he desperately wants to ask for help but does not even know what to ask, because the institutional knowledge that some of his peers inherited from their families is a foreign language to him.</span></p>
+              <p class="flex gap-2.5"><span class="w-6 h-6 rounded-full bg-white border border-amber-200 flex items-center justify-center text-[11px] shrink-0 mt-0.5">3</span><span><span class="font-semibold text-ink">It is all about</span> helping James navigate and belong in the university environment without feeling like an outsider who has to apologize for existing.</span></p>
+            </div>
+            <div class="mt-4 flex flex-wrap gap-1.5">
+              <span class="text-[11px] font-semibold bg-white border border-slate-200 px-2.5 py-1 rounded-full">First gen</span>
+              <span class="text-[11px] font-semibold bg-white border border-slate-200 px-2.5 py-1 rounded-full">Unreliable internet</span>
+              <span class="text-[11px] font-semibold bg-white border border-slate-200 px-2.5 py-1 rounded-full">Hidden curriculum</span>
+              <span class="text-[11px] font-semibold bg-white border border-slate-200 px-2.5 py-1 rounded-full">Belonging</span>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col gap-4">
+          <div class="bg-slate-900 rounded-2xl p-6 sm:p-7 text-white relative overflow-hidden shadow-[0_12px_30px_rgba(15,23,42,0.18)]">
+            <div class="absolute -top-10 -right-10 w-48 h-48 rounded-full blur-[40px] opacity-20" style="background: radial-gradient(circle at center, #F59E0B 0%, transparent 70%)"></div>
+            <div class="absolute -bottom-10 -left-10 w-40 h-40 rounded-full blur-[36px] opacity-15" style="background: radial-gradient(circle at center, #2563EB 0%, transparent 70%)"></div>
+            <div class="relative">
+              <div class="flex items-center gap-2 mb-3">
+                <span class="w-8 h-8 rounded-xl bg-white text-slate-900 flex items-center justify-center font-extrabold text-[14px]">?</span>
+                <span class="text-[11px] font-bold tracking-[0.16em] uppercase text-amber-300">How Might We</span>
+                <span class="ml-auto w-2 h-2 rounded-full bg-emerald-400"></span>
+              </div>
+              <p class="font-display text-[20px] sm:text-[22px] font-[800] leading-[1.15] tracking-[-0.02em]">
+                How might we help first-generation students like James navigate online learning, ask for help confidently, and feel they belong without constantly apologizing for their circumstances?
+              </p>
+              <div class="mt-4 flex flex-wrap gap-1.5">
+                <span class="text-[11px] font-semibold bg-white/10 border border-white/20 px-2.5 py-1 rounded-full">Navigate</span>
+                <span class="text-[11px] font-semibold bg-white/10 border border-white/20 px-2.5 py-1 rounded-full">Ask confidently</span>
+                <span class="text-[11px] font-semibold bg-white/10 border border-white/20 px-2.5 py-1 rounded-full">Belong</span>
+              </div>
+            </div>
+          </div>
+          <div class="bg-blue-50 border border-blue-200 rounded-2xl p-4 flex gap-3">
+            <span class="w-8 h-8 rounded-xl bg-white border border-blue-200 flex items-center justify-center text-blue-600 shrink-0"><i class="fa-solid fa-lightbulb text-[13px]"></i></span>
+            <div>
+              <p class="text-[12px] font-bold text-ink">Why this HMW matters</p>
+              <p class="text-[12.5px] leading-snug text-slate-600">It keeps the focus on the student experience and on making help seeking feel normal and supported.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="section2" class="mt-6 scroll-mt-6 reveal">
+    <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+      <div class="px-6 sm:px-7 lg:px-8 pt-6">
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="inline-flex items-center gap-2 bg-slate-900 text-white text-[11px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full"><span class="w-6 h-6 rounded-full bg-emerald-500 flex items-center justify-center text-[11px]">02</span> Section 2</span>
+          <h2 class="text-[18px] sm:text-[20px] font-extrabold tracking-tight text-ink">Silent Brainstorming</h2>
+          <span class="text-[12px] font-medium text-slate-500 hidden sm:inline">15 ideas, 5 columns, no discussion</span>
+        </div>
+        <p class="text-[12.5px] text-slate-500 font-medium mt-1">Board setup: 5 columns, one per team member, sticky notes grouped under each name. Color shows owner.</p>
+      </div>
+      <div class="px-4 sm:px-6 lg:px-7 pb-7 pt-5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-start">
+          <div class="rounded-2xl border border-blue-200 bg-blue-50/40 overflow-hidden">
+            <div class="h-1 w-full bg-blue-600"></div>
+            <div class="p-3">
+              <div class="flex items-center gap-2.5 mb-3">
+                <span class="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-[12px]">LT</span>
+                <div>
+                  <p class="text-[12px] font-extrabold text-ink leading-none">Linh Tran</p>
+                  <p class="text-[11px] text-blue-700 font-semibold leading-none">UX Low Resource</p>
+                </div>
+                <span class="ml-auto w-2 h-2 rounded-full bg-blue-600"></span>
+              </div>
+              <p class="text-[10px] font-bold tracking-widest uppercase text-blue-700 mb-2 flex items-center gap-1"><span class="w-3 h-0.5 bg-blue-500 rounded-full"></span> Blue stickies</p>
+              <div class="space-y-2.5">
+                <div class="sticky-note bg-white border border-blue-200 rounded-xl p-3 shadow-sticky" style="transform: rotate(-0.6deg)">
+                  <p class="text-[11px] font-bold tracking-wide uppercase text-blue-700 flex items-center gap-1"><span>💡</span> Offline-First Learning OS</p>
+                  <p class="text-[12px] leading-snug text-ink mt-1 font-medium">Lightweight system for low-end devices prioritizing offline functionality</p>
+                </div>
+                <div class="sticky-note bg-white border border-blue-200 rounded-xl p-3 shadow-sticky" style="transform: rotate(0.5deg)">
+                  <p class="text-[11px] font-bold tracking-wide uppercase text-blue-700 flex items-center gap-1"><span>💡</span> Audio-Only Learning Pathways</p>
+                  <p class="text-[12px] leading-snug text-ink mt-1 font-medium">Complete audio-based learning experience, zero data usage</p>
+                </div>
+                <div class="sticky-note bg-white border border-blue-200 rounded-xl p-3 shadow-sticky" style="transform: rotate(-0.4deg)">
+                  <p class="text-[11px] font-bold tracking-wide uppercase text-blue-700 flex items-center gap-1"><span>💡</span> Help Me Voice Memo Button</p>
+                  <p class="text-[12px] leading-snug text-ink mt-1 font-medium">Records help request, sends when connected</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="rounded-2xl border border-emerald-200 bg-emerald-50/40 overflow-hidden">
+            <div class="h-1 w-full bg-emerald-600"></div>
+            <div class="p-3">
+              <div class="flex items-center gap-2.5 mb-3">
+                <span class="w-9 h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold text-[12px]">KB</span>
+                <div>
+                  <p class="text-[12px] font-extrabold text-ink leading-none">Keisha Brown</p>
+                  <p class="text-[11px] text-emerald-700 font-semibold leading-none">Inclusive Env.</p>
+                </div>
+                <span class="ml-auto w-2 h-2 rounded-full bg-emerald-600"></span>
+              </div>
+              <p class="text-[10px] font-bold tracking-widest uppercase text-emerald-700 mb-2 flex items-center gap-1"><span class="w-3 h-0.5 bg-emerald-500 rounded-full"></span> Green stickies</p>
+              <div class="space-y-2.5">
+                <div class="sticky-note bg-white border border-emerald-200 rounded-xl p-3 shadow-sticky" style="transform: rotate(0.4deg)">
+                  <p class="text-[11px] font-bold tracking-wide uppercase text-emerald-700 flex items-center gap-1"><span>💡</span> Hidden Curriculum Micro-Course</p>
+                  <p class="text-[12px] leading-snug text-ink mt-1 font-medium">Explicitly teaches university navigation skills</p>
+                </div>
+                <div class="sticky-note bg-white border border-emerald-200 rounded-xl p-3 shadow-sticky" style="transform: rotate(-0.5deg)">
+                  <p class="text-[11px] font-bold tracking-wide uppercase text-emerald-700 flex items-center gap-1"><span>💡</span> Help Without Asking System</p>
+                  <p class="text-[12px] leading-snug text-ink mt-1 font-medium">Proactive, empathetic outreach when engagement drops</p>
+                </div>
+                <div class="sticky-note bg-white border border-emerald-200 rounded-xl p-3 shadow-sticky" style="transform: rotate(0.6deg)">
+                  <p class="text-[11px] font-bold tracking-wide uppercase text-emerald-700 flex items-center gap-1"><span>💡</span> Low-Bandwidth Text-Only Forums</p>
+                  <p class="text-[12px] leading-snug text-ink mt-1 font-medium">Community of practice for first-gen students</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="rounded-2xl border border-amber-200 bg-amber-50/40 overflow-hidden">
+            <div class="h-1 w-full bg-amber-500"></div>
+            <div class="p-3">
+              <div class="flex items-center gap-2.5 mb-3">
+                <span class="w-9 h-9 rounded-xl bg-amber-500 text-white flex items-center justify-center font-bold text-[12px]">CJ</span>
+                <div>
+                  <p class="text-[12px] font-extrabold text-ink leading-none">Carlos Jimenez</p>
+                  <p class="text-[11px] text-amber-700 font-semibold leading-none">Community Dev</p>
+                </div>
+                <span class="ml-auto w-2 h-2 rounded-full bg-amber-500"></span>
+              </div>
+              <p class="text-[10px] font-bold tracking-widest uppercase text-amber-700 mb-2 flex items-center gap-1"><span class="w-3 h-0.5 bg-amber-500 rounded-full"></span> Orange stickies</p>
+              <div class="space-y-2.5">
+                <div class="sticky-note bg-white border border-amber-200 rounded-xl p-3 shadow-sticky" style="transform: rotate(0.3deg)">
+                  <p class="text-[11px] font-bold tracking-wide uppercase text-amber-700 flex items-center gap-1"><span>💡</span> Local Learning Hubs</p>
+                  <p class="text-[12px] leading-snug text-ink mt-1 font-medium">Community centers with reliable internet and facilitators</p>
+                </div>
+                <div class="sticky-note bg-white border border-amber-200 rounded-xl p-3 shadow-sticky" style="transform: rotate(-0.4deg)">
+                  <p class="text-[11px] font-bold tracking-wide uppercase text-amber-700 flex items-center gap-1"><span>💡</span> Family Engagement Ambassadors</p>
+                  <p class="text-[12px] leading-snug text-ink mt-1 font-medium">Students train families to understand university systems</p>
+                </div>
+                <div class="sticky-note bg-white border border-amber-200 rounded-xl p-3 shadow-sticky" style="transform: rotate(0.5deg)">
+                  <p class="text-[11px] font-bold tracking-wide uppercase text-amber-700 flex items-center gap-1"><span>💡</span> Co-Designed Learning Agreements</p>
+                  <p class="text-[12px] leading-snug text-ink mt-1 font-medium">Contracts acknowledging students constraints</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="rounded-2xl border border-violet-200 bg-violet-50/40 overflow-hidden">
+            <div class="h-1 w-full bg-violet-600"></div>
+            <div class="p-3">
+              <div class="flex items-center gap-2.5 mb-3">
+                <span class="w-9 h-9 rounded-xl bg-violet-600 text-white flex items-center justify-center font-bold text-[12px]">RM</span>
+                <div>
+                  <p class="text-[12px] font-extrabold text-ink leading-none">Rajiv Menon</p>
+                  <p class="text-[11px] text-violet-700 font-semibold leading-none">AI Product Analyst</p>
+                </div>
+                <span class="ml-auto w-2 h-2 rounded-full bg-violet-600"></span>
+              </div>
+              <p class="text-[10px] font-bold tracking-widest uppercase text-violet-700 mb-2 flex items-center gap-1"><span class="w-3 h-0.5 bg-violet-500 rounded-full"></span> Purple stickies</p>
+              <div class="space-y-2.5">
+                <div class="sticky-note bg-white border border-violet-200 rounded-xl p-3 shadow-sticky" style="transform: rotate(-0.5deg)">
+                  <p class="text-[11px] font-bold tracking-wide uppercase text-violet-700 flex items-center gap-1"><span>💡</span> Connectivity-Aware Course Design</p>
+                  <p class="text-[12px] leading-snug text-ink mt-1 font-medium">AI generates low-bandwidth alternatives automatically</p>
+                </div>
+                <div class="sticky-note bg-white border border-violet-200 rounded-xl p-3 shadow-sticky" style="transform: rotate(0.6deg)">
+                  <p class="text-[11px] font-bold tracking-wide uppercase text-violet-700 flex items-center gap-1"><span>💡</span> Predictive Empathy Engine</p>
+                  <p class="text-[12px] leading-snug text-ink mt-1 font-medium">AI predicts struggle and sends personalized help</p>
+                </div>
+                <div class="sticky-note bg-white border border-violet-200 rounded-xl p-3 shadow-sticky" style="transform: rotate(-0.3deg)">
+                  <p class="text-[11px] font-bold tracking-wide uppercase text-violet-700 flex items-center gap-1"><span>💡</span> Peer-to-Peer Learning Network</p>
+                  <p class="text-[12px] leading-snug text-ink mt-1 font-medium">Decentralized, offline-first resource sharing</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="rounded-2xl border border-red-200 bg-red-50/40 overflow-hidden">
+            <div class="h-1 w-full bg-red-500"></div>
+            <div class="p-3">
+              <div class="flex items-center gap-2.5 mb-3">
+                <span class="w-9 h-9 rounded-xl bg-red-500 text-white flex items-center justify-center font-bold text-[12px]">TS</span>
+                <div>
+                  <p class="text-[12px] font-extrabold text-ink leading-none">Tobias Schafer</p>
+                  <p class="text-[11px] text-red-700 font-semibold leading-none">Innovation Ethics</p>
+                </div>
+                <span class="ml-auto w-2 h-2 rounded-full bg-red-600"></span>
+              </div>
+              <p class="text-[10px] font-bold tracking-widest uppercase text-red-700 mb-2 flex items-center gap-1"><span class="w-3 h-0.5 bg-red-500 rounded-full"></span> Red stickies</p>
+              <div class="space-y-2.5">
+                <div class="sticky-note bg-white border border-red-200 rounded-xl p-3 shadow-sticky" style="transform: rotate(0.5deg)">
+                  <p class="text-[11px] font-bold tracking-wide uppercase text-red-700 flex items-center gap-1"><span>💡</span> Expectations Transparency Dashboard</p>
+                  <p class="text-[12px] leading-snug text-ink mt-1 font-medium">Makes unwritten rules explicit</p>
+                </div>
+                <div class="sticky-note bg-white border border-red-200 rounded-xl p-3 shadow-sticky" style="transform: rotate(-0.4deg)">
+                  <p class="text-[11px] font-bold tracking-wide uppercase text-red-700 flex items-center gap-1"><span>💡</span> Belonging by Design Audit</p>
+                  <p class="text-[12px] leading-snug text-ink mt-1 font-medium">Annual audit of platforms and policies</p>
+                </div>
+                <div class="sticky-note bg-white border border-red-200 rounded-xl p-3 shadow-sticky" style="transform: rotate(0.4deg)">
+                  <p class="text-[11px] font-bold tracking-wide uppercase text-red-700 flex items-center gap-1"><span>💡</span> Student-Led Institutional Change</p>
+                  <p class="text-[12px] leading-snug text-ink mt-1 font-medium">Formal governance power for first-gen students</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 flex flex-wrap items-center gap-3 text-[11px] font-semibold text-slate-600">
+          <span class="inline-flex items-center gap-1.5 bg-white border border-slate-200 px-2.5 py-1 rounded-full"><i class="fa-solid fa-eye-slash text-[11px]"></i> Silent no talking</span>
+          <span class="inline-flex items-center gap-1.5"><i class="fa-solid fa-clock text-[11px]"></i> 10 min timebox</span>
+          <span class="inline-flex items-center gap-1.5"><i class="fa-solid fa-palette text-[11px]"></i> Color shows owner</span>
+          <span class="ml-auto text-[11px] font-bold bg-slate-900 text-white px-2.5 py-1 rounded-full">15 stickies total</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="section3" class="mt-6 scroll-mt-6 reveal">
+    <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+      <div class="px-6 sm:px-7 lg:px-8 pt-6">
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="inline-flex items-center gap-2 bg-slate-900 text-white text-[11px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full"><span class="w-6 h-6 rounded-full bg-amber-500 flex items-center justify-center text-[11px]">03</span> Section 3</span>
+          <h2 class="text-[18px] sm:text-[20px] font-extrabold tracking-tight text-ink">Crazy Eights</h2>
+          <span class="hidden sm:inline-flex items-center gap-1.5 text-[11px] font-bold bg-amber-50 border border-amber-200 text-amber-700 px-2.5 py-1 rounded-full"><i class="fa-solid fa-stopwatch text-[11px]"></i> 8 sketches per person, 8 min</span>
+        </div>
+        <p class="text-[12.5px] text-slate-500 font-medium mt-1">Each team member has an 8 segment sketch sheet (A4 folded into 8 squares). 40 ideas in 8 minutes.</p>
+      </div>
+      <div class="px-4 sm:px-6 lg:px-7 pb-7 pt-5 space-y-6">
+        <div class="rounded-2xl border border-blue-200 overflow-hidden">
+          <div class="bg-blue-50 border-b border-blue-200 px-4 py-3 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold text-[12px]">LT</span>
+            <p class="text-[13px] font-extrabold text-ink">Linh Tran 8 sketches</p>
+            <span class="hidden sm:inline-flex text-[11px] font-semibold bg-white border border-blue-200 text-blue-700 px-2 py-1 rounded-full">Offline and Accessible</span>
+            <span class="ml-auto text-[11px] font-bold bg-blue-600 text-white px-2.5 py-1 rounded-full">Blue</span>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 p-3 bg-white">
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-blue-200 hover:bg-blue-50/50">
+              <span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px] shrink-0">📱</span>
+              <span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">01</span>
+              <p class="text-[12px] font-bold text-ink leading-tight mt-1">Offline dashboard</p>
+            </div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-blue-200 hover:bg-blue-50/50">
+              <span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">📞</span>
+              <span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">02</span>
+              <p class="text-[12px] font-bold text-ink leading-tight mt-1">SMS tutor alerts</p>
+            </div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-blue-200 hover:bg-blue-50/50">
+              <span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">🔊</span>
+              <span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">03</span>
+              <p class="text-[12px] font-bold text-ink leading-tight mt-1">Voice to text lectures</p>
+            </div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-blue-200 hover:bg-blue-50/50">
+              <span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">🤝</span>
+              <span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">04</span>
+              <p class="text-[12px] font-bold text-ink leading-tight mt-1">Peer check in app</p>
+            </div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-blue-200 hover:bg-blue-50/50">
+              <span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">📚</span>
+              <span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">05</span>
+              <p class="text-[12px] font-bold text-ink leading-tight mt-1">Download scheduler</p>
+            </div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-blue-200 hover:bg-blue-50/50">
+              <span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">💬</span>
+              <span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">06</span>
+              <p class="text-[12px] font-bold text-ink leading-tight mt-1">Anonymous chat</p>
+            </div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-blue-200 hover:bg-blue-50/50">
+              <span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">🎯</span>
+              <span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">07</span>
+              <p class="text-[12px] font-bold text-ink leading-tight mt-1">Progress tracker</p>
+            </div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-blue-200 hover:bg-blue-50/50">
+              <span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">🔄</span>
+              <span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">08</span>
+              <p class="text-[12px] font-bold text-ink leading-tight mt-1">Auto sync assignments</p>
+            </div>
+          </div>
+        </div>
+        <div class="rounded-2xl border border-emerald-200 overflow-hidden">
+          <div class="bg-emerald-50 border-b border-emerald-200 px-4 py-3 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-emerald-600 text-white flex items-center justify-center font-bold text-[12px]">KB</span>
+            <p class="text-[13px] font-extrabold text-ink">Keisha Brown 8 sketches</p>
+            <span class="hidden sm:inline-flex text-[11px] font-semibold bg-white border border-emerald-200 text-emerald-700 px-2 py-1 rounded-full">Belonging and Pedagogy</span>
+            <span class="ml-auto text-[11px] font-bold bg-emerald-600 text-white px-2.5 py-1 rounded-full">Green</span>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 p-3 bg-white">
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-emerald-200 hover:bg-emerald-50/50"><span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">📖</span><span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">01</span><p class="text-[12px] font-bold text-ink leading-tight mt-1">How to Uni guide</p></div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-emerald-200 hover:bg-emerald-50/50"><span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">👥</span><span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">02</span><p class="text-[12px] font-bold text-ink leading-tight mt-1">Study buddy matching</p></div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-emerald-200 hover:bg-emerald-50/50"><span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">📅</span><span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">03</span><p class="text-[12px] font-bold text-ink leading-tight mt-1">Flexible deadlines</p></div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-emerald-200 hover:bg-emerald-50/50"><span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">🎓</span><span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">04</span><p class="text-[12px] font-bold text-ink leading-tight mt-1">Alumni mentor program</p></div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-emerald-200 hover:bg-emerald-50/50"><span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">📝</span><span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">05</span><p class="text-[12px] font-bold text-ink leading-tight mt-1">Text based lectures</p></div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-emerald-200 hover:bg-emerald-50/50"><span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">🤗</span><span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">06</span><p class="text-[12px] font-bold text-ink leading-tight mt-1">Welcome package</p></div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-emerald-200 hover:bg-emerald-50/50"><span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">📱</span><span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">07</span><p class="text-[12px] font-bold text-ink leading-tight mt-1">I am Struggling button</p></div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-emerald-200 hover:bg-emerald-50/50"><span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">🏠</span><span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">08</span><p class="text-[12px] font-bold text-ink leading-tight mt-1">Family info sessions</p></div>
+          </div>
+        </div>
+        <div class="rounded-2xl border border-amber-200 overflow-hidden">
+          <div class="bg-amber-50 border-b border-amber-200 px-4 py-3 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center font-bold text-[12px]">CJ</span>
+            <p class="text-[13px] font-extrabold text-ink">Carlos Jimenez 8 sketches</p>
+            <span class="hidden sm:inline-flex text-[11px] font-semibold bg-white border border-amber-200 text-amber-700 px-2 py-1 rounded-full">Community and Place</span>
+            <span class="ml-auto text-[11px] font-bold bg-amber-500 text-white px-2.5 py-1 rounded-full">Orange</span>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 p-3 bg-white">
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-amber-200 hover:bg-amber-50/50"><span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">🏛️</span><span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">01</span><p class="text-[12px] font-bold text-ink leading-tight mt-1">Community study spaces</p></div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-amber-200 hover:bg-amber-50/50"><span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">📡</span><span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">02</span><p class="text-[12px] font-bold text-ink leading-tight mt-1">WiFi sharing network</p></div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-amber-200 hover:bg-amber-50/50"><span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">👨‍👩‍👧‍👦</span><span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">03</span><p class="text-[12px] font-bold text-ink leading-tight mt-1">Family orientation</p></div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-amber-200 hover:bg-amber-50/50"><span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">🤲</span><span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">04</span><p class="text-[12px] font-bold text-ink leading-tight mt-1">Peer support circles</p></div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-amber-200 hover:bg-amber-50/50"><span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">📋</span><span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">05</span><p class="text-[12px] font-bold text-ink leading-tight mt-1">Co designed syllabi</p></div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-amber-200 hover:bg-amber-50/50"><span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">🌐</span><span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">06</span><p class="text-[12px] font-bold text-ink leading-tight mt-1">Offline resource kits</p></div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-amber-200 hover:bg-amber-50/50"><span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">🗣️</span><span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">07</span><p class="text-[12px] font-bold text-ink leading-tight mt-1">Community facilitators</p></div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-amber-200 hover:bg-amber-50/50"><span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">🎉</span><span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">08</span><p class="text-[12px] font-bold text-ink leading-tight mt-1">Celebration events</p></div>
+          </div>
+        </div>
+        <div class="rounded-2xl border border-violet-200 overflow-hidden">
+          <div class="bg-violet-50 border-b border-violet-200 px-4 py-3 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-violet-600 text-white flex items-center justify-center font-bold text-[12px]">RM</span>
+            <p class="text-[13px] font-extrabold text-ink">Rajiv Menon 8 sketches</p>
+            <span class="hidden sm:inline-flex text-[11px] font-semibold bg-white border border-violet-200 text-violet-700 px-2 py-1 rounded-full">AI and Tech</span>
+            <span class="ml-auto text-[11px] font-bold bg-violet-600 text-white px-2.5 py-1 rounded-full">Purple</span>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 p-3 bg-white">
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-violet-200 hover:bg-violet-50/50"><span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">🤖</span><span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">01</span><p class="text-[12px] font-bold text-ink leading-tight mt-1">AI learning assistant</p></div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-violet-200 hover:bg-violet-50/50"><span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">📊</span><span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">02</span><p class="text-[12px] font-bold text-ink leading-tight mt-1">Connectivity dashboard</p></div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-violet-200 hover:bg-violet-50/50"><span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">📉</span><span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">03</span><p class="text-[12px] font-bold text-ink leading-tight mt-1">Data compression tool</p></div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-violet-200 hover:bg-violet-50/50"><span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">🎯</span><span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">04</span><p class="text-[12px] font-bold text-ink leading-tight mt-1">Predictive alerts</p></div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-violet-200 hover:bg-violet-50/50"><span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">🔍</span><span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">05</span><p class="text-[12px] font-bold text-ink leading-tight mt-1">Searchable FAQs</p></div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-violet-200 hover:bg-violet-50/50"><span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">📱</span><span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">06</span><p class="text-[12px] font-bold text-ink leading-tight mt-1">Mobile first design</p></div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-violet-200 hover:bg-violet-50/50"><span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">🌐</span><span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">07</span><p class="text-[12px] font-bold text-ink leading-tight mt-1">Offline sync</p></div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-violet-200 hover:bg-violet-50/50"><span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">📈</span><span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">08</span><p class="text-[12px] font-bold text-ink leading-tight mt-1">Success predictors</p></div>
+          </div>
+        </div>
+        <div class="rounded-2xl border border-red-200 overflow-hidden">
+          <div class="bg-red-50 border-b border-red-200 px-4 py-3 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-red-500 text-white flex items-center justify-center font-bold text-[12px]">TS</span>
+            <p class="text-[13px] font-extrabold text-ink">Tobias Schafer 8 sketches</p>
+            <span class="hidden sm:inline-flex text-[11px] font-semibold bg-white border border-red-200 text-red-700 px-2 py-1 rounded-full">Ethics and Governance</span>
+            <span class="ml-auto text-[11px] font-bold bg-red-500 text-white px-2.5 py-1 rounded-full">Red</span>
+          </div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 p-3 bg-white">
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-red-200 hover:bg-red-50/50"><span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">📋</span><span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">01</span><p class="text-[12px] font-bold text-ink leading-tight mt-1">Rules of the Game guide</p></div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-red-200 hover:bg-red-50/50"><span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">🗣️</span><span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">02</span><p class="text-[12px] font-bold text-ink leading-tight mt-1">Student advisory board</p></div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-red-200 hover:bg-red-50/50"><span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">🔍</span><span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">03</span><p class="text-[12px] font-bold text-ink leading-tight mt-1">Transparency audit</p></div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-red-200 hover:bg-red-50/50"><span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">⚖️</span><span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">04</span><p class="text-[12px] font-bold text-ink leading-tight mt-1">Equity framework</p></div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-red-200 hover:bg-red-50/50"><span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">📜</span><span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">05</span><p class="text-[12px] font-bold text-ink leading-tight mt-1">Values statement</p></div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-red-200 hover:bg-red-50/50"><span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">🏛️</span><span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">06</span><p class="text-[12px] font-bold text-ink leading-tight mt-1">Governance reform</p></div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-red-200 hover:bg-red-50/50"><span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">📚</span><span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">07</span><p class="text-[12px] font-bold text-ink leading-tight mt-1">Student led wiki</p></div>
+            <div class="crazy-cell bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col items-center text-center hover:border-red-200 hover:bg-red-50/50"><span class="w-7 h-7 rounded-full bg-white border border-slate-200 flex items-center justify-center text-[14px]">🤝</span><span class="text-[10px] font-bold tracking-widest uppercase text-slate-500 mt-1.5">08</span><p class="text-[12px] font-bold text-ink leading-tight mt-1">Partnership model</p></div>
+          </div>
+        </div>
+
+        <div class="bg-slate-900 rounded-2xl p-5 sm:p-6 text-white relative overflow-hidden">
+          <div class="absolute inset-0 opacity-[0.07] grid-pattern"></div>
+          <div class="relative">
+            <div class="flex flex-wrap items-center gap-3 mb-4">
+              <span class="w-9 h-9 rounded-xl bg-white text-slate-900 flex items-center justify-center"><i class="fa-solid fa-layer-group text-[14px]"></i></span>
+              <div>
+                <h3 class="text-[14px] font-extrabold leading-none">Clustering from Crazy Eights</h3>
+                <p class="text-[12px] text-white/70 font-medium">Sticky notes grouped by theme after the sketching</p>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              <div class="bg-white rounded-xl p-3.5 text-ink">
+                <p class="text-[11px] font-bold tracking-widest uppercase text-blue-700 flex items-center gap-1.5"><span>📚</span> Learning Resources</p>
+                <ul class="mt-2 space-y-1.5 text-[12px] font-medium">
+                  <li class="flex items-center gap-1.5 bg-blue-50 border border-blue-200 rounded-lg px-2.5 py-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span> Offline Resource Kits</li>
+                  <li class="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5"><span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> How to Uni Guide</li>
+                  <li class="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5"><span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Alumni Mentor Program</li>
+                  <li class="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5"><span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Student Led Wiki</li>
+                </ul>
+              </div>
+              <div class="bg-white rounded-xl p-3.5 text-ink">
+                <p class="text-[11px] font-bold tracking-widest uppercase text-emerald-700 flex items-center gap-1.5"><span>🤝</span> Community and Belonging</p>
+                <ul class="mt-2 space-y-1.5 text-[12px] font-medium">
+                  <li class="flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 rounded-lg px-2.5 py-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span> Local Learning Hubs</li>
+                  <li class="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5"><span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Family Info Sessions</li>
+                  <li class="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5"><span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Peer Support Circles</li>
+                  <li class="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5"><span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Student Advisory Board</li>
+                </ul>
+              </div>
+              <div class="bg-white rounded-xl p-3.5 text-ink">
+                <p class="text-[11px] font-bold tracking-widest uppercase text-violet-700 flex items-center gap-1.5"><span>🛠️</span> Technical Solutions</p>
+                <ul class="mt-2 space-y-1.5 text-[12px] font-medium">
+                  <li class="flex items-center gap-1.5 bg-violet-50 border border-violet-200 rounded-lg px-2.5 py-1.5"><span class="w-1.5 h-1.5 rounded-full bg-violet-600"></span> Data Compression Tool</li>
+                  <li class="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5"><span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Offline Dashboard</li>
+                  <li class="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5"><span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Auto Sync Assignments</li>
+                  <li class="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5"><span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Offline Sync</li>
+                </ul>
+              </div>
+              <div class="bg-white rounded-xl p-3.5 text-ink">
+                <p class="text-[11px] font-bold tracking-widest uppercase text-amber-700 flex items-center gap-1.5"><span>🗣️</span> Help Seeking</p>
+                <ul class="mt-2 space-y-1.5 text-[12px] font-medium">
+                  <li class="flex items-center gap-1.5 bg-amber-50 border border-amber-200 rounded-lg px-2.5 py-1.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> I am Struggling Button</li>
+                  <li class="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5"><span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Anonymous Chat</li>
+                  <li class="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5"><span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> SMS Tutor Alerts</li>
+                  <li class="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5"><span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span> Predictive Alerts</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="section4" class="mt-6 scroll-mt-6 reveal">
+    <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+      <div class="px-6 sm:px-7 lg:px-8 pt-6">
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="inline-flex items-center gap-2 bg-slate-900 text-white text-[11px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full"><span class="w-6 h-6 rounded-full bg-red-500 flex items-center justify-center text-[11px]">04</span> Section 4</span>
+          <h2 class="text-[18px] sm:text-[20px] font-extrabold tracking-tight text-ink">Reverse Brainstorming</h2>
+        </div>
+        <p class="text-[12.5px] text-slate-500 font-medium mt-1">First we asked how to make things worse, then we reversed those ideas.</p>
+      </div>
+      <div class="px-6 sm:px-7 lg:px-8 pb-7 pt-5 grid lg:grid-cols-2 gap-5">
+        <div class="rounded-2xl border-2 border-slate-900 overflow-hidden bg-slate-900 text-white">
+          <div class="px-5 py-4 flex items-center gap-3 border-b border-white/10">
+            <span class="w-9 h-9 rounded-xl bg-red-500 flex items-center justify-center text-[18px]">💀</span>
+            <div>
+              <p class="text-[13px] font-extrabold tracking-tight leading-none">How to Make It Worse</p>
+              <p class="text-[11px] text-white/60 font-medium">Worst case ideas on purpose</p>
+            </div>
+          </div>
+          <div class="p-4 grid gap-3">
+            <div class="bg-white/10 border border-white/15 rounded-xl p-3.5 flex gap-3 hover:bg-white/15 transition-colors">
+              <span class="w-8 h-8 rounded-xl bg-red-500 flex items-center justify-center text-[14px] shrink-0">💀</span>
+              <div>
+                <p class="text-[12px] font-bold leading-tight">Make help seeking even more bureaucratic</p>
+                <p class="text-[11px] text-white/60 leading-snug mt-1">Add 5 forms, require faculty signatures, 2 week waiting list before you can ask a question.</p>
+              </div>
+            </div>
+            <div class="bg-white/10 border border-white/15 rounded-xl p-3.5 flex gap-3 hover:bg-white/15 transition-colors">
+              <span class="w-8 h-8 rounded-xl bg-red-500 flex items-center justify-center text-[14px] shrink-0">💀</span>
+              <div>
+                <p class="text-[12px] font-bold leading-tight">Require high speed internet for everything</p>
+                <p class="text-[11px] text-white/60 leading-snug mt-1">Stream every lecture in 4K, no downloads, auto logout if bandwidth drops.</p>
+              </div>
+            </div>
+            <div class="bg-white/10 border border-white/15 rounded-xl p-3.5 flex gap-3 hover:bg-white/15 transition-colors">
+              <span class="w-8 h-8 rounded-xl bg-red-500 flex items-center justify-center text-[14px] shrink-0">💀</span>
+              <div>
+                <p class="text-[12px] font-bold leading-tight">Remove all support systems</p>
+                <p class="text-[11px] text-white/60 leading-snug mt-1">No mentors, no office hours, no FAQs, figure it out yourself.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="rounded-2xl border-2 border-emerald-300 overflow-hidden bg-emerald-50">
+          <div class="px-5 py-4 flex items-center gap-3 border-b border-emerald-200 bg-white">
+            <span class="w-9 h-9 rounded-xl bg-emerald-500 text-white flex items-center justify-center text-[16px]">💡</span>
+            <div>
+              <p class="text-[13px] font-extrabold tracking-tight leading-none text-ink">Reversed Ideas</p>
+              <p class="text-[11px] text-slate-500 font-medium">Flipped into better solutions</p>
+            </div>
+          </div>
+          <div class="p-4 grid gap-3">
+            <div class="bg-white border-2 border-amber-300 rounded-xl p-3.5 flex gap-3 shadow-sm hover:shadow-md hover:-translate-y-[1px] transition-all">
+              <span class="w-8 h-8 rounded-xl bg-amber-400 border border-amber-500 flex items-center justify-center text-[14px] shrink-0">🦸</span>
+              <div class="flex-1">
+                <div class="flex items-center gap-2">
+                  <p class="text-[12px] font-bold leading-tight text-ink">Help Heroes Program</p>
+                  <span class="text-[10px] font-bold bg-amber-500 text-white px-1.5 py-0.5 rounded-full">CELEBRATE</span>
+                </div>
+                <p class="text-[11px] text-slate-600 leading-snug mt-1">Celebrate and reward help seeking. Turn bureaucracy into badges and pride.</p>
+              </div>
+            </div>
+            <div class="bg-white border border-emerald-200 rounded-xl p-3.5 flex gap-3 shadow-sm hover:shadow-md hover:-translate-y-[1px] transition-all">
+              <span class="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center text-[14px] shrink-0">📱</span>
+              <div>
+                <p class="text-[12px] font-bold leading-tight text-ink">Offline First Everything</p>
+                <p class="text-[11px] text-slate-600 leading-snug mt-1">All materials work without internet. Downloads, text only, auto sync when reconnected.</p>
+              </div>
+            </div>
+            <div class="bg-white border border-emerald-200 rounded-xl p-3.5 flex gap-3 shadow-sm hover:shadow-md hover:-translate-y-[1px] transition-all">
+              <span class="w-8 h-8 rounded-xl bg-violet-600 text-white flex items-center justify-center text-[14px] shrink-0">✨</span>
+              <div>
+                <p class="text-[12px] font-bold leading-tight text-ink">Invisible Support</p>
+                <p class="text-[11px] text-slate-600 leading-snug mt-1">Help comes to students proactively. Gentle nudges, no begging needed.</p>
+              </div>
+            </div>
+          </div>
+          <div class="px-4 pb-4">
+            <div class="bg-emerald-600 text-white rounded-xl px-3 py-2.5 flex items-center gap-2 text-[11px] font-bold shadow-sm">
+              <i class="fa-solid fa-arrow-right text-[11px]"></i> These two reversed ideas became the prototypes for Week 6.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="section5" class="mt-6 scroll-mt-6 reveal">
+    <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+      <div class="px-6 sm:px-7 lg:px-8 pt-6">
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="inline-flex items-center gap-2 bg-slate-900 text-white text-[11px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full"><span class="w-6 h-6 rounded-full bg-violet-600 flex items-center justify-center text-[11px]">05</span> Section 5</span>
+          <h2 class="text-[18px] sm:text-[20px] font-extrabold tracking-tight text-ink">Building on Ideas</h2>
+          <span class="hidden sm:inline-flex items-center gap-1.5 text-[11px] font-bold bg-violet-50 border border-violet-200 text-violet-700 px-2.5 py-1 rounded-full">Tower 10 levels</span>
+        </div>
+        <p class="text-[12.5px] text-slate-500 font-medium mt-1">Help Heroes Expansion. Visual stack of post its building upward like a tower.</p>
+      </div>
+      <div class="px-6 sm:px-7 lg:px-8 pb-7 pt-5 grid lg:grid-cols-[1.1fr_0.9fr] gap-6">
+        <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-5">
+          <div class="flex items-center justify-between mb-4">
+            <p class="text-[11px] font-bold tracking-widest uppercase text-slate-500 flex items-center gap-2"><span class="w-6 h-6 rounded-full bg-amber-400 flex items-center justify-center text-[12px]">🔺</span> Help Heroes Tower</p>
+            <span class="text-[10px] font-bold tracking-wide uppercase bg-white border border-slate-200 px-2 py-1 rounded-full text-slate-600">bottom is foundation, top is culture</span>
+          </div>
+          <div class="flex flex-col items-center gap-[2px] max-w-[420px] mx-auto">
+            <div class="w-[58%] bg-slate-900 text-white rounded-t-xl px-3 py-2.5 flex items-center gap-2.5 shadow-md">
+              <span class="w-6 h-6 rounded-full bg-amber-400 text-slate-900 flex items-center justify-center font-extrabold text-[11px] shrink-0">10</span>
+              <div class="min-w-0"><p class="text-[11px] font-bold leading-none">Values Statement</p><p class="text-[10px] text-white/70 leading-none">Institutional commitment</p></div>
+              <span class="ml-auto text-[10px] opacity-60">🔺</span>
+            </div>
+            <div class="w-[66%] bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-lg px-3 py-2.5 flex items-center gap-2.5 shadow-md">
+              <span class="w-6 h-6 rounded-full bg-white text-amber-600 flex items-center justify-center font-extrabold text-[11px] shrink-0">9</span>
+              <div class="min-w-0"><p class="text-[11px] font-bold leading-none">AI highlights help seeking positively</p><p class="text-[10px] text-white/80 leading-none">System nudges with pride</p></div>
+            </div>
+            <div class="w-[72%] bg-white border border-amber-200 rounded-lg px-3 py-2.5 flex items-center gap-2.5 shadow-sm">
+              <span class="w-6 h-6 rounded-full bg-amber-500 text-white flex items-center justify-center font-extrabold text-[11px] shrink-0">8</span>
+              <div class="min-w-0"><p class="text-[11px] font-bold text-ink leading-none">Families involving families in the celebration</p><p class="text-[10px] text-slate-500 leading-none">Ambassadors and events</p></div>
+            </div>
+            <div class="w-[78%] bg-white border border-slate-200 rounded-lg px-3 py-2.5 flex items-center gap-2.5 shadow-sm">
+              <span class="w-6 h-6 rounded-full bg-slate-900 text-white flex items-center justify-center font-extrabold text-[11px] shrink-0">7</span>
+              <div class="min-w-0"><p class="text-[11px] font-bold text-ink leading-none">Community Events celebrating help seeking</p><p class="text-[10px] text-slate-500 leading-none">Rituals, stories, visibility</p></div>
+            </div>
+            <div class="w-[82%] bg-amber-50 border border-amber-200 rounded-lg px-3 py-2.5 flex items-center gap-2.5">
+              <span class="w-6 h-6 rounded-full bg-amber-500 text-white flex items-center justify-center font-extrabold text-[11px] shrink-0">6</span>
+              <div class="min-w-0"><p class="text-[11px] font-bold text-ink leading-none">Curriculum learning to ask for help is a skill</p><p class="text-[10px] text-amber-700 leading-none">Taught explicitly</p></div>
+            </div>
+            <div class="w-[86%] bg-white border border-slate-200 rounded-lg px-3 py-2.5 flex items-center gap-2.5 shadow-sm">
+              <span class="w-6 h-6 rounded-full bg-violet-600 text-white flex items-center justify-center font-extrabold text-[11px] shrink-0">5</span>
+              <div class="min-w-0"><p class="text-[11px] font-bold text-ink leading-none">Peer Mentoring students who ask become mentors</p><p class="text-[10px] text-slate-500 leading-none">Pay it forward loop</p></div>
+            </div>
+            <div class="w-[90%] bg-violet-50 border border-violet-200 rounded-lg px-3 py-2.5 flex items-center gap-2.5">
+              <span class="w-6 h-6 rounded-full bg-violet-600 text-white flex items-center justify-center font-extrabold text-[11px] shrink-0">4</span>
+              <div class="min-w-0"><p class="text-[11px] font-bold text-ink leading-none">Stories shared in orientation</p><p class="text-[10px] text-violet-700 leading-none">Narratives that normalize asking</p></div>
+            </div>
+            <div class="w-[94%] bg-white border border-slate-200 rounded-lg px-3 py-2.5 flex items-center gap-2.5 shadow-sm">
+              <span class="w-6 h-6 rounded-full bg-slate-900 text-white flex items-center justify-center font-extrabold text-[11px] shrink-0">3</span>
+              <div class="min-w-0"><p class="text-[11px] font-bold text-ink leading-none">Leaderboard anonymous or with consent</p><p class="text-[10px] text-slate-500 leading-none">Social proof, opt in</p></div>
+            </div>
+            <div class="w-[98%] bg-white border border-amber-200 rounded-lg px-3 py-2.5 flex items-center gap-2.5 shadow-sm">
+              <span class="w-6 h-6 rounded-full bg-amber-500 text-white flex items-center justify-center font-extrabold text-[11px] shrink-0">2</span>
+              <div class="min-w-0"><p class="text-[11px] font-bold text-ink leading-none">Badges visible on student profiles</p><p class="text-[10px] text-slate-500 leading-none">From First Help to Peer Mentor</p></div>
+            </div>
+            <div class="w-full bg-blue-600 text-white rounded-b-xl px-3 py-3 flex items-center gap-2.5 shadow-[0_8px_20px_rgba(37,99,235,0.25)]">
+              <span class="w-7 h-7 rounded-full bg-white text-blue-600 flex items-center justify-center font-extrabold text-[12px] shrink-0">1</span>
+              <div class="min-w-0"><p class="text-[12px] font-extrabold leading-none">Help Heroes Program foundation</p><p class="text-[11px] text-white/85 leading-none">Reframe help seeking as strength to be celebrated</p></div>
+              <span class="ml-auto text-[16px]">🦸</span>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col gap-4">
+          <div class="bg-white border border-slate-200 rounded-2xl p-4 sm:p-5 shadow-sm">
+            <h3 class="text-[13px] font-extrabold text-ink flex items-center gap-2"><span class="w-7 h-7 rounded-xl bg-violet-600 text-white flex items-center justify-center"><i class="fa-solid fa-arrow-trend-up text-[12px]"></i></span> Why a tower</h3>
+            <p class="text-[12.5px] leading-snug text-slate-600 mt-2">We started with one sticky for Help Heroes and kept adding layers. Each level adds a new way to make help seeking more visible and supported.</p>
+            <div class="mt-3 grid grid-cols-3 gap-2 text-center">
+              <div class="bg-amber-50 border border-amber-200 rounded-xl p-2.5"><p class="text-[16px]">🏅</p><p class="text-[11px] font-bold text-ink">Proud</p><p class="text-[10px] text-slate-500">not ashamed</p></div>
+              <div class="bg-blue-50 border border-blue-200 rounded-xl p-2.5"><p class="text-[16px]">🤝</p><p class="text-[11px] font-bold text-ink">Peer</p><p class="text-[10px] text-slate-500">pay forward</p></div>
+              <div class="bg-slate-50 border border-slate-200 rounded-xl p-2.5"><p class="text-[16px]">🏛️</p><p class="text-[11px] font-bold text-ink">Institution</p><p class="text-[10px] text-slate-500">values led</p></div>
+            </div>
+          </div>
+          <div class="bg-slate-900 rounded-2xl p-4 sm:p-5 text-white relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10 grid-pattern"></div>
+            <div class="relative">
+              <p class="text-[11px] font-bold tracking-widest uppercase text-amber-300 flex items-center gap-1.5"><i class="fa-solid fa-quote-left text-[11px]"></i> Team note</p>
+              <p class="text-[13px] leading-snug font-medium mt-2">The tower showed us Help Heroes is not just a button. It is identity, community and institutional support working together.</p>
+              <p class="text-[11px] text-white/60 mt-2">Tobias and Keisha, synthesis session</p>
+            </div>
+          </div>
+          <div class="bg-blue-50 border border-blue-200 rounded-2xl p-4 flex gap-3">
+            <span class="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center shrink-0"><i class="fa-solid fa-lightbulb text-[13px]"></i></span>
+            <div>
+              <p class="text-[12px] font-bold text-ink">Link to Week 6</p>
+              <p class="text-[12.5px] leading-snug text-slate-600">Levels 1 to 3 were built first: program, badges and leaderboard logic became the Profile screen. Levels 4 to 8 are next steps.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="section6" class="mt-6 scroll-mt-6 reveal">
+    <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+      <div class="px-6 sm:px-7 lg:px-8 pt-6">
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="inline-flex items-center gap-2 bg-slate-900 text-white text-[11px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full"><span class="w-6 h-6 rounded-full bg-emerald-500 flex items-center justify-center text-[11px]">06</span> Section 6</span>
+          <h2 class="text-[18px] sm:text-[20px] font-extrabold tracking-tight text-ink">Selection for Prototyping</h2>
+          <span class="inline-flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 text-emerald-700 text-[11px] font-bold px-2.5 py-1 rounded-full"><i class="fa-solid fa-check text-[11px]"></i> 2 winners</span>
+        </div>
+        <p class="text-[12.5px] text-slate-500 font-medium mt-1">After clustering and tower building, the team voted with dots. Two ideas were selected to prototype.</p>
+      </div>
+      <div class="px-4 sm:px-6 lg:px-8 pb-7 pt-5">
+        <div class="grid lg:grid-cols-2 gap-5">
+          <div class="rounded-2xl border-2 border-amber-400 overflow-hidden bg-amber-50/40 shadow-[0_8px_24px_rgba(245,158,11,0.12)] relative">
+            <div class="absolute top-3 right-3 z-10 flex items-center gap-1.5 bg-emerald-600 text-white text-[11px] font-extrabold px-2.5 py-1 rounded-full shadow-sm"><i class="fa-solid fa-check text-[10px]"></i> SELECTED</div>
+            <div class="h-2 w-full bg-gradient-to-r from-amber-400 to-orange-500"></div>
+            <div class="p-5 sm:p-6">
+              <div class="flex items-start gap-3">
+                <span class="w-12 h-12 rounded-2xl bg-amber-500 text-white flex items-center justify-center text-[22px] shadow-sm shrink-0">🦸</span>
+                <div class="min-w-0">
+                  <p class="text-[10px] font-bold tracking-widest uppercase text-amber-700">Idea 01 Help Seeking Culture</p>
+                  <h3 class="text-[18px] font-extrabold text-ink leading-tight mt-1">Help Heroes Program</h3>
+                  <p class="text-[12px] font-medium text-slate-600">Reframes help seeking as strength and builds belonging</p>
+                </div>
+              </div>
+              <div class="mt-4 grid grid-cols-3 gap-2 text-center">
+                <div class="bg-white border border-amber-200 rounded-xl p-2.5">
+                  <p class="text-[11px] font-bold tracking-widest uppercase text-slate-500">Impact</p>
+                  <p class="text-[13px] font-extrabold text-ink">High</p>
+                  <p class="text-[10px] text-slate-500">cultural</p>
+                </div>
+                <div class="bg-white border border-amber-200 rounded-xl p-2.5">
+                  <p class="text-[11px] font-bold tracking-widest uppercase text-slate-500">Cost</p>
+                  <p class="text-[13px] font-extrabold text-emerald-600">Low</p>
+                  <p class="text-[10px] text-slate-500">no hardware</p>
+                </div>
+                <div class="bg-white border border-amber-200 rounded-xl p-2.5">
+                  <p class="text-[11px] font-bold tracking-widest uppercase text-slate-500">Dots</p>
+                  <p class="text-[13px] font-extrabold text-ink">5 dots</p>
+                  <p class="text-[10px] text-slate-500">unanimous</p>
+                </div>
+              </div>
+              <ul class="mt-4 space-y-1.5 text-[12.5px] leading-snug text-slate-700">
+                <li class="flex gap-2"><span class="text-emerald-600 mt-0.5"><i class="fa-solid fa-check text-[11px]"></i></span><span><span class="font-semibold text-ink">Reframes</span> help seeking as strength with badges and profiles</span></li>
+                <li class="flex gap-2"><span class="text-emerald-600 mt-0.5"><i class="fa-solid fa-check text-[11px]"></i></span><span><span class="font-semibold text-ink">Builds belonging</span> with Help Wall and Community</span></li>
+                <li class="flex gap-2"><span class="text-emerald-600 mt-0.5"><i class="fa-solid fa-check text-[11px]"></i></span><span><span class="font-semibold text-ink">Low cost, high impact</span> with design and culture, not infrastructure</span></li>
+              </ul>
+              <div class="mt-4 bg-white border border-amber-200 rounded-xl px-3.5 py-3 flex gap-2.5">
+                <span class="w-7 h-7 rounded-full bg-amber-500 text-white flex items-center justify-center text-[12px] shrink-0"><i class="fa-solid fa-quote-left text-[10px]"></i></span>
+                <p class="text-[12px] leading-snug text-ink italic">I do not know how to ask, that is literally me. This is exactly what I said in the interview. <span class="not-italic font-semibold text-amber-700">James, testing</span></p>
+              </div>
+            </div>
+          </div>
+          <div class="rounded-2xl border-2 border-blue-500 overflow-hidden bg-blue-50/40 shadow-[0_8px_24px_rgba(37,99,235,0.12)] relative">
+            <div class="absolute top-3 right-3 z-10 flex items-center gap-1.5 bg-emerald-600 text-white text-[11px] font-extrabold px-2.5 py-1 rounded-full shadow-sm"><i class="fa-solid fa-check text-[10px]"></i> SELECTED</div>
+            <div class="h-2 w-full bg-gradient-to-r from-blue-600 to-cyan-500"></div>
+            <div class="p-5 sm:p-6">
+              <div class="flex items-start gap-3">
+                <span class="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center text-[20px] shadow-sm shrink-0"><i class="fa-solid fa-mobile-screen"></i></span>
+                <div class="min-w-0">
+                  <p class="text-[10px] font-bold tracking-widest uppercase text-blue-700">Idea 02 Connectivity</p>
+                  <h3 class="text-[18px] font-extrabold text-ink leading-tight mt-1">Offline First Learning OS</h3>
+                  <p class="text-[12px] font-medium text-slate-600">Solves connectivity at its root and works with existing devices</p>
+                </div>
+              </div>
+              <div class="mt-4 grid grid-cols-3 gap-2 text-center">
+                <div class="bg-white border border-blue-200 rounded-xl p-2.5">
+                  <p class="text-[11px] font-bold tracking-widest uppercase text-slate-500">Impact</p>
+                  <p class="text-[13px] font-extrabold text-ink">High</p>
+                  <p class="text-[10px] text-slate-500">technical</p>
+                </div>
+                <div class="bg-white border border-blue-200 rounded-xl p-2.5">
+                  <p class="text-[11px] font-bold tracking-widest uppercase text-slate-500">Feasibility</p>
+                  <p class="text-[13px] font-extrabold text-blue-600">Medium</p>
+                  <p class="text-[10px] text-slate-500">needs sync</p>
+                </div>
+                <div class="bg-white border border-blue-200 rounded-xl p-2.5">
+                  <p class="text-[11px] font-bold tracking-widest uppercase text-slate-500">Dots</p>
+                  <p class="text-[13px] font-extrabold text-ink">4 dots</p>
+                  <p class="text-[10px] text-slate-500">strong</p>
+                </div>
+              </div>
+              <ul class="mt-4 space-y-1.5 text-[12.5px] leading-snug text-slate-700">
+                <li class="flex gap-2"><span class="text-emerald-600 mt-0.5"><i class="fa-solid fa-check text-[11px]"></i></span><span><span class="font-semibold text-ink">Solves the core constraint</span> of unreliable internet</span></li>
+                <li class="flex gap-2"><span class="text-emerald-600 mt-0.5"><i class="fa-solid fa-check text-[11px]"></i></span><span><span class="font-semibold text-ink">Works with existing devices</span> like low end phones and library wifi</span></li>
+                <li class="flex gap-2"><span class="text-emerald-600 mt-0.5"><i class="fa-solid fa-check text-[11px]"></i></span><span><span class="font-semibold text-ink">Technical and human</span> with auto sync and text only forums</span></li>
+              </ul>
+              <div class="mt-4 bg-white border border-blue-200 rounded-xl px-3.5 py-3 flex gap-2.5">
+                <span class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-[12px] shrink-0"><i class="fa-solid fa-signal text-[10px]"></i></span>
+                <p class="text-[12px] leading-snug text-ink italic">This uses almost no data. I could access this even on my phone. <span class="not-italic font-semibold text-blue-700">Maria, testing</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-5 bg-slate-900 rounded-2xl p-5 sm:p-6 text-white relative overflow-hidden">
+          <div class="absolute inset-0 opacity-[0.06] grid-pattern"></div>
+          <div class="relative flex flex-col lg:flex-row gap-5 items-start lg:items-center">
+            <div class="flex-1">
+              <p class="text-[11px] font-bold tracking-widest uppercase text-amber-300 flex items-center gap-2"><i class="fa-solid fa-handshake-angle text-[11px]"></i> Why both</p>
+              <p class="text-[13px] leading-snug text-white/90 mt-1.5">One addresses the human side from shame to pride. The other addresses the practical side from no connection to offline access. Together they make it easier for James to ask for help anytime.</p>
+            </div>
+            <div class="flex gap-2 shrink-0">
+              <div class="bg-white text-ink rounded-xl px-4 py-3 text-center min-w-[110px]">
+                <p class="text-[10px] font-bold tracking-widest uppercase text-slate-500">Not selected</p>
+                <p class="text-[12px] font-bold leading-tight">Local Hubs and audits</p>
+                <p class="text-[10px] text-slate-500">roadmap</p>
+              </div>
+              <div class="bg-emerald-600 text-white rounded-xl px-4 py-3 text-center min-w-[110px] shadow-lg">
+                <p class="text-[10px] font-bold tracking-widest uppercase text-white/80">Prototyped</p>
+                <p class="text-[12px] font-bold leading-tight">Help Heroes and Offline OS</p>
+                <p class="text-[10px] text-white/80">to Week 6</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div class="bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-[14px]">🗳️</span>
+            <div>
+              <p class="text-[12px] font-bold text-ink leading-none">Dot voting</p>
+              <p class="text-[11px] text-slate-500">3 dots per person, 15 total</p>
+            </div>
+            <span class="ml-auto text-[11px] font-bold bg-slate-900 text-white px-2 py-1 rounded-full">On MURAL</span>
+          </div>
+          <div class="bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center"><i class="fa-solid fa-arrow-trend-up text-[13px]"></i></span>
+            <div>
+              <p class="text-[12px] font-bold text-ink leading-none">Criteria</p>
+              <p class="text-[11px] text-amber-700 font-medium">Desirability, feasibility and belonging</p>
+            </div>
+          </div>
+          <div class="bg-blue-50 border border-blue-200 rounded-xl px-4 py-3 flex items-center gap-3">
+            <span class="w-8 h-8 rounded-xl bg-blue-600 text-white flex items-center justify-center"><i class="fa-solid fa-forward text-[12px]"></i></span>
+            <div>
+              <p class="text-[12px] font-bold text-ink leading-none">Next: Prototype Week 6</p>
+              <p class="text-[11px] text-blue-700 font-medium">5 screen mobile mockup</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="mt-6 bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 reveal">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-slate-900 text-white flex items-center justify-center text-[16px]">🦸</div>
+      <div>
+        <p class="text-[13px] font-extrabold text-ink">Week 5 to Week 6 Ideation to Prototype</p>
+        <p class="text-[12px] text-slate-500 font-medium">MURAL board then interactive mockups and user testing.</p>
+      </div>
+    </div>
+    <div class="flex flex-wrap gap-2">
+      <a href="./index.html" class="inline-flex items-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-[12px] font-bold px-4 py-2 rounded-full shadow-sm">Open Week 6 prototype <i class="fa-solid fa-arrow-right text-[10px]"></i></a>
+      <a href="./wireframe_image.html" class="inline-flex items-center gap-1.5 bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 text-[12px] font-bold px-4 py-2 rounded-full">Wireframe overview</a>
+      <a href="./testing_board.html" class="inline-flex items-center gap-1.5 bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 text-[12px] font-bold px-4 py-2 rounded-full">Testing board</a>
+    </div>
+  </div>
+  <p class="text-center text-[11px] font-medium text-slate-400 mt-4">Week 5 Project Ideation and Prototyping MURAL Board Aug 2026 Design Thinking Help Heroes and Offline First Learning OS selected for prototyping</p>
+</div>
+
+<script>
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', e=>{
+      const id=a.getAttribute('href');
+      const el=document.querySelector(id);
+      if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}); history.pushState(null,'',id); }
+    });
+  });
+</script>
+</body>
+</html>
