@@ -152,7 +152,7 @@ html.dark .cov-btn{background:#0F172A!important;border-color:#1E293B!important;c
       </div>
       <!-- Coverage: the 5 required video points, click to jump -->
       <div class="mt-2 bg-slate-900 text-white rounded-2xl px-4 py-3">
-        <p class="text-[10px] font-bold tracking-widest uppercase text-amber-300 text-center">Video covers all 5 required points — click to jump</p>
+        <p class="text-[10px] font-bold tracking-widest uppercase text-amber-300 text-center">Video covers all 5 required points: click to jump</p>
         <div class="mt-2 flex flex-wrap justify-center gap-1.5 text-[11px] font-bold">
           <button onclick="showSlide(2)" class="cov-btn inline-flex items-center gap-1.5 bg-white text-ink px-3 py-1.5 rounded-full hover:bg-blue-50 border border-transparent hover:border-blue-200"><i class="fa-solid fa-check text-emerald-500 text-[10px]"></i> Challenge <span class="font-semibold text-slate-400">S2</span></button>
           <button onclick="showSlide(3)" class="cov-btn inline-flex items-center gap-1.5 bg-white text-ink px-3 py-1.5 rounded-full hover:bg-blue-50 border border-transparent hover:border-blue-200"><i class="fa-solid fa-check text-emerald-500 text-[10px]"></i> User <span class="font-semibold text-slate-400">S3</span></button>
@@ -567,7 +567,7 @@ function populateVoices(){
   [...en,...rest].slice(0,40).forEach(v=>{
     const o=document.createElement('option');
     o.value=v.name;
-    o.textContent=v.name+' ('+v.lang+')'+(v===narrVoice?' — recommended':'');
+    o.textContent=v.name+' ('+v.lang+')'+(v===narrVoice?' (recommended)':'');
     if(v===narrVoice) o.selected=true;
     sel.appendChild(o);
   });
