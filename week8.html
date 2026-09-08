@@ -61,6 +61,12 @@ html.dark #notesPanel{background:#0B1226!important}
 html.dark .work-link:not(.slide-frame *){background:#0F172A;border-color:#1E293B}
 html.dark .work-link:not(.slide-frame *) b{color:#F1F5F9}
 html.dark .cov-btn{background:#0F172A!important;border-color:#1E293B!important;color:#E2E8F0!important}
+/* Taller canvas on desktop so slides fit without scrolling */
+@media(min-width:640px){.slide-frame .aspect-video{min-height:600px}}
+/* Stage controls auto-hide, reveal on hover/focus (always on touch) */
+#stageControls{opacity:0;transform:translateY(-4px);transition:opacity .25s ease,transform .25s ease;pointer-events:none}
+#stage:hover #stageControls,#stageControls:focus-within{opacity:1;transform:none;pointer-events:auto}
+@media(hover:none){#stageControls{opacity:1;transform:none;pointer-events:auto}}
 @media print{.no-print{display:none!important}.deck-slide{display:block!important;page-break-inside:avoid;margin-bottom:16px}}
 </style>
 </head>
@@ -166,9 +172,9 @@ html.dark .cov-btn{background:#0F172A!important;border-color:#1E293B!important;c
 </header>
 
 <!-- DECK -->
-<section class="mt-6 reveal">
+<section class="mt-6 reveal max-w-[920px] mx-auto w-full">
 <div id="stage" class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
-  <div class="px-5 sm:px-6 pt-5 flex flex-wrap items-center justify-between gap-3 no-print">
+  <div id="stageControls" class="px-5 sm:px-6 pt-5 flex flex-wrap items-center justify-between gap-3 no-print">
     <div class="flex items-center gap-2">
       <span class="w-8 h-8 rounded-xl bg-slate-900 text-white flex items-center justify-center"><i class="fa-solid fa-person-chalkboard text-[13px]"></i></span>
       <div>
@@ -411,7 +417,7 @@ html.dark .cov-btn{background:#0F172A!important;border-color:#1E293B!important;c
       <button id="fullBtn" onclick="playFullTalk()" class="inline-flex items-center gap-1.5 bg-white border border-slate-200 text-[11px] font-bold px-3 py-1.5 rounded-full hover:bg-slate-100"><i class="fa-solid fa-list-ol text-[11px]"></i> <span id="fullLabel">Full talk</span></button>
       <button onclick="stopSpeak()" class="inline-flex items-center gap-1.5 bg-white border border-slate-200 text-[11px] font-semibold px-3 py-1.5 rounded-full hover:bg-slate-100"><i class="fa-solid fa-stop text-[11px]"></i> Stop</button>
       <select id="voiceSelect" class="text-[11px] font-semibold border border-slate-200 rounded-full px-2.5 py-1.5 bg-white text-slate-700 max-w-[190px] focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary" title="Fallback system voice (used only if studio audio is missing)"></select>
-      <span class="text-[11px] text-slate-400 font-medium ml-1">Studio voice: neural narration, one MP3 per slide (./audio). Full talk plays all 10 and advances. Tip: <kbd class="bg-white border border-slate-200 rounded px-1.5 py-0.5 font-mono">←</kbd> <kbd class="bg-white border border-slate-200 rounded px-1.5 py-0.5 font-mono">→</kbd> to move, <kbd class="bg-white border border-slate-200 rounded px-1.5 py-0.5 font-mono">F</kbd> for fullscreen.</span>
+      <span class="text-[11px] text-slate-400 font-medium ml-1">Studio voice: neural narration, one MP3 per slide (./audio). Full talk plays all 10 and advances. Tip: <kbd class="bg-white border border-slate-200 rounded px-1.5 py-0.5 font-mono">←</kbd> <kbd class="bg-white border border-slate-200 rounded px-1.5 py-0.5 font-mono">→</kbd> to move, <kbd class="bg-white border border-slate-200 rounded px-1.5 py-0.5 font-mono">F</kbd> for fullscreen, <kbd class="bg-white border border-slate-200 rounded px-1.5 py-0.5 font-mono">N</kbd> for notes.</span>
     </div>
   </div>
   </div>
@@ -475,7 +481,7 @@ const notes=[
 {t:"Slide 10 • Closing",time:"4:50 – 5:00",x:"Thank you for joining me on this journey. Our solution, Help Heroes, is about turning questions into connections. Because when we ask for help, we don't just find answers – we find each other. That's what design thinking is all about."}
 ];
 let cur=1; const N=10;
-let startT=null, timer=null, notesVisible=true;
+let startT=null, timer=null, notesVisible=false;
 const shortTitles=["Title","Challenge","James","Solution","Testing","Iteration","Storyboard","Next steps","Takeaways","Closing"];
 
 function renderThumbs(){
@@ -521,11 +527,14 @@ function toggleFullscreen(){
   else el.requestFullscreen&&el.requestFullscreen();
 }
 function startPresent(){
-  showSlide(1); toggleNotes(true);
+  showSlide(1); toggleNotes(false);
   const el=document.getElementById('stage');
   el.scrollIntoView({behavior:'smooth'});
-  if(el.requestFullscreen&&window.innerWidth>768){/* keep inline by default; user can press F */ }
+  try{ el.requestFullscreen&&el.requestFullscreen(); }catch(e){}
 }
+document.addEventListener('fullscreenchange',()=>{
+  if(document.fullscreenElement) toggleNotes(false);
+});
 function startClock(){
   if(timer) return;
   timer=setInterval(()=>{
@@ -651,6 +660,7 @@ document.addEventListener('keydown',e=>{
   if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();nextSlide()}
   else if(e.key==='ArrowLeft'){e.preventDefault();prevSlide()}
   else if(e.key.toLowerCase()==='f'){toggleFullscreen()}
+  else if(e.key.toLowerCase()==='n'){toggleNotes()}
   else if(e.key==='Home'){showSlide(1)} else if(e.key==='End'){showSlide(N)}
 });
 function toggleDark(){
@@ -667,7 +677,7 @@ function syncDarkIcon(){
 }
 try{ if(localStorage.getItem('hh-dark')==='1') document.documentElement.classList.add('dark'); }catch(e){}
 syncDarkIcon();
-renderThumbs(); renderScript(); showSlide(1);
+renderThumbs(); renderScript(); toggleNotes(false); showSlide(1);
 </script>
 </body>
 </html>
