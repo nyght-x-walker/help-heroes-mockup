@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<!--
+  Help Heroes | Week 2 - Choose the Challenge, Assemble the Team
+  Student ID: s-01141 | Design Thinking Project
+  File: week2.html - single-file content page (no build step)
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Help Heroes | Week 2 Team</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#2563EB',ink:'#0F172A',muted:'#64748B'},fontFamily:{sans:['Inter','system-ui','sans-serif'],display:['Fraunces','serif']},boxShadow:{card:'0 1px 3px rgba(15,23,42,0.06),0 12px 32px rgba(15,23,42,0.08)'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,800;9..144,900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*{font-family:Inter,system-ui,sans-serif}
+.font-display{font-family:Fraunces,serif}
+.grid-pattern{background-image:linear-gradient(to right,rgba(15,23,42,0.035) 1px,transparent 1px),linear-gradient(to bottom,rgba(15,23,42,0.035) 1px,transparent 1px);background-size:32px 32px}
+.reveal{opacity:0;transform:translateY(10px);animation:reveal 700ms ease forwards}
+@keyframes reveal{to{opacity:1;transform:none}}
+.quote{border-left:3px solid #2563EB}
+</style>
+</head>
+<body class="bg-[#F8FAFC] text-ink antialiased selection:bg-primary selection:text-white">
+<div class="fixed inset-0 -z-10 pointer-events-none"><div class="absolute inset-0 bg-[#F8FAFC]"></div><div class="absolute inset-0 grid-pattern opacity-[0.5]"></div><div class="absolute -top-[360px] left-1/2 -translate-x-1/2 w-[1400px] h-[760px] rounded-full blur-[100px] opacity-[0.14]" style="background:radial-gradient(ellipse at center,#2563EB 0%,#8B5CF6 34%,transparent 72%)"></div></div>
+
+<nav class="sticky top-0 z-40 backdrop-blur-xl bg-white/80 border-b border-slate-200">
+  <div class="max-w-[1160px] mx-auto px-4 sm:px-6 lg:px-8 h-[56px] flex items-center justify-between gap-4">
+    <a href="./index.html" class="flex items-center gap-2.5">
+      <span class="w-8 h-8 rounded-xl bg-[#2563EB] text-white flex items-center justify-center text-[16px] shadow-sm">🦸</span>
+      <span class="font-display font-[900] tracking-tight text-[17px] leading-none">Help Heroes</span>
+      <span class="hidden sm:inline-flex text-[11px] font-bold tracking-widest uppercase bg-slate-900 text-white px-2 py-1 rounded-full ml-1">Week 2</span>
+    </a>
+    <div class="hidden md:flex items-center gap-1.5 text-[12px] font-semibold overflow-x-auto [&>a]:shrink-0">
+      <a href="./week1.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 1</a>
+      <a href="./week2.html" class="px-3 py-1.5 rounded-full bg-[#EFF6FF] text-primary border border-blue-200">Week 2</a>
+      <a href="./week3.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 3</a>
+      <a href="./week4.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 4</a>
+      <a href="./week5_project.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 5</a>
+      <a href="./week6.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 6</a>
+      <a href="./index_week7.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 7</a>
+      <a href="./week8.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 8</a>
+    </div>
+    <div class="flex items-center gap-1.5">
+      <a href="./index.html" class="hidden sm:inline-flex items-center gap-1.5 bg-white border border-slate-200 px-3 py-1.5 rounded-full text-[12px] font-semibold hover:bg-slate-50">Overview</a>
+      <a href="./s-01141_WEEK_2_Team.pdf" download class="inline-flex items-center gap-1.5 bg-[#2563EB] text-white px-3.5 py-1.5 rounded-full text-[12px] font-bold hover:bg-[#1D4ED8] shadow-sm"><i class="fa-solid fa-download text-[10px]"></i> PDF</a>
+    </div>
+  </div>
+</nav>
+
+<main class="max-w-[1160px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+
+<header class="reveal">
+  <div class="bg-white rounded-[24px] border border-slate-200 shadow-card overflow-hidden">
+    <div class="h-[5px] w-full bg-gradient-to-r from-blue-600 via-violet-500 to-amber-500"></div>
+    <div class="px-6 sm:px-8 lg:px-10 py-7 sm:py-8">
+      <div class="flex flex-wrap items-center gap-2 mb-3">
+        <span class="inline-flex items-center gap-2 bg-slate-900 text-white text-[11px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full">Assignment 2</span>
+        <span class="inline-flex items-center gap-1.5 bg-violet-50 border border-violet-200 text-violet-700 text-[11px] font-bold px-2.5 py-1 rounded-full">Team assembly</span>
+        <span class="inline-flex items-center gap-1.5 text-[11px] font-medium text-slate-500">s-01141</span>
+      </div>
+      <h1 class="font-display text-[30px] sm:text-[42px] font-[900] leading-[0.95] tracking-[-0.03em]">Five People, Five Angles</h1>
+      <p class="mt-3 text-[13.5px] leading-relaxed text-slate-600 max-w-[760px]">A wicked problem eats single-discipline teams. This one mixes UX, learning design, community roots, data, and ethics. Deep in one craft each, fluent across the rest: T-shaped.</p>
+      <div class="mt-3 bg-blue-50 border-2 border-primary/60 rounded-2xl px-5 py-4 text-center">
+        <p class="text-[13px] sm:text-[15px] font-bold leading-snug">Redesign the online learning experience for first-generation university students in a world in which access to high-speed internet is unreliable.</p>
+      </div>
+      <div class="mt-4 flex flex-wrap items-center gap-2">
+        <a href="#team" class="text-[12px] font-bold bg-slate-900 text-white px-4 py-2 rounded-full hover:bg-black">Meet the team</a>
+        <a href="#tension" class="text-[12px] font-bold bg-white border border-slate-200 px-4 py-2 rounded-full hover:bg-slate-50">Productive tension</a>
+        <span class="text-[12px] font-semibold text-slate-500 ml-1">🇻🇳 🇺🇸 🇨🇴 🇮🇳 🇩🇪 <span class="font-normal">five countries, one brief</span></span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- TEAM -->
+<section id="team" class="mt-6 scroll-mt-[72px] reveal">
+  <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+    <div class="px-6 sm:px-8 pt-6"><h2 class="text-[18px] sm:text-[20px] font-extrabold tracking-tight">The crew</h2><p class="text-[12.5px] text-slate-500 mt-1">Each T: deep stem, wide bar.</p></div>
+    <div class="px-6 sm:px-8 pb-6 pt-4 grid sm:grid-cols-2 lg:grid-cols-3 gap-3 text-[12.5px]">
+
+      <div class="bg-blue-50/60 border border-blue-200 rounded-2xl p-5">
+        <div class="flex items-center gap-3">
+          <span class="w-11 h-11 rounded-full bg-[#2563EB] text-white flex items-center justify-center text-[15px] font-extrabold shrink-0">LT</span>
+          <div><p class="text-[14px] font-extrabold leading-none">Linh Tran <span class="font-semibold text-slate-400">· she/her</span></p><p class="text-[11.5px] text-slate-500 mt-1">UX Designer · health tech startup · 🇻🇳</p></div>
+        </div>
+        <svg viewBox="0 0 200 86" class="w-full h-auto mt-3" aria-hidden="true"><rect x="30" y="6" width="140" height="13" rx="6.5" fill="#BFDBFE"/><rect x="93" y="19" width="14" height="44" rx="7" fill="#2563EB"/><text x="100" y="78" text-anchor="middle" font-size="9.5" font-weight="700" fill="#1D4ED8" font-family="Inter,sans-serif">low-resource UX × empathy</text></svg>
+        <p class="text-slate-600 mt-2">Designs health tech where constraints are the norm, so struggling students feel familiar. Iterative prototyping, empathy first, simplicity always.</p>
+      </div>
+
+      <div class="bg-emerald-50/70 border border-emerald-200 rounded-2xl p-5">
+        <div class="flex items-center gap-3">
+          <span class="w-11 h-11 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[15px] font-extrabold shrink-0">KB</span>
+          <div><p class="text-[14px] font-extrabold leading-none">Keisha Brown <span class="font-semibold text-slate-400">· she/her</span></p><p class="text-[11.5px] text-slate-500 mt-1">Learning Designer · online platforms · 🇺🇸</p></div>
+        </div>
+        <svg viewBox="0 0 200 86" class="w-full h-auto mt-3" aria-hidden="true"><rect x="30" y="6" width="140" height="13" rx="6.5" fill="#A7F3D0"/><rect x="93" y="19" width="14" height="44" rx="7" fill="#059669"/><text x="100" y="78" text-anchor="middle" font-size="9.5" font-weight="700" fill="#047857" font-family="Inter,sans-serif">universal design × engagement</text></svg>
+        <p class="text-slate-600 mt-2">Builds inclusive learning on universal design. Access and engagement for diverse learners, not just software that functions.</p>
+      </div>
+
+      <div class="bg-amber-50/70 border border-amber-200 rounded-2xl p-5">
+        <div class="flex items-center gap-3">
+          <span class="w-11 h-11 rounded-full bg-amber-500 text-white flex items-center justify-center text-[15px] font-extrabold shrink-0">CJ</span>
+          <div><p class="text-[14px] font-extrabold leading-none">Carlos Jiménez <span class="font-semibold text-slate-400">· he/him</span></p><p class="text-[11.5px] text-slate-500 mt-1">Community Development · NGO · 🇨🇴</p></div>
+        </div>
+        <svg viewBox="0 0 200 86" class="w-full h-auto mt-3" aria-hidden="true"><rect x="30" y="6" width="140" height="13" rx="6.5" fill="#FDE68A"/><rect x="93" y="19" width="14" height="44" rx="7" fill="#D97706"/><text x="100" y="78" text-anchor="middle" font-size="9.5" font-weight="700" fill="#92400E" font-family="Inter,sans-serif">rural systems × co-design</text></svg>
+        <p class="text-slate-600 mt-2">Works with rural Latin American communities around infrastructure gaps. Nothing imposed from above; everything co-built with the people it serves.</p>
+      </div>
+
+      <div class="bg-violet-50/70 border border-violet-200 rounded-2xl p-5">
+        <div class="flex items-center gap-3">
+          <span class="w-11 h-11 rounded-full bg-violet-600 text-white flex items-center justify-center text-[15px] font-extrabold shrink-0">RM</span>
+          <div><p class="text-[14px] font-extrabold leading-none">Rajiv Menon <span class="font-semibold text-slate-400">· he/him</span></p><p class="text-[11.5px] text-slate-500 mt-1">AI Product Analyst · 🇮🇳</p></div>
+        </div>
+        <svg viewBox="0 0 200 86" class="w-full h-auto mt-3" aria-hidden="true"><rect x="30" y="6" width="140" height="13" rx="6.5" fill="#DDD6FE"/><rect x="93" y="19" width="14" height="44" rx="7" fill="#7C3AED"/><text x="100" y="78" text-anchor="middle" font-size="9.5" font-weight="700" fill="#6D28D9" font-family="Inter,sans-serif">data × fair, feasible tech</text></svg>
+        <p class="text-slate-600 mt-2">Turns user insight into data and algorithm choices. Tests what lightweight AI can do on thin bandwidth, fairness wired in from the start.</p>
+      </div>
+
+      <div class="bg-rose-50/70 border border-rose-200 rounded-2xl p-5">
+        <div class="flex items-center gap-3">
+          <span class="w-11 h-11 rounded-full bg-rose-500 text-white flex items-center justify-center text-[15px] font-extrabold shrink-0">TS</span>
+          <div><p class="text-[14px] font-extrabold leading-none">Tobias Schäfer <span class="font-semibold text-slate-400">· he/him</span></p><p class="text-[11.5px] text-slate-500 mt-1">Innovation Ethics Consultant · 🇩🇪</p></div>
+        </div>
+        <svg viewBox="0 0 200 86" class="w-full h-auto mt-3" aria-hidden="true"><rect x="30" y="6" width="140" height="13" rx="6.5" fill="#FECDD3"/><rect x="93" y="19" width="14" height="44" rx="7" fill="#E11D48"/><text x="100" y="78" text-anchor="middle" font-size="9.5" font-weight="700" fill="#BE123C" font-family="Inter,sans-serif">values × whose good counts?</text></svg>
+        <p class="text-slate-600 mt-2">Reads the values buried in every design. Asks whose "good learning" counts and what new exclusions a fix might smuggle in.</p>
+      </div>
+
+      <div class="bg-slate-900 text-white rounded-2xl p-5 flex flex-col justify-center">
+        <p class="text-[11px] font-bold tracking-widest uppercase text-amber-300">Why this mix</p>
+        <p class="text-[13px] leading-relaxed mt-1.5 text-white/90">UX plus learning plus community plus data plus ethics. Five countries against a narrow Western lens. Five crafts, one brief, deliberate friction.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TENSION -->
+<section id="tension" class="mt-6 scroll-mt-[72px] reveal">
+  <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+    <div class="px-6 sm:px-8 pt-6"><h2 class="text-[18px] sm:text-[20px] font-extrabold tracking-tight">Productive tension</h2><p class="text-[12.5px] text-slate-500 mt-1">Everyone pulls toward the same center, in different directions. That is the point.</p></div>
+    <div class="px-6 sm:px-8 pb-6 pt-2">
+      <svg viewBox="0 0 420 250" class="w-full h-auto max-w-[560px] mx-auto" role="img" aria-label="Four pulls toward productive tension: simplicity, context, possibility, hard questions">
+        <defs>
+          <marker id="ah" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><polygon points="0,0 8,4 0,8" fill="#2563EB"/></marker>
+        </defs>
+        <g stroke="#2563EB" stroke-width="2.5">
+          <line x1="80" y1="52" x2="168" y2="102" marker-end="url(#ah)"/>
+          <line x1="340" y1="52" x2="252" y2="102" marker-end="url(#ah)"/>
+          <line x1="80" y1="208" x2="168" y2="158" marker-end="url(#ah)"/>
+          <line x1="340" y1="208" x2="252" y2="158" marker-end="url(#ah)"/>
+        </g>
+        <circle cx="210" cy="130" r="46" fill="#0F172A"/>
+        <text x="210" y="126" text-anchor="middle" font-size="11.5" font-weight="800" fill="#FBBF24" font-family="Inter,sans-serif">productive</text>
+        <text x="210" y="142" text-anchor="middle" font-size="11.5" font-weight="800" fill="#FBBF24" font-family="Inter,sans-serif">tension</text>
+        <g font-family="Inter,system-ui,sans-serif" font-size="11" font-weight="800" fill="#0F172A">
+          <text x="52" y="34" text-anchor="middle">simplicity</text><text x="52" y="48" text-anchor="middle" font-size="9.5" font-weight="600" fill="#64748B">Linh + Keisha</text>
+          <text x="368" y="34" text-anchor="middle">context</text><text x="368" y="48" text-anchor="middle" font-size="9.5" font-weight="600" fill="#64748B">Carlos</text>
+          <text x="52" y="230" text-anchor="middle">possibility</text><text x="52" y="244" text-anchor="middle" font-size="9.5" font-weight="600" fill="#64748B">Rajiv</text>
+          <text x="368" y="230" text-anchor="middle">hard questions</text><text x="368" y="244" text-anchor="middle" font-size="9.5" font-weight="600" fill="#64748B">Tobias</text>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- FIRST IMPRESSIONS -->
+<section class="mt-6 reveal">
+  <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+    <div class="px-6 sm:px-8 pt-6"><h2 class="text-[18px] sm:text-[20px] font-extrabold tracking-tight">First impressions, in their own words</h2></div>
+    <div class="px-6 sm:px-8 pb-6 pt-4 space-y-2.5 text-[12.5px]">
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-4"><p class="font-extrabold">Linh: start from the day, not the spec</p><p class="quote pl-3 italic text-slate-700 mt-1.5">"We need to prioritize empathy with first-generation students by understanding their daily realities: internet dropping during lectures, sharing devices with family members, and the anxiety of being left behind. Then design simple, low-bandwidth solutions that can work offline and sync when connection returns."</p></div>
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-4"><p class="font-extrabold">Keisha: redesign the activity, not just the file</p><p class="quote pl-3 italic text-slate-700 mt-1.5">"Our focus should be on reimagining learning activities themselves. Not just making videos downloadable, but designing asynchronous, text-based, low-bandwidth learning experiences that maintain engagement and social connection even without constant connectivity."</p></div>
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-4"><p class="font-extrabold">Carlos: work inside the constraints</p><p class="quote pl-3 italic text-slate-700 mt-1.5">"We must involve students and their communities from the start, recognizing that unreliable internet is often a symptom of deeper infrastructure and equity issues. Our solution needs to work within existing constraints rather than assuming those constraints will disappear."</p></div>
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-4"><p class="font-extrabold">Rajiv: small AI, honest AI</p><p class="quote pl-3 italic text-slate-700 mt-1.5">"We can leverage lightweight AI models that operate on limited data to personalize learning pathways, predict when connectivity will be available, and optimize content delivery based on bandwidth availability. But only if we design with fairness and transparency in mind."</p></div>
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-4"><p class="font-extrabold">Tobias: interrogate the goal first</p><p class="quote pl-3 italic text-slate-700 mt-1.5">"Before we design anything, we need to critically examine the underlying assumptions: What do we mean by 'successful learning'? Whose definition of educational quality are we using? And could our 'solution' inadvertently create new forms of exclusion or dependence that we haven't considered?"</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="mt-6 bg-white border border-slate-200 rounded-2xl p-5 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+  <div>
+    <p class="text-[12px] font-bold tracking-widest uppercase text-slate-500">Next</p>
+    <p class="text-[13px] text-slate-700 mt-1">The problem space: mind map, interviews, open questions.</p>
+  </div>
+  <div class="flex gap-2 shrink-0">
+    <a href="./index.html" class="text-[12px] font-bold bg-white border border-slate-200 px-4 py-2 rounded-full hover:bg-slate-50">Overview</a>
+    <a href="./week3.html" class="text-[12px] font-bold bg-[#2563EB] text-white px-4 py-2 rounded-full hover:bg-[#1D4ED8]">Week 3 →</a>
+  </div>
+</div>
+
+</main>
+<footer class="max-w-[1160px] mx-auto px-6 lg:px-8 pb-10 pt-6 text-[11px] text-slate-500 flex flex-wrap gap-2 justify-between">
+  <span>Help Heroes • Design Thinking Project • German University of Digital Science • s-01141</span>
+  <span class="flex gap-2"><a href="./week1.html" class="underline hover:text-ink">Week 1</a> • <a href="./index.html" class="underline hover:text-ink">Overview</a> • <a href="./week8.html" class="underline hover:text-ink">Finale</a></span>
+</footer>
+</body>
+</html>

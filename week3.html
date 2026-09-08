@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<!--
+  Help Heroes | Week 3 - Exploring the Problem Space
+  Student ID: s-01141 | Design Thinking Project
+  File: week3.html - single-file content page (no build step)
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Help Heroes | Week 3 Problem Space</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#2563EB',ink:'#0F172A',muted:'#64748B'},fontFamily:{sans:['Inter','system-ui','sans-serif'],display:['Fraunces','serif']},boxShadow:{card:'0 1px 3px rgba(15,23,42,0.06),0 12px 32px rgba(15,23,42,0.08)'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,800;9..144,900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*{font-family:Inter,system-ui,sans-serif}
+.font-display{font-family:Fraunces,serif}
+.grid-pattern{background-image:linear-gradient(to right,rgba(15,23,42,0.035) 1px,transparent 1px),linear-gradient(to bottom,rgba(15,23,42,0.035) 1px,transparent 1px);background-size:32px 32px}
+.reveal{opacity:0;transform:translateY(10px);animation:reveal 700ms ease forwards}
+@keyframes reveal{to{opacity:1;transform:none}}
+.quote{border-left:3px solid #2563EB}
+</style>
+</head>
+<body class="bg-[#F8FAFC] text-ink antialiased selection:bg-primary selection:text-white">
+<div class="fixed inset-0 -z-10 pointer-events-none"><div class="absolute inset-0 bg-[#F8FAFC]"></div><div class="absolute inset-0 grid-pattern opacity-[0.5]"></div><div class="absolute -top-[360px] left-1/2 -translate-x-1/2 w-[1400px] h-[760px] rounded-full blur-[100px] opacity-[0.14]" style="background:radial-gradient(ellipse at center,#2563EB 0%,#8B5CF6 34%,transparent 72%)"></div></div>
+
+<nav class="sticky top-0 z-40 backdrop-blur-xl bg-white/80 border-b border-slate-200">
+  <div class="max-w-[1160px] mx-auto px-4 sm:px-6 lg:px-8 h-[56px] flex items-center justify-between gap-4">
+    <a href="./index.html" class="flex items-center gap-2.5">
+      <span class="w-8 h-8 rounded-xl bg-[#2563EB] text-white flex items-center justify-center text-[16px] shadow-sm">🦸</span>
+      <span class="font-display font-[900] tracking-tight text-[17px] leading-none">Help Heroes</span>
+      <span class="hidden sm:inline-flex text-[11px] font-bold tracking-widest uppercase bg-slate-900 text-white px-2 py-1 rounded-full ml-1">Week 3</span>
+    </a>
+    <div class="hidden md:flex items-center gap-1.5 text-[12px] font-semibold overflow-x-auto [&>a]:shrink-0">
+      <a href="./week1.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 1</a>
+      <a href="./week2.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 2</a>
+      <a href="./week3.html" class="px-3 py-1.5 rounded-full bg-[#EFF6FF] text-primary border border-blue-200">Week 3</a>
+      <a href="./week4.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 4</a>
+      <a href="./week5_project.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 5</a>
+      <a href="./week6.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 6</a>
+      <a href="./index_week7.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 7</a>
+      <a href="./week8.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 8</a>
+    </div>
+    <div class="flex items-center gap-1.5">
+      <a href="./index.html" class="hidden sm:inline-flex items-center gap-1.5 bg-white border border-slate-200 px-3 py-1.5 rounded-full text-[12px] font-semibold hover:bg-slate-50">Overview</a>
+      <a href="./s-01141_WEEK_3_Problem_Space.pdf" download class="inline-flex items-center gap-1.5 bg-[#2563EB] text-white px-3.5 py-1.5 rounded-full text-[12px] font-bold hover:bg-[#1D4ED8] shadow-sm"><i class="fa-solid fa-download text-[10px]"></i> PDF</a>
+    </div>
+  </div>
+</nav>
+
+<main class="max-w-[1160px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+
+<header class="reveal">
+  <div class="bg-white rounded-[24px] border border-slate-200 shadow-card overflow-hidden">
+    <div class="h-[5px] w-full bg-gradient-to-r from-blue-600 via-violet-500 to-amber-500"></div>
+    <div class="px-6 sm:px-8 lg:px-10 py-7 sm:py-8">
+      <div class="flex flex-wrap items-center gap-2 mb-3">
+        <span class="inline-flex items-center gap-2 bg-slate-900 text-white text-[11px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full">Assignment 3</span>
+        <span class="inline-flex items-center gap-1.5 bg-blue-50 border border-blue-200 text-primary text-[11px] font-bold px-2.5 py-1 rounded-full">Understand + Observe</span>
+        <span class="inline-flex items-center gap-1.5 text-[11px] font-medium text-slate-500">s-01141</span>
+      </div>
+      <h1 class="font-display text-[30px] sm:text-[42px] font-[900] leading-[0.95] tracking-[-0.03em]">Exploring the Problem Space</h1>
+      <div class="mt-3 bg-blue-50 border-2 border-primary/60 rounded-2xl px-5 py-4 text-center">
+        <p class="text-[13px] sm:text-[15px] font-bold leading-snug">Redesign the online learning experience for first-generation university students in a world in which access to high-speed internet is unreliable.</p>
+      </div>
+      <div class="mt-4 flex flex-wrap gap-2">
+        <a href="#mindmap" class="text-[12px] font-bold bg-slate-900 text-white px-4 py-2 rounded-full hover:bg-black">Mind map + chapters</a>
+        <a href="#interviews" class="text-[12px] font-bold bg-white border border-slate-200 px-4 py-2 rounded-full hover:bg-slate-50">Maria, James, Aisha</a>
+        <a href="./week4.html" class="text-[12px] font-bold bg-[#2563EB] text-white px-4 py-2 rounded-full hover:bg-[#1D4ED8]">Continue to Week 4 →</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- TASK 1A -->
+<section id="mindmap" class="mt-6 scroll-mt-[72px] reveal">
+  <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+    <div class="px-6 sm:px-8 pt-6">
+      <p class="text-[11px] font-bold tracking-[0.22em] uppercase text-primary">Task 1 • Understand</p>
+      <h2 class="text-[18px] sm:text-[20px] font-extrabold tracking-tight mt-1">Mind map: five things that come to mind</h2>
+    </div>
+    <div class="px-6 sm:px-8 pt-4">
+      <svg viewBox="0 0 600 360" class="w-full h-auto" role="img" aria-label="Mind map: problem space in the center, five branches around it">
+        <g stroke="#CBD5E1" stroke-width="2">
+          <line x1="300" y1="173" x2="300" y2="52"/><line x1="300" y1="173" x2="500" y2="138"/><line x1="300" y1="173" x2="423" y2="278"/><line x1="300" y1="173" x2="177" y2="278"/><line x1="300" y1="173" x2="100" y2="138"/>
+        </g>
+        <g font-family="Inter,system-ui,sans-serif" font-size="13" font-weight="700" text-anchor="middle">
+          <rect x="228" y="29" width="144" height="46" rx="12" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/><text x="300" y="57" fill="#0F172A">📱 Connectivity</text>
+          <rect x="428" y="115" width="144" height="46" rx="12" fill="#F5F3FF" stroke="#8B5CF6" stroke-width="2"/><text x="500" y="143" fill="#0F172A">🎓 First-gen</text>
+          <rect x="357" y="255" width="132" height="46" rx="12" fill="#FFFBEB" stroke="#F59E0B" stroke-width="2"/><text x="423" y="283" fill="#0F172A">💰 Money</text>
+          <rect x="111" y="255" width="132" height="46" rx="12" fill="#FFF7ED" stroke="#FB923C" stroke-width="2"/><text x="177" y="283" fill="#0F172A">🏠 Home</text>
+          <rect x="28" y="115" width="144" height="46" rx="12" fill="#FEF2F2" stroke="#F87171" stroke-width="2"/><text x="100" y="143" fill="#0F172A">😰 Isolation</text>
+        </g>
+        <rect x="222" y="143" width="156" height="60" rx="14" fill="#0F172A"/>
+        <text x="300" y="167" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="12" font-weight="800" fill="#FBBF24">PROBLEM SPACE</text>
+        <text x="300" y="186" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="10.5" fill="#CBD5E1">first-gen • low bandwidth</text>
+      </svg>
+    </div>
+    <div class="px-6 sm:px-8 pb-6 pt-4 grid sm:grid-cols-2 lg:grid-cols-5 gap-2.5">
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-4"><p class="text-[26px]">📱</p><p class="text-[13px] font-extrabold mt-1">Connectivity</p><p class="text-[12px] text-slate-600 mt-1">Unreliable internet blocks lectures, submissions, live sessions.</p></div>
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-4"><p class="text-[26px]">🎓</p><p class="text-[13px] font-extrabold mt-1">First-generation status</p><p class="text-[12px] text-slate-600 mt-1">No family guide to university systems and expectations.</p></div>
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-4"><p class="text-[26px]">💰</p><p class="text-[13px] font-extrabold mt-1">Financial constraints</p><p class="text-[12px] text-slate-600 mt-1">Little room for devices, data plans, backup options.</p></div>
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-4"><p class="text-[26px]">🏠</p><p class="text-[13px] font-extrabold mt-1">Home environment</p><p class="text-[12px] text-slate-600 mt-1">Shared devices, competing bandwidth, no quiet space.</p></div>
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-4"><p class="text-[26px]">😰</p><p class="text-[13px] font-extrabold mt-1">Isolation and anxiety</p><p class="text-[12px] text-slate-600 mt-1">Falling behind breeds stress and lost peer connection.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAPTERS -->
+<section class="mt-6 reveal">
+  <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+    <div class="px-6 sm:px-8 pt-6">
+      <p class="text-[11px] font-bold tracking-[0.22em] uppercase text-primary">Book about this challenge • 7 chapters</p>
+      <h2 class="text-[18px] sm:text-[20px] font-extrabold tracking-tight mt-1">Chapters, issues, opportunities</h2>
+    </div>
+    <div class="px-6 sm:px-8 pt-4">
+      <div class="flex items-end gap-1.5" aria-hidden="true">
+        <div class="flex-1 rounded-t-lg bg-slate-200 h-14 flex items-start justify-center pt-2 text-[13px] font-extrabold text-slate-500">1</div>
+        <div class="flex-1 rounded-t-lg bg-slate-200 h-14 flex items-start justify-center pt-2 text-[13px] font-extrabold text-slate-500">2</div>
+        <div class="flex-1 rounded-t-lg bg-amber-400 h-24 flex items-start justify-center pt-2 text-[15px] font-extrabold text-slate-900">3</div>
+        <div class="flex-1 rounded-t-lg bg-amber-400 h-24 flex items-start justify-center pt-2 text-[15px] font-extrabold text-slate-900">4</div>
+        <div class="flex-1 rounded-t-lg bg-slate-200 h-14 flex items-start justify-center pt-2 text-[13px] font-extrabold text-slate-500">5</div>
+        <div class="flex-1 rounded-t-lg bg-slate-100 h-10 flex items-start justify-center pt-1.5 text-[12px] font-extrabold text-slate-400">6</div>
+        <div class="flex-1 rounded-t-lg bg-slate-100 h-10 flex items-start justify-center pt-1.5 text-[12px] font-extrabold text-slate-400">7</div>
+      </div>
+      <p class="text-[11px] text-slate-400 font-medium pt-1">The book spine: chapters 3 and 4 stand tallest, so they got the deep dive.</p>
+    </div>
+    <div class="px-6 sm:px-8 pb-6 pt-4 space-y-2.5 text-[13px]">
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-4"><p class="font-extrabold">Ch 1: The Digital Divide in Higher Education</p><p class="text-slate-600 text-[12.5px] mt-0.5">How unreliable access skews learning outcomes.</p><p class="text-[12px] mt-1.5"><span class="font-bold text-rose-600">Issues:</span> unequal broadband, rural vs urban gaps, affordability. <span class="font-bold text-emerald-600">Opportunities:</span> low-bandwidth solutions, telecom partnerships, mobile-first.</p></div>
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-4"><p class="font-extrabold">Ch 2: Navigating the Unfamiliar</p><p class="text-slate-600 text-[12.5px] mt-0.5">What first-generation students face on arrival.</p><p class="text-[12px] mt-1.5"><span class="font-bold text-rose-600">Issues:</span> no institutional knowledge, no family guidance, imposter syndrome. <span class="font-bold text-emerald-600">Opportunities:</span> peer mentoring, plain communication, supportive onboarding.</p></div>
+      <div class="bg-amber-50 border-2 border-amber-300 rounded-xl p-4"><p class="font-extrabold">Ch 3: When Connectivity Fails ⭐ <a href="#deep-ch3" class="text-[11px] font-bold text-amber-700 underline">deep dive ↓</a></p><p class="text-slate-600 text-[12.5px] mt-0.5">Outages, lag, limited bandwidth as lived experience.</p><p class="text-[12px] mt-1.5"><span class="font-bold text-rose-600">Issues:</span> dropped exam connections, failed submissions, missed live classes. <span class="font-bold text-emerald-600">Opportunities:</span> offline-first design, flexible deadlines, async alternatives.</p></div>
+      <div class="bg-amber-50 border-2 border-amber-300 rounded-xl p-4"><p class="font-extrabold">Ch 4: Beyond the Screen ⭐ <a href="#deep-ch4" class="text-[11px] font-bold text-amber-700 underline">deep dive ↓</a></p><p class="text-slate-600 text-[12.5px] mt-0.5">Social, emotional, psychological costs of struggling to participate.</p><p class="text-[12px] mt-1.5"><span class="font-bold text-rose-600">Issues:</span> isolation, mental-health strain, lost campus community. <span class="font-bold text-emerald-600">Opportunities:</span> low-bandwidth social tools, hybrid community, text discussion.</p></div>
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-4"><p class="font-extrabold">Ch 5: Designing for Resilience</p><p class="text-slate-600 text-[12.5px] mt-0.5">Learning experiences that work with constraints, not against them.</p><p class="text-[12px] mt-1.5"><span class="font-bold text-rose-600">Issues:</span> one-size-fits-all, assumed connectivity. <span class="font-bold text-emerald-600">Opportunities:</span> user-centered design, modular content, progressive enhancement.</p></div>
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-4"><p class="font-extrabold">Ch 6: Voices from the Field</p><p class="text-slate-600 text-[12.5px] mt-0.5">Stories from students navigating these challenges.</p></div>
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-4"><p class="font-extrabold">Ch 7: A Path Forward</p><p class="text-slate-600 text-[12.5px] mt-0.5">Recommendations for universities, educators, policymakers.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- DEEP DIVES -->
+<section class="mt-6 reveal">
+  <div class="grid lg:grid-cols-2 gap-6">
+    <div id="deep-ch3" class="bg-white rounded-[22px] border border-slate-200 shadow-card p-6 scroll-mt-[72px]">
+      <p class="text-[11px] font-bold tracking-widest uppercase text-amber-700">Deep dive • Chapter 3</p>
+      <h3 class="text-[16px] font-extrabold mt-1">When Connectivity Fails</h3>
+      <p class="text-[12.5px] text-slate-600 mt-2">Online learning went from optional to central. Campus labs used to be the backup; after COVID, hybrid stuck and reliable connectivity became the assumption, so every failure hits harder.</p>
+      <p class="text-[12.5px] text-slate-600 mt-2"><span class="font-bold text-ink">Known fixes:</span> downloadable materials, recorded lectures, email submission. They help, yet downloads still cost data, recordings kill live questions, and email assumes she can get online at all. None touch the social cost of absence.</p>
+      <div class="mt-2 bg-slate-50 border border-slate-200 rounded-xl p-3 text-[12px]"><p class="font-bold">Open questions</p><ul class="mt-1 space-y-1 text-slate-600"><li>• How to keep learning social without real-time presence?</li><li>• Design that routes <em>around</em> outages instead of coping?</li><li>• Which low-bandwidth tools are we overlooking?</li></ul></div>
+      <p class="text-[12px] mt-2">😟 I worry about students going invisible • 🤔 I keep wondering what workarounds they invent next • 😤 It angers me that infrastructure rations education</p>
+    </div>
+    <div id="deep-ch4" class="bg-white rounded-[22px] border border-slate-200 shadow-card p-6 scroll-mt-[72px]">
+      <p class="text-[11px] font-bold tracking-widest uppercase text-amber-700">Deep dive • Chapter 4</p>
+      <h3 class="text-[16px] font-extrabold mt-1">Beyond the Screen</h3>
+      <p class="text-[12.5px] text-slate-600 mt-2">University was always relationships and belonging, not just content. First-generation students started out behind socially; online doubled the isolation: no family guidance <em>and</em> no peer ties.</p>
+      <p class="text-[12.5px] text-slate-600 mt-2"><span class="font-bold text-ink">Known fixes:</span> forums, virtual office hours, study groups. Forums feel performative, office hours need scheduling plus bandwidth, groups drop irregular attenders. None build belonging.</p>
+      <div class="mt-2 bg-slate-50 border border-slate-200 rounded-xl p-3 text-[12px]"><p class="font-bold">Open questions</p><ul class="mt-1 space-y-1 text-slate-600"><li>• Genuine community on unstable connections?</li><li>• Which low-bandwidth social tools sit unused?</li><li>• Networks first-gen students can draw on for years?</li></ul></div>
+      <p class="text-[12px] mt-2">😢 Losing the campus fabric hurts to watch • 💡 Low-bandwidth community still feels possible • 🤝 Above all, that loneliness is real</p>
+    </div>
+  </div>
+</section>
+
+<!-- STAKEHOLDERS -->
+<section class="mt-6 reveal">
+  <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+    <div class="px-6 sm:px-8 pt-6"><h2 class="text-[18px] sm:text-[20px] font-extrabold tracking-tight">Users and stakeholders</h2></div>
+    <div class="px-6 sm:px-8 pt-4">
+      <p class="text-[11px] font-bold tracking-widest uppercase text-slate-500">Stakeholder map • interest vs influence</p>
+      <div class="mt-2 grid grid-cols-2 gap-2 max-w-[680px] text-[12px]">
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-3.5"><p class="font-extrabold text-amber-800">Keep satisfied</p><p class="text-slate-500 text-[11px]">High influence, quieter stake</p><div class="mt-1.5 flex flex-wrap gap-1.5 font-bold"><span class="bg-white border border-slate-200 px-2.5 py-1 rounded-full">🖥️ University IT</span><span class="bg-white border border-slate-200 px-2.5 py-1 rounded-full">💼 Employers</span></div></div>
+        <div class="bg-blue-50 border-2 border-primary/50 rounded-xl p-3.5"><p class="font-extrabold text-primary">Manage closely</p><p class="text-slate-500 text-[11px]">High influence, high stake</p><div class="mt-1.5 flex flex-wrap gap-1.5 font-bold"><span class="bg-white border border-slate-200 px-2.5 py-1 rounded-full">🏛️ Administrators</span><span class="bg-white border border-slate-200 px-2.5 py-1 rounded-full">👩‍🏫 Faculty</span></div></div>
+        <div class="bg-slate-50 border border-dashed border-slate-300 rounded-xl p-3.5"><p class="font-extrabold text-slate-500">Monitor</p><p class="text-slate-400 text-[11px]">Nobody sits here. Every player cares.</p></div>
+        <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3.5"><p class="font-extrabold text-emerald-700">Design WITH them</p><p class="text-slate-500 text-[11px]">Highest stake, least power</p><div class="mt-1.5 flex flex-wrap gap-1.5 font-bold"><span class="bg-white border border-slate-200 px-2.5 py-1 rounded-full">🎓 First-gen students</span><span class="bg-white border border-slate-200 px-2.5 py-1 rounded-full">🏠 Families</span></div></div>
+      </div>
+    </div>
+    <div class="px-6 sm:px-8 pb-6 pt-4 overflow-x-auto">
+      <table class="w-full text-[12.5px] min-w-[640px]">
+        <thead><tr class="text-left text-[11px] tracking-widest uppercase text-slate-500 border-b border-slate-200"><th class="py-2 pr-4">Who</th><th class="py-2 pr-4">Interest</th><th class="py-2">Problems they face</th></tr></thead>
+        <tbody class="text-slate-700">
+          <tr class="border-b border-slate-100"><td class="py-2.5 pr-4 font-bold">First-gen students</td><td class="pr-4">Finish the degree</td><td>Unreliable internet, no guidance, money stress</td></tr>
+          <tr class="border-b border-slate-100"><td class="py-2.5 pr-4 font-bold">Faculty</td><td class="pr-4">Teach well, students succeed</td><td>Silent seminars, tech failures, extra workload</td></tr>
+          <tr class="border-b border-slate-100"><td class="py-2.5 pr-4 font-bold">University IT</td><td class="pr-4">Keep systems running</td><td>Swamped helpdesks, security, legacy systems</td></tr>
+          <tr class="border-b border-slate-100"><td class="py-2.5 pr-4 font-bold">Administrators</td><td class="pr-4">Retention, reputation</td><td>Equity metrics, tight resources, outcome pressure</td></tr>
+          <tr class="border-b border-slate-100"><td class="py-2.5 pr-4 font-bold">Families</td><td class="pr-4">Back their children</td><td>Unfamiliar systems, shared bandwidth, costs</td></tr>
+          <tr><td class="py-2.5 pr-4 font-bold">Employers</td><td class="pr-4">Hire strong graduates</td><td>Skills gaps, digital literacy, hiring equity</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- USER TYPES -->
+<section class="mt-6 reveal">
+  <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+    <div class="px-6 sm:px-8 pt-6"><h2 class="text-[18px] sm:text-[20px] font-extrabold tracking-tight">Five user types and their problems</h2></div>
+    <div class="px-6 sm:px-8 pb-6 pt-4 grid sm:grid-cols-2 lg:grid-cols-3 gap-2.5 text-[12.5px]">
+      <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-4"><p class="font-extrabold">🌾 The Rural Student</p><p class="text-slate-600 mt-1">No broadband, lives on mobile data. Locked out of video, late submissions, talked over in discussions.</p></div>
+      <div class="bg-blue-50 border-2 border-primary/50 rounded-xl p-4"><p class="font-extrabold">🦸 The Sharing Student</p><p class="text-slate-600 mt-1">One device and data plan for the whole family. Fights family for bandwidth, studies at midnight, no privacy.</p></div>
+      <div class="bg-violet-50 border border-violet-200 rounded-xl p-4"><p class="font-extrabold">💼 The Working Student</p><p class="text-slate-600 mt-1">Studies on work Wi-Fi in stolen moments. No desk, no routine, work and study colliding.</p></div>
+      <div class="bg-rose-50 border border-rose-200 rounded-xl p-4"><p class="font-extrabold">😟 The Anxious Student</p><p class="text-slate-600 mt-1">Falling behind, invisible to staff. Won't ask for help, imposter syndrome, quietly disengages.</p></div>
+      <div class="bg-amber-50 border border-amber-200 rounded-xl p-4"><p class="font-extrabold">🔧 The Resourceful Student</p><p class="text-slate-600 mt-1">Night downloads, library Wi-Fi, clever hacks. Still behind, burning out, solving it all alone.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- QUESTIONNAIRE -->
+<section class="mt-6 reveal">
+  <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+    <div class="px-6 sm:px-8 pt-6"><p class="text-[11px] font-bold tracking-[0.22em] uppercase text-primary">Task 2 • Observe + Engage</p><h2 class="text-[18px] sm:text-[20px] font-extrabold tracking-tight mt-1">Interview guide: 5 open questions</h2></div>
+    <div class="px-6 sm:px-8 pb-6 pt-4 space-y-2.5 text-[13px]">
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-4"><p class="font-bold">1. "Tell me about the last time internet problems blocked your classes or assignments."</p><p class="text-[12px] text-slate-500 mt-1">Catches a concrete failure and the raw feeling behind it. Probes: what happened next, how did it feel.</p></div>
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-4"><p class="font-bold">2. "What are your biggest challenges as a first-gen student learning online?"</p><p class="text-[12px] text-slate-500 mt-1">Surfaces life beyond bandwidth. Probes: what makes that hard, and can you give an example.</p></div>
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-4"><p class="font-bold">3. "Walk me through a typical day of coursework online."</p><p class="text-[12px] text-slate-500 mt-1">Maps a full day to find the pain points. I ask where they study, which device, who shares the line.</p></div>
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-4"><p class="font-bold">4. "What would make online learning feel easier for you?"</p><p class="text-[12px] text-slate-500 mt-1">Invites their fixes and exposes unmet needs. Probes: what would that look like, seen it anywhere.</p></div>
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-4"><p class="font-bold">5. "How do you stay connected to professors and peers despite all this?"</p><p class="text-[12px] text-slate-500 mt-1">Charts the social layer and the workarounds already in use. I ask what works and what fails.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- INTERVIEWS -->
+<section id="interviews" class="mt-6 scroll-mt-[72px] reveal">
+  <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+    <div class="px-6 sm:px-8 pt-6"><h2 class="text-[18px] sm:text-[20px] font-extrabold tracking-tight">Three semi-structured interviews</h2></div>
+    <div class="px-6 sm:px-8 pb-6 pt-4 grid lg:grid-cols-3 gap-4">
+      <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5">
+        <div class="flex items-center gap-2.5"><span class="w-10 h-10 rounded-full bg-emerald-100 border border-emerald-200 flex items-center justify-center text-[18px]">🌾</span><div><p class="text-[14px] font-extrabold">Maria, 19</p><p class="text-[11px] text-slate-500">First year • rural, patchy broadband</p></div></div>
+        <div class="mt-2.5 flex items-center gap-1.5" title="Connectivity: 1 of 4 bars"><span class="flex items-end gap-[2.5px]"><i class="w-[5px] rounded-sm bg-emerald-500 block" style="height:5px"></i><i class="w-[5px] rounded-sm bg-slate-200 block" style="height:8px"></i><i class="w-[5px] rounded-sm bg-slate-200 block" style="height:11px"></i><i class="w-[5px] rounded-sm bg-slate-200 block" style="height:14px"></i></span><span class="text-[10.5px] font-bold text-slate-400">signal 1/4</span></div>
+        <div class="mt-3 space-y-2.5 text-[12.5px] text-slate-700">
+          <p class="quote pl-3 italic">"I drive 20 minutes to the library for lecture videos. Last week it closed early mid-lecture. I nearly cried."</p>
+          <p class="quote pl-3 italic">"Professors say watch the recording later. A 45-minute video eats half my monthly data."</p>
+          <p class="quote pl-3 italic">"I screenshot slides and read them like a textbook. Not the same, but it's how I keep up."</p>
+          <p class="quote pl-3 italic">"Will my degree mean the same thing when I graduate?"</p>
+          <p class="quote pl-3 italic">"On Zoom without video, the group forgot I was there."</p>
+        </div>
+        <p class="text-[11.5px] text-slate-500 mt-3">😤 Frustrated at the effort just to show up • 😢 Sad about slipping behind • 🤨 Anxious her degree counts less</p>
+      </div>
+      <div class="bg-blue-50/60 border-2 border-primary/40 rounded-2xl p-5">
+        <div class="flex items-center gap-2.5"><span class="w-10 h-10 rounded-full bg-blue-100 border border-blue-200 flex items-center justify-center text-[18px]">🦸</span><div><p class="text-[14px] font-extrabold">James, 20</p><p class="text-[11px] text-slate-500">Second year • shares device + data with family</p></div></div>
+        <div class="mt-2.5 flex items-center gap-1.5" title="Connectivity: 2 of 4 bars"><span class="flex items-end gap-[2.5px]"><i class="w-[5px] rounded-sm bg-blue-500 block" style="height:5px"></i><i class="w-[5px] rounded-sm bg-blue-500 block" style="height:8px"></i><i class="w-[5px] rounded-sm bg-slate-200 block" style="height:11px"></i><i class="w-[5px] rounded-sm bg-slate-200 block" style="height:14px"></i></span><span class="text-[10.5px] font-bold text-slate-400">signal 2/4</span></div>
+        <div class="mt-3 space-y-2.5 text-[12.5px] text-slate-700">
+          <p class="quote pl-3 italic">"Five of us share one connection. I study after 11 pm when everyone's asleep, then I'm wrecked next day."</p>
+          <p class="quote pl-3 italic">"I missed deadlines to timeouts. I keep screenshots of the errors to prove it wasn't me."</p>
+          <p class="quote pl-3 italic">"Three platforms, each breaking differently on slow internet. A guessing game, daily."</p>
+          <p class="quote pl-3 italic">"I'm always apologizing. To professors, to group members, to family for the data."</p>
+          <p class="quote pl-3 italic">"I want to ask for help, but I don't even know what to ask. I don't know what I don't know."</p>
+        </div>
+        <p class="text-[11.5px] text-slate-500 mt-3">😰 Exhausted from negotiating • 😞 Embarrassed, always sorry • 🤯 Overwhelmed by platforms • 😟 Isolated, unsure how to ask</p>
+      </div>
+      <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5">
+        <div class="flex items-center gap-2.5"><span class="w-10 h-10 rounded-full bg-violet-100 border border-violet-200 flex items-center justify-center text-[18px]">💼</span><div><p class="text-[14px] font-extrabold">Aisha, 22</p><p class="text-[11px] text-slate-500">Third year • part-time job, studies on work Wi-Fi</p></div></div>
+        <div class="mt-2.5 flex items-center gap-1.5" title="Connectivity: 3 of 4 bars, no time to use it"><span class="flex items-end gap-[2.5px]"><i class="w-[5px] rounded-sm bg-violet-500 block" style="height:5px"></i><i class="w-[5px] rounded-sm bg-violet-500 block" style="height:8px"></i><i class="w-[5px] rounded-sm bg-violet-500 block" style="height:11px"></i><i class="w-[5px] rounded-sm bg-slate-200 block" style="height:14px"></i></span><span class="text-[10.5px] font-bold text-slate-400">signal 3/4, no time</span></div>
+        <div class="mt-3 space-y-2.5 text-[12.5px] text-slate-700">
+          <p class="quote pl-3 italic">"I download what I can at lunch and catch up after work. By then I'm exhausted."</p>
+          <p class="quote pl-3 italic">"I join lectures on my phone on break. Can't participate, scared the manager walks in."</p>
+          <p class="quote pl-3 italic">"Office hours are while I'm working. One email took three days. Assignment already due."</p>
+          <p class="quote pl-3 italic">"The class WhatsApp is my lifeline, but by night everything's decided."</p>
+          <p class="quote pl-3 italic">"Professors think we're just students with nothing else to do."</p>
+        </div>
+        <p class="text-[11.5px] text-slate-500 mt-3">😩 Burned out juggling both • 😤 Resentful at being unseen • 💪 Determined anyway</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSIGHTS -->
+<section class="mt-6 reveal">
+  <div class="bg-[#0F172A] text-white rounded-[22px] shadow-card overflow-hidden relative">
+    <div class="absolute inset-0 opacity-[0.10] grid-pattern"></div>
+    <div class="relative px-6 sm:px-8 py-6 grid lg:grid-cols-3 gap-5">
+      <div><p class="text-[11px] font-bold tracking-widest uppercase text-amber-300">Patterns</p><ul class="mt-2 space-y-1.5 text-[12.5px] text-white/85"><li>• Connectivity is one layer; social and logistical weight piles on</li><li>• Workarounds are clever, draining, and expire fast</li><li>• Official fixes misread the constraints</li><li>• Students feel unseen by staff</li><li>• Peer ties fray first</li></ul></div>
+      <div><p class="text-[11px] font-bold tracking-widest uppercase text-amber-300">Surprises</p><ul class="mt-2 space-y-1.5 text-[12.5px] text-white/85"><li>• Screenshots as a lecture substitute</li><li>• Group projects hit hardest</li><li>• Students don't know what support exists, or how to ask</li></ul></div>
+      <div><p class="text-[11px] font-bold tracking-widest uppercase text-amber-300">Open questions</p><ul class="mt-2 space-y-1.5 text-[12.5px] text-white/85"><li>• Learning that bends to constraints, not constant hacks?</li><li>• Feeling seen without more screen time?</li><li>• Video-free formats that teach just as well?</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<div class="mt-6 bg-white border border-slate-200 rounded-2xl p-5 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+  <div>
+    <p class="text-[12px] font-bold tracking-widest uppercase text-slate-500">Next</p>
+    <p class="text-[13px] text-slate-700 mt-1">Synthesis: from quotes to insight to one direction.</p>
+  </div>
+  <div class="flex gap-2 shrink-0">
+    <a href="./index.html" class="text-[12px] font-bold bg-white border border-slate-200 px-4 py-2 rounded-full hover:bg-slate-50">Overview</a>
+    <a href="./week4.html" class="text-[12px] font-bold bg-[#2563EB] text-white px-4 py-2 rounded-full hover:bg-[#1D4ED8]">Week 4 →</a>
+  </div>
+</div>
+
+</main>
+<footer class="max-w-[1160px] mx-auto px-6 lg:px-8 pb-10 pt-6 text-[11px] text-slate-500 flex flex-wrap gap-2 justify-between">
+  <span>Help Heroes • Design Thinking Project • German University of Digital Science • s-01141</span>
+  <span class="flex gap-2"><a href="./index.html" class="underline hover:text-ink">Overview</a> • <a href="./week4.html" class="underline hover:text-ink">Week 4</a> • <a href="./week8.html" class="underline hover:text-ink">Finale</a></span>
+</footer>
+</body>
+</html>

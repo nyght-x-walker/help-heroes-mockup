@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<!--
+  Help Heroes | Week 1 - Accepting the Challenge (Wicked Problem)
+  Student ID: s-01141 | Design Thinking Project
+  File: week1.html - single-file content page (no build step)
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Help Heroes | Week 1 Wicked Problem</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#2563EB',ink:'#0F172A',muted:'#64748B'},fontFamily:{sans:['Inter','system-ui','sans-serif'],display:['Fraunces','serif']},boxShadow:{card:'0 1px 3px rgba(15,23,42,0.06),0 12px 32px rgba(15,23,42,0.08)'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,800;9..144,900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*{font-family:Inter,system-ui,sans-serif}
+.font-display{font-family:Fraunces,serif}
+.grid-pattern{background-image:linear-gradient(to right,rgba(15,23,42,0.035) 1px,transparent 1px),linear-gradient(to bottom,rgba(15,23,42,0.035) 1px,transparent 1px);background-size:32px 32px}
+.reveal{opacity:0;transform:translateY(10px);animation:reveal 700ms ease forwards}
+@keyframes reveal{to{opacity:1;transform:none}}
+</style>
+</head>
+<body class="bg-[#F8FAFC] text-ink antialiased selection:bg-primary selection:text-white">
+<div class="fixed inset-0 -z-10 pointer-events-none"><div class="absolute inset-0 bg-[#F8FAFC]"></div><div class="absolute inset-0 grid-pattern opacity-[0.5]"></div><div class="absolute -top-[360px] left-1/2 -translate-x-1/2 w-[1400px] h-[760px] rounded-full blur-[100px] opacity-[0.14]" style="background:radial-gradient(ellipse at center,#2563EB 0%,#8B5CF6 34%,transparent 72%)"></div></div>
+
+<nav class="sticky top-0 z-40 backdrop-blur-xl bg-white/80 border-b border-slate-200">
+  <div class="max-w-[1160px] mx-auto px-4 sm:px-6 lg:px-8 h-[56px] flex items-center justify-between gap-4">
+    <a href="./index.html" class="flex items-center gap-2.5">
+      <span class="w-8 h-8 rounded-xl bg-[#2563EB] text-white flex items-center justify-center text-[16px] shadow-sm">🦸</span>
+      <span class="font-display font-[900] tracking-tight text-[17px] leading-none">Help Heroes</span>
+      <span class="hidden sm:inline-flex text-[11px] font-bold tracking-widest uppercase bg-slate-900 text-white px-2 py-1 rounded-full ml-1">Week 1</span>
+    </a>
+    <div class="hidden md:flex items-center gap-1.5 text-[12px] font-semibold overflow-x-auto [&>a]:shrink-0">
+      <a href="./week1.html" class="px-3 py-1.5 rounded-full bg-[#EFF6FF] text-primary border border-blue-200">Week 1</a>
+      <a href="./week2.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 2</a>
+      <a href="./week3.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 3</a>
+      <a href="./week4.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 4</a>
+      <a href="./week5_project.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 5</a>
+      <a href="./week6.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 6</a>
+      <a href="./index_week7.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 7</a>
+      <a href="./week8.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 8</a>
+    </div>
+    <div class="flex items-center gap-1.5">
+      <a href="./index.html" class="hidden sm:inline-flex items-center gap-1.5 bg-white border border-slate-200 px-3 py-1.5 rounded-full text-[12px] font-semibold hover:bg-slate-50">Overview</a>
+      <a href="./week2.html" class="inline-flex items-center gap-1.5 bg-[#2563EB] text-white px-3.5 py-1.5 rounded-full text-[12px] font-bold hover:bg-[#1D4ED8] shadow-sm">Team →</a>
+    </div>
+  </div>
+</nav>
+
+<main class="max-w-[1160px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+
+<header class="reveal">
+  <div class="bg-white rounded-[24px] border border-slate-200 shadow-card overflow-hidden">
+    <div class="h-[5px] w-full bg-gradient-to-r from-blue-600 via-violet-500 to-amber-500"></div>
+    <div class="px-6 sm:px-8 lg:px-10 py-7 sm:py-8">
+      <div class="flex flex-wrap items-center gap-2 mb-3">
+        <span class="inline-flex items-center gap-2 bg-slate-900 text-white text-[11px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full">Assignment 1</span>
+        <span class="inline-flex items-center gap-1.5 bg-rose-50 border border-rose-200 text-rose-700 text-[11px] font-bold px-2.5 py-1 rounded-full">Wicked problem</span>
+        <span class="inline-flex items-center gap-1.5 text-[11px] font-medium text-slate-500">s-01141</span>
+      </div>
+      <h1 class="font-display text-[30px] sm:text-[42px] font-[900] leading-[0.95] tracking-[-0.03em]">Accepting the Challenge</h1>
+      <p class="mt-3 text-[13.5px] leading-relaxed text-slate-600 max-w-[760px]">Why this brief refuses to behave: everything connects, nobody agrees on the problem, and there is no finish line. Rittel and Webber territory.</p>
+      <div class="mt-3 bg-blue-50 border-2 border-primary/60 rounded-2xl px-5 py-4 text-center">
+        <p class="text-[13px] sm:text-[15px] font-bold leading-snug">Redesign the online learning experience for first-generation university students in a world in which access to high-speed internet is unreliable.</p>
+      </div>
+      <div class="mt-4 flex flex-wrap gap-2">
+        <a href="#knot" class="text-[12px] font-bold bg-slate-900 text-white px-4 py-2 rounded-full hover:bg-black">Complexity + uncertainty</a>
+        <a href="#iceberg" class="text-[12px] font-bold bg-white border border-slate-200 px-4 py-2 rounded-full hover:bg-slate-50">The iceberg</a>
+        <a href="#risks" class="text-[12px] font-bold bg-white border border-slate-200 px-4 py-2 rounded-full hover:bg-slate-50">Risks + moves</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- KNOT + PRISM -->
+<section id="knot" class="mt-6 scroll-mt-[72px] reveal">
+  <div class="grid lg:grid-cols-2 gap-6">
+    <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+      <div class="px-6 pt-6"><p class="text-[11px] font-bold tracking-[0.22em] uppercase text-rose-600">Complex</p><h2 class="text-[18px] font-extrabold tracking-tight mt-1">One tug moves everything</h2></div>
+      <div class="px-6 pt-2">
+        <svg viewBox="0 0 300 205" class="w-full h-auto max-w-[340px] mx-auto" role="img" aria-label="Five connected factors: technology, course design, family, work, money">
+          <g stroke="#CBD5E1" stroke-width="1.5">
+            <line x1="150" y1="30" x2="221" y2="82"/><line x1="150" y1="30" x2="194" y2="166"/><line x1="150" y1="30" x2="106" y2="166"/><line x1="150" y1="30" x2="79" y2="82"/>
+            <line x1="221" y1="82" x2="194" y2="166"/><line x1="221" y1="82" x2="106" y2="166"/><line x1="221" y1="82" x2="79" y2="82"/>
+            <line x1="194" y1="166" x2="106" y2="166"/><line x1="194" y1="166" x2="79" y2="82"/><line x1="106" y1="166" x2="79" y2="82"/>
+          </g>
+          <g font-family="Inter,system-ui,sans-serif" font-size="10" font-weight="700" text-anchor="middle">
+            <circle cx="150" cy="30" r="15" fill="#2563EB"/><text x="150" y="34" fill="#fff">tx</text><text x="150" y="60" fill="#64748B">tech</text>
+            <circle cx="221" cy="82" r="15" fill="#8B5CF6"/><text x="221" y="86" fill="#fff">cd</text><text x="235" y="106" fill="#64748B">course</text>
+            <circle cx="194" cy="166" r="15" fill="#F59E0B"/><text x="194" y="170" fill="#fff">fa</text><text x="194" y="192" fill="#64748B">family</text>
+            <circle cx="106" cy="166" r="15" fill="#10B981"/><text x="106" y="170" fill="#fff">wo</text><text x="106" y="192" fill="#64748B">work</text>
+            <circle cx="79" cy="82" r="15" fill="#F87171"/><text x="79" y="86" fill="#fff">$</text><text x="63" y="106" fill="#64748B">money</text>
+          </g>
+        </svg>
+      </div>
+      <p class="px-6 pb-6 pt-2 text-[12.5px] text-slate-600">Tech, course design, family, work, money, support: pull one thread and the rest shift. Make recordings downloadable and you can fill a cheap phone or strand the student who needed the live room.</p>
+    </div>
+    <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+      <div class="px-6 pt-6"><p class="text-[11px] font-bold tracking-[0.22em] uppercase text-violet-600">Uncertain</p><h2 class="text-[18px] font-extrabold tracking-tight mt-1">One brief, three problems</h2></div>
+      <div class="px-6 pt-2">
+        <svg viewBox="0 0 300 180" class="w-full h-auto max-w-[340px] mx-auto" role="img" aria-label="One problem statement splits into three possible formulations">
+          <line x1="20" y1="90" x2="118" y2="90" stroke="#2563EB" stroke-width="3"/><polygon points="118,82 132,90 118,98" fill="#2563EB"/>
+          <polygon points="132,58 132,122 172,90" fill="#DDD6FE" stroke="#8B5CF6" stroke-width="2"/>
+          <g stroke="#8B5CF6" stroke-width="2.5">
+            <line x1="172" y1="90" x2="238" y2="42"/><line x1="172" y1="90" x2="238" y2="90"/><line x1="172" y1="90" x2="238" y2="138"/>
+          </g>
+          <g font-family="Inter,system-ui,sans-serif" font-size="11.5" font-weight="700" fill="#0F172A">
+            <text x="244" y="46">access?</text><text x="244" y="94">design?</text><text x="244" y="142">knowledge?</text>
+          </g>
+        </svg>
+      </div>
+      <p class="px-6 pb-6 pt-2 text-[12.5px] text-slate-600">Is it the connection, the course design, or the missing institutional knowledge? Each answer builds a different solution. Formulating the problem <em>is</em> the problem, and unknown unknowns ship with it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RITTEL BAND -->
+<section class="mt-6 reveal">
+  <div class="bg-[#0F172A] text-white rounded-[22px] shadow-card px-6 sm:px-8 py-6 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-[0.10] grid-pattern"></div>
+    <div class="relative grid md:grid-cols-2 gap-5">
+      <div><p class="font-display text-[17px] sm:text-[19px] font-bold leading-snug">"The formulation of a wicked problem is the problem."</p><p class="text-[11.5px] text-white/60 mt-1.5">Rittel and Webber. I can't fully grasp the brief until I've sketched a solution.</p></div>
+      <div><p class="font-display text-[17px] sm:text-[19px] font-bold leading-snug">"What satisfies one group may be abhorrent to another."</p><p class="text-[11.5px] text-white/60 mt-1.5">Students, staff, admins, IT, families: five definitions of the same mess. Below.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ICEBERG + DEFINITIONS -->
+<section id="iceberg" class="mt-6 scroll-mt-[72px] reveal">
+  <div class="grid lg:grid-cols-2 gap-6">
+    <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+      <div class="px-6 pt-6"><h2 class="text-[18px] font-extrabold tracking-tight">The iceberg</h2><p class="text-[12.5px] text-slate-500 mt-1">The visible struggle sits on deep water.</p></div>
+      <div class="px-6 pb-6 pt-2">
+        <svg viewBox="0 0 400 270" class="w-full h-auto" role="img" aria-label="Iceberg: visible learning struggles above water, inequality and underinvestment below">
+          <rect x="0" y="118" width="400" height="152" fill="#EFF6FF"/>
+          <polygon points="168,38 232,38 200,118" fill="#FFFFFF" stroke="#94A3B8" stroke-width="2"/>
+          <polygon points="200,118 118,244 282,244" fill="#BFDBFE" stroke="#60A5FA" stroke-width="2"/>
+          <line x1="0" y1="118" x2="400" y2="118" stroke="#38BDF8" stroke-width="2" stroke-dasharray="7 5"/>
+          <g font-family="Inter,system-ui,sans-serif" font-size="11" font-weight="700">
+            <text x="200" y="24" text-anchor="middle" fill="#0F172A">missed classes, late work</text>
+            <text x="200" y="160" text-anchor="middle" fill="#1D4ED8">economic inequality</text>
+            <text x="200" y="190" text-anchor="middle" fill="#1D4ED8">rural underinvestment</text>
+            <text x="200" y="220" text-anchor="middle" fill="#1D4ED8">systemic barriers</text>
+            <text x="352" y="134" text-anchor="middle" fill="#0284C7" font-size="10">waterline</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+      <div class="px-6 pt-6"><h2 class="text-[18px] font-extrabold tracking-tight">Same mess, five definitions</h2><p class="text-[12.5px] text-slate-500 mt-1">Frame it as infrastructure, design, or equity, and the solution changes completely.</p></div>
+      <div class="px-6 pb-6 pt-4 space-y-2 text-[12.5px]">
+        <div class="bg-blue-50 border border-blue-200 rounded-xl px-4 py-2.5"><span class="font-extrabold">Students:</span> the problem is flexibility. Learning should bend.</div>
+        <div class="bg-violet-50 border border-violet-200 rounded-xl px-4 py-2.5"><span class="font-extrabold">Professors:</span> the problem is engagement. The room should answer back.</div>
+        <div class="bg-amber-50 border border-amber-200 rounded-xl px-4 py-2.5"><span class="font-extrabold">Admins:</span> the problem is outcomes. The numbers should move.</div>
+        <div class="bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5"><span class="font-extrabold">IT:</span> the problem is security. The systems should hold.</div>
+        <div class="bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-2.5"><span class="font-extrabold">Families:</span> the problem is clarity. It should be usable by all of us.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RISKS -->
+<section id="risks" class="mt-6 scroll-mt-[72px] reveal">
+  <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+    <div class="px-6 sm:px-8 pt-6"><h2 class="text-[18px] sm:text-[20px] font-extrabold tracking-tight">Expected trouble, planned moves</h2></div>
+    <div class="px-6 sm:px-8 pb-6 pt-4 space-y-2.5 text-[13px]">
+      <div class="flex gap-3 bg-slate-50 border border-slate-200 rounded-xl p-4"><span class="text-[18px]">🎯</span><p><span class="font-extrabold">Who exactly am I designing for?</span> <span class="text-slate-600">First-generation students aren't one group.</span> <span class="text-emerald-700 font-semibold">→ Interviews and observation before assumptions.</span></p></div>
+      <div class="flex gap-3 bg-slate-50 border border-slate-200 rounded-xl p-4"><span class="text-[18px]">⚔️</span><p><span class="font-extrabold">Stakeholder fights.</span> <span class="text-slate-600">Staff resist, admins count costs.</span> <span class="text-emerald-700 font-semibold">→ Involve early, prototype something touchable.</span></p></div>
+      <div class="flex gap-3 bg-slate-50 border border-slate-200 rounded-xl p-4"><span class="text-[18px]">🧪</span><p><span class="font-extrabold">Side effects, guaranteed.</span> <span class="text-emerald-700 font-semibold">→ Build small, test fast, treat failures as tuition.</span></p></div>
+      <div class="flex gap-3 bg-slate-50 border border-slate-200 rounded-xl p-4"><span class="text-[18px]">⚖️</span><p><span class="font-extrabold">No right to be wrong.</span> <span class="text-slate-600">Consequences land on real students.</span> <span class="text-emerald-700 font-semibold">→ Stay humble, state limits, keep the design adaptable.</span></p></div>
+      <div class="flex gap-3 bg-slate-50 border border-slate-200 rounded-xl p-4"><span class="text-[18px]">🏁</span><p><span class="font-extrabold">No finish line.</span> <span class="text-emerald-700 font-semibold">→ Milestones now; better responses over final solutions.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSE -->
+<section class="mt-6 reveal">
+  <div class="bg-gradient-to-br from-blue-600 to-violet-600 rounded-[22px] shadow-card p-6 sm:p-8 text-white relative overflow-hidden">
+    <div class="absolute inset-0 opacity-20 grid-pattern"></div>
+    <div class="relative max-w-[780px]">
+      <p class="text-[11px] font-bold tracking-widest uppercase text-white/70">Bottom line</p>
+      <p class="text-[15px] sm:text-[17px] font-bold leading-relaxed mt-2">Nobody solves this in any final sense. That is what makes it wicked. Empathy, collaboration, iteration, and experiment can still move it. The goal isn't perfection. It's something that genuinely helps first-generation students learn online, plus an honest record of what worked and what didn't.</p>
+      <div class="mt-4 flex flex-wrap gap-1.5 text-[11px] font-bold">
+        <span class="bg-white/15 border border-white/25 px-3 py-1.5 rounded-full">empathy</span>
+        <span class="bg-white/15 border border-white/25 px-3 py-1.5 rounded-full">collaboration</span>
+        <span class="bg-white/15 border border-white/25 px-3 py-1.5 rounded-full">iteration</span>
+        <span class="bg-white/15 border border-white/25 px-3 py-1.5 rounded-full">experiment</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="mt-6 bg-white border border-slate-200 rounded-2xl p-5 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+  <div>
+    <p class="text-[12px] font-bold tracking-widest uppercase text-slate-500">Next</p>
+    <p class="text-[13px] text-slate-700 mt-1">A wicked problem needs a mixed crew. Meet the five.</p>
+  </div>
+  <div class="flex gap-2 shrink-0">
+    <a href="./index.html" class="text-[12px] font-bold bg-white border border-slate-200 px-4 py-2 rounded-full hover:bg-slate-50">Overview</a>
+    <a href="./week2.html" class="text-[12px] font-bold bg-[#2563EB] text-white px-4 py-2 rounded-full hover:bg-[#1D4ED8]">Week 2 →</a>
+  </div>
+</div>
+
+</main>
+<footer class="max-w-[1160px] mx-auto px-6 lg:px-8 pb-10 pt-6 text-[11px] text-slate-500 flex flex-wrap gap-2 justify-between">
+  <span>Help Heroes • Design Thinking Project • German University of Digital Science • s-01141</span>
+  <span class="flex gap-2"><a href="./index.html" class="underline hover:text-ink">Overview</a> • <a href="./week2.html" class="underline hover:text-ink">Week 2</a> • <a href="./week8.html" class="underline hover:text-ink">Finale</a></span>
+</footer>
+</body>
+</html>

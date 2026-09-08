@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<!--
+  Help Heroes | Week 8 Final Presentation Prototype
+  Student ID: s-01141 | September 2026
+  German University of Digital Science | Design Thinking Project
+  Assignment: Project Assignment 8 - Prototype Your Final Presentation (10 slides, ~5 min)
+  File: week8.html - single-file interactive slide deck (no build step)
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Help Heroes | Week 8 Final Presentation</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#2563EB',ink:'#0F172A',muted:'#64748B'},fontFamily:{sans:['Inter','system-ui','sans-serif'],display:['Fraunces','serif']},boxShadow:{card:'0 1px 3px rgba(15,23,42,0.06),0 12px 32px rgba(15,23,42,0.08)'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,800;9..144,900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*{font-family:Inter,system-ui,sans-serif}
+.font-display{font-family:Fraunces,serif}
+.grid-pattern{background-image:linear-gradient(to right,rgba(15,23,42,0.035) 1px,transparent 1px),linear-gradient(to bottom,rgba(15,23,42,0.035) 1px,transparent 1px);background-size:32px 32px}
+.reveal{opacity:0;transform:translateY(10px);animation:reveal 700ms ease forwards}
+@keyframes reveal{to{opacity:1;transform:none}}
+.deck-slide{display:none}
+.deck-slide.active{display:block;animation:slideIn 380ms cubic-bezier(0.32,0.72,0,1)}
+@keyframes slideIn{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
+.thumb{transition:all 150ms ease}
+.thumb.active{border-color:#2563EB!important;background:#EFF6FF!important;box-shadow:0 0 0 2px rgba(37,99,235,0.25)}
+.thumb:hover{transform:translateY(-1px)}
+#stage:fullscreen{background:#0F172A;padding:24px}
+#stage:fullscreen .slide-frame{max-height:calc(100vh - 160px)}
+.notes-box a{color:#2563EB;text-decoration:underline}
+/* Living-document link cards: one per slide, opens the real work */
+.work-link{display:inline-flex;align-items:center;gap:.6rem;background:#fff;border:1.5px solid #E2E8F0;border-radius:999px;padding:.4rem .9rem .4rem .5rem;box-shadow:0 2px 10px rgba(15,23,42,.08);transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease,background-color .16s ease;text-align:left}
+.work-link:hover{transform:translateY(-2px);border-color:#2563EB;box-shadow:0 8px 22px rgba(37,99,235,.22)}
+.work-link:hover .wl-go{transform:translateX(3px);color:#2563EB}
+.wl-ico{width:28px;height:28px;border-radius:999px;background:#EFF6FF;color:#2563EB;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.wl-go{transition:transform .16s ease,color .16s ease;color:#94A3B8;font-size:10px}
+.work-link b{display:block;color:#0F172A;font-size:12px;line-height:1.2}
+.work-link small{display:block;color:#64748B;font-weight:500;font-size:10.5px;line-height:1.3}
+.work-link-dark{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.28)}
+.work-link-dark b{color:#fff}
+.work-link-dark small{color:rgba(255,255,255,.72)}
+.work-link-dark .wl-ico{background:rgba(251,191,36,.2);color:#FBBF24}
+.work-link-dark:hover{border-color:#FBBF24;background:rgba(255,255,255,.16);box-shadow:0 8px 22px rgba(0,0,0,.35)}
+.work-link-dark:hover .wl-go{color:#FBBF24}
+/* Dark mode: page chrome goes dark, slide canvas stays white */
+html.dark body{background:#020617!important;color:#E2E8F0}
+html.dark .bg-white:not(.slide-frame):not(.slide-frame *){background-color:#0F172A!important}
+html.dark .bg-slate-50:not(.slide-frame):not(.slide-frame *){background-color:#141f38!important}
+html.dark .border-slate-200:not(.slide-frame):not(.slide-frame *){border-color:#1E293B!important}
+html.dark .text-ink:not(.slide-frame *){color:#F1F5F9!important}
+html.dark .text-slate-700:not(.slide-frame *),html.dark .text-slate-600:not(.slide-frame *){color:#CBD5E1!important}
+html.dark .text-slate-500:not(.slide-frame *),html.dark .text-slate-400:not(.slide-frame *){color:#94A3B8!important}
+html.dark nav.sticky{background:rgba(2,6,23,.9)!important}
+html.dark select,html.dark kbd{background:#0F172A!important;border-color:#334155!important;color:#E2E8F0!important}
+html.dark .thumb{background:#0F172A!important;border-color:#1E293B!important}
+html.dark .thumb.active{background:#1E3A8A!important;border-color:#2563EB!important}
+html.dark #notesPanel{background:#0B1226!important}
+html.dark .work-link:not(.slide-frame *){background:#0F172A;border-color:#1E293B}
+html.dark .work-link:not(.slide-frame *) b{color:#F1F5F9}
+html.dark .cov-btn{background:#0F172A!important;border-color:#1E293B!important;color:#E2E8F0!important}
+@media print{.no-print{display:none!important}.deck-slide{display:block!important;page-break-inside:avoid;margin-bottom:16px}}
+</style>
+</head>
+<body class="bg-[#F8FAFC] text-ink antialiased selection:bg-primary selection:text-white">
+<div class="fixed inset-0 -z-10 pointer-events-none"><div class="absolute inset-0 bg-[#F8FAFC]"></div><div class="absolute inset-0 grid-pattern opacity-[0.5]"></div><div class="absolute -top-[360px] left-1/2 -translate-x-1/2 w-[1400px] h-[760px] rounded-full blur-[100px] opacity-[0.14]" style="background:radial-gradient(ellipse at center,#2563EB 0%,#8B5CF6 34%,transparent 72%)"></div><div class="absolute top-[680px] -right-[200px] w-[600px] h-[600px] rounded-full blur-[90px] opacity-[0.09]" style="background:radial-gradient(circle at center,#F59E0B 0%,transparent 68%)"></div></div>
+
+<!-- Sticky Nav -->
+<nav class="sticky top-0 z-40 backdrop-blur-xl bg-white/80 border-b border-slate-200 no-print">
+  <div class="max-w-[1160px] mx-auto px-4 sm:px-6 lg:px-8 h-[56px] flex items-center justify-between gap-4">
+    <a href="./index.html" class="flex items-center gap-2.5">
+      <span class="w-8 h-8 rounded-xl bg-[#2563EB] text-white flex items-center justify-center text-[16px] shadow-sm">🦸</span>
+      <span class="font-display font-[900] tracking-tight text-[17px] leading-none">Help Heroes</span>
+      <span class="hidden sm:inline-flex text-[11px] font-bold tracking-widest uppercase bg-slate-900 text-white px-2 py-1 rounded-full ml-1">Week 8</span>
+    </a>
+    <div class="hidden md:flex items-center gap-1.5 text-[12px] font-semibold overflow-x-auto [&>a]:shrink-0">
+      <a href="./week1.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 1</a>
+      <a href="./week2.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 2</a>
+      <a href="./week3.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 3</a>
+      <a href="./week4.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 4</a>
+      <a href="./week5_project.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 5</a>
+      <a href="./week6.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 6</a>
+      <a href="./index_week7.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 7</a>
+      <a href="./week8.html" class="px-3 py-1.5 rounded-full bg-[#EFF6FF] text-primary border border-blue-200">Week 8 finale</a>
+      <span class="w-px h-4 bg-slate-200 mx-1"></span>
+      <a href="./testing_board.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Testing</a>
+      <a href="./wireframe_image.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Wireframe</a>
+    </div>
+    <div class="flex items-center gap-1.5">
+      <a href="./index.html" class="hidden sm:inline-flex items-center gap-1.5 bg-white border border-slate-200 px-3 py-1.5 rounded-full text-[12px] font-semibold hover:bg-slate-50">Overview</a>
+      <button onclick="startPresent()" class="inline-flex items-center gap-1.5 bg-[#2563EB] text-white px-3.5 py-1.5 rounded-full text-[12px] font-bold hover:bg-[#1D4ED8] shadow-sm"><i class="fa-solid fa-play text-[10px]"></i> Present</button>
+    </div>
+  </div>
+</nav>
+
+<main class="max-w-[1160px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+
+<!-- HERO -->
+<header class="reveal">
+  <div class="bg-white rounded-[24px] border border-slate-200 shadow-card overflow-hidden">
+    <div class="h-[5px] w-full bg-gradient-to-r from-blue-600 via-violet-500 to-amber-500"></div>
+    <div class="px-6 sm:px-8 lg:px-10 py-7 sm:py-8">
+      <div class="flex flex-col lg:flex-row gap-8">
+        <div class="flex-1 min-w-0">
+          <div class="flex flex-wrap items-center gap-2 mb-3">
+            <span class="inline-flex items-center gap-2 bg-slate-900 text-white text-[11px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full"><i class="fa-solid fa-graduation-cap text-amber-300 text-[10px]"></i> German University of Digital Science</span>
+            <span class="inline-flex items-center gap-1.5 bg-blue-50 border border-blue-200 text-primary text-[11px] font-bold px-2.5 py-1 rounded-full"><i class="fa-solid fa-bezier-curve text-[10px]"></i> Design Thinking Project</span>
+            <span class="inline-flex items-center gap-1.5 text-[11px] font-medium text-slate-500"><i class="fa-regular fa-calendar"></i> September 2026 • Week 8</span>
+          </div>
+          <h1 class="font-display text-[30px] sm:text-[40px] lg:text-[44px] font-[900] leading-[0.95] tracking-[-0.03em]">Week 8: Final Presentation <span class="text-slate-400 font-[800]">Prototype</span></h1>
+          <p class="mt-3 text-[13.5px] leading-relaxed text-slate-600 max-w-[720px]"><span class="font-bold text-ink">From Apology to Belonging: A Design Thinking Journey.</span> 10 slides, about 5 minutes, from wicked problem to closing. Each slide keeps its timed note.</p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="inline-flex items-center gap-1.5 bg-blue-50 border border-blue-200 text-primary text-[12px] font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-layer-group text-[11px]"></i> 10 slides • 16:9</span>
+            <span class="inline-flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 text-emerald-700 text-[12px] font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-stopwatch text-[11px]"></i> 5:00 target • timed notes</span>
+            <span class="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-200 text-amber-700 text-[12px] font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-id-card text-[11px]"></i> Student ID: s-01141</span>
+            <span class="inline-flex items-center gap-1.5 bg-violet-50 border border-violet-200 text-violet-700 text-[12px] font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-microphone text-[11px]"></i> Speaker notes included</span>
+          </div>
+          <div class="mt-5 flex flex-wrap gap-2 no-print">
+            <button onclick="startPresent()" class="inline-flex items-center gap-1.5 bg-slate-900 text-white text-[12px] font-bold px-4 py-2 rounded-full hover:bg-black shadow-sm"><i class="fa-solid fa-play text-[10px]"></i> Start from Slide 1</button>
+            <button onclick="toggleNotes(true)" class="inline-flex items-center gap-1.5 bg-[#2563EB] text-white text-[12px] font-bold px-4 py-2 rounded-full hover:bg-[#1D4ED8] shadow-sm"><i class="fa-solid fa-note-sticky text-[10px]"></i> Speaker notes</button>
+            <a href="#all-slides" class="inline-flex items-center gap-1.5 bg-white border border-slate-200 text-slate-700 text-[12px] font-bold px-4 py-2 rounded-full hover:bg-slate-50">All slides grid</a>
+          </div>
+        </div>
+        <div class="lg:w-[360px] shrink-0 flex flex-col gap-3">
+          <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+            <p class="text-[11px] font-bold tracking-widest uppercase text-slate-500">How to present: 3 steps</p>
+            <div class="mt-3 space-y-2.5 text-[12px]">
+              <div class="flex items-center gap-3 bg-white border border-slate-200 rounded-xl px-3 py-2.5"><span class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-[12px] font-bold">1</span><p class="font-semibold">Click Present or use ← → keys</p></div>
+              <div class="flex items-center gap-3 bg-white border border-slate-200 rounded-xl px-3 py-2.5"><span class="w-7 h-7 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[12px] font-bold">2</span><p class="font-semibold">Read the timed note under the stage</p></div>
+              <div class="flex items-center gap-3 bg-white border border-slate-200 rounded-xl px-3 py-2.5"><span class="w-7 h-7 rounded-full bg-slate-900 text-white flex items-center justify-center text-[12px] font-bold">3</span><p class="font-semibold">Follow the 5:00 pacing bar</p></div>
+            </div>
+          </div>
+          <div class="bg-gradient-to-br from-blue-600 to-violet-600 rounded-2xl p-4 text-white relative overflow-hidden">
+            <div class="absolute inset-0 opacity-20 grid-pattern"></div>
+            <div class="relative">
+              <p class="text-[11px] font-bold tracking-widest uppercase text-white/80">Arc of the talk</p>
+              <p class="text-[13px] font-bold mt-1">Apology → Belonging</p>
+              <p class="text-[12.5px] leading-snug text-white/90 mt-1">Isolation → Fear → Hope → Empowerment → Belonging. Help-seeking reframed as strength.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Pacing strip -->
+      <div class="mt-6 grid grid-cols-2 sm:grid-cols-5 gap-2 text-center text-[11px] font-bold">
+        <div class="bg-slate-50 border border-slate-200 rounded-xl px-2 py-2">1 Title <span class="block text-slate-500 font-semibold">0:00–0:15</span></div>
+        <div class="bg-slate-50 border border-slate-200 rounded-xl px-2 py-2">2–3 Challenge + James <span class="block text-slate-500 font-semibold">0:15–1:15</span></div>
+        <div class="bg-blue-50 border border-blue-200 text-primary rounded-xl px-2 py-2">4 Solution <span class="block font-semibold">1:15–2:00</span></div>
+        <div class="bg-slate-50 border border-slate-200 rounded-xl px-2 py-2">5–7 Test → Iterate → Story <span class="block text-slate-500 font-semibold">2:00–4:00</span></div>
+        <div class="bg-slate-50 border border-slate-200 rounded-xl px-2 py-2">8–10 Next → Close <span class="block text-slate-500 font-semibold">4:00–5:00</span></div>
+      </div>
+      <!-- Coverage: the 5 required video points, click to jump -->
+      <div class="mt-2 bg-slate-900 text-white rounded-2xl px-4 py-3">
+        <p class="text-[10px] font-bold tracking-widest uppercase text-amber-300 text-center">Video covers all 5 required points — click to jump</p>
+        <div class="mt-2 flex flex-wrap justify-center gap-1.5 text-[11px] font-bold">
+          <button onclick="showSlide(2)" class="cov-btn inline-flex items-center gap-1.5 bg-white text-ink px-3 py-1.5 rounded-full hover:bg-blue-50 border border-transparent hover:border-blue-200"><i class="fa-solid fa-check text-emerald-500 text-[10px]"></i> Challenge <span class="font-semibold text-slate-400">S2</span></button>
+          <button onclick="showSlide(3)" class="cov-btn inline-flex items-center gap-1.5 bg-white text-ink px-3 py-1.5 rounded-full hover:bg-blue-50 border border-transparent hover:border-blue-200"><i class="fa-solid fa-check text-emerald-500 text-[10px]"></i> User <span class="font-semibold text-slate-400">S3</span></button>
+          <button onclick="showSlide(4)" class="cov-btn inline-flex items-center gap-1.5 bg-white text-ink px-3 py-1.5 rounded-full hover:bg-blue-50 border border-transparent hover:border-blue-200"><i class="fa-solid fa-check text-emerald-500 text-[10px]"></i> Solution <span class="font-semibold text-slate-400">S4</span></button>
+          <button onclick="showSlide(5)" class="cov-btn inline-flex items-center gap-1.5 bg-white text-ink px-3 py-1.5 rounded-full hover:bg-blue-50 border border-transparent hover:border-blue-200"><i class="fa-solid fa-check text-emerald-500 text-[10px]"></i> Testing + iteration <span class="font-semibold text-slate-400">S5–6</span></button>
+          <button onclick="showSlide(8)" class="cov-btn inline-flex items-center gap-1.5 bg-white text-ink px-3 py-1.5 rounded-full hover:bg-blue-50 border border-transparent hover:border-blue-200"><i class="fa-solid fa-check text-emerald-500 text-[10px]"></i> Next steps <span class="font-semibold text-slate-400">S8</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- DECK -->
+<section class="mt-6 reveal">
+<div id="stage" class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+  <div class="px-5 sm:px-6 pt-5 flex flex-wrap items-center justify-between gap-3 no-print">
+    <div class="flex items-center gap-2">
+      <span class="w-8 h-8 rounded-xl bg-slate-900 text-white flex items-center justify-center"><i class="fa-solid fa-person-chalkboard text-[13px]"></i></span>
+      <div>
+        <h2 class="text-[15px] font-extrabold leading-none">Slide deck <span id="counter" class="text-slate-400 font-bold">1 / 10</span></h2>
+        <p class="text-[11px] text-slate-500 mt-0.5">Use ← → keys • <span id="clock" class="font-mono font-bold text-slate-700">0:00 / 5:00</span> elapsed</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-1.5">
+      <button onclick="prevSlide()" class="w-9 h-9 rounded-full bg-white border border-slate-200 flex items-center justify-center hover:bg-slate-50" title="Previous"><i class="fa-solid fa-chevron-left text-[12px]"></i></button>
+      <button onclick="nextSlide()" class="h-9 px-4 rounded-full bg-[#2563EB] text-white text-[12px] font-bold hover:bg-[#1D4ED8]">Next <i class="fa-solid fa-chevron-right text-[10px] ml-1"></i></button>
+      <span class="w-px h-5 bg-slate-200 mx-1"></span>
+      <button id="notesBtn" onclick="toggleNotes()" class="h-9 px-3 rounded-full bg-blue-50 border border-blue-200 text-primary text-[12px] font-bold hover:bg-blue-100"><i class="fa-solid fa-note-sticky text-[11px] mr-1"></i>Notes</button>
+      <button onclick="toggleFullscreen()" class="w-9 h-9 rounded-full bg-white border border-slate-200 hidden sm:flex items-center justify-center hover:bg-slate-50" title="Fullscreen"><i class="fa-solid fa-expand text-[12px]"></i></button>
+      <button id="darkBtn" onclick="toggleDark()" class="w-9 h-9 rounded-full bg-white border border-slate-200 flex items-center justify-center hover:bg-slate-50" title="Dark mode"><i class="fa-solid fa-moon text-[12px]"></i></button>
+      <button onclick="window.print()" class="w-9 h-9 rounded-full bg-white border border-slate-200 hidden sm:flex items-center justify-center hover:bg-slate-50" title="Print"><i class="fa-solid fa-print text-[12px]"></i></button>
+    </div>
+  </div>
+  <div class="px-5 sm:px-6 pt-3 no-print">
+    <div class="h-1.5 bg-slate-100 rounded-full overflow-hidden"><div id="deckProgress" class="h-full w-[10%] bg-gradient-to-r from-blue-600 via-violet-500 to-amber-500 rounded-full transition-all duration-300"></div></div>
+  </div>
+
+  <div class="p-5 sm:p-6">
+  <div class="slide-frame rounded-2xl border border-slate-200 overflow-hidden bg-white shadow-[0_12px_30px_rgba(15,23,42,0.10)]">
+
+    <!-- SLIDE 1 -->
+    <div id="slide-1" class="deck-slide active">
+      <div class="aspect-video bg-gradient-to-br from-[#0F172A] via-[#1D4ED8] to-[#7C3AED] text-white relative overflow-hidden flex flex-col items-center justify-center text-center px-6 sm:px-12 py-8">
+        <div class="absolute inset-0 opacity-20 grid-pattern"></div>
+        <div class="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-amber-400/20 blur-3xl"></div>
+        <div class="relative">
+          <p class="text-[11px] sm:text-[12px] font-bold tracking-[0.25em] uppercase text-white/70">Design Thinking Project • Final Presentation</p>
+          <div class="mt-3 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-white/15 border border-white/25 text-[28px]">🦸</div>
+          <h3 class="font-display text-[30px] sm:text-[46px] font-[900] leading-none tracking-tight mt-3">HELP HEROES</h3>
+          <p class="text-[14px] sm:text-[19px] font-semibold text-white/95 mt-2">From Apology to Belonging: A Design Thinking Journey</p>
+          <div class="mt-4 inline-flex items-center gap-2 bg-white/12 border border-white/25 rounded-full px-4 py-2 text-[12px] font-semibold"><span class="w-8 h-8 rounded-full bg-amber-400 text-slate-900 flex items-center justify-center text-[16px] font-bold">J</span> Student with Help Hero badge</div>
+          <div class="mt-5 flex flex-wrap justify-center gap-2 text-[11px] font-bold">
+            <span class="bg-white text-slate-900 px-3 py-1.5 rounded-full">Student ID: s-01141</span>
+            <span class="bg-white/15 border border-white/25 px-3 py-1.5 rounded-full">September 2026</span>
+            <span class="bg-white/15 border border-white/25 px-3 py-1.5 rounded-full">German University of Digital Science</span>
+          </div>
+          <div class="mt-5 flex justify-center relative"><a class="work-link work-link-dark" href="./index.html" target="_blank" rel="noopener"><span class="wl-ico"><i class="fa-solid fa-house"></i></span><span><b>Overview hub</b><small>Start at the hub: all weeks</small></span><i class="fa-solid fa-arrow-up-right-from-square wl-go"></i></a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2 -->
+    <div id="slide-2" class="deck-slide">
+      <div class="aspect-video bg-white px-6 sm:px-10 py-5 sm:py-6 overflow-y-auto">
+        <p class="text-[11px] font-bold tracking-[0.22em] uppercase text-primary">02 • The Design Challenge</p>
+        <h3 class="font-display text-[22px] sm:text-[30px] font-[900] tracking-tight leading-none mt-1">THE DESIGN CHALLENGE</h3>
+        <div class="mt-3 bg-blue-50 border-2 border-primary/70 rounded-2xl px-5 py-4 text-center">
+          <p class="text-[13px] sm:text-[15px] font-bold leading-snug">Redesign the online learning experience for first-generation university students in a world in which access to high-speed internet is unreliable.</p>
+        </div>
+        <div class="mt-3 grid sm:grid-cols-[1fr_1fr_0.9fr] gap-3">
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5"><p class="text-[11px] font-bold tracking-widest uppercase text-slate-500"><i class="fa-solid fa-diagram-project text-primary mr-1"></i> Complexity</p><ul class="mt-1.5 space-y-1 text-[11.5px] sm:text-[12.5px] text-slate-700 leading-snug"><li>• Multiple interconnected factors (tech, family, finances, support)</li><li>• Multiple stakeholders with conflicting needs</li><li>• Symptom of deeper problems (inequality, infrastructure)</li></ul></div>
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5"><p class="text-[11px] font-bold tracking-widest uppercase text-slate-500"><i class="fa-solid fa-circle-question text-amber-500 mr-1"></i> Uncertainty</p><ul class="mt-1.5 space-y-1 text-[11.5px] sm:text-[12.5px] text-slate-700 leading-snug"><li>• No single, definitive problem formulation</li><li>• Multiple valid explanations</li><li>• Unknown unknowns & unintended consequences</li></ul></div>
+          <div class="bg-slate-900 text-white rounded-xl p-3.5 flex flex-col items-center justify-center text-center"><span class="text-[26px]">💻😕</span><p class="text-[11px] font-semibold text-white/80 mt-1">Student looking confused at laptop</p></div>
+        </div>
+        <div class="mt-3 flex justify-center"><a class="work-link" href="./week1.html" target="_blank" rel="noopener"><span class="wl-ico"><i class="fa-solid fa-circle-nodes"></i></span><span><b>Week 1: Wicked Problem</b><small>Knot, prism, iceberg, five definitions</small></span><i class="fa-solid fa-arrow-up-right-from-square wl-go"></i></a></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3 -->
+    <div id="slide-3" class="deck-slide">
+      <div class="aspect-video bg-white px-6 sm:px-10 py-5 sm:py-6 overflow-y-auto">
+        <p class="text-[11px] font-bold tracking-[0.22em] uppercase text-primary">03 • Understanding the user</p>
+        <h3 class="font-display text-[22px] sm:text-[30px] font-[900] tracking-tight leading-none mt-1">UNDERSTANDING THE USER: JAMES</h3>
+        <div class="mt-3 grid sm:grid-cols-[1.25fr_0.75fr] gap-3">
+          <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-5">
+            <p class="text-[12.5px] sm:text-[14px] leading-relaxed text-slate-700">I met <span class="font-bold text-ink">James</span>, a first-generation student who has learned to <span class="font-semibold">apologize</span>, for late work, for missed meetings, for needing help, and who has internalized the belief that he is a burden to the system.</p>
+            <p class="text-[12.5px] sm:text-[14px] leading-relaxed text-slate-700 mt-2">I was inspired to discover that he <span class="font-bold text-ink">desperately wants to ask for help</span> but does not even know what to ask, because the institutional knowledge that some of his peers inherited from their families is a foreign language to him.</p>
+            <p class="text-[12.5px] sm:text-[14px] leading-relaxed text-slate-700 mt-2">It's all about helping James <span class="font-bold text-primary">navigate and belong</span> without feeling like an outsider who has to apologize for existing.</p>
+          </div>
+          <div class="flex flex-col gap-3">
+            <div class="bg-gradient-to-br from-blue-600 to-violet-600 rounded-2xl p-4 text-white text-center"><span class="text-[30px]">🧑🏽‍🎓</span><p class="text-[11px] font-semibold text-white/80 mt-1">James, the Sharing Student</p></div>
+            <div class="bg-amber-50 border-2 border-amber-300 rounded-2xl p-3.5"><p class="text-[10px] font-bold tracking-widest uppercase text-amber-700">Key insight</p><p class="text-[12.5px] sm:text-[13.5px] font-bold leading-snug mt-1">“I want to ask for help, but I don't even know what to ask. I don't know what I don't know.”</p></div>
+          </div>
+        </div>
+        <div class="mt-3 flex justify-center"><a class="work-link" href="./week3.html#interviews" target="_blank" rel="noopener"><span class="wl-ico"><i class="fa-solid fa-comments"></i></span><span><b>Week 3: Interviews</b><small>Maria, James, Aisha in their words</small></span><i class="fa-solid fa-arrow-up-right-from-square wl-go"></i></a></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4 -->
+    <div id="slide-4" class="deck-slide">
+      <div class="aspect-video bg-white px-6 sm:px-10 py-5 sm:py-6 overflow-y-auto">
+        <div class="flex items-center gap-2"><span class="text-[22px]">🦸</span><div><p class="text-[11px] font-bold tracking-[0.22em] uppercase text-primary leading-none">04 • The solution</p><h3 class="font-display text-[22px] sm:text-[30px] font-[900] tracking-tight leading-none">THE SOLUTION: HELP HEROES</h3></div></div>
+        <div class="mt-2 bg-slate-900 text-white rounded-2xl px-5 py-3 text-center"><p class="text-[13px] sm:text-[15px] font-bold">A program that reframes help-seeking as a strength</p><p class="text-[11px] sm:text-[12px] text-amber-300 font-semibold tracking-wide">“Turning Questions into Connections”</p></div>
+        <div class="mt-3 grid grid-cols-5 gap-1.5 sm:gap-2 text-center">
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-2"><p class="text-[20px]">😟</p><p class="text-[10px] sm:text-[11px] font-bold leading-tight">James needs help</p></div>
+          <div class="bg-blue-50 border-2 border-primary rounded-xl p-2 relative"><p class="text-[20px]">🦸</p><p class="text-[10px] sm:text-[11px] font-bold leading-tight">Click “Ask Help”</p><span class="absolute -right-2 top-1/2 -translate-y-1/2 text-slate-300 text-[10px] hidden sm:block">→</span></div>
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-2"><p class="text-[20px]">💬</p><p class="text-[10px] sm:text-[11px] font-bold leading-tight">Help Hero helps</p></div>
+          <div class="bg-amber-50 border border-amber-300 rounded-xl p-2"><p class="text-[20px]">🏆</p><p class="text-[10px] sm:text-[11px] font-bold leading-tight">Badge earned</p></div>
+          <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-2"><p class="text-[20px]">😄</p><p class="text-[10px] sm:text-[11px] font-bold leading-tight">James feels proud</p></div>
+        </div>
+        <div class="mt-3 bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5">
+          <p class="text-[10px] font-bold tracking-widest uppercase text-slate-500">5 key features</p>
+          <div class="mt-1.5 flex flex-wrap gap-1.5 text-[10.5px] sm:text-[11.5px] font-semibold">
+            <span class="bg-amber-100 border border-amber-300 text-amber-800 px-2.5 py-1 rounded-full">🆘 “I don't know how to ask” button</span>
+            <span class="bg-white border border-slate-200 px-2.5 py-1 rounded-full">🏆 Help Hero badges</span>
+            <span class="bg-white border border-slate-200 px-2.5 py-1 rounded-full">🧱 Anonymous Help Wall</span>
+            <span class="bg-white border border-slate-200 px-2.5 py-1 rounded-full">📶 Low-bandwidth text community</span>
+            <span class="bg-white border border-slate-200 px-2.5 py-1 rounded-full">🔘 One-click “Help” button</span>
+          </div>
+        </div>
+        <div class="mt-3 flex justify-center"><a class="work-link" href="./week6.html" target="_blank" rel="noopener"><span class="wl-ico"><i class="fa-solid fa-mobile-screen"></i></span><span><b>Live prototype</b><small>Tap through Help Heroes</small></span><i class="fa-solid fa-arrow-up-right-from-square wl-go"></i></a></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5 -->
+    <div id="slide-5" class="deck-slide">
+      <div class="aspect-video bg-white px-6 sm:px-10 py-5 sm:py-6 overflow-y-auto">
+        <p class="text-[11px] font-bold tracking-[0.22em] uppercase text-primary">05 • Testing & what we learned</p>
+        <h3 class="font-display text-[22px] sm:text-[30px] font-[900] tracking-tight leading-none mt-1">TESTING & WHAT WE LEARNED</h3>
+        <div class="mt-3 grid sm:grid-cols-2 gap-3">
+          <div>
+            <div class="grid grid-cols-2 gap-2">
+              <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-center"><p class="text-[20px]">🌾</p><p class="text-[12px] font-extrabold">Maria</p><p class="text-[10.5px] text-slate-500 font-semibold">The Rural Student</p></div>
+              <div class="bg-blue-50 border-2 border-primary/60 rounded-xl p-3 text-center"><p class="text-[20px]">🦸</p><p class="text-[12px] font-extrabold">James</p><p class="text-[10.5px] text-slate-500 font-semibold">The Sharing Student</p></div>
+            </div>
+            <div class="mt-2 bg-slate-50 border border-slate-200 rounded-xl p-3">
+              <p class="text-[10px] font-bold tracking-widest uppercase text-slate-500">Key findings</p>
+              <ul class="mt-1 space-y-1 text-[11px] sm:text-[12px] font-semibold text-slate-700">
+                <li>✅ The ask button landed: “That's me!”</li>
+                <li>✅ Badges felt like pride: “I'd show these off”</li>
+                <li>✅ The Wall normalized asking, others had the same questions</li>
+                <li>✅ Text-only sipped data: “Uses almost no data”</li>
+              </ul>
+            </div>
+          </div>
+          <div class="flex flex-col gap-2">
+            <div class="bg-blue-600 text-white rounded-xl p-3.5"><p class="text-[10px] font-bold tracking-widest uppercase text-white/70">What users said</p><ul class="mt-1 space-y-1 text-[11.5px] sm:text-[12.5px] font-medium italic leading-snug"><li>“It says ‘Good evening, James.’ That's nice — personal.”</li><li>“I would actually press this. It doesn't feel scary.”</li><li>“A reward for being brave enough to ask.”</li></ul></div>
+            <div class="bg-amber-50 border border-amber-300 rounded-xl p-3"><p class="text-[10px] font-bold tracking-widest uppercase text-amber-700">Up next: fixes</p><p class="text-[11.5px] font-semibold text-slate-700 mt-0.5">Main-screen CTA • Offline Help Wall • Hero of the Month</p></div>
+          </div>
+        </div>
+        <div class="mt-3 flex justify-center"><a class="work-link" href="./testing_board.html" target="_blank" rel="noopener"><span class="wl-ico"><i class="fa-solid fa-flask"></i></span><span><b>Testing board</b><small>Findings from Maria + James</small></span><i class="fa-solid fa-arrow-up-right-from-square wl-go"></i></a></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 6 -->
+    <div id="slide-6" class="deck-slide">
+      <div class="aspect-video bg-white px-6 sm:px-10 py-5 sm:py-6 overflow-y-auto">
+        <p class="text-[11px] font-bold tracking-[0.22em] uppercase text-primary">06 • Iteration</p>
+        <h3 class="font-display text-[22px] sm:text-[30px] font-[900] tracking-tight leading-none mt-1">ITERATION: WHAT WE CHANGED</h3>
+        <p class="text-[11.5px] sm:text-[12.5px] text-slate-500 font-medium mt-1">What changed after testing:</p>
+        <div class="mt-2 grid sm:grid-cols-3 gap-2.5">
+          <div class="bg-amber-50 border-2 border-amber-300 rounded-xl p-3"><p class="text-[11px] font-extrabold text-amber-800">1. “I don't know how to ask” → main screen</p><div class="mt-2 space-y-1 text-[11px] font-medium"><p class="bg-white border border-slate-200 rounded-lg px-2 py-1.5 text-slate-500">Before: hidden behind 2nd screen</p><p class="bg-slate-900 text-white rounded-lg px-2 py-1.5">After: prominent Home button ✓</p></div></div>
+          <div class="bg-blue-50 border-2 border-blue-200 rounded-xl p-3"><p class="text-[11px] font-extrabold text-primary">2. Offline download → Help Wall</p><div class="mt-2 space-y-1 text-[11px] font-medium"><p class="bg-white border border-slate-200 rounded-lg px-2 py-1.5 text-slate-500">Before: online only</p><p class="bg-primary text-white rounded-lg px-2 py-1.5">After: downloadable Q&A ✓</p></div></div>
+          <div class="bg-violet-50 border-2 border-violet-200 rounded-xl p-3"><p class="text-[11px] font-extrabold text-violet-700">3. “Hero of the Month” → gamify</p><div class="mt-2 space-y-1 text-[11px] font-medium"><p class="bg-white border border-slate-200 rounded-lg px-2 py-1.5 text-slate-500">Before: no recognition</p><p class="bg-violet-600 text-white rounded-lg px-2 py-1.5">After: monthly recognition ✓</p></div></div>
+        </div>
+        <div class="mt-2.5 bg-slate-900 text-white rounded-full px-4 py-2 flex items-center justify-center gap-2 text-[11px] sm:text-[12px] font-bold flex-wrap"><span>Build</span><i class="fa-solid fa-arrow-right text-[9px] text-amber-300"></i><span>Test</span><i class="fa-solid fa-arrow-right text-[9px] text-amber-300"></i><span>Learn</span><i class="fa-solid fa-arrow-right text-[9px] text-amber-300"></i><span>Improve</span><i class="fa-solid fa-arrow-right text-[9px] text-amber-300"></i><span class="text-amber-300">Test Again</span></div>
+        <div class="mt-3 flex justify-center"><a class="work-link" href="./index_week7.html" target="_blank" rel="noopener"><span class="wl-ico"><i class="fa-solid fa-rotate"></i></span><span><b>Week 7: Iteration</b><small>What testing changed</small></span><i class="fa-solid fa-arrow-up-right-from-square wl-go"></i></a></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 7 -->
+    <div id="slide-7" class="deck-slide">
+      <div class="aspect-video bg-[#0F172A] text-white px-6 sm:px-8 py-5 sm:py-6 overflow-y-auto relative">
+        <div class="absolute inset-0 opacity-[0.12] grid-pattern"></div>
+        <div class="relative">
+          <p class="text-[11px] font-bold tracking-[0.22em] uppercase text-amber-300">07 • The journey</p>
+          <h3 class="font-display text-[20px] sm:text-[28px] font-[900] tracking-tight leading-none mt-1">FROM APOLOGY TO BELONGING</h3>
+          <div class="mt-3 grid grid-cols-5 gap-1.5 sm:gap-2">
+            <div class="bg-white/[0.07] border border-white/15 rounded-xl p-2 sm:p-3 text-center"><p class="text-[10px] font-bold tracking-widest uppercase text-white/50">Panel 1</p><p class="text-[24px] sm:text-[30px] mt-1">🧍💻</p><p class="text-[10px] sm:text-[11px] font-bold mt-1">James alone, confused</p><p class="text-[9.5px] sm:text-[10.5px] text-white/60 italic mt-1">“I'm the first in my family. I feel so alone.”</p></div>
+            <div class="bg-white/[0.07] border border-white/15 rounded-xl p-2 sm:p-3 text-center"><p class="text-[10px] font-bold tracking-widest uppercase text-white/50">Panel 2</p><p class="text-[24px] sm:text-[30px] mt-1">👆🔘</p><p class="text-[10px] sm:text-[11px] font-bold mt-1">Hovering over “Help”</p><p class="text-[9.5px] sm:text-[10.5px] text-white/60 italic mt-1">“I don't know what to ask… afraid.”</p></div>
+            <div class="bg-amber-400/15 border-2 border-amber-300/70 rounded-xl p-2 sm:p-3 text-center"><p class="text-[10px] font-bold tracking-widest uppercase text-amber-300">Panel 3</p><p class="text-[24px] sm:text-[30px] mt-1">🦸✨</p><p class="text-[10px] sm:text-[11px] font-bold mt-1 text-amber-200">Help Hero appears</p><p class="text-[9.5px] sm:text-[10.5px] text-white/70 italic mt-1">“Great question! Not alone.”</p></div>
+            <div class="bg-white/[0.07] border border-white/15 rounded-xl p-2 sm:p-3 text-center"><p class="text-[10px] font-bold tracking-widest uppercase text-white/50">Panel 4</p><p class="text-[24px] sm:text-[30px] mt-1">🤝🏆</p><p class="text-[10px] sm:text-[11px] font-bold mt-1">Mentor + first badge</p><p class="text-[9.5px] sm:text-[10.5px] text-white/60 italic mt-1">“You're a Help Hero now!”</p></div>
+            <div class="bg-emerald-400/10 border border-emerald-300/50 rounded-xl p-2 sm:p-3 text-center"><p class="text-[10px] font-bold tracking-widest uppercase text-emerald-300">Panel 5</p><p class="text-[24px] sm:text-[30px] mt-1">🎉🤗</p><p class="text-[10px] sm:text-[11px] font-bold mt-1 text-emerald-200">Community celebrating</p><p class="text-[9.5px] sm:text-[10.5px] text-white/70 italic mt-1">“I'm not alone. I belong.”</p></div>
+          </div>
+          <div class="mt-3 flex items-center justify-center gap-1.5 sm:gap-2 text-[10px] sm:text-[11px] font-bold flex-wrap"><span class="text-white/50">Isolation</span><i class="fa-solid fa-arrow-right text-[9px] text-white/30"></i><span class="text-white/70">Fear</span><i class="fa-solid fa-arrow-right text-[9px] text-white/30"></i><span class="text-amber-300">Hope</span><i class="fa-solid fa-arrow-right text-[9px] text-white/30"></i><span>Empowerment</span><i class="fa-solid fa-arrow-right text-[9px] text-white/30"></i><span class="text-emerald-300">Belonging</span></div>
+        </div>
+        <div class="mt-3 flex justify-center relative"><a class="work-link work-link-dark" href="./week5_project.html#week5-video" target="_blank" rel="noopener"><span class="wl-ico"><i class="fa-solid fa-clapperboard"></i></span><span><b>Week 5: Story video</b><small>Ideation + storyboard</small></span><i class="fa-solid fa-arrow-up-right-from-square wl-go"></i></a></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 8 -->
+    <div id="slide-8" class="deck-slide">
+      <div class="aspect-video bg-white px-6 sm:px-10 py-5 sm:py-6 overflow-y-auto">
+        <p class="text-[11px] font-bold tracking-[0.22em] uppercase text-primary">08 • Next steps</p>
+        <h3 class="font-display text-[22px] sm:text-[30px] font-[900] tracking-tight leading-none mt-1">NEXT STEPS</h3>
+        <div class="mt-3 grid sm:grid-cols-2 gap-2.5">
+          <div class="space-y-2">
+            <div class="flex gap-2.5 bg-slate-50 border border-slate-200 rounded-xl p-3"><span class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-[12px] font-bold shrink-0">1</span><div><p class="text-[12px] font-extrabold">Refine the prototype</p><p class="text-[11px] text-slate-500">Implement 3 iterations • high-fidelity version</p></div></div>
+            <div class="flex gap-2.5 bg-slate-50 border border-slate-200 rounded-xl p-3"><span class="w-7 h-7 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[12px] font-bold shrink-0">2</span><div><p class="text-[12px] font-extrabold">Expand testing</p><p class="text-[11px] text-slate-500">More first-gen students • contexts • cultures</p></div></div>
+            <div class="flex gap-2.5 bg-slate-50 border border-slate-200 rounded-xl p-3"><span class="w-7 h-7 rounded-full bg-violet-600 text-white flex items-center justify-center text-[12px] font-bold shrink-0">3</span><div><p class="text-[12px] font-extrabold">Leadership engagement</p><p class="text-[11px] text-slate-500">Present findings • commitment • Design Thinking Guardian</p></div></div>
+            <div class="flex gap-2.5 bg-slate-50 border border-slate-200 rounded-xl p-3"><span class="w-7 h-7 rounded-full bg-amber-500 text-white flex items-center justify-center text-[12px] font-bold shrink-0">4</span><div><p class="text-[12px] font-extrabold">Build a community</p><p class="text-[11px] text-slate-500">Pilot program • Heroes network • dissemination</p></div></div>
+          </div>
+          <div class="bg-slate-900 text-white rounded-2xl p-4 sm:p-5 flex flex-col justify-center"><p class="text-[11px] font-bold tracking-widest uppercase text-amber-300">How Might We…</p><p class="text-[13px] sm:text-[15px] font-bold leading-snug mt-1">…help first-generation students navigate online learning without feeling like outsiders who have to constantly apologize?</p><a href="./week6.html" class="mt-3 inline-flex items-center gap-1.5 bg-white text-ink text-[11px] font-bold px-3 py-1.5 rounded-full self-start">Try the prototype <i class="fa-solid fa-arrow-right text-[10px]"></i></a></div>
+        </div>
+        <div class="mt-3 flex justify-center"><a class="work-link" href="./index_week7.html" target="_blank" rel="noopener"><span class="wl-ico"><i class="fa-solid fa-rocket"></i></span><span><b>Week 7: Roadmap</b><small>Rollout + next moves</small></span><i class="fa-solid fa-arrow-up-right-from-square wl-go"></i></a></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 9 -->
+    <div id="slide-9" class="deck-slide">
+      <div class="aspect-video bg-white px-6 sm:px-10 py-5 sm:py-6 overflow-y-auto">
+        <p class="text-[11px] font-bold tracking-[0.22em] uppercase text-primary">09 • Key takeaways</p>
+        <h3 class="font-display text-[22px] sm:text-[30px] font-[900] tracking-tight leading-none mt-1">KEY TAKEAWAYS</h3>
+        <div class="mt-3 grid sm:grid-cols-2 lg:grid-cols-3 gap-2">
+          <div class="bg-blue-50 border border-blue-200 rounded-xl p-3"><p class="text-[12px] font-extrabold text-primary">1. Wicked → clumsy solutions</p><p class="text-[11px] text-slate-600 mt-1">No perfect answer. Messy institutions, multiple strategies.</p></div>
+          <div class="bg-amber-50 border border-amber-200 rounded-xl p-3"><p class="text-[12px] font-extrabold text-amber-800">2. Empathy is essential</p><p class="text-[11px] text-slate-600 mt-1">James's insight unlocked everything. Users reveal unspoken needs.</p></div>
+          <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3"><p class="text-[12px] font-extrabold text-emerald-700">3. Help-seeking is strength</p><p class="text-[11px] text-slate-600 mt-1">Reframe shame as courage. Community over solo struggle.</p></div>
+          <div class="bg-violet-50 border border-violet-200 rounded-xl p-3"><p class="text-[12px] font-extrabold text-violet-700">4. Iteration → innovation</p><p class="text-[11px] text-slate-600 mt-1">Build → Test → Learn → Improve. Testing showed the way.</p></div>
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:col-span-2 lg:col-span-2"><p class="text-[12px] font-extrabold">5. Design thinking is leadership</p><p class="text-[11px] text-slate-600 mt-1">Enable collaboration • make sense of ambiguity • encourage constructive conflict.</p></div>
+        </div>
+        <p class="mt-2.5 text-center text-[11px] sm:text-[12.5px] italic font-medium text-slate-600">“It's not about finding the perfect answer. It's about making genuine progress and learning from what works and what doesn't.”</p>
+        <div class="mt-3 flex justify-center"><a class="work-link" href="./week4.html" target="_blank" rel="noopener"><span class="wl-ico"><i class="fa-solid fa-lightbulb"></i></span><span><b>Week 4: Synthesis</b><small>Flowers, PoVs, the HMW</small></span><i class="fa-solid fa-arrow-up-right-from-square wl-go"></i></a></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 10 -->
+    <div id="slide-10" class="deck-slide">
+      <div class="aspect-video bg-gradient-to-br from-[#0F172A] via-[#1D4ED8] to-[#7C3AED] text-white relative overflow-hidden flex flex-col items-center justify-center text-center px-6 sm:px-12 py-8">
+        <div class="absolute inset-0 opacity-20 grid-pattern"></div>
+        <div class="relative">
+          <p class="text-[22px] sm:text-[30px] font-light">Thank You</p>
+          <p class="font-display text-[26px] sm:text-[38px] font-[900] tracking-tight mt-1">🦸 HELP HEROES</p>
+          <p class="text-[12px] sm:text-[14px] font-semibold text-amber-300 tracking-wide">Turning Questions into Connections</p>
+          <div class="mt-3 inline-flex items-center gap-2 bg-white/12 border border-white/25 rounded-full px-4 py-2 text-[12px] font-semibold">Student with Help Hero badge 🎖️</div>
+          <p class="text-[13px] sm:text-[16px] italic font-medium text-white/95 mt-4 max-w-[560px]">“Because when we ask for help,<br>we don't just find answers, we find each other.”</p>
+          <div class="mt-4 flex flex-wrap justify-center gap-2 text-[11px] font-bold">
+            <span class="bg-white text-slate-900 px-3 py-1.5 rounded-full">s-01141 • September 2026</span>
+            <a href="./index.html" class="bg-white/15 border border-white/25 px-3 py-1.5 rounded-full hover:bg-white/25">← Back to overview</a>
+          </div>
+          <div class="mt-4 flex justify-center relative"><a class="work-link work-link-dark" href="./index.html" target="_blank" rel="noopener"><span class="wl-ico"><i class="fa-solid fa-house"></i></span><span><b>Overview hub</b><small>Back to the hub: all weeks</small></span><i class="fa-solid fa-arrow-up-right-from-square wl-go"></i></a></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Speaker notes -->
+  <div id="notesPanel" class="mx-0 border-t border-slate-200 bg-slate-50 px-5 sm:px-6 py-4">
+    <div class="flex flex-wrap items-center justify-between gap-2">
+      <p class="text-[11px] font-bold tracking-widest uppercase text-slate-500"><i class="fa-solid fa-microphone text-primary mr-1"></i> Speaker notes: <span id="notesTitle" class="text-ink">Slide 1 • Title Slide</span></p>
+      <span id="notesTime" class="text-[11px] font-bold bg-slate-900 text-white px-2.5 py-1 rounded-full">0:00 – 0:15</span>
+    </div>
+    <p id="notesText" class="notes-box mt-2 text-[13px] leading-relaxed text-slate-700"></p>
+    <div class="mt-3 flex flex-wrap items-center gap-1.5 no-print">
+      <button id="speakBtn" onclick="speakNote()" class="inline-flex items-center gap-1.5 bg-[#2563EB] text-white text-[11px] font-bold px-3 py-1.5 rounded-full hover:bg-[#1D4ED8]"><i class="fa-solid fa-circle-play text-[11px]"></i> <span id="speakLabel">Play studio voice</span></button>
+      <button id="fullBtn" onclick="playFullTalk()" class="inline-flex items-center gap-1.5 bg-white border border-slate-200 text-[11px] font-bold px-3 py-1.5 rounded-full hover:bg-slate-100"><i class="fa-solid fa-list-ol text-[11px]"></i> <span id="fullLabel">Full talk</span></button>
+      <button onclick="stopSpeak()" class="inline-flex items-center gap-1.5 bg-white border border-slate-200 text-[11px] font-semibold px-3 py-1.5 rounded-full hover:bg-slate-100"><i class="fa-solid fa-stop text-[11px]"></i> Stop</button>
+      <select id="voiceSelect" class="text-[11px] font-semibold border border-slate-200 rounded-full px-2.5 py-1.5 bg-white text-slate-700 max-w-[190px] focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary" title="Fallback system voice (used only if studio audio is missing)"></select>
+      <span class="text-[11px] text-slate-400 font-medium ml-1">Studio voice: neural narration, one MP3 per slide (./audio). Full talk plays all 10 and advances. Tip: <kbd class="bg-white border border-slate-200 rounded px-1.5 py-0.5 font-mono">←</kbd> <kbd class="bg-white border border-slate-200 rounded px-1.5 py-0.5 font-mono">→</kbd> to move, <kbd class="bg-white border border-slate-200 rounded px-1.5 py-0.5 font-mono">F</kbd> for fullscreen.</span>
+    </div>
+  </div>
+  </div>
+
+  <!-- Thumbnails -->
+  <div class="mt-3 bg-white border border-slate-200 rounded-2xl p-3 no-print">
+    <div class="flex items-center justify-between px-1 pb-2">
+      <p class="text-[11px] font-bold tracking-widest uppercase text-slate-500">Jump to slide</p>
+      <span class="text-[11px] text-slate-400 font-medium">10 slides • click any card</span>
+    </div>
+    <div id="thumbs" class="grid grid-cols-5 lg:grid-cols-10 gap-1.5"></div>
+  </div>
+</div>
+</section>
+
+<!-- ALL SLIDES GRID -->
+<section id="all-slides" class="mt-6 scroll-mt-[72px] reveal">
+  <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+    <div class="px-6 sm:px-8 pt-6 flex flex-wrap items-start justify-between gap-3">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="w-8 h-8 rounded-xl bg-slate-900 text-white flex items-center justify-center"><i class="fa-solid fa-table-cells text-[12px]"></i></span>
+          <h2 class="text-[18px] sm:text-[20px] font-extrabold tracking-tight">All 10 slides at a glance</h2>
+        </div>
+        <p class="text-[13px] text-slate-600 mt-1.5 max-w-[760px]">Full script with timestamps. Use it as a teleprompter.</p>
+      </div>
+      <button onclick="window.print()" class="inline-flex items-center gap-1.5 bg-slate-900 text-white text-[12px] font-bold px-3.5 py-1.5 rounded-full hover:bg-black no-print"><i class="fa-solid fa-print text-[11px]"></i> Print / PDF</button>
+    </div>
+    <div class="px-6 sm:px-8 pb-6 pt-4 grid md:grid-cols-2 gap-3 text-[12.5px] leading-relaxed" id="scriptGrid"></div>
+  </div>
+</section>
+
+<div class="mt-6 bg-white border border-slate-200 rounded-2xl p-5 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+  <div>
+    <p class="text-[12px] font-bold tracking-widest uppercase text-slate-500">About</p>
+    <p class="text-[13px] text-slate-700 mt-1 leading-snug max-w-[720px]">Help Heroes: Turning Questions into Connections. Because when we ask for help, we don't just find answers, we find each other. Week 8 final presentation prototype.</p>
+  </div>
+  <div class="flex gap-2 shrink-0 no-print">
+    <a href="./index.html" class="text-[12px] font-bold bg-white border border-slate-200 px-4 py-2 rounded-full hover:bg-slate-50">Overview</a>
+    <button onclick="startPresent()" class="text-[12px] font-bold bg-[#2563EB] text-white px-4 py-2 rounded-full hover:bg-[#1D4ED8]">Present</button>
+  </div>
+</div>
+
+</main>
+<footer class="max-w-[1160px] mx-auto px-6 lg:px-8 pb-10 pt-6 text-[11px] text-slate-500 flex flex-wrap gap-2 justify-between">
+  <span>Help Heroes • Design Thinking Project • German University of Digital Science • Sep 2026 • Weeks 5·6·7·8 • s-01141</span>
+  <span class="flex gap-2"><a href="./index.html" class="underline hover:text-ink">Overview</a> • <a href="./week6.html" class="underline hover:text-ink">Prototype</a> • <a href="./week8.html" class="underline hover:text-ink">Week 8 deck</a></span>
+</footer>
+
+<script>
+const notes=[
+{t:"Slide 1 • Title Slide",time:"0:00 – 0:15",x:"Hello and welcome to my final presentation. This project has been a journey through the design thinking process, and today I'll walk you through how we tackled a wicked problem: redesigning the online learning experience for first-generation university students who face unreliable internet access. Our solution is called 'Help Heroes' – a program that reframes help-seeking as a strength rather than a weakness."},
+{t:"Slide 2 • The Design Challenge",time:"0:15 – 0:45",x:"Our design challenge was to redesign the online learning experience for first-generation university students in a world with unreliable internet access. This is a classic wicked problem – it's complex, uncertain, and defies simple solutions. The complexity comes from multiple interconnected factors: technological infrastructure, course design, family circumstances, work obligations, and financial constraints. The uncertainty is equally profound – there's no single way to define the problem, and any solution will have unintended consequences."},
+{t:"Slide 3 • Understanding the User: James",time:"0:45 – 1:15",x:"Through our fieldwork, we met James – a first-generation student whose experience defined the core of our problem. James is always apologizing – for late work, for missed meetings, for needing help. He's internalized the belief that he's a burden to the system. But here's the key insight: he desperately wants to ask for help but doesn't even know what to ask. The institutional knowledge that some students inherited from their families is a foreign language to him. This insight – captured in his words, 'I don't know what I don't know' – became the heart of our design challenge."},
+{t:"Slide 4 • The Solution: Help Heroes",time:"1:15 – 2:00",x:"Our solution is the 'Help Heroes' program. It reframes help-seeking as a strength. Here's how it works: James clicks the 'Ask for Help' button. The key feature is the 'I don't know how to ask' option – designed specifically for students like him. A Help Hero mentor appears and helps him navigate the system. He receives a Help Hero badge – a visible celebration of his courage. The anonymous Help Wall shows him he's not alone. And the low-bandwidth community ensures he stays connected even with limited internet. This isn't about technical fixes – it's about building belonging."},
+{t:"Slide 5 • Testing & What We Learned",time:"2:00 – 2:45",x:"We tested our prototype with two users – Maria, the rural student, and James himself. The feedback was powerful. When James saw the 'I don't know how to ask' button, he said, 'That's me! That's exactly how I feel.' Maria told us the Help Hero badges made her feel proud – 'I would be proud to have these,' she said. Both users loved the anonymous Help Wall – it showed them they're not alone. And the low-bandwidth community was a hit – 'This uses almost no data,' Maria noted. But we also learned what needs improvement: moving the 'I don't know how to ask' feature to the main screen, adding offline download capability, and introducing a 'Help Hero of the Month' feature to gamify the experience."},
+{t:"Slide 6 • Iteration: What We Changed",time:"2:45 – 3:30",x:"Based on user feedback, we made three key iterations. First, we moved the 'I don't know how to ask' feature to the main screen – users wanted it front and center. Second, we added offline download capability for the Help Wall, so students can access answers even without internet. Third, we introduced a 'Help Hero of the Month' feature to gamify the experience and encourage more help-seeking. This is the heart of design thinking – build, test, learn, improve, and test again. Each iteration brought us closer to a solution that truly serves our users."},
+{t:"Slide 7 • The Journey – Storyboard",time:"3:30 – 4:00",x:"To tell James's story, let me walk you through our storyboard. Panel 1: James is alone and confused. Panel 2: He's afraid to ask for help. Panel 3: He clicks 'I don't know how to ask' and a Help Hero appears. Panel 4: His mentor helps him navigate, and he earns his first badge. Panel 5: James is part of a community – he belongs. This is the journey from apology to belonging. And it's what our solution is all about."},
+{t:"Slide 8 • Next Steps",time:"4:00 – 4:30",x:"Looking ahead, we have four key next steps. First, refine the prototype by implementing our three iterations. Second, expand testing to more students across different contexts. Third, engage university leadership and establish a Design Thinking Guardian role to protect and champion the initiative. Fourth, build a community by launching a pilot and developing a dissemination strategy. Our guiding question remains: How might we help first-generation students navigate online learning without feeling like outsiders who have to constantly apologize?"},
+{t:"Slide 9 • Key Takeaways",time:"4:30 – 4:50",x:"Let me end with the key takeaways. First, wicked problems require clumsy solutions – there's no single right answer. Second, empathy isn't just nice – it's essential. James's insight was the key to everything. Third, help-seeking is strength – reframing shame as courage. Fourth, iteration is the path to innovation – build, test, learn, improve. And fifth, design thinking is leadership – enabling collaboration, making sense of ambiguity, and encouraging constructive conflict. As I said before, it's not about finding the perfect answer. It's about making genuine progress and learning from what works and what doesn't along the way."},
+{t:"Slide 10 • Closing",time:"4:50 – 5:00",x:"Thank you for joining me on this journey. Our solution, Help Heroes, is about turning questions into connections. Because when we ask for help, we don't just find answers – we find each other. That's what design thinking is all about."}
+];
+let cur=1; const N=10;
+let startT=null, timer=null, notesVisible=true;
+const shortTitles=["Title","Challenge","James","Solution","Testing","Iteration","Storyboard","Next steps","Takeaways","Closing"];
+
+function renderThumbs(){
+  const w=document.getElementById('thumbs'); w.innerHTML='';
+  for(let i=1;i<=N;i++){
+    const b=document.createElement('button');
+    b.className='thumb text-left bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-2'+(i===cur?' active':'');
+    b.innerHTML='<p class="text-[10px] font-bold text-slate-400">'+String(i).padStart(2,'0')+'</p><p class="text-[11px] font-bold leading-tight">'+shortTitles[i-1]+'</p><p class="text-[10px] text-slate-400 font-mono">'+notes[i-1].time+'</p>';
+    b.onclick=()=>showSlide(i);
+    w.appendChild(b);
+  }
+}
+function renderScript(){
+  const g=document.getElementById('scriptGrid'); g.innerHTML='';
+  notes.forEach((n,i)=>{
+    const d=document.createElement('div');
+    d.className='bg-slate-50 border border-slate-200 rounded-2xl p-4';
+    d.innerHTML='<div class="flex items-center justify-between gap-2"><p class="text-[12px] font-extrabold">'+(i+1)+'. '+n.t+'</p><span class="text-[10px] font-bold bg-slate-900 text-white px-2 py-0.5 rounded-full shrink-0">'+n.time+'</span></div><p class="mt-1.5 text-slate-600 italic">“'+n.x+'”</p><button onclick="showSlide('+(i+1)+');window.scrollTo({top:0,behavior:\'smooth\'})" class="mt-2 text-[11px] font-bold text-primary hover:underline">⤴ Go to slide '+(i+1)+'</button>';
+    g.appendChild(d);
+  });
+}
+function showSlide(n){
+  cur=Math.min(N,Math.max(1,n));
+  document.querySelectorAll('.deck-slide').forEach(s=>s.classList.remove('active'));
+  document.getElementById('slide-'+cur).classList.add('active');
+  document.getElementById('counter').textContent=cur+' / '+N;
+  document.getElementById('deckProgress').style.width=(cur/N*100)+'%';
+  document.getElementById('notesTitle').textContent=notes[cur-1].t;
+  document.getElementById('notesTime').textContent=notes[cur-1].time;
+  document.getElementById('notesText').textContent='“'+notes[cur-1].x+'”';
+  stopSpeak(); renderThumbs();
+  if(!startT){startT=Date.now(); startClock();}
+}
+function nextSlide(){showSlide(cur+1)} function prevSlide(){showSlide(cur-1)}
+function toggleNotes(force){
+  notesVisible = force!==undefined?force:!notesVisible;
+  document.getElementById('notesPanel').style.display=notesVisible?'block':'none';
+  document.getElementById('notesBtn').classList.toggle('bg-blue-100',notesVisible);
+}
+function toggleFullscreen(){
+  const el=document.getElementById('stage');
+  if(document.fullscreenElement) document.exitFullscreen();
+  else el.requestFullscreen&&el.requestFullscreen();
+}
+function startPresent(){
+  showSlide(1); toggleNotes(true);
+  const el=document.getElementById('stage');
+  el.scrollIntoView({behavior:'smooth'});
+  if(el.requestFullscreen&&window.innerWidth>768){/* keep inline by default; user can press F */ }
+}
+function startClock(){
+  if(timer) return;
+  timer=setInterval(()=>{
+    const s=Math.floor((Date.now()-startT)/1000);
+    const m=Math.floor(s/60), r=String(s%60).padStart(2,'0');
+    document.getElementById('clock').textContent=m+':'+r+' / 5:00';
+  },500);
+}
+/* Natural narration: best neural voice, sentence-by-sentence delivery */
+let narrVoice=null, narrating=false;
+function pickBestVoice(voices){
+  const en=voices.filter(v=>v.lang&&v.lang.toLowerCase().startsWith('en'));
+  const pool=en.length?en:voices;
+  if(!pool.length) return null;
+  const score=v=>{
+    const n=(v.name+' '+(v.voiceURI||'')).toLowerCase(), lang=v.lang.toLowerCase();
+    let s=0;
+    if(lang.startsWith('en-us')) s+=100; else if(lang.startsWith('en-gb')) s+=70; else if(lang.startsWith('en')) s+=40;
+    if(n.includes('natural')) s+=120;
+    if(n.includes('google us english')||n.includes('google uk english female')) s+=110;
+    else if(n.includes('google')) s+=80;
+    if(n.includes('microsoft')&&(n.includes('online')||n.includes('aria')||n.includes('jenny')||n.includes('guy'))) s+=100;
+    else if(n.includes('microsoft')) s+=60;
+    if(n.includes('samantha')||n.includes('karen')||n.includes('moira')||n.includes('tessa')) s+=50;
+    if(n.includes('enhanced')||n.includes('premium')) s+=30;
+    return s;
+  };
+  return [...pool].sort((a,b)=>score(b)-score(a))[0];
+}
+function populateVoices(){
+  const sel=document.getElementById('voiceSelect');
+  if(!sel||!('speechSynthesis' in window)) return;
+  const voices=speechSynthesis.getVoices();
+  if(!voices.length) return;
+  narrVoice=narrVoice||pickBestVoice(voices);
+  sel.innerHTML='';
+  const en=voices.filter(v=>v.lang&&v.lang.toLowerCase().startsWith('en'));
+  const rest=voices.filter(v=>!(v.lang&&v.lang.toLowerCase().startsWith('en')));
+  [...en,...rest].slice(0,40).forEach(v=>{
+    const o=document.createElement('option');
+    o.value=v.name;
+    o.textContent=v.name+' ('+v.lang+')'+(v===narrVoice?' — recommended':'');
+    if(v===narrVoice) o.selected=true;
+    sel.appendChild(o);
+  });
+  sel.onchange=()=>{
+    const v=voices.find(x=>x.name===sel.value);
+    if(v){ narrVoice=v; previewVoice(); }
+  };
+}
+function previewVoice(){
+  if(!narrVoice||!('speechSynthesis' in window)) return;
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance("Hi, I'm "+narrVoice.name+". I'll narrate your Help Heroes talk.");
+  u.voice=narrVoice; u.rate=1; u.pitch=1;
+  speechSynthesis.speak(u);
+}
+function setSpeakUI(on){
+  narrating=on;
+  const l=document.getElementById('speakLabel');
+  if(l) l.textContent=on?'Playing…':'Play studio voice';
+}
+/* Studio narration: pre-generated neural MP3s (./audio/), system voice fallback */
+let studioAudio=null, fullTalk=false, autoAdv=false;
+function studioSrc(n){ return './audio/week8-slide'+String(n).padStart(2,'0')+'.mp3'; }
+function stopStudio(){ if(studioAudio){ try{ studioAudio.pause(); studioAudio.src=''; }catch(e){} studioAudio=null; } }
+function stopSystem(){ try{ speechSynthesis.cancel(); }catch(e){} }
+function syncFullBtn(){
+  const b=document.getElementById('fullBtn'), l=document.getElementById('fullLabel');
+  if(!b||!l) return;
+  l.textContent=fullTalk?'Stop full talk':'Full talk';
+  b.classList.toggle('bg-violet-50',fullTalk); b.classList.toggle('border-violet-300',fullTalk);
+}
+function playStudio(n,onEnd){
+  stopStudio(); stopSystem();
+  const a=new Audio(studioSrc(n)); studioAudio=a; setSpeakUI(true);
+  a.onended=()=>{ studioAudio=null; setSpeakUI(false); if(onEnd) onEnd(); };
+  a.onerror=()=>{ studioAudio=null; setSpeakUI(false); speakSystem(); if(fullTalk){ fullTalk=false; syncFullBtn(); } };
+  try{ const p=a.play(); if(p&&p.catch) p.catch(()=>{ studioAudio=null; setSpeakUI(false); speakSystem(); }); }
+  catch(e){ studioAudio=null; setSpeakUI(false); speakSystem(); }
+}
+function nextInTalk(){
+  if(!fullTalk) return;
+  if(cur<N){ autoAdv=true; showSlide(cur+1); autoAdv=false; playStudio(cur,nextInTalk); }
+  else { fullTalk=false; syncFullBtn(); }
+}
+function playFullTalk(){
+  if(fullTalk){ stopSpeak(); return; }
+  fullTalk=true; syncFullBtn();
+  autoAdv=true; showSlide(1); autoAdv=false;
+  playStudio(1,nextInTalk);
+}
+function speakNote(){
+  if(studioAudio||narrating){ stopSpeak(); return; }
+  fullTalk=false; syncFullBtn();
+  playStudio(cur,null);
+}
+function speakSystem(){
+  if(!('speechSynthesis' in window)) return;
+  const synth=speechSynthesis;
+  synth.cancel();
+  if(!narrVoice) narrVoice=pickBestVoice(synth.getVoices());
+  const chunks=(notes[cur-1].x.match(/[^.!?…]+[.!?…]+|[^.!?…]+$/g)||[notes[cur-1].x]).map(s=>s.trim()).filter(Boolean);
+  let i=0; setSpeakUI(true);
+  const next=()=>{
+    if(!narrating) return;
+    if(i>=chunks.length){ setSpeakUI(false); return; }
+    const u=new SpeechSynthesisUtterance(chunks[i]);
+    if(narrVoice){ u.voice=narrVoice; u.lang=narrVoice.lang; }
+    u.rate=1; u.pitch=1; u.volume=1;
+    u.onend=()=>{ i++; setTimeout(next,220); };
+    u.onerror=()=>{ i++; setTimeout(next,220); };
+    synth.speak(u);
+  };
+  next();
+}
+function stopSpeak(){ if(!autoAdv){ fullTalk=false; syncFullBtn(); } stopStudio(); stopSystem(); setSpeakUI(false); }
+if('speechSynthesis' in window){
+  populateVoices();
+  speechSynthesis.onvoiceschanged=populateVoices;
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();nextSlide()}
+  else if(e.key==='ArrowLeft'){e.preventDefault();prevSlide()}
+  else if(e.key.toLowerCase()==='f'){toggleFullscreen()}
+  else if(e.key==='Home'){showSlide(1)} else if(e.key==='End'){showSlide(N)}
+});
+function toggleDark(){
+  const h=document.documentElement;
+  h.classList.toggle('dark');
+  try{ localStorage.setItem('hh-dark',h.classList.contains('dark')?'1':'0'); }catch(e){}
+  syncDarkIcon();
+}
+function syncDarkIcon(){
+  const b=document.getElementById('darkBtn');
+  if(b) b.innerHTML=document.documentElement.classList.contains('dark')
+    ?'<i class="fa-solid fa-sun text-[12px]"></i>'
+    :'<i class="fa-solid fa-moon text-[12px]"></i>';
+}
+try{ if(localStorage.getItem('hh-dark')==='1') document.documentElement.classList.add('dark'); }catch(e){}
+syncDarkIcon();
+renderThumbs(); renderScript(); showSlide(1);
+</script>
+</body>
+</html>

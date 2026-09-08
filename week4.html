@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<!--
+  Help Heroes | Week 4 - Synthesis
+  Student ID: s-01141 | August 11, 2026 | Design Thinking Project
+  File: week4.html - single-file content page (no build step)
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Help Heroes | Week 4 Synthesis</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#2563EB',ink:'#0F172A',muted:'#64748B'},fontFamily:{sans:['Inter','system-ui','sans-serif'],display:['Fraunces','serif']},boxShadow:{card:'0 1px 3px rgba(15,23,42,0.06),0 12px 32px rgba(15,23,42,0.08)'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,800;9..144,900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*{font-family:Inter,system-ui,sans-serif}
+.font-display{font-family:Fraunces,serif}
+.grid-pattern{background-image:linear-gradient(to right,rgba(15,23,42,0.035) 1px,transparent 1px),linear-gradient(to bottom,rgba(15,23,42,0.035) 1px,transparent 1px);background-size:32px 32px}
+.reveal{opacity:0;transform:translateY(10px);animation:reveal 700ms ease forwards}
+.petals span{display:inline-block;transition:transform 150ms ease}
+.petals span:nth-child(odd){transform:rotate(-1.4deg)}
+.petals span:nth-child(even){transform:rotate(1.4deg)}
+.petals span:hover{transform:rotate(0) scale(1.07)}
+@keyframes reveal{to{opacity:1;transform:none}}
+</style>
+</head>
+<body class="bg-[#F8FAFC] text-ink antialiased selection:bg-primary selection:text-white">
+<div class="fixed inset-0 -z-10 pointer-events-none"><div class="absolute inset-0 bg-[#F8FAFC]"></div><div class="absolute inset-0 grid-pattern opacity-[0.5]"></div><div class="absolute -top-[360px] left-1/2 -translate-x-1/2 w-[1400px] h-[760px] rounded-full blur-[100px] opacity-[0.14]" style="background:radial-gradient(ellipse at center,#2563EB 0%,#8B5CF6 34%,transparent 72%)"></div></div>
+
+<nav class="sticky top-0 z-40 backdrop-blur-xl bg-white/80 border-b border-slate-200">
+  <div class="max-w-[1160px] mx-auto px-4 sm:px-6 lg:px-8 h-[56px] flex items-center justify-between gap-4">
+    <a href="./index.html" class="flex items-center gap-2.5">
+      <span class="w-8 h-8 rounded-xl bg-[#2563EB] text-white flex items-center justify-center text-[16px] shadow-sm">🦸</span>
+      <span class="font-display font-[900] tracking-tight text-[17px] leading-none">Help Heroes</span>
+      <span class="hidden sm:inline-flex text-[11px] font-bold tracking-widest uppercase bg-slate-900 text-white px-2 py-1 rounded-full ml-1">Week 4</span>
+    </a>
+    <div class="hidden md:flex items-center gap-1.5 text-[12px] font-semibold overflow-x-auto [&>a]:shrink-0">
+      <a href="./week1.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 1</a>
+      <a href="./week2.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 2</a>
+      <a href="./week3.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 3</a>
+      <a href="./week4.html" class="px-3 py-1.5 rounded-full bg-[#EFF6FF] text-primary border border-blue-200">Week 4</a>
+      <a href="./week5_project.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 5</a>
+      <a href="./week6.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 6</a>
+      <a href="./index_week7.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 7</a>
+      <a href="./week8.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Week 8</a>
+    </div>
+    <div class="flex items-center gap-1.5">
+      <a href="./index.html" class="hidden sm:inline-flex items-center gap-1.5 bg-white border border-slate-200 px-3 py-1.5 rounded-full text-[12px] font-semibold hover:bg-slate-50">Overview</a>
+      <a href="./s-01141_WEEK_4_Synthesis.pdf" download class="inline-flex items-center gap-1.5 bg-[#2563EB] text-white px-3.5 py-1.5 rounded-full text-[12px] font-bold hover:bg-[#1D4ED8] shadow-sm"><i class="fa-solid fa-download text-[10px]"></i> PDF</a>
+    </div>
+  </div>
+</nav>
+
+<main class="max-w-[1160px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+
+<header class="reveal">
+  <div class="bg-white rounded-[24px] border border-slate-200 shadow-card overflow-hidden">
+    <div class="h-[5px] w-full bg-gradient-to-r from-blue-600 via-violet-500 to-amber-500"></div>
+    <div class="px-6 sm:px-8 lg:px-10 py-7 sm:py-8">
+      <div class="flex flex-wrap items-center gap-2 mb-3">
+        <span class="inline-flex items-center gap-2 bg-slate-900 text-white text-[11px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full">Assignment 4</span>
+        <span class="inline-flex items-center gap-1.5 bg-blue-50 border border-blue-200 text-primary text-[11px] font-bold px-2.5 py-1 rounded-full">Interpret + Point of View</span>
+        <span class="inline-flex items-center gap-1.5 text-[11px] font-medium text-slate-500">s-01141 • Aug 11, 2026</span>
+      </div>
+      <h1 class="font-display text-[30px] sm:text-[42px] font-[900] leading-[0.95] tracking-[-0.03em]">Synthesis</h1>
+      <p class="mt-3 text-[13.5px] leading-relaxed text-slate-600 max-w-[760px]">Five quotes in, one direction out: <span class="font-bold text-ink">belonging, not just connectivity</span>.</p>
+      <div class="mt-4 flex flex-wrap gap-2">
+        <a href="#flowers" class="text-[12px] font-bold bg-slate-900 text-white px-4 py-2 rounded-full hover:bg-black">Quotation flowers</a>
+        <a href="#povs" class="text-[12px] font-bold bg-white border border-slate-200 px-4 py-2 rounded-full hover:bg-slate-50">PoVs + direction</a>
+        <a href="./week5_project.html" class="text-[12px] font-bold bg-[#2563EB] text-white px-4 py-2 rounded-full hover:bg-[#1D4ED8]">Continue to Week 5 →</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- FUNNEL -->
+<section class="mt-6 reveal">
+  <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+    <div class="px-6 sm:px-8 pt-6"><p class="text-[11px] font-bold tracking-[0.22em] uppercase text-primary">How synthesis works</p><h2 class="text-[18px] sm:text-[20px] font-extrabold tracking-tight mt-1">The funnel: evidence narrows to one direction</h2></div>
+    <div class="px-6 sm:px-8 pb-6 pt-4">
+      <svg viewBox="0 0 520 330" class="w-full h-auto max-w-[560px] mx-auto" role="img" aria-label="Synthesis funnel: 15 quotes, 5 flowers, 5 themes, 3 PoVs, 1 HMW">
+        <g font-family="Inter,system-ui,sans-serif" font-size="13" font-weight="800" text-anchor="middle">
+          <polygon points="30,8 490,8 450,68 70,68" fill="#DBEAFE"/><text x="260" y="44" fill="#1D4ED8">15 interview quotes</text>
+          <polygon points="70,76 450,76 410,136 110,136" fill="#BFDBFE"/><text x="260" y="112" fill="#1E3A8A">5 quotation flowers</text>
+          <polygon points="110,144 410,144 370,204 150,204" fill="#93C5FD"/><text x="260" y="180" fill="#1E3A8A">5 themes</text>
+          <polygon points="150,212 370,212 330,272 190,272" fill="#6366F1"/><text x="260" y="248" fill="#FFFFFF">3 PoVs</text>
+        </g>
+        <rect x="150" y="282" width="220" height="36" rx="18" fill="#F59E0B"/>
+        <text x="260" y="305" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="13" font-weight="800" fill="#0F172A">1 HMW: belonging</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- FLOWERS -->
+<section id="flowers" class="mt-6 scroll-mt-[72px] reveal">
+  <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+    <div class="px-6 sm:px-8 pt-6"><p class="text-[11px] font-bold tracking-[0.22em] uppercase text-primary">Task 1 • Interpret + Abduct</p><h2 class="text-[18px] sm:text-[20px] font-extrabold tracking-tight mt-1">Five quotation flowers</h2></div>
+    <div class="px-6 sm:px-8 pb-6 pt-4 space-y-4">
+
+      <div class="rounded-2xl border border-slate-200 overflow-hidden">
+        <div class="bg-slate-50 px-5 py-4 border-b border-slate-200">
+          <p class="text-[11px] font-bold tracking-widest uppercase text-slate-500">Quotation 1 • The Silent Trade-Off • Maria</p>
+          <p class="text-[14px] italic font-medium mt-1">"I've started screenshotting the slides and reading them like a textbook. It's not the same, I miss the explanations, but it's the only way I can keep up."</p>
+          <div class="mt-2 flex flex-wrap gap-1.5 text-[11px] font-semibold">
+            <span class="bg-white border border-slate-200 px-2.5 py-1 rounded-full">💡 Creative workaround, not real learning</span>
+            <span class="bg-white border border-slate-200 px-2.5 py-1 rounded-full">⚖️ Degraded experience beats none</span>
+            <span class="bg-white border border-slate-200 px-2.5 py-1 rounded-full">😞 Quiet shame, "not the same"</span>
+            <span class="bg-white border border-slate-200 px-2.5 py-1 rounded-full">❓ Will the degree count the same?</span>
+            <span class="bg-white border border-slate-200 px-2.5 py-1 rounded-full">🕐 Harder work, thinner results</span>
+            <span class="bg-white border border-slate-200 px-2.5 py-1 rounded-full">🛣️ Surviving, not understanding</span>
+          </div>
+        </div>
+        <div class="bg-emerald-50/60 px-5 py-3.5 text-[12.5px] text-slate-700"><span class="font-bold text-emerald-700">Inference:</span> Maria trades depth for access on purpose. She wants the degree more than the system wants her. Shame plus overload ends in burnout or a quiet exit.</div>
+      </div>
+
+      <div class="rounded-2xl border border-slate-200 overflow-hidden">
+        <div class="bg-slate-50 px-5 py-4 border-b border-slate-200">
+          <p class="text-[11px] font-bold tracking-widest uppercase text-slate-500">Quotation 2 • The Impossible Choice • Maria</p>
+          <p class="text-[14px] italic font-medium mt-1">"Professors say just watch the recording later. Downloading a 45-minute video uses half my data for the month."</p>
+          <div class="mt-2 flex flex-wrap gap-1.5 text-[11px] font-semibold">
+            <span class="bg-white border border-slate-200 px-2.5 py-1 rounded-full">⚠️ Staff assume access that isn't there</span>
+            <span class="bg-white border border-slate-200 px-2.5 py-1 rounded-full">✖️ Study vs essentials, pick one</span>
+            <span class="bg-white border border-slate-200 px-2.5 py-1 rounded-full">🚪 Built for someone else</span>
+            <span class="bg-white border border-slate-200 px-2.5 py-1 rounded-full">🔇 She stopped explaining</span>
+            <span class="bg-white border border-slate-200 px-2.5 py-1 rounded-full">😞 The "fix" makes it worse</span>
+          </div>
+        </div>
+        <div class="bg-emerald-50/60 px-5 py-3.5 text-[12.5px] text-slate-700"><span class="font-bold text-emerald-700">Inference:</span> Lectures compete with job applications and emergencies for the same megabytes. Silence after unheard explanations keeps the problem invisible and uncounted.</div>
+      </div>
+
+      <div class="rounded-2xl border-2 border-primary/40 overflow-hidden">
+        <div class="bg-blue-50/70 px-5 py-4 border-b border-blue-100">
+          <p class="text-[11px] font-bold tracking-widest uppercase text-primary">Quotation 3 • The Burden of Apology • James ⭐</p>
+          <p class="text-[14px] italic font-medium mt-1">"I'm always apologizing. To professors for late work, to group members for missed meetings, to family for the data."</p>
+          <div class="mt-2 flex flex-wrap gap-1.5 text-[11px] font-semibold">
+            <span class="bg-white border border-slate-200 px-2.5 py-1 rounded-full">🙈 Blames himself, not the setup</span>
+            <span class="bg-white border border-slate-200 px-2.5 py-1 rounded-full">🏋️ Feels like an inconvenience</span>
+            <span class="bg-white border border-slate-200 px-2.5 py-1 rounded-full">😢 Shame eats belonging</span>
+            <span class="bg-white border border-slate-200 px-2.5 py-1 rounded-full">⛓️ Sorry for things outside his control</span>
+            <span class="bg-white border border-slate-200 px-2.5 py-1 rounded-full">👥 Belonging slips away</span>
+          </div>
+        </div>
+        <div class="bg-emerald-50/60 px-5 py-3.5 text-[12.5px] text-slate-700"><span class="font-bold text-emerald-700">Inference:</span> Apology has become identity. Structural gaps read as personal failure, which silences him in class, in groups, and when help is near.</div>
+      </div>
+
+      <div class="rounded-2xl border-2 border-amber-300 overflow-hidden">
+        <div class="bg-amber-50 px-5 py-4 border-b border-amber-200">
+          <p class="text-[11px] font-bold tracking-widest uppercase text-amber-700">❀ Quotation 4 • The Double Bind • James ⭐ core insight</p>
+          <p class="text-[14px] italic font-medium mt-1">"I want to ask for help, but I don't even know what to ask. I don't know what I don't know."</p>
+          <div class="petals mt-2 flex flex-wrap gap-1.5 text-[11px] font-semibold">
+            <span class="bg-white border border-amber-200 px-2.5 py-1 rounded-full">🔒 Needs help, lacks the words to request it</span>
+            <span class="bg-white border border-amber-200 px-2.5 py-1 rounded-full">📖 Hidden curriculum, never inherited</span>
+            <span class="bg-white border border-amber-200 px-2.5 py-1 rounded-full">⏸️ Stuck between needing and asking</span>
+            <span class="bg-white border border-amber-200 px-2.5 py-1 rounded-full">❓ Reads as disengaged, actually lost</span>
+            <span class="bg-white border border-amber-200 px-2.5 py-1 rounded-full">🧰 Missing navigation skills</span>
+          </div>
+        </div>
+        <div class="bg-emerald-50/60 px-5 py-3.5 text-[12.5px] text-slate-700"><span class="font-bold text-emerald-700">Inference:</span> Asking itself demands vocabulary James was never given. Nobody hands him those words, so the confidence to self-advocate never forms.</div>
+      </div>
+
+      <div class="rounded-2xl border border-slate-200 overflow-hidden">
+        <div class="bg-slate-50 px-5 py-4 border-b border-slate-200">
+          <p class="text-[11px] font-bold tracking-widest uppercase text-slate-500">Quotation 5 • The Invisible Student • Aisha</p>
+          <p class="text-[14px] italic font-medium mt-1">"Professors don't realize some of us work and study at once. They think we're just students with nothing else to do."</p>
+          <div class="mt-2 flex flex-wrap gap-1.5 text-[11px] font-semibold">
+            <span class="bg-white border border-slate-200 px-2.5 py-1 rounded-full">🫥 Her reality goes unrecognized</span>
+            <span class="bg-white border border-slate-200 px-2.5 py-1 rounded-full">🎓 System built around a "typical" student</span>
+            <span class="bg-white border border-slate-200 px-2.5 py-1 rounded-full">✊ Resentment builds</span>
+            <span class="bg-white border border-slate-200 px-2.5 py-1 rounded-full">⚖️ Risks underperforming at both</span>
+            <span class="bg-white border border-slate-200 px-2.5 py-1 rounded-full">💀 Strain tips toward dropout</span>
+          </div>
+        </div>
+        <div class="bg-emerald-50/60 px-5 py-3.5 text-[12.5px] text-slate-700"><span class="font-bold text-emerald-700">Inference:</span> The wound is recognition, not just workload. Two demanding worlds, support from neither, and disengagement follows when the institution won't bend.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- THEMES -->
+<section class="mt-6 reveal">
+  <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+    <div class="px-6 sm:px-8 pt-6"><h2 class="text-[18px] sm:text-[20px] font-extrabold tracking-tight">Five emerging themes</h2></div>
+    <div class="px-6 sm:px-8 pb-6 pt-4 grid sm:grid-cols-2 lg:grid-cols-5 gap-2.5 text-[12.5px]">
+      <div class="bg-blue-50 border border-blue-200 rounded-xl p-4"><p class="text-[20px]">💡</p><p class="font-extrabold mt-1">Clever, costly workarounds</p><p class="text-slate-600 mt-1">Survival tactics that exhaust and expire.</p></div>
+      <div class="bg-rose-50 border border-rose-200 rounded-xl p-4"><p class="text-[20px]">⚠️</p><p class="font-extrabold mt-1">Assumed access</p><p class="text-slate-600 mt-1">Study vs food, data vs emergencies.</p></div>
+      <div class="bg-amber-50 border border-amber-200 rounded-xl p-4"><p class="text-[20px]">😢</p><p class="font-extrabold mt-1">Shame as interface</p><p class="text-slate-600 mt-1">Barriers read as personal failure.</p></div>
+      <div class="bg-violet-50 border border-violet-200 rounded-xl p-4"><p class="text-[20px]">📖</p><p class="font-extrabold mt-1">Missing hidden curriculum</p><p class="text-slate-600 mt-1">Even asking needs knowledge never taught.</p></div>
+      <div class="bg-slate-50 border border-slate-200 rounded-xl p-4"><p class="text-[20px]">🫥</p><p class="font-extrabold mt-1">Invisibility</p><p class="text-slate-600 mt-1">Designed around a student who isn't them.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- POVS -->
+<section id="povs" class="mt-6 scroll-mt-[72px] reveal">
+  <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+    <div class="px-6 sm:px-8 pt-6"><p class="text-[11px] font-bold tracking-[0.22em] uppercase text-primary">Task 2 • Point of View</p><h2 class="text-[18px] sm:text-[20px] font-extrabold tracking-tight mt-1">Three PoV statements</h2></div>
+    <div class="px-6 sm:px-8 pb-6 pt-4 grid lg:grid-cols-3 gap-4 text-[13px]">
+      <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5">
+        <p class="text-[11px] font-bold tracking-widest uppercase text-slate-500">PoV 1 • Maria</p>
+        <p class="mt-2"><span class="font-bold text-primary">I met</span> <em>Maria, who drives 20 minutes to library Wi-Fi and screenshots slides to save data.</em></p>
+        <p class="mt-2"><span class="font-bold text-primary">I was inspired to discover</span> <em>she knows she learns less deeply and fears her degree counts less, yet persists because she values it more than the system values her.</em></p>
+        <p class="mt-2"><span class="font-bold text-primary">It's all about helping Maria</span> <em>learn with confidence, without trading education against scarce resources.</em></p>
+      </div>
+      <div class="bg-blue-50/70 border-2 border-primary/50 rounded-2xl p-5 relative">
+        <span class="absolute -top-2.5 left-4 text-[10px] font-bold bg-slate-900 text-white px-2.5 py-1 rounded-full">CHOSEN ✓</span>
+        <p class="text-[11px] font-bold tracking-widest uppercase text-primary">PoV 2 • James</p>
+        <p class="mt-2"><span class="font-bold text-primary">I met</span> <em>James, who apologizes for late work, missed meetings, and needing help, and believes he burdens the system.</em></p>
+        <p class="mt-2"><span class="font-bold text-primary">I was inspired to discover</span> <em>he burns to ask for help but can't phrase the question. Institutional knowledge is a foreign language to him.</em></p>
+        <p class="mt-2"><span class="font-bold text-primary">It's all about helping James</span> <em>navigate and belong, without apologizing for existing.</em></p>
+      </div>
+      <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5">
+        <p class="text-[11px] font-bold tracking-widest uppercase text-slate-500">PoV 3 • Aisha</p>
+        <p class="mt-2"><span class="font-bold text-primary">I met</span> <em>Aisha, fitting study into workday cracks, unseen by her professors.</em></p>
+        <p class="mt-2"><span class="font-bold text-primary">I was inspired to discover</span> <em>she feels invisible to a community built for students with no other life.</em></p>
+        <p class="mt-2"><span class="font-bold text-primary">It's all about helping Aisha</span> <em>learn on her terms, recognized as different from the "typical" student.</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIRECTION -->
+<section class="mt-6 reveal">
+  <div class="bg-gradient-to-br from-blue-600 to-violet-600 rounded-[22px] shadow-card p-6 sm:p-8 text-white relative overflow-hidden">
+    <div class="absolute inset-0 opacity-20 grid-pattern"></div>
+    <div class="relative">
+      <p class="text-[11px] font-bold tracking-widest uppercase text-white/70">Choosing a direction • PoV 2, James</p>
+      <h2 class="font-display text-[22px] sm:text-[28px] font-[900] tracking-tight mt-1">Belonging, not just connectivity</h2>
+      <p class="text-[13px] sm:text-[14px] text-white/90 leading-relaxed mt-2 max-w-[780px]">"Always apologizing" reaches past bandwidth into shame, invisibility, and feeling like a burden. The environment itself can un-belong a student. That opens a wider design space than tech fixes: community, expectations, and institutional knowledge made legible.</p>
+      <div class="mt-4 bg-white rounded-2xl px-6 py-5 text-center">
+        <p class="text-[11px] font-bold tracking-widest uppercase text-slate-500">The problem to pursue</p>
+        <p class="text-[15px] sm:text-[18px] font-bold text-ink italic mt-1">How might we help first-generation students navigate online learning without feeling like outsiders who constantly apologize for their circumstances?</p>
+      </div>
+      <div class="mt-4 flex flex-wrap gap-2">
+        <span class="text-[11px] font-bold bg-white/15 border border-white/25 px-3 py-1.5 rounded-full">✓ 5 quotation flowers</span>
+        <span class="text-[11px] font-bold bg-white/15 border border-white/25 px-3 py-1.5 rounded-full">✓ 5 key insights</span>
+        <span class="text-[11px] font-bold bg-white/15 border border-white/25 px-3 py-1.5 rounded-full">✓ 3 PoVs, PoV 2 selected</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="mt-6 bg-white border border-slate-200 rounded-2xl p-5 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+  <div>
+    <p class="text-[12px] font-bold tracking-widest uppercase text-slate-500">Next</p>
+    <p class="text-[13px] text-slate-700 mt-1">Ideation: Week 5 turns insight into ideas.</p>
+  </div>
+  <div class="flex gap-2 shrink-0">
+    <a href="./index.html" class="text-[12px] font-bold bg-white border border-slate-200 px-4 py-2 rounded-full hover:bg-slate-50">Overview</a>
+    <a href="./week5_project.html" class="text-[12px] font-bold bg-[#2563EB] text-white px-4 py-2 rounded-full hover:bg-[#1D4ED8]">Week 5 →</a>
+  </div>
+</div>
+
+</main>
+<footer class="max-w-[1160px] mx-auto px-6 lg:px-8 pb-10 pt-6 text-[11px] text-slate-500 flex flex-wrap gap-2 justify-between">
+  <span>Help Heroes • Design Thinking Project • German University of Digital Science • s-01141</span>
+  <span class="flex gap-2"><a href="./week3.html" class="underline hover:text-ink">Week 3</a> • <a href="./index.html" class="underline hover:text-ink">Overview</a> • <a href="./week8.html" class="underline hover:text-ink">Finale</a></span>
+</footer>
+</body>
+</html>
