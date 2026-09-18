@@ -6,3 +6,5 @@ wreframe_image.html
 Thumbs.db
 *.log
 /tmp/
+# speaker notes stay local only, never publish
+speaker-notes-week8-live.md

@@ -31,7 +31,6 @@
 .thumb:hover{transform:translateY(-1px)}
 #stage:fullscreen{background:#0F172A;padding:24px}
 #stage:fullscreen .slide-frame{max-height:calc(100vh - 160px)}
-.notes-box a{color:#2563EB;text-decoration:underline}
 .work-link{display:inline-flex;align-items:center;gap:.6rem;background:#fff;border:1.5px solid #E2E8F0;border-radius:999px;padding:.4rem .9rem .4rem .5rem;box-shadow:0 2px 10px rgba(15,23,42,.08);transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease;text-align:left}
 .work-link:hover{transform:translateY(-2px);border-color:#2563EB;box-shadow:0 8px 22px rgba(37,99,235,.22)}
 .work-link:hover .wl-go{transform:translateX(3px);color:#2563EB}
@@ -56,7 +55,6 @@ html.dark nav.sticky{background:rgba(2,6,23,.9)!important}
 html.dark select,html.dark kbd{background:#0F172A!important;border-color:#334155!important;color:#E2E8F0!important}
 html.dark .thumb{background:#0F172A!important;border-color:#1E293B!important}
 html.dark .thumb.active{background:#1E3A8A!important;border-color:#2563EB!important}
-html.dark #notesPanel{background:#0B1226!important}
 html.dark .work-link:not(.slide-frame *){background:#0F172A;border-color:#1E293B}
 html.dark .work-link:not(.slide-frame *) b{color:#F1F5F9}
 html.dark .cov-btn{background:#0F172A!important;border-color:#1E293B!important;color:#E2E8F0!important}
@@ -64,11 +62,11 @@ html.dark .cov-btn{background:#0F172A!important;border-color:#1E293B!important;c
 #stageControls{opacity:0;transform:translateY(-4px);transition:opacity .25s ease,transform .25s ease;pointer-events:none}
 #stage:hover #stageControls,#stageControls:focus-within{opacity:1;transform:none;pointer-events:auto}
 @media(hover:none){#stageControls{opacity:1;transform:none;pointer-events:auto}}
-@media print{.no-print{display:none!important}nav.sticky,header.reveal,#all-slides,footer,.final-chrome-hide,#notesPanel,#stageControls,.fixed{display:none!important}main{max-width:none!important;padding:0!important;margin:0!important}section{margin:0!important}#stage{border:none!important;border-radius:0!important;box-shadow:none!important}.slide-frame{border:none!important;box-shadow:none!important;border-radius:0!important}.slide-frame .aspect-video{min-height:auto!important}.deck-slide{display:block!important;page-break-inside:avoid;page-break-after:always;margin:0!important}.slide-footer{border-top:1px solid #E2E8F0}}@page{size:Letter landscape;margin:0.35in}
+@media print{.no-print{display:none!important}nav.sticky,header.reveal,footer,.final-chrome-hide,#stageControls,.fixed{display:none!important}main{max-width:none!important;padding:0!important;margin:0!important}section{margin:0!important}#stage{border:none!important;border-radius:0!important;box-shadow:none!important}.slide-frame{border:none!important;box-shadow:none!important;border-radius:0!important}.slide-frame .aspect-video{min-height:auto!important}.deck-slide{display:block!important;page-break-inside:avoid;page-break-after:always;margin:0!important}.slide-footer{border-top:1px solid #E2E8F0}}@page{size:Letter landscape;margin:0.35in}
 .slide-footer{display:flex;align-items:center;justify-content:space-between;gap:.5rem;border-top:1px solid #E2E8F0;background:#F8FAFC;padding:.4rem .9rem;font-size:10px;font-weight:700;letter-spacing:.02em;color:#64748B}
 .slide-footer .sf-l{display:flex;align-items:center;gap:.4rem}
 .slide-footer .sf-dot{width:6px;height:6px;border-radius:999px;background:#2563EB}
-body.present-mode nav.sticky,body.present-mode header.reveal,body.present-mode #all-slides,body.present-mode footer,body.present-mode .final-chrome-hide{display:none!important}
+body.present-mode nav.sticky,body.present-mode header.reveal,body.present-mode footer,body.present-mode .final-chrome-hide{display:none!important}
 body.present-mode main{max-width:1020px;padding-top:12px}
 body.present-mode #stage{border-width:2px}
 body.present-mode .present-hide{display:none!important}
@@ -150,8 +148,6 @@ body.present-mode #stageControls{opacity:1!important;transform:none!important;po
           <div class="mt-5 flex flex-wrap gap-2 no-print">
             <button onclick="startPresent()" class="inline-flex items-center gap-1.5 bg-slate-900 text-white text-[12px] font-bold px-4 py-2 rounded-full hover:bg-black shadow-sm"><i class="fa-solid fa-play text-[10px]"></i> Start from Slide 1</button>
             <a href="./week8-live.html?present=1" class="inline-flex items-center gap-1.5 bg-emerald-600 text-white text-[12px] font-bold px-4 py-2 rounded-full hover:bg-emerald-700 shadow-sm"><i class="fa-solid fa-expand text-[10px]"></i> Open present mode</a>
-            <button onclick="toggleNotes(true)" class="inline-flex items-center gap-1.5 bg-[#2563EB] text-white text-[12px] font-bold px-4 py-2 rounded-full hover:bg-[#1D4ED8] shadow-sm"><i class="fa-solid fa-note-sticky text-[10px]"></i> Speaker notes</button>
-            <a href="#all-slides" class="inline-flex items-center gap-1.5 bg-white border border-slate-200 text-slate-700 text-[12px] font-bold px-4 py-2 rounded-full hover:bg-slate-50">Script grid</a>
             <a href="./s-01141_WEEK_8_Live_Presentation.pdf" download class="inline-flex items-center gap-1.5 bg-white border border-slate-200 text-slate-700 text-[12px] font-bold px-4 py-2 rounded-full hover:bg-slate-50"><i class="fa-solid fa-file-pdf text-[10px] text-rose-500"></i> Download PDF</a>
           </div>
         </div>
@@ -211,7 +207,6 @@ body.present-mode #stageControls{opacity:1!important;transform:none!important;po
       <button onclick="prevSlide()" class="w-9 h-9 rounded-full bg-white border border-slate-200 flex items-center justify-center hover:bg-slate-50" title="Previous"><i class="fa-solid fa-chevron-left text-[12px]"></i></button>
       <button onclick="nextSlide()" class="h-9 px-4 rounded-full bg-[#2563EB] text-white text-[12px] font-bold hover:bg-[#1D4ED8]">Next <i class="fa-solid fa-chevron-right text-[10px] ml-1"></i></button>
       <span class="w-px h-5 bg-slate-200 mx-1 present-hide"></span>
-      <button id="notesBtn" onclick="toggleNotes()" class="present-hide h-9 px-3 rounded-full bg-blue-50 border border-blue-200 text-primary text-[12px] font-bold hover:bg-blue-100"><i class="fa-solid fa-note-sticky text-[11px] mr-1"></i>Notes</button>
       <button onclick="toggleFullscreen()" class="present-hide w-9 h-9 rounded-full bg-white border border-slate-200 hidden sm:flex items-center justify-center hover:bg-slate-50" title="Fullscreen"><i class="fa-solid fa-expand text-[12px]"></i></button>
       <button id="darkBtn" onclick="toggleDark()" class="present-hide w-9 h-9 rounded-full bg-white border border-slate-200 flex items-center justify-center hover:bg-slate-50" title="Dark mode"><i class="fa-solid fa-moon text-[12px]"></i></button>
       <button onclick="window.print()" class="present-hide w-9 h-9 rounded-full bg-white border border-slate-200 hidden sm:flex items-center justify-center hover:bg-slate-50" title="Print"><i class="fa-solid fa-print text-[12px]"></i></button>
@@ -413,18 +408,6 @@ body.present-mode #stageControls{opacity:1!important;transform:none!important;po
     </div>
   </div>
 
-  <div id="notesPanel" class="mx-0 border-t border-slate-200 bg-slate-50 px-5 sm:px-6 py-4">
-    <div class="flex flex-wrap items-center justify-between gap-2">
-      <p class="text-[11px] font-bold tracking-widest uppercase text-slate-500"><i class="fa-solid fa-microphone text-primary mr-1"></i> Speaker notes: <span id="notesTitle" class="text-ink">Slide 1 • Title</span></p>
-      <span id="notesTime" class="text-[11px] font-bold bg-slate-900 text-white px-2.5 py-1 rounded-full">0:00 – 0:20</span>
-    </div>
-    <p id="notesText" class="notes-box mt-2 text-[13px] leading-relaxed text-slate-700"></p>
-    <div class="mt-3 flex flex-wrap items-center gap-1.5 no-print">
-      <button onclick="speakNote()" class="inline-flex items-center gap-1.5 bg-[#2563EB] text-white text-[11px] font-bold px-3 py-1.5 rounded-full hover:bg-[#1D4ED8]"><i class="fa-solid fa-circle-play text-[11px]"></i> <span id="speakLabel">Play voice</span></button>
-      <button onclick="stopSpeak()" class="inline-flex items-center gap-1.5 bg-white border border-slate-200 text-[11px] font-semibold px-3 py-1.5 rounded-full hover:bg-slate-100"><i class="fa-solid fa-stop text-[11px]"></i> Stop</button>
-      <span class="text-[11px] text-slate-400 font-medium ml-1">Tip: <kbd class="bg-white border border-slate-200 rounded px-1.5 py-0.5 font-mono">←</kbd> <kbd class="bg-white border border-slate-200 rounded px-1.5 py-0.5 font-mono">→</kbd> move, <kbd class="bg-white border border-slate-200 rounded px-1.5 py-0.5 font-mono">F</kbd> fullscreen, <kbd class="bg-white border border-slate-200 rounded px-1.5 py-0.5 font-mono">N</kbd> notes.</span>
-    </div>
-  </div>
   </div>
 
   <div class="mt-3 bg-white border border-slate-200 rounded-2xl p-3 no-print">
@@ -437,21 +420,7 @@ body.present-mode #stageControls{opacity:1!important;transform:none!important;po
 </div>
 </section>
 
-<section id="all-slides" class="mt-6 scroll-mt-[72px] reveal">
-  <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
-    <div class="px-6 sm:px-8 pt-6 flex flex-wrap items-start justify-between gap-3">
-      <div>
-        <div class="flex items-center gap-2">
-          <span class="w-8 h-8 rounded-xl bg-slate-900 text-white flex items-center justify-center"><i class="fa-solid fa-table-cells text-[12px]"></i></span>
-          <h2 class="text-[18px] sm:text-[20px] font-extrabold tracking-tight">All 7 slides: teleprompter</h2>
-        </div>
-        <p class="text-[13px] text-slate-600 mt-1.5 max-w-[760px]">Locked 5:00 script. Print for rehearsal.</p>
-      </div>
-      <button onclick="window.print()" class="inline-flex items-center gap-1.5 bg-slate-900 text-white text-[12px] font-bold px-3.5 py-1.5 rounded-full hover:bg-black no-print"><i class="fa-solid fa-print text-[11px]"></i> Print / PDF</button>
-    </div>
-    <div class="px-6 sm:px-8 pb-6 pt-4 grid md:grid-cols-2 gap-3 text-[12.5px] leading-relaxed" id="scriptGrid"></div>
-  </div>
-</section>
+
 
 <div class="mt-6 bg-white border border-slate-200 rounded-2xl p-5 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between final-chrome-hide">
   <div>
@@ -471,36 +440,19 @@ body.present-mode #stageControls{opacity:1!important;transform:none!important;po
 </footer>
 
 <script>
-const notes=[
-{t:"Slide 1 • Title Slide",time:"0:00 – 0:20",x:"Hello. I am Augustine Atta Abrefa. This is Help Heroes. From Apology to Belonging. Over the next five minutes, you will meet James. He and students like him are the reason this project exists."},
-{t:"Slide 2 • The Design Challenge",time:"0:20 – 0:50",x:"Subject: Sorry for late submission. Body: Sorry Professor, network failed again. Sorry to bother you. I understand if you deduct marks. James. That inbox is my brief. This work sets out to redesign the online learning experience for first generation students, the first in their families at university, in a world in which access to high speed internet is unreliable. It means James does not write that mail again."},
-{t:"Slide 3 • Understanding the User: James",time:"0:50 – 1:40",x:"That mail has a sender, and his name is James. He is twenty, second year, and he shares one connection with four other people at home. So he studies after eleven at night, on two bars of signal, when the house is finally quiet. Over time he has learned to apologize for everything. Late work, missed meetings, needing help. Not because he is careless. Because he does not know how to ask. And his words, not mine: I want to ask for help, but I do not even know what to ask. I do not know what I do not know. So he apologizes instead. That is the moment I built for."},
-{t:"Slide 4 • The Solution: Help Heroes",time:"1:40 – 2:40",x:"So asking had to stop feeling like begging. James needed help phrasing it, proof he is not alone, and a version that works on two bars. My answer is Help Heroes, and the idea is simple. Turning questions into connections. When James opens the app, he taps Ask for Help, and then the one that actually matters: I do not know how to ask. We help him word it in about thirty seconds, with no judgment, and a trained student mentor replies. He earns a badge. And when he opens the wall, he sees the idea: a hundred and forty-five found one answer about emailing a professor helpful. Five screens. Home, Ask, Wall, Profile, Community. Each post is about two kilobytes, which is less than a text message. I will show it live in a moment."},
-{t:"Slide 5 • Why It Works",time:"2:40 – 3:30",x:"So why does this work. Because each thing that was holding James back has an answer. He could not phrase it, so we phrase it with him. He felt alone, so the wall shows him others asked too. He felt shame, so the badge rewards asking, and asking reads as brave, not weak. And he had no data, so text holds. The list saves offline and syncs the next time he is on library wifi. Belonging, not just bandwidth."},
-{t:"Slide 6 • Testing",time:"3:30 – 4:20",x:"After the prototype was built, I tested it with two users. Maria is nineteen, a first year from a rural area with no signal at home, so she works from library wifi. Then James himself, to see if he recognizes his own situation in the design. Maria pointed at the Ask button. Oh, that is me, that is exactly how I feel. James pointed at the wall. It is like it was designed for me. Maria wished it was on the main screen instead of a tap deep, so Ask moved to the first screen. The list now saves offline, twelve questions in less space than one photo, plus dark mode, so the screen does not light the room at night. Both sessions are on the testing board, with full quotes and what changed."},
-{t:"Slide 7 • Next Steps plus Thank You",time:"4:20 – 5:00",x:"Three things come next. First, give me one course and one library slot for four weeks, and I will pilot this with one teacher and the IT team. Second, library computers with the questions preloaded, and testing with more first years. Third, keeping anonymous questions safe, plus a moderator for the wall. But the question stays the same. How do we help first-generation students belong, without apology. Thank you. Help Heroes. When we ask, we find each other."}
-];
+const times=["0:00 – 0:20","0:20 – 0:50","0:50 – 1:40","1:40 – 2:40","2:40 – 3:30","3:30 – 4:20","4:20 – 5:00"];
 let cur=1; const N=7;
-let startT=null, timer=null, notesVisible=false;
+let startT=null, timer=null;
 const shortTitles=["Title","Challenge","James","Solution","Why it works","Tested+Changed","Next+Thanks"];
 function renderThumbs(){
   const w=document.getElementById('thumbs'); w.innerHTML='';
   for(let i=1;i<=N;i++){
     const b=document.createElement('button');
     b.className='thumb text-left bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-2'+(i===cur?' active':'');
-    b.innerHTML='<p class="text-[10px] font-bold text-slate-400">'+String(i).padStart(2,'0')+'</p><p class="text-[11px] font-bold leading-tight">'+shortTitles[i-1]+'</p><p class="text-[10px] text-slate-400 font-mono">'+notes[i-1].time+'</p>';
+    b.innerHTML='<p class="text-[10px] font-bold text-slate-400">'+String(i).padStart(2,'0')+'</p><p class="text-[11px] font-bold leading-tight">'+shortTitles[i-1]+'</p><p class="text-[10px] text-slate-400 font-mono">'+times[i-1]+'</p>';
     b.onclick=()=>showSlide(i);
     w.appendChild(b);
   }
-}
-function renderScript(){
-  const g=document.getElementById('scriptGrid'); g.innerHTML='';
-  notes.forEach((n,i)=>{
-    const d=document.createElement('div');
-    d.className='bg-slate-50 border border-slate-200 rounded-2xl p-4';
-    d.innerHTML='<div class="flex items-center justify-between gap-2"><p class="text-[12px] font-extrabold">'+(i+1)+'. '+n.t+'</p><span class="text-[10px] font-bold bg-slate-900 text-white px-2 py-0.5 rounded-full shrink-0">'+n.time+'</span></div><p class="mt-1.5 text-slate-600 italic">“'+n.x+'”</p><button onclick="showSlide('+(i+1)+');window.scrollTo({top:0,behavior:\'smooth\'})" class="mt-2 text-[11px] font-bold text-primary hover:underline">⤴ Go to slide '+(i+1)+'</button>';
-    g.appendChild(d);
-  });
 }
 function showSlide(n){
   cur=Math.min(N,Math.max(1,n));
@@ -508,30 +460,21 @@ function showSlide(n){
   document.getElementById('slide-'+cur).classList.add('active');
   document.getElementById('counter').textContent=cur+' / '+N;
   document.getElementById('deckProgress').style.width=(cur/N*100)+'%';
-  document.getElementById('notesTitle').textContent=notes[cur-1].t;
-  document.getElementById('notesTime').textContent=notes[cur-1].time;
-  document.getElementById('notesText').textContent='“'+notes[cur-1].x+'”';
-  stopSpeak(); renderThumbs();
+  renderThumbs();
   if(!startT){startT=Date.now(); startClock();}
 }
 function nextSlide(){showSlide(cur+1)} function prevSlide(){showSlide(cur-1)}
-function toggleNotes(force){
-  notesVisible = force!==undefined?force:!notesVisible;
-  document.getElementById('notesPanel').style.display=notesVisible?'block':'none';
-  document.getElementById('notesBtn').classList.toggle('bg-blue-100',notesVisible);
-}
 function toggleFullscreen(){
   const el=document.getElementById('stage');
   if(document.fullscreenElement) document.exitFullscreen();
   else el.requestFullscreen&&el.requestFullscreen();
 }
 function startPresent(){
-  showSlide(1); toggleNotes(false);
+  showSlide(1);
   const el=document.getElementById('stage');
   el.scrollIntoView({behavior:'smooth'});
   try{ el.requestFullscreen&&el.requestFullscreen(); }catch(e){}
 }
-document.addEventListener('fullscreenchange',()=>{ if(document.fullscreenElement) toggleNotes(false); });
 function startClock(){
   if(timer) return;
   timer=setInterval(()=>{
@@ -540,23 +483,10 @@ function startClock(){
     document.getElementById('clock').textContent=m+':'+r+' / 5:00';
   },500);
 }
-let narrating=false;
-function speakNote(){
-  if(!('speechSynthesis' in window)) return;
-  const synth=speechSynthesis; synth.cancel();
-  const u=new SpeechSynthesisUtterance(notes[cur-1].x);
-  u.rate=1; u.pitch=1;
-  setSpeakUI(true);
-  u.onend=()=>setSpeakUI(false); u.onerror=()=>setSpeakUI(false);
-  synth.speak(u); narrating=true;
-}
-function stopSpeak(){ try{ speechSynthesis.cancel(); }catch(e){} setSpeakUI(false); narrating=false; }
-function setSpeakUI(on){ const l=document.getElementById('speakLabel'); if(l) l.textContent=on?'Playing…':'Play voice'; }
 document.addEventListener('keydown',e=>{
   if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();nextSlide()}
   else if(e.key==='ArrowLeft'){e.preventDefault();prevSlide()}
   else if(e.key.toLowerCase()==='f'){toggleFullscreen()}
-  else if(e.key.toLowerCase()==='n'){toggleNotes()}
   else if(e.key==='Home'){showSlide(1)} else if(e.key==='End'){showSlide(N)}
 });
 function toggleDark(){
@@ -571,7 +501,6 @@ function syncDarkIcon(){
 try{ if(localStorage.getItem('hh-dark')==='1') document.documentElement.classList.add('dark'); }catch(e){}
 syncDarkIcon();
 function openWork(url,title){
-  stopSpeak();
   const ov=document.getElementById('workOverlay');
   document.getElementById('workFrame').src=url;
   document.getElementById('workOverlayTitle').textContent=title||'Project page';
@@ -601,12 +530,11 @@ function applyPresentMode(){
     const q=new URLSearchParams(location.search);
     if(q.get('present')==='1'){
       document.body.classList.add('present-mode');
-      toggleNotes(false);
       setTimeout(()=>{const st=document.getElementById('stage'); st&&st.scrollIntoView({behavior:'auto',block:'start'});},60);
     }
   }catch(e){}
 }
-renderThumbs(); renderScript(); addSlideFooters(); toggleNotes(false); showSlide(1); applyPresentMode(); addSlideFooters();
+renderThumbs(); addSlideFooters(); showSlide(1); applyPresentMode();
 </script>
 </body>
 </html>
