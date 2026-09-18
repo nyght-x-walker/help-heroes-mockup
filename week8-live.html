@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<!--
+  Help Heroes | Week 8 LIVE - Stakeholder Pitch (7 slides, 5:00)
+  Student: Augustine Atta Abrefa • s-01141 | September 2026
+  German University of Digital Science | Design Thinking Project
+  New file, best version: cut from week8-final.html 10-slide prototype for Sep 18 live.
+  Live: 7 slides, stakeholder language (no process theory). Present mode: week8-live.html?present=1
+  Study mode: full notes, script grid, print/PDF. Single file, no build step.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Help Heroes | Week 8 Live Pitch (7 slides • 5:00)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#2563EB',ink:'#0F172A',muted:'#64748B'},fontFamily:{sans:['Inter','system-ui','sans-serif'],display:['Fraunces','serif']},boxShadow:{card:'0 1px 3px rgba(15,23,42,0.06),0 12px 32px rgba(15,23,42,0.08)'}}}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,800;9..144,900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*{font-family:Inter,system-ui,sans-serif}
+.font-display{font-family:Fraunces,serif}
+.grid-pattern{background-image:linear-gradient(to right,rgba(15,23,42,0.035) 1px,transparent 1px),linear-gradient(to bottom,rgba(15,23,42,0.035) 1px,transparent 1px);background-size:32px 32px}
+.reveal{opacity:0;transform:translateY(10px);animation:reveal 700ms ease forwards}
+@keyframes reveal{to{opacity:1;transform:none}}
+.deck-slide{display:none}
+.deck-slide.active{display:block;animation:slideIn 380ms cubic-bezier(0.32,0.72,0,1)}
+@keyframes slideIn{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
+.thumb{transition:all 150ms ease}
+.thumb.active{border-color:#2563EB!important;background:#EFF6FF!important;box-shadow:0 0 0 2px rgba(37,99,235,0.25)}
+.thumb:hover{transform:translateY(-1px)}
+#stage:fullscreen{background:#0F172A;padding:24px}
+#stage:fullscreen .slide-frame{max-height:calc(100vh - 160px)}
+.notes-box a{color:#2563EB;text-decoration:underline}
+.work-link{display:inline-flex;align-items:center;gap:.6rem;background:#fff;border:1.5px solid #E2E8F0;border-radius:999px;padding:.4rem .9rem .4rem .5rem;box-shadow:0 2px 10px rgba(15,23,42,.08);transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease;text-align:left}
+.work-link:hover{transform:translateY(-2px);border-color:#2563EB;box-shadow:0 8px 22px rgba(37,99,235,.22)}
+.work-link:hover .wl-go{transform:translateX(3px);color:#2563EB}
+.wl-ico{width:28px;height:28px;border-radius:999px;background:#EFF6FF;color:#2563EB;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.wl-go{transition:transform .16s ease,color .16s ease;color:#94A3B8;font-size:10px}
+.work-link b{display:block;color:#0F172A;font-size:12px;line-height:1.2}
+.work-link small{display:block;color:#64748B;font-weight:500;font-size:10.5px;line-height:1.3}
+.work-link-dark{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.28)}
+.work-link-dark b{color:#fff}
+.work-link-dark small{color:rgba(255,255,255,.72)}
+.work-link-dark .wl-ico{background:rgba(251,191,36,.2);color:#FBBF24}
+.work-link-dark:hover{border-color:#FBBF24;background:rgba(255,255,255,.16)}
+.work-link-dark:hover .wl-go{color:#FBBF24}
+html.dark body{background:#020617!important;color:#E2E8F0}
+html.dark .bg-white:not(.slide-frame):not(.slide-frame *){background-color:#0F172A!important}
+html.dark .bg-slate-50:not(.slide-frame):not(.slide-frame *){background-color:#141f38!important}
+html.dark .border-slate-200:not(.slide-frame):not(.slide-frame *){border-color:#1E293B!important}
+html.dark .text-ink:not(.slide-frame *){color:#F1F5F9!important}
+html.dark .text-slate-700:not(.slide-frame *),html.dark .text-slate-600:not(.slide-frame *){color:#CBD5E1!important}
+html.dark .text-slate-500:not(.slide-frame *),html.dark .text-slate-400:not(.slide-frame *){color:#94A3B8!important}
+html.dark nav.sticky{background:rgba(2,6,23,.9)!important}
+html.dark select,html.dark kbd{background:#0F172A!important;border-color:#334155!important;color:#E2E8F0!important}
+html.dark .thumb{background:#0F172A!important;border-color:#1E293B!important}
+html.dark .thumb.active{background:#1E3A8A!important;border-color:#2563EB!important}
+html.dark #notesPanel{background:#0B1226!important}
+html.dark .work-link:not(.slide-frame *){background:#0F172A;border-color:#1E293B}
+html.dark .work-link:not(.slide-frame *) b{color:#F1F5F9}
+html.dark .cov-btn{background:#0F172A!important;border-color:#1E293B!important;color:#E2E8F0!important}
+@media(min-width:640px){.slide-frame .aspect-video{min-height:600px}}
+#stageControls{opacity:0;transform:translateY(-4px);transition:opacity .25s ease,transform .25s ease;pointer-events:none}
+#stage:hover #stageControls,#stageControls:focus-within{opacity:1;transform:none;pointer-events:auto}
+@media(hover:none){#stageControls{opacity:1;transform:none;pointer-events:auto}}
+@media print{.no-print{display:none!important}.deck-slide{display:block!important;page-break-inside:avoid;margin-bottom:16px}}
+.slide-footer{display:flex;align-items:center;justify-content:space-between;gap:.5rem;border-top:1px solid #E2E8F0;background:#F8FAFC;padding:.4rem .9rem;font-size:10px;font-weight:700;letter-spacing:.02em;color:#64748B}
+.slide-footer .sf-l{display:flex;align-items:center;gap:.4rem}
+.slide-footer .sf-dot{width:6px;height:6px;border-radius:999px;background:#2563EB}
+body.present-mode nav.sticky,body.present-mode header.reveal,body.present-mode #all-slides,body.present-mode footer,body.present-mode .final-chrome-hide{display:none!important}
+body.present-mode main{max-width:1020px;padding-top:12px}
+body.present-mode #stage{border-width:2px}
+body.present-mode .present-hide{display:none!important}
+body.present-mode #stageControls{opacity:1!important;transform:none!important;pointer-events:auto!important}
+.icon-tile{width:42px;height:42px;border-radius:13px;display:inline-flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.tile-amber{background:linear-gradient(135deg,#FBBF24,#D97706);color:#fff;box-shadow:0 6px 16px rgba(245,158,11,.42)}
+.tile-blue{background:linear-gradient(135deg,#3B82F6,#1D4ED8);color:#fff;box-shadow:0 6px 16px rgba(37,99,235,.38)}
+.tile-violet{background:linear-gradient(135deg,#8B5CF6,#6D28D9);color:#fff;box-shadow:0 6px 16px rgba(124,58,237,.38)}
+.tile-emerald{background:linear-gradient(135deg,#10B981,#047857);color:#fff;box-shadow:0 6px 16px rgba(5,150,105,.38)}
+.tile-slate{background:linear-gradient(135deg,#334155,#0F172A);color:#fff}
+.tile-rose{background:linear-gradient(135deg,#FB7185,#BE123C);color:#fff;box-shadow:0 6px 16px rgba(244,63,94,.38)}
+.tile-teal{background:linear-gradient(135deg,#2DD4BF,#0F766E);color:#fff;box-shadow:0 6px 16px rgba(13,148,136,.38)}
+.crest-wrap{position:relative;display:inline-flex}
+.crest-wrap::before{content:'';position:absolute;inset:-7px;border-radius:22px;border:2px solid rgba(251,191,36,.5);animation:crestPulse 2.8s ease-in-out infinite;pointer-events:none}
+@keyframes crestPulse{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:1;transform:scale(1.045)}}
+.avatar-init{width:34px;height:34px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex-shrink:0}
+.phone{background:#0F172A;border-radius:13px;padding:5px;box-shadow:0 10px 22px rgba(15,23,42,.28);min-width:0}
+.phone-screen{background:#F8FAFC;border-radius:8px;overflow:hidden;min-height:112px;display:flex;flex-direction:column;padding:6px;gap:4px}
+.mini-bar{height:5px;border-radius:99px;background:#E2E8F0}
+.mini-bar.b{background:#BFDBFE}.mini-bar.dp{background:#2563EB}.mini-bar.a{background:#FCD34D}.mini-bar.ap{background:#D97706}.mini-bar.e{background:#A7F3D0}.mini-bar.v{background:#DDD6FE}.mini-bar.r{background:#FECDD3}
+.mini-dot{width:14px;height:14px;border-radius:999px;flex-shrink:0}
+.sig{display:inline-flex;align-items:flex-end;gap:2px;height:12px}
+.sig i{width:3px;border-radius:2px;background:#E2E8F0}
+.sig-light i{background:rgba(255,255,255,.22)}
+.sig i.on{background:#34D399}
+.sig i:nth-child(1){height:4px}.sig i:nth-child(2){height:7px}.sig i:nth-child(3){height:10px}.sig i:nth-child(4){height:12px}
+.scene-ico{font-size:24px;line-height:1}
+@media(min-width:640px){.scene-ico{font-size:28px}}
+.pullmark{font-family:Fraunces,serif;font-size:40px;line-height:.55;color:#F59E0B;display:block}
+.knot-lbl{font-size:9.5px;font-weight:800;fill:#fff}
+.knot-sub{font-size:7.5px;font-weight:600;fill:rgba(255,255,255,.72)}
+.work-link-dark:hover{box-shadow:0 8px 22px rgba(0,0,0,.35)}
+</style>
+</head>
+<body class="bg-[#F8FAFC] text-ink antialiased selection:bg-primary selection:text-white">
+<div class="fixed inset-0 -z-10 pointer-events-none"><div class="absolute inset-0 bg-[#F8FAFC]"></div><div class="absolute inset-0 grid-pattern opacity-[0.5]"></div><div class="absolute -top-[360px] left-1/2 -translate-x-1/2 w-[1400px] h-[760px] rounded-full blur-[100px] opacity-[0.14]" style="background:radial-gradient(ellipse at center,#2563EB 0%,#8B5CF6 34%,transparent 72%)"></div><div class="absolute top-[680px] -right-[200px] w-[600px] h-[600px] rounded-full blur-[90px] opacity-[0.09]" style="background:radial-gradient(circle at center,#F59E0B 0%,transparent 68%)"></div></div>
+
+<nav class="sticky top-0 z-40 backdrop-blur-xl bg-white/80 border-b border-slate-200 no-print">
+  <div class="max-w-[1160px] mx-auto px-4 sm:px-6 lg:px-8 h-[56px] flex items-center justify-between gap-4">
+    <a href="./index.html" class="flex items-center gap-2.5">
+      <span class="w-8 h-8 rounded-xl bg-[#2563EB] text-white flex items-center justify-center text-[13px] shadow-sm"><i class="fa-solid fa-handshake-angle"></i></span>
+      <span class="font-display font-[900] tracking-tight text-[17px] leading-none">Help Heroes</span>
+      <span class="hidden sm:inline-flex text-[11px] font-bold tracking-widest uppercase bg-emerald-600 text-white px-2 py-1 rounded-full ml-1">Week 8 Live • 7 slides</span>
+    </a>
+    <div class="hidden md:flex items-center gap-1.5 text-[12px] font-semibold overflow-x-auto [&>a]:shrink-0">
+      <a href="./index.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Overview</a>
+      <a href="./week6.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Prototype</a>
+      <a href="./testing_board.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Testing</a>
+      <a href="./week8-final.html" class="px-3 py-1.5 rounded-full hover:bg-slate-100">Final 10</a>
+      <a href="./week8-live.html" class="px-3 py-1.5 rounded-full bg-[#EFF6FF] text-primary border border-blue-200">Live 7</a>
+    </div>
+    <div class="flex items-center gap-1.5">
+      <a href="./week8-live.html?present=1" class="hidden sm:inline-flex items-center gap-1.5 bg-slate-900 text-white px-3.5 py-1.5 rounded-full text-[12px] font-bold hover:bg-black"><i class="fa-solid fa-expand text-[10px]"></i> Present mode</a>
+      <button onclick="startPresent()" class="inline-flex items-center gap-1.5 bg-[#2563EB] text-white px-3.5 py-1.5 rounded-full text-[12px] font-bold hover:bg-[#1D4ED8] shadow-sm"><i class="fa-solid fa-play text-[10px]"></i> Present</button>
+    </div>
+  </div>
+</nav>
+
+<main class="max-w-[1160px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+
+<header class="reveal">
+  <div class="bg-white rounded-[24px] border border-slate-200 shadow-card overflow-hidden">
+    <div class="h-[5px] w-full bg-gradient-to-r from-blue-600 via-violet-500 to-amber-500"></div>
+    <div class="px-6 sm:px-8 lg:px-10 py-7 sm:py-8">
+      <div class="flex flex-col lg:flex-row gap-8">
+        <div class="flex-1 min-w-0">
+          <div class="flex flex-wrap items-center gap-2 mb-3">
+            <span class="inline-flex items-center gap-2 bg-slate-900 text-white text-[11px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full"><i class="fa-solid fa-graduation-cap text-amber-300 text-[10px]"></i> German University of Digital Science</span>
+            <span class="inline-flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 text-emerald-700 text-[11px] font-bold px-2.5 py-1 rounded-full"><i class="fa-solid fa-microphone text-[10px]"></i> Live stakeholder pitch</span>
+            <span class="inline-flex items-center gap-1.5 text-[11px] font-medium text-slate-500"><i class="fa-regular fa-calendar"></i> Sep 18 • 5:00 max</span>
+          </div>
+          <h1 class="font-display text-[30px] sm:text-[40px] lg:text-[44px] font-[900] leading-[0.95] tracking-[-0.03em]">Week 8 Live: From Apology to Belonging <span class="text-[14px] sm:text-[16px] align-middle font-sans font-bold bg-emerald-100 text-emerald-700 border border-emerald-300 px-3 py-1.5 rounded-full whitespace-nowrap">LIVE • 7 slides • 5:00</span></h1>
+          <p class="mt-3 text-[13.5px] leading-relaxed text-slate-600 max-w-[720px]"><span class="font-bold text-ink">From Apology to Belonging: A Design Thinking Journey.</span> Seven slides. You will meet James and Maria, and see the prototype they shaped. <a href="./week8-live.html?present=1" class="underline font-bold text-primary">present mode</a> shows the deck alone.</p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            <span class="inline-flex items-center gap-1.5 bg-blue-50 border border-blue-200 text-primary text-[12px] font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-layer-group text-[11px]"></i> 7 slides • 16:9</span>
+            <span class="inline-flex items-center gap-1.5 bg-emerald-50 border border-emerald-200 text-emerald-700 text-[12px] font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-stopwatch text-[11px]"></i> 5:00 locked • ~43s/slide</span>
+            <span class="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-200 text-amber-700 text-[12px] font-semibold px-3 py-1.5 rounded-full"><i class="fa-solid fa-id-card text-[11px]"></i> s-01141 • Augustine Atta Abrefa</span>
+          </div>
+          <div class="mt-5 flex flex-wrap gap-2 no-print">
+            <button onclick="startPresent()" class="inline-flex items-center gap-1.5 bg-slate-900 text-white text-[12px] font-bold px-4 py-2 rounded-full hover:bg-black shadow-sm"><i class="fa-solid fa-play text-[10px]"></i> Start from Slide 1</button>
+            <a href="./week8-live.html?present=1" class="inline-flex items-center gap-1.5 bg-emerald-600 text-white text-[12px] font-bold px-4 py-2 rounded-full hover:bg-emerald-700 shadow-sm"><i class="fa-solid fa-expand text-[10px]"></i> Open present mode</a>
+            <button onclick="toggleNotes(true)" class="inline-flex items-center gap-1.5 bg-[#2563EB] text-white text-[12px] font-bold px-4 py-2 rounded-full hover:bg-[#1D4ED8] shadow-sm"><i class="fa-solid fa-note-sticky text-[10px]"></i> Speaker notes</button>
+            <a href="#all-slides" class="inline-flex items-center gap-1.5 bg-white border border-slate-200 text-slate-700 text-[12px] font-bold px-4 py-2 rounded-full hover:bg-slate-50">Script grid</a>
+          </div>
+        </div>
+        <div class="lg:w-[360px] shrink-0 flex flex-col gap-3">
+          <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+            <p class="text-[11px] font-bold tracking-widest uppercase text-slate-500">Live run • 4:40 + buffer</p>
+            <div class="mt-3 space-y-2 text-[12px] font-semibold">
+              <div class="flex items-center gap-2.5 bg-white border border-slate-200 rounded-xl px-3 py-2"><span class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-[11px] font-bold">1-2</span> Hook + challenge • 0:50</div>
+              <div class="flex items-center gap-2.5 bg-white border border-slate-200 rounded-xl px-3 py-2"><span class="w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center text-[11px] font-bold">3-5</span> James → solution → tackles • 2:40</div>
+              <div class="flex items-center gap-2.5 bg-white border border-slate-200 rounded-xl px-3 py-2"><span class="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[11px] font-bold">6-7</span> Proof → ask + close • 1:30</div>
+            </div>
+          </div>
+          <div class="bg-gradient-to-br from-blue-600 to-violet-600 rounded-2xl p-4 text-white relative overflow-hidden">
+            <div class="absolute inset-0 opacity-20 grid-pattern"></div>
+            <div class="relative">
+              <p class="text-[11px] font-bold tracking-widest uppercase text-white/80">Arc of the talk</p>
+              <p class="text-[13px] font-bold mt-1">Apology → Belonging</p>
+              <p class="text-[12.5px] leading-snug text-white/90 mt-1">Isolation to Fear to Hope to Courage to Belonging. Help-seeking reframed as strength.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2 text-center text-[11px] font-bold">
+        <div class="bg-slate-900 text-white rounded-xl px-2 py-2">1 Title<span class="block font-semibold text-white/60">0:00–0:20</span></div>
+        <div class="bg-slate-50 border border-slate-200 rounded-xl px-2 py-2">2 Challenge<span class="block text-slate-500 font-semibold">0:20–0:50</span></div>
+        <div class="bg-slate-50 border border-slate-200 rounded-xl px-2 py-2">3 James<span class="block text-slate-500 font-semibold">0:50–1:40</span></div>
+        <div class="bg-blue-50 border border-blue-200 text-primary rounded-xl px-2 py-2">4 Solution<span class="block font-semibold">1:40–2:40</span></div>
+        <div class="bg-slate-50 border border-slate-200 rounded-xl px-2 py-2">5 Tackles<span class="block text-slate-500 font-semibold">2:40–3:30</span></div>
+        <div class="bg-slate-50 border border-slate-200 rounded-xl px-2 py-2">6 Proof<span class="block text-slate-500 font-semibold">3:30–4:20</span></div>
+        <div class="bg-amber-50 border border-amber-300 text-amber-800 rounded-xl px-2 py-2">7 Ask+Close<span class="block font-semibold">4:20–5:00</span></div>
+      </div>
+      <div class="mt-2 bg-slate-900 text-white rounded-2xl px-4 py-3">
+        <p class="text-[10px] font-bold tracking-widest uppercase text-amber-300 text-center">Covers assignment 5 + live stakeholder 3: click to jump</p>
+        <div class="mt-2 flex flex-wrap justify-center gap-1.5 text-[11px] font-bold">
+          <button onclick="showSlide(2)" class="cov-btn inline-flex items-center gap-1.5 bg-white text-ink px-3 py-1.5 rounded-full hover:bg-blue-50"><i class="fa-solid fa-check text-emerald-500 text-[10px]"></i> Challenge <span class="font-semibold text-slate-400">S2</span></button>
+          <button onclick="showSlide(3)" class="cov-btn inline-flex items-center gap-1.5 bg-white text-ink px-3 py-1.5 rounded-full hover:bg-blue-50"><i class="fa-solid fa-check text-emerald-500 text-[10px]"></i> User <span class="font-semibold text-slate-400">S3</span></button>
+          <button onclick="showSlide(4)" class="cov-btn inline-flex items-center gap-1.5 bg-white text-ink px-3 py-1.5 rounded-full hover:bg-blue-50"><i class="fa-solid fa-check text-emerald-500 text-[10px]"></i> Solution <span class="font-semibold text-slate-400">S4-5</span></button>
+          <button onclick="showSlide(6)" class="cov-btn inline-flex items-center gap-1.5 bg-white text-ink px-3 py-1.5 rounded-full hover:bg-blue-50"><i class="fa-solid fa-check text-emerald-500 text-[10px]"></i> Testing→iteration <span class="font-semibold text-slate-400">S6</span></button>
+          <button onclick="showSlide(7)" class="cov-btn inline-flex items-center gap-1.5 bg-white text-ink px-3 py-1.5 rounded-full hover:bg-blue-50"><i class="fa-solid fa-check text-emerald-500 text-[10px]"></i> Next steps <span class="font-semibold text-slate-400">S7</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="mt-6 reveal max-w-[920px] mx-auto w-full">
+<div id="stage" class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden relative">
+  <div id="stageControls" class="px-5 sm:px-6 pt-5 flex flex-wrap items-center justify-between gap-3 no-print">
+    <div class="flex items-center gap-2">
+      <span class="w-8 h-8 rounded-xl bg-slate-900 text-white flex items-center justify-center"><i class="fa-solid fa-person-chalkboard text-[13px]"></i></span>
+      <div>
+        <h2 class="text-[15px] font-extrabold leading-none">Live deck <span id="counter" class="text-slate-400 font-bold">1 / 7</span></h2>
+        <p class="text-[11px] text-slate-500 mt-0.5">Use ← → keys • <span id="clock" class="font-mono font-bold text-slate-700">0:00 / 5:00</span> elapsed</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-1.5">
+      <button onclick="prevSlide()" class="w-9 h-9 rounded-full bg-white border border-slate-200 flex items-center justify-center hover:bg-slate-50" title="Previous"><i class="fa-solid fa-chevron-left text-[12px]"></i></button>
+      <button onclick="nextSlide()" class="h-9 px-4 rounded-full bg-[#2563EB] text-white text-[12px] font-bold hover:bg-[#1D4ED8]">Next <i class="fa-solid fa-chevron-right text-[10px] ml-1"></i></button>
+      <span class="w-px h-5 bg-slate-200 mx-1 present-hide"></span>
+      <button id="notesBtn" onclick="toggleNotes()" class="present-hide h-9 px-3 rounded-full bg-blue-50 border border-blue-200 text-primary text-[12px] font-bold hover:bg-blue-100"><i class="fa-solid fa-note-sticky text-[11px] mr-1"></i>Notes</button>
+      <button onclick="toggleFullscreen()" class="present-hide w-9 h-9 rounded-full bg-white border border-slate-200 hidden sm:flex items-center justify-center hover:bg-slate-50" title="Fullscreen"><i class="fa-solid fa-expand text-[12px]"></i></button>
+      <button id="darkBtn" onclick="toggleDark()" class="present-hide w-9 h-9 rounded-full bg-white border border-slate-200 flex items-center justify-center hover:bg-slate-50" title="Dark mode"><i class="fa-solid fa-moon text-[12px]"></i></button>
+      <button onclick="window.print()" class="present-hide w-9 h-9 rounded-full bg-white border border-slate-200 hidden sm:flex items-center justify-center hover:bg-slate-50" title="Print"><i class="fa-solid fa-print text-[12px]"></i></button>
+    </div>
+  </div>
+  <div class="px-5 sm:px-6 pt-3 no-print">
+    <div class="h-1.5 bg-slate-100 rounded-full overflow-hidden"><div id="deckProgress" class="h-full w-[14%] bg-gradient-to-r from-blue-600 via-violet-500 to-amber-500 rounded-full transition-all duration-300"></div></div>
+  </div>
+
+  <div class="p-5 sm:p-6">
+  <div class="slide-frame rounded-2xl border border-slate-200 overflow-hidden bg-white shadow-[0_12px_30px_rgba(15,23,42,0.10)]">
+
+    <!-- SLIDE 1 TITLE -->
+    <div id="slide-1" class="deck-slide active">
+      <div class="aspect-video bg-gradient-to-br from-[#0F172A] via-[#1D4ED8] to-[#7C3AED] text-white relative overflow-hidden flex flex-col items-center justify-center text-center px-6 sm:px-12 py-8">
+        <div class="absolute inset-0 opacity-20 grid-pattern"></div>
+        <div class="absolute -top-20 -right-20 w-72 h-72 rounded-full bg-amber-400/20 blur-3xl"></div>
+        <div class="relative">
+          <p class="text-[11px] sm:text-[12px] font-bold tracking-[0.25em] uppercase text-white/70">Design Thinking Project • Live Presentation</p>
+          <div class="mt-3 crest-wrap"><span class="icon-tile tile-amber" style="width:60px;height:60px;border-radius:18px;font-size:26px"><i class="fa-solid fa-handshake-angle"></i></span></div>
+          <h3 class="font-display text-[30px] sm:text-[46px] font-[900] leading-none tracking-tight mt-3">HELP HEROES</h3>
+          <p class="text-[14px] sm:text-[19px] font-semibold text-white/95 mt-2">From Apology to Belonging: A Design Thinking Journey</p>
+          <div class="mt-4 inline-flex items-center gap-2.5 bg-white/10 border border-white/25 rounded-2xl pl-1.5 pr-3 py-1.5 text-left shadow-lg"><span class="avatar-init bg-amber-400 text-slate-900">J</span><span><b class="block text-[12.5px] leading-tight">James · Help Hero</b><small class="block text-white/65 text-[10.5px]">Badge 001 “First Help” · Aug 2026</small></span><i class="fa-solid fa-medal text-amber-300 text-[18px]"></i></div>
+          <div class="mt-5 flex flex-wrap justify-center gap-2 text-[11px] font-bold">
+            <span class="bg-white text-slate-900 px-3 py-1.5 rounded-full">Augustine Atta Abrefa • s-01141</span>
+            <span class="bg-white/15 border border-white/25 px-3 py-1.5 rounded-full">September 2026</span>
+            <span class="bg-white/15 border border-white/25 px-3 py-1.5 rounded-full">German University of Digital Science</span>
+          </div>
+          <div class="mt-5 flex justify-center relative"><a class="work-link work-link-dark" href="./index.html" target="_blank" rel="noopener"><span class="wl-ico"><i class="fa-solid fa-house"></i></span><span><b>Overview hub</b><small>Start at the hub: all weeks</small></span><i class="fa-solid fa-arrow-up-right-from-square wl-go"></i></a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2 CHALLENGE -->
+    <div id="slide-2" class="deck-slide">
+      <div class="aspect-video bg-white px-6 sm:px-10 py-5 sm:py-6 overflow-y-auto">
+        <p class="text-[11px] font-bold tracking-[0.22em] uppercase text-primary">02 • The Design Challenge</p>
+        <h3 class="font-display text-[22px] sm:text-[30px] font-[900] tracking-tight leading-none mt-1">THE DESIGN CHALLENGE</h3>
+        <div class="mt-3 bg-blue-50 border-2 border-primary/70 rounded-2xl px-5 py-4 text-center">
+          <p class="text-[13px] sm:text-[15px] font-bold leading-snug">Redesign the online learning experience for first-generation university students in a world in which access to high-speed internet is unreliable.</p>
+        </div>
+        <div class="mt-3 grid sm:grid-cols-[1.25fr_0.75fr] gap-3 items-stretch">
+          <div class="bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden">
+            <div class="flex items-center gap-2.5 px-4 py-3 border-b border-slate-200 bg-white">
+              <span class="avatar-init bg-amber-400 text-slate-900" style="width:36px;height:36px">J</span>
+              <div class="min-w-0 flex-1"><p class="text-[12px] font-extrabold leading-none">James <span class="font-semibold text-slate-400">to Professor</span></p><p class="text-[11px] text-slate-500 mt-1">Subject: Sorry for late submission <span class="ml-1 text-[10px] font-bold bg-slate-100 border border-slate-200 px-1.5 py-0.5 rounded-full">23:47 • 1 bar</span></p></div>
+              <i class="fa-solid fa-inbox text-slate-300"></i>
+            </div>
+            <div class="px-4 sm:px-5 py-4">
+              <p class="text-[13px] sm:text-[14px] leading-relaxed text-slate-700">Sorry Professor, network failed again.</p>
+              <p class="text-[13px] sm:text-[14px] leading-relaxed text-slate-700 mt-1">Sorry to bother you.</p>
+              <p class="text-[13px] sm:text-[14px] leading-relaxed text-slate-700 mt-1">I understand if you deduct marks.</p>
+              <p class="text-[13px] font-bold text-ink mt-2">James</p>
+              <div class="mt-3 flex items-center gap-2 text-[11px] font-semibold text-rose-600 bg-rose-50 border border-rose-200 rounded-xl px-3 py-2"><i class="fa-solid fa-circle-exclamation"></i> Attachment failed • draft lost on timeout</div>
+            </div>
+          </div>
+          <div class="flex flex-col gap-2.5">
+            <div class="bg-slate-900 text-white rounded-2xl p-4"><p class="text-[10px] font-bold tracking-widest uppercase text-white/50">That inbox is my brief</p><p class="text-[12.5px] font-semibold leading-snug mt-1">One mail. Three sorrys. A lost draft at night.</p><div class="mt-3 space-y-1.5 text-[11.5px] font-medium"><p class="flex items-center gap-2"><i class="fa-solid fa-moon text-violet-300 w-4 text-center"></i> After 11 pm, shared line</p><p class="flex items-center gap-2"><i class="fa-solid fa-signal text-emerald-300 w-4 text-center"></i> Weak signal, lost work</p></div></div>
+            <div class="bg-amber-50 border-2 border-amber-300 rounded-2xl p-3.5"><p class="text-[12.5px] font-bold leading-snug text-amber-900">It means James does not write that mail again.</p></div>
+          </div>
+        </div>
+        <div class="mt-3 flex justify-center"><a class="work-link" href="./week1.html" target="_blank" rel="noopener"><span class="wl-ico"><i class="fa-solid fa-circle-nodes"></i></span><span><b>Week 1: Wicked Problem</b><small>Knot, prism, iceberg, five definitions</small></span><i class="fa-solid fa-arrow-up-right-from-square wl-go"></i></a></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3 JAMES -->
+    <div id="slide-3" class="deck-slide">
+      <div class="aspect-video bg-white px-6 sm:px-10 py-5 sm:py-6 overflow-y-auto">
+        <p class="text-[11px] font-bold tracking-[0.22em] uppercase text-primary">03 • Understanding the user</p>
+        <h3 class="font-display text-[22px] sm:text-[30px] font-[900] tracking-tight leading-none mt-1">UNDERSTANDING THE USER: JAMES</h3>
+        <div class="mt-3 grid sm:grid-cols-[1.25fr_0.75fr] gap-3">
+          <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-5">
+            <p class="text-[12.5px] sm:text-[14px] leading-relaxed text-slate-700">I met <span class="font-bold text-ink">James</span>, a first-generation student who has learned to <span class="font-semibold">apologize</span>, for late work, for missed meetings, for needing help, and who has internalized the belief that he is a burden to the system.</p>
+            <p class="text-[12.5px] sm:text-[14px] leading-relaxed text-slate-700 mt-2">I was inspired to discover that he <span class="font-bold text-ink">desperately wants to ask for help</span> but does not even know what to ask, because the institutional knowledge that some of his peers inherited from their families is a foreign language to him.</p>
+            <p class="text-[12.5px] sm:text-[14px] leading-relaxed text-slate-700 mt-2">It's all about helping James <span class="font-bold text-primary">navigate and belong</span> without feeling like an outsider who has to apologize for existing.</p>
+          </div>
+          <div class="flex flex-col gap-3">
+            <div class="bg-slate-900 text-white rounded-2xl p-4"><div class="flex items-center gap-3"><span class="avatar-init bg-amber-400 text-slate-900" style="width:44px;height:44px;font-size:18px">J</span><div class="min-w-0"><p class="font-extrabold text-[15px] leading-none">James, 20</p><p class="text-[11px] text-white/65 mt-1">Second-year · The Sharing Student</p></div></div><div class="mt-3 space-y-2 text-[11.5px] font-medium"><p class="flex items-center gap-2"><i class="fa-solid fa-users text-sky-300 w-4 text-center"></i> 5 people · 1 connection</p><p class="flex items-center gap-2"><i class="fa-solid fa-moon text-violet-300 w-4 text-center"></i> Studies after 11 pm</p><p class="flex items-center gap-2"><i class="fa-solid fa-signal text-emerald-300 w-4 text-center"></i> Signal <span class="sig sig-light"><i class="on"></i><i class="on"></i><i></i><i></i></span> <span class="text-white/50">2 of 4</span></p><p class="flex items-center gap-2"><i class="fa-solid fa-triangle-exclamation text-amber-300 w-4 text-center"></i> Missed deadlines to timeouts</p></div></div>
+            <div class="bg-amber-50 border-2 border-amber-300 rounded-2xl p-3.5"><span class="pullmark">“</span><p class="text-[10px] font-bold tracking-widest uppercase text-amber-700">Key insight: his words</p><p class="text-[12.5px] sm:text-[13.5px] font-bold leading-snug mt-1">I want to ask for help, but I don't even know what to ask. I don't know what I don't know.</p><p class="mt-2 text-[11px] italic font-semibold text-amber-800">So he apologizes instead of asking. Built for that moment.</p></div>
+          </div>
+        </div>
+        <div class="mt-3 flex justify-center"><a class="work-link" href="./week3.html#interviews" target="_blank" rel="noopener"><span class="wl-ico"><i class="fa-solid fa-comments"></i></span><span><b>Week 3: Interviews</b><small>Maria, James, Aisha in their words</small></span><i class="fa-solid fa-arrow-up-right-from-square wl-go"></i></a></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4 SOLUTION -->
+    <div id="slide-4" class="deck-slide">
+      <div class="aspect-video bg-white px-6 sm:px-10 py-5 sm:py-6 overflow-y-auto">
+        <div class="flex items-center gap-2.5"><span class="icon-tile tile-amber" style="width:38px;height:38px;font-size:16px"><i class="fa-solid fa-handshake-angle"></i></span><div><p class="text-[11px] font-bold tracking-[0.22em] uppercase text-primary leading-none">04 • The solution</p><h3 class="font-display text-[22px] sm:text-[30px] font-[900] tracking-tight leading-none">THE SOLUTION: HELP HEROES</h3></div></div>
+        <div class="mt-2 bg-slate-900 text-white rounded-2xl px-5 py-3 text-center"><p class="text-[13px] sm:text-[15px] font-bold">A program that reframes help-seeking as a strength</p><p class="text-[11px] sm:text-[12px] text-amber-300 font-semibold tracking-wide">“Turning Questions into Connections”</p></div>
+        <p class="mt-3 text-[10px] font-bold tracking-widest uppercase text-slate-500">The flow: all 5 prototype screens, 375×812</p>
+        <div class="mt-1.5 grid grid-cols-5 gap-1.5 sm:gap-2 text-center">
+          <div class="min-w-0"><div class="phone"><div class="phone-screen"><p class="text-left" style="font-size:7px;font-weight:800;color:#0F172A">Good evening, James! 👋</p><div class="mini-bar b"></div><p class="text-center text-white" style="font-size:7px;font-weight:800;background:#2563EB;border-radius:5px;padding:3px 0">ASK FOR HELP</p><div class="flex gap-1"><div class="mini-bar flex-1"></div><div class="mini-bar flex-1"></div><div class="mini-bar flex-1"></div></div></div></div><p class="text-[10px] sm:text-[11px] font-bold mt-1">1 · Home</p></div>
+          <div class="min-w-0"><div class="phone" style="box-shadow:0 10px 22px rgba(217,119,6,.45);outline:2px solid #F59E0B"><div class="phone-screen"><p class="text-left" style="font-size:7px;font-weight:800;color:#0F172A">What do you need help with?</p><div class="mini-bar"></div><div class="mini-bar" style="width:70%"></div><p class="text-center text-white" style="font-size:6.5px;font-weight:800;background:#D97706;border-radius:5px;padding:3px 0">I don't know how to ask</p><p class="text-center" style="font-size:5.5px;color:#64748B">no judgment · 30 sec</p></div></div><p class="text-[10px] sm:text-[11px] font-bold mt-1 text-amber-700">2 · Ask ★</p></div>
+          <div class="min-w-0"><div class="phone"><div class="phone-screen"><p class="text-left" style="font-size:6.5px;font-weight:800;color:#0F172A">📌 Email my professor?</p><p class="text-left" style="font-size:6px;font-weight:700;color:#059669">145 found this helpful</p><div class="mini-bar"></div><div class="mini-bar" style="width:80%"></div><div class="mini-bar" style="width:60%"></div></div></div><p class="text-[10px] sm:text-[11px] font-bold mt-1">3 · Help Wall</p></div>
+          <div class="min-w-0"><div class="phone"><div class="phone-screen items-center"><p style="font-size:12px;font-weight:800;color:#0F172A">J</p><div class="flex gap-1 justify-center"><span class="mini-dot" style="background:#F59E0B"></span><span class="mini-dot" style="background:#2563EB"></span><span class="mini-dot" style="background:#8B5CF6"></span></div><p style="font-size:6.5px;font-weight:800;color:#0F172A">3 badges earned</p><div class="mini-bar v" style="width:80%"></div></div></div><p class="text-[10px] sm:text-[11px] font-bold mt-1">4 · Profile</p></div>
+          <div class="min-w-0"><div class="phone"><div class="phone-screen"><p class="text-left" style="font-size:6px;font-weight:800;color:#059669">TEXT-ONLY · ~2 KB/POST</p><div class="mini-bar e"></div><div class="mini-bar e" style="width:85%"></div><div class="mini-bar e" style="width:70%"></div><div class="mini-bar e" style="width:90%"></div></div></div><p class="text-[10px] sm:text-[11px] font-bold mt-1">5 · Community</p></div>
+        </div>
+        <div class="mt-3 bg-amber-50 border-2 border-amber-200 rounded-xl px-4 py-2.5 text-center">
+          <p class="text-[12px] sm:text-[13px] font-bold text-amber-800">Start with James tapping Ask ★. Rest is proof. <span class="font-semibold text-slate-600">Shame-free, ~2 KB/post.</span></p>
+        </div>
+        <div class="mt-3 flex justify-center"><a class="work-link" href="./week6.html" target="_blank" rel="noopener"><span class="wl-ico"><i class="fa-solid fa-mobile-screen"></i></span><span><b>Live prototype</b><small>Tap through Help Heroes</small></span><i class="fa-solid fa-arrow-up-right-from-square wl-go"></i></a></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5 HOW IT TACKLES -->
+    <div id="slide-5" class="deck-slide">
+      <div class="aspect-video bg-white px-6 sm:px-10 py-5 sm:py-6 overflow-y-auto">
+        <p class="text-[11px] font-bold tracking-[0.22em] uppercase text-primary">05 • How it tackles James's challenges</p>
+        <h3 class="font-display text-[22px] sm:text-[30px] font-[900] tracking-tight leading-none mt-1">WHY IT WORKS FOR JAMES</h3>
+        <div class="mt-3 grid sm:grid-cols-2 gap-2.5">
+          <div class="bg-amber-50 border-2 border-amber-300 rounded-xl p-3 flex gap-2.5"><span class="icon-tile tile-amber" style="width:34px;height:34px;font-size:14px"><i class="fa-solid fa-circle-question"></i></span><div><p class="text-[12px] font-extrabold text-amber-800">Can't phrase it → “I don't know” button</p><p class="text-[11.5px] text-slate-600 mt-1 leading-snug">We help him phrase it in 30 sec, no judgment. As James said in interview: “I don't know what I don't know.”</p></div></div>
+          <div class="bg-blue-50 border-2 border-blue-200 rounded-xl p-3 flex gap-2.5"><span class="icon-tile tile-blue" style="width:34px;height:34px;font-size:14px"><i class="fa-solid fa-comments"></i></span><div><p class="text-[12px] font-extrabold text-primary">Alone → anonymous Help Wall</p><p class="text-[11.5px] text-slate-600 mt-1 leading-snug">145 students shared his question about emailing a professor. “I don't feel so alone” (Maria, testing)</p></div></div>
+          <div class="bg-violet-50 border-2 border-violet-200 rounded-xl p-3 flex gap-2.5"><span class="icon-tile tile-violet" style="width:34px;height:34px;font-size:14px"><i class="fa-solid fa-medal"></i></span><div><p class="text-[12px] font-extrabold text-violet-700">Shame → Help Hero badges</p><p class="text-[11.5px] text-slate-600 mt-1 leading-snug">“A reward for being brave enough to ask” (James, on badges). Pride replaces apology.</p></div></div>
+          <div class="bg-emerald-50 border-2 border-emerald-200 rounded-xl p-3 flex gap-2.5"><span class="icon-tile tile-emerald" style="width:34px;height:34px;font-size:14px"><i class="fa-solid fa-signal"></i></span><div><p class="text-[12px] font-extrabold text-emerald-700">No data → text-only + offline</p><p class="text-[11.5px] text-slate-600 mt-1 leading-snug">~2 KB/post. 12 Qs · 48 KB saved, auto-syncs on library wifi. “Almost no data” (Maria, on text-only)</p></div></div>
+        </div>
+        <p class="mt-2.5 text-center text-[11.5px] font-semibold text-slate-500">Belonging, not just bandwidth → tested next.</p>
+      </div>
+    </div>
+
+    <!-- SLIDE 6 PROOF -->
+    <div id="slide-6" class="deck-slide">
+      <div class="aspect-video bg-white px-6 sm:px-10 py-5 sm:py-6 overflow-y-auto">
+        <p class="text-[11px] font-bold tracking-[0.22em] uppercase text-primary">06 • Testing & what I changed</p>
+        <h3 class="font-display text-[22px] sm:text-[30px] font-[900] tracking-tight leading-none mt-1">TESTED WITH MARIA & JAMES</h3>
+        <div class="mt-3 grid sm:grid-cols-2 gap-3">
+          <div>
+            <div class="grid grid-cols-2 gap-2">
+              <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 flex items-center gap-2.5 text-left"><span class="avatar-init bg-emerald-600 text-white">M</span><div class="min-w-0"><p class="text-[12px] font-extrabold leading-none">Maria, 19</p><p class="text-[10px] text-slate-500 font-semibold mt-1">Rural · library WiFi · 1st-year</p></div></div>
+              <div class="bg-blue-50 border-2 border-primary/60 rounded-xl p-3 flex items-center gap-2.5 text-left"><span class="avatar-init bg-primary text-white">J</span><div class="min-w-0"><p class="text-[12px] font-extrabold leading-none">James, 20</p><p class="text-[10px] text-slate-500 font-semibold mt-1">Shared device · 2nd-year</p></div></div>
+            </div>
+            <div class="mt-2 bg-slate-50 border border-slate-200 rounded-xl p-3">
+              <p class="text-[10px] font-bold tracking-widest uppercase text-slate-500">Key findings • 2 users × 60 min</p>
+              <ul class="mt-1 space-y-1 text-[11px] sm:text-[12px] font-semibold text-slate-700">
+                <li>✅ Top find: ask-button to Home</li>
+                <li>✅ Pride validated: badges reward bravery</li>
+                <li>✅ Low-data validated: wall plus offline works</li>
+              </ul>
+            </div>
+          </div>
+          <div class="flex flex-col gap-2">
+            <div class="bg-blue-600 text-white rounded-xl p-3.5"><p class="text-[10px] font-bold tracking-widest uppercase text-white/70">What they said: verbatim</p><ul class="mt-1 space-y-1 text-[11.5px] sm:text-[12.5px] font-medium italic leading-snug"><li>“Oh, that's me! That's exactly how I feel.” (Maria)</li><li>“It's like it was designed for me.” (James)</li></ul></div>
+            <div class="grid grid-cols-2 gap-2 text-[11px] font-semibold">
+              <div class="bg-amber-50 border-2 border-amber-300 rounded-xl p-2.5"><p class="font-extrabold text-amber-800">→ Home CTA ✓</p><p class="text-slate-500 font-medium">Do not bury the best bit</p></div>
+              <div class="bg-emerald-50 border-2 border-emerald-200 rounded-xl p-2.5"><p class="font-extrabold text-emerald-700">→ Offline + dark ✓</p><p class="text-slate-500 font-medium">12 Qs · 48 KB · night study</p></div>
+            </div>
+            <div class="flex flex-wrap justify-start gap-1.5"><a class="work-link" href="./testing_board.html" target="_blank" rel="noopener"><span class="wl-ico"><i class="fa-solid fa-flask"></i></span><span><b>Testing board</b><small>Findings from Maria + James</small></span><i class="fa-solid fa-arrow-up-right-from-square wl-go"></i></a><a class="work-link" href="./index_week7.html" target="_blank" rel="noopener"><span class="wl-ico"><i class="fa-solid fa-rotate"></i></span><span><b>Iterated prototype</b><small>Week 7, built from feedback</small></span><i class="fa-solid fa-arrow-up-right-from-square wl-go"></i></a></div>
+          </div>
+        </div>
+        <div class="mt-2.5 bg-slate-900 text-white rounded-full px-4 py-2 flex items-center justify-center gap-2 text-[11px] sm:text-[12px] font-bold flex-wrap"><span>Build</span><i class="fa-solid fa-arrow-right text-[9px] text-amber-300"></i><span>Test</span><i class="fa-solid fa-arrow-right text-[9px] text-amber-300"></i><span>Learn</span><i class="fa-solid fa-arrow-right text-[9px] text-amber-300"></i><span>Improve</span><i class="fa-solid fa-arrow-right text-[9px] text-amber-300"></i><span class="text-amber-300">Test Again</span></div>
+      </div>
+    </div>
+
+    <!-- SLIDE 7 ASK + CLOSE -->
+    <div id="slide-7" class="deck-slide">
+      <div class="aspect-video bg-gradient-to-br from-[#0F172A] via-[#1D4ED8] to-[#7C3AED] text-white relative overflow-hidden px-6 sm:px-10 py-5 sm:py-6 overflow-y-auto">
+        <div class="absolute inset-0 opacity-20 grid-pattern"></div>
+        <div class="absolute -bottom-20 -left-20 w-72 h-72 rounded-full bg-amber-400/15 blur-3xl"></div>
+        <div class="relative">
+          <p class="text-[11px] font-bold tracking-[0.22em] uppercase text-amber-300">07 • Next steps + thank you</p>
+          <h3 class="font-display text-[22px] sm:text-[30px] font-[900] tracking-tight leading-none mt-1">NEXT STEPS → THANK YOU</h3>
+          <div class="mt-3 grid sm:grid-cols-2 gap-3 items-stretch">
+            <div class="bg-white/[0.07] border border-white/15 rounded-2xl p-4">
+              <p class="text-[10px] font-bold tracking-widest uppercase text-white/50">Where this goes next</p>
+              <ul class="mt-2 space-y-2 text-[12px] font-semibold">
+                <li class="flex gap-2"><span class="w-6 h-6 rounded-full bg-amber-400 text-slate-900 flex items-center justify-center text-[11px] font-bold shrink-0">1</span> Give us 1 course plus 1 library slot for 4 weeks to pilot with 1 faculty and IT</li>
+                <li class="flex gap-2"><span class="w-6 h-6 rounded-full bg-white/20 border border-white/30 flex items-center justify-center text-[11px] font-bold shrink-0">2</span> Library hubs with offline packs, wider testing</li>
+                <li class="flex gap-2"><span class="w-6 h-6 rounded-full bg-white/20 border border-white/30 flex items-center justify-center text-[11px] font-bold shrink-0">3</span> Safety beyond badges, funding and moderation</li>
+              </ul>
+              <p class="mt-3 text-[12.5px] font-bold leading-snug text-amber-200">How might we help first-generation students navigate without feeling like outsiders who apologize?</p>
+            </div>
+            <div class="text-center flex flex-col items-center justify-center bg-white/[0.06] border border-white/15 rounded-2xl p-4">
+              <p class="text-[20px] font-light">Thank You</p>
+              <p class="font-display text-[26px] sm:text-[32px] font-[900] tracking-tight">HELP HEROES</p>
+              <p class="text-[11px] font-semibold text-amber-300 tracking-wide">Turning Questions into Connections</p>
+              <div class="mt-2 inline-flex items-center gap-2.5 bg-white/10 border border-white/25 rounded-2xl pl-1.5 pr-3 py-1.5 text-left"><span class="avatar-init bg-amber-400 text-slate-900">J</span><span><b class="block text-[12px] leading-tight">James · Help Hero</b><small class="block text-white/65 text-[10px]">3 badges · paying it forward</small></span><i class="fa-solid fa-medal text-amber-300 text-[16px]"></i></div>
+              <p class="text-[12.5px] italic font-medium text-white/95 mt-3">“Because when we ask for help,<br>we don't just find answers, we find each other.”</p>
+              <p class="mt-2 text-[10px] font-bold bg-white text-slate-900 px-3 py-1.5 rounded-full">Augustine Atta Abrefa • s-01141 • Sep 2026</p>
+            </div>
+          </div>
+          <div class="mt-3 flex justify-center relative"><a class="work-link work-link-dark" href="./week6.html" target="_blank" rel="noopener"><span class="wl-ico"><i class="fa-solid fa-mobile-screen"></i></span><span><b>Try the prototype live</b><small>Happy to demo after Q&A</small></span><i class="fa-solid fa-arrow-up-right-from-square wl-go"></i></a></div>
+          <div class="mt-2 flex items-center justify-center gap-1.5 text-[10px] font-bold flex-wrap"><span class="text-white/50">Isolation</span><i class="fa-solid fa-arrow-right text-[9px] text-white/30"></i><span class="text-white/70">Fear</span><i class="fa-solid fa-arrow-right text-[9px] text-white/30"></i><span class="text-amber-300">Hope</span><i class="fa-solid fa-arrow-right text-[9px] text-white/30"></i><span>Courage</span><i class="fa-solid fa-arrow-right text-[9px] text-white/30"></i><span class="text-emerald-300">Belonging</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="workOverlay" class="hidden absolute inset-0 z-50 flex-col bg-[#0F172A]/95 backdrop-blur-sm p-4 sm:p-6 no-print">
+    <div class="flex items-center gap-2.5 w-full max-w-[1000px] mx-auto">
+      <span class="w-8 h-8 rounded-xl bg-amber-400 text-slate-900 flex items-center justify-center shrink-0"><i class="fa-solid fa-arrow-up-right-from-square text-[12px]"></i></span>
+      <p id="workOverlayTitle" class="text-white text-[13px] font-bold truncate">Page</p>
+      <div class="ml-auto flex items-center gap-1.5 shrink-0">
+        <a id="workOverlayOpen" href="#" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 bg-white/10 border border-white/25 text-white text-[11px] font-bold px-3 py-1.5 rounded-full hover:bg-white/20">New tab <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></a>
+        <button onclick="closeWork()" class="inline-flex items-center gap-1.5 bg-amber-400 text-slate-900 text-[11px] font-bold px-3.5 py-1.5 rounded-full hover:bg-amber-300"><i class="fa-solid fa-arrow-left text-[10px]"></i> Back to slide</button>
+      </div>
+    </div>
+    <div class="flex-1 min-h-0 w-full max-w-[1000px] mx-auto mt-3 rounded-2xl overflow-hidden border border-white/20 bg-white">
+      <iframe id="workFrame" class="w-full h-full border-0" title="Linked project page" style="min-height:480px"></iframe>
+    </div>
+  </div>
+
+  <div id="notesPanel" class="mx-0 border-t border-slate-200 bg-slate-50 px-5 sm:px-6 py-4">
+    <div class="flex flex-wrap items-center justify-between gap-2">
+      <p class="text-[11px] font-bold tracking-widest uppercase text-slate-500"><i class="fa-solid fa-microphone text-primary mr-1"></i> Speaker notes: <span id="notesTitle" class="text-ink">Slide 1 • Title</span></p>
+      <span id="notesTime" class="text-[11px] font-bold bg-slate-900 text-white px-2.5 py-1 rounded-full">0:00 – 0:20</span>
+    </div>
+    <p id="notesText" class="notes-box mt-2 text-[13px] leading-relaxed text-slate-700"></p>
+    <div class="mt-3 flex flex-wrap items-center gap-1.5 no-print">
+      <button onclick="speakNote()" class="inline-flex items-center gap-1.5 bg-[#2563EB] text-white text-[11px] font-bold px-3 py-1.5 rounded-full hover:bg-[#1D4ED8]"><i class="fa-solid fa-circle-play text-[11px]"></i> <span id="speakLabel">Play voice</span></button>
+      <button onclick="stopSpeak()" class="inline-flex items-center gap-1.5 bg-white border border-slate-200 text-[11px] font-semibold px-3 py-1.5 rounded-full hover:bg-slate-100"><i class="fa-solid fa-stop text-[11px]"></i> Stop</button>
+      <span class="text-[11px] text-slate-400 font-medium ml-1">Tip: <kbd class="bg-white border border-slate-200 rounded px-1.5 py-0.5 font-mono">←</kbd> <kbd class="bg-white border border-slate-200 rounded px-1.5 py-0.5 font-mono">→</kbd> move, <kbd class="bg-white border border-slate-200 rounded px-1.5 py-0.5 font-mono">F</kbd> fullscreen, <kbd class="bg-white border border-slate-200 rounded px-1.5 py-0.5 font-mono">N</kbd> notes.</span>
+    </div>
+  </div>
+  </div>
+
+  <div class="mt-3 bg-white border border-slate-200 rounded-2xl p-3 no-print">
+    <div class="flex items-center justify-between px-1 pb-2">
+      <p class="text-[11px] font-bold tracking-widest uppercase text-slate-500">Jump to slide</p>
+      <span class="text-[11px] text-slate-400 font-medium">7 slides • click any card</span>
+    </div>
+    <div id="thumbs" class="grid grid-cols-4 sm:grid-cols-7 gap-1.5"></div>
+  </div>
+</div>
+</section>
+
+<section id="all-slides" class="mt-6 scroll-mt-[72px] reveal">
+  <div class="bg-white rounded-[22px] border border-slate-200 shadow-card overflow-hidden">
+    <div class="px-6 sm:px-8 pt-6 flex flex-wrap items-start justify-between gap-3">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="w-8 h-8 rounded-xl bg-slate-900 text-white flex items-center justify-center"><i class="fa-solid fa-table-cells text-[12px]"></i></span>
+          <h2 class="text-[18px] sm:text-[20px] font-extrabold tracking-tight">All 7 slides: teleprompter</h2>
+        </div>
+        <p class="text-[13px] text-slate-600 mt-1.5 max-w-[760px]">Locked 5:00 script. Print for rehearsal.</p>
+      </div>
+      <button onclick="window.print()" class="inline-flex items-center gap-1.5 bg-slate-900 text-white text-[12px] font-bold px-3.5 py-1.5 rounded-full hover:bg-black no-print"><i class="fa-solid fa-print text-[11px]"></i> Print / PDF</button>
+    </div>
+    <div class="px-6 sm:px-8 pb-6 pt-4 grid md:grid-cols-2 gap-3 text-[12.5px] leading-relaxed" id="scriptGrid"></div>
+  </div>
+</section>
+
+<div class="mt-6 bg-white border border-slate-200 rounded-2xl p-5 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between final-chrome-hide">
+  <div>
+    <p class="text-[12px] font-bold tracking-widest uppercase text-slate-500">About live cut</p>
+    <p class="text-[13px] text-slate-700 mt-1 leading-snug max-w-[720px]">7-slide stakeholder pitch cut from 10-slide prototype. Covers challenge, James, solution, tackles, proof, ask. 5:00 max.</p>
+  </div>
+  <div class="flex gap-2 shrink-0 no-print">
+    <a href="./week8-final.html" class="text-[12px] font-bold bg-white border border-slate-200 px-4 py-2 rounded-full hover:bg-slate-50">10-slide prototype</a>
+    <button onclick="startPresent()" class="text-[12px] font-bold bg-[#2563EB] text-white px-4 py-2 rounded-full hover:bg-[#1D4ED8]">Present live</button>
+  </div>
+</div>
+
+</main>
+<footer class="max-w-[1160px] mx-auto px-6 lg:px-8 pb-10 pt-6 text-[11px] text-slate-500 flex flex-wrap gap-2 justify-between">
+  <span>Help Heroes • Design Thinking • GUDS • Sep 2026 • s-01141 • live deck v2 (7 slides, original tone, from final 10)</span>
+  <span class="flex gap-2"><a href="./index.html" class="underline hover:text-ink">Overview</a> • <a href="./week6.html" class="underline hover:text-ink">Prototype</a> • <a href="./week8-final.html" class="underline hover:text-ink">Final 10</a> • <a href="./week8-live.html" class="underline hover:text-ink">Live 7</a></span>
+</footer>
+
+<script>
+const notes=[
+{t:"Slide 1 • Title Slide",time:"0:00 – 0:20",x:"Hello. I am Augustine Atta Abrefa. This is Help Heroes. From Apology to Belonging. Over the next five minutes, you will meet James. He and students like him are the reason this project exists."},
+{t:"Slide 2 • The Design Challenge",time:"0:20 – 0:50",x:"Subject: Sorry for late submission. Body: Sorry Professor, network failed again. Sorry to bother you. I understand if you deduct marks. James. That inbox is my brief. This work sets out to redesign the online learning experience for first generation students in a world in which access to high speed internet is unreliable. It means James does not write that mail again."},
+{t:"Slide 3 • Understanding the User: James",time:"0:50 – 1:40",x:"That mail has a sender, and his name is James. He is twenty, second year, and he shares one connection with four other people at home. So he studies after eleven at night, on two bars of signal, when the house is finally quiet. Over time he has learned to apologize for everything. Late work, missed meetings, needing help. Not because he is careless. Because he does not know how to ask. And his words, not mine: I want to ask for help, but I do not even know what to ask. I do not know what I do not know. So he apologizes instead. That is the moment I built for."},
+{t:"Slide 4 • The Solution: Help Heroes",time:"1:40 – 2:40",x:"My answer is Help Heroes, and the idea is simple. Turning questions into connections. When James opens the app, he taps Ask for Help, and then the one that actually matters: I do not know how to ask. We help him word it in about thirty seconds, with no judgment, and a mentor replies. He earns a badge. And when he opens the wall, he sees that a hundred and forty-five students asked the same question about emailing a professor. Five screens. Home, Ask, Wall, Profile, Community. Each post is about two kilobytes, which is less than a text message. I will show it live in a moment."},
+{t:"Slide 5 • Why It Works",time:"2:40 – 3:30",x:"So why does this work. Because each thing that was holding James back has an answer. He could not phrase it, so we phrase it with him. He felt alone, so the wall shows him others asked too. He felt shame, so the badge turns it into pride. And he had no data, so text holds. Twelve questions fit in forty-eight kilobytes, and it syncs the next time he is on library wifi. Belonging, not just bandwidth."},
+{t:"Slide 6 • Testing",time:"3:30 – 4:20",x:"I tested this with two people. Maria, nineteen, rural, working from library wifi. And James himself. An hour with each of them. Maria said: Oh, that is me. That is exactly how I feel. And James said: It is like it was designed for me. So I moved Ask to the Home screen, because it was buried before and it is the whole point. I made the wall save offline. Twelve questions, forty-eight kilobytes. And I added dark mode, because James studies at night and the screen was waking his family. Build, test, learn, improve."},
+{t:"Slide 7 • Next Steps plus Thank You",time:"4:20 – 5:00",x:"Three things come next. First, give me one course and one library slot for four weeks, and I will pilot this with one teacher and the IT team. Second, library hubs with offline packs, and wider testing across more students and more contexts. Third, safety beyond badges, plus funding and moderation. But the question stays the same. How do we help first-generation students belong, without apology. Thank you. Help Heroes. When we ask, we find each other."}
+];
+let cur=1; const N=7;
+let startT=null, timer=null, notesVisible=false;
+const shortTitles=["Title","Challenge","James","Solution","Why it works","Tested+Changed","Next+Thanks"];
+function renderThumbs(){
+  const w=document.getElementById('thumbs'); w.innerHTML='';
+  for(let i=1;i<=N;i++){
+    const b=document.createElement('button');
+    b.className='thumb text-left bg-slate-50 border border-slate-200 rounded-xl px-2.5 py-2'+(i===cur?' active':'');
+    b.innerHTML='<p class="text-[10px] font-bold text-slate-400">'+String(i).padStart(2,'0')+'</p><p class="text-[11px] font-bold leading-tight">'+shortTitles[i-1]+'</p><p class="text-[10px] text-slate-400 font-mono">'+notes[i-1].time+'</p>';
+    b.onclick=()=>showSlide(i);
+    w.appendChild(b);
+  }
+}
+function renderScript(){
+  const g=document.getElementById('scriptGrid'); g.innerHTML='';
+  notes.forEach((n,i)=>{
+    const d=document.createElement('div');
+    d.className='bg-slate-50 border border-slate-200 rounded-2xl p-4';
+    d.innerHTML='<div class="flex items-center justify-between gap-2"><p class="text-[12px] font-extrabold">'+(i+1)+'. '+n.t+'</p><span class="text-[10px] font-bold bg-slate-900 text-white px-2 py-0.5 rounded-full shrink-0">'+n.time+'</span></div><p class="mt-1.5 text-slate-600 italic">“'+n.x+'”</p><button onclick="showSlide('+(i+1)+');window.scrollTo({top:0,behavior:\'smooth\'})" class="mt-2 text-[11px] font-bold text-primary hover:underline">⤴ Go to slide '+(i+1)+'</button>';
+    g.appendChild(d);
+  });
+}
+function showSlide(n){
+  cur=Math.min(N,Math.max(1,n));
+  document.querySelectorAll('.deck-slide').forEach(s=>s.classList.remove('active'));
+  document.getElementById('slide-'+cur).classList.add('active');
+  document.getElementById('counter').textContent=cur+' / '+N;
+  document.getElementById('deckProgress').style.width=(cur/N*100)+'%';
+  document.getElementById('notesTitle').textContent=notes[cur-1].t;
+  document.getElementById('notesTime').textContent=notes[cur-1].time;
+  document.getElementById('notesText').textContent='“'+notes[cur-1].x+'”';
+  stopSpeak(); renderThumbs();
+  if(!startT){startT=Date.now(); startClock();}
+}
+function nextSlide(){showSlide(cur+1)} function prevSlide(){showSlide(cur-1)}
+function toggleNotes(force){
+  notesVisible = force!==undefined?force:!notesVisible;
+  document.getElementById('notesPanel').style.display=notesVisible?'block':'none';
+  document.getElementById('notesBtn').classList.toggle('bg-blue-100',notesVisible);
+}
+function toggleFullscreen(){
+  const el=document.getElementById('stage');
+  if(document.fullscreenElement) document.exitFullscreen();
+  else el.requestFullscreen&&el.requestFullscreen();
+}
+function startPresent(){
+  showSlide(1); toggleNotes(false);
+  const el=document.getElementById('stage');
+  el.scrollIntoView({behavior:'smooth'});
+  try{ el.requestFullscreen&&el.requestFullscreen(); }catch(e){}
+}
+document.addEventListener('fullscreenchange',()=>{ if(document.fullscreenElement) toggleNotes(false); });
+function startClock(){
+  if(timer) return;
+  timer=setInterval(()=>{
+    const s=Math.floor((Date.now()-startT)/1000);
+    const m=Math.floor(s/60), r=String(s%60).padStart(2,'0');
+    document.getElementById('clock').textContent=m+':'+r+' / 5:00';
+  },500);
+}
+let narrating=false;
+function speakNote(){
+  if(!('speechSynthesis' in window)) return;
+  const synth=speechSynthesis; synth.cancel();
+  const u=new SpeechSynthesisUtterance(notes[cur-1].x);
+  u.rate=1; u.pitch=1;
+  setSpeakUI(true);
+  u.onend=()=>setSpeakUI(false); u.onerror=()=>setSpeakUI(false);
+  synth.speak(u); narrating=true;
+}
+function stopSpeak(){ try{ speechSynthesis.cancel(); }catch(e){} setSpeakUI(false); narrating=false; }
+function setSpeakUI(on){ const l=document.getElementById('speakLabel'); if(l) l.textContent=on?'Playing…':'Play voice'; }
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();nextSlide()}
+  else if(e.key==='ArrowLeft'){e.preventDefault();prevSlide()}
+  else if(e.key.toLowerCase()==='f'){toggleFullscreen()}
+  else if(e.key.toLowerCase()==='n'){toggleNotes()}
+  else if(e.key==='Home'){showSlide(1)} else if(e.key==='End'){showSlide(N)}
+});
+function toggleDark(){
+  const h=document.documentElement; h.classList.toggle('dark');
+  try{ localStorage.setItem('hh-dark',h.classList.contains('dark')?'1':'0'); }catch(e){}
+  syncDarkIcon();
+}
+function syncDarkIcon(){
+  const b=document.getElementById('darkBtn');
+  if(b) b.innerHTML=document.documentElement.classList.contains('dark')?'<i class="fa-solid fa-sun text-[12px]"></i>':'<i class="fa-solid fa-moon text-[12px]"></i>';
+}
+try{ if(localStorage.getItem('hh-dark')==='1') document.documentElement.classList.add('dark'); }catch(e){}
+syncDarkIcon();
+function openWork(url,title){
+  stopSpeak();
+  const ov=document.getElementById('workOverlay');
+  document.getElementById('workFrame').src=url;
+  document.getElementById('workOverlayTitle').textContent=title||'Project page';
+  document.getElementById('workOverlayOpen').href=url;
+  ov.classList.remove('hidden'); ov.classList.add('flex');
+}
+function closeWork(){
+  const ov=document.getElementById('workOverlay');
+  ov.classList.add('hidden'); ov.classList.remove('flex');
+  document.getElementById('workFrame').src='about:blank';
+}
+document.querySelectorAll('a.work-link').forEach(a=>{
+  a.addEventListener('click',e=>{ e.preventDefault(); const b=a.querySelector('b'); openWork(a.getAttribute('href'),b?b.textContent:'Project page'); });
+});
+function addSlideFooters(){
+  for(let i=1;i<=N;i++){
+    const s=document.getElementById('slide-'+i);
+    if(!s||s.querySelector('.slide-footer')) continue;
+    const f=document.createElement('div');
+    f.className='slide-footer';
+    f.innerHTML='<span class="sf-l"><span class="sf-dot"></span> HELP HEROES • s-01141 • German University of Digital Science</span><span>'+i+' / '+N+'</span>';
+    s.appendChild(f);
+  }
+}
+function applyPresentMode(){
+  try{
+    const q=new URLSearchParams(location.search);
+    if(q.get('present')==='1'){
+      document.body.classList.add('present-mode');
+      toggleNotes(false);
+      setTimeout(()=>{const st=document.getElementById('stage'); st&&st.scrollIntoView({behavior:'auto',block:'start'});},60);
+    }
+  }catch(e){}
+}
+renderThumbs(); renderScript(); addSlideFooters(); toggleNotes(false); showSlide(1); applyPresentMode(); addSlideFooters();
+</script>
+</body>
+</html>
