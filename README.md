@@ -1,22 +1,29 @@
 # Help Heroes
 
-Prototype for Design Thinking project, first generation students.
+**An eight-week Design Thinking case study for first-generation students, from interviews to a narrated prototype.**
 
-## Files
-- `index.html` Overview landing (Weeks 1–8)
-- `week1.html` Week 1 wicked problem (factor knot, prism, iceberg, risks)
-- `week2.html` Week 2 team (T-shapes, tension diagram, first impressions)
-- `week3.html` Week 3 problem space (mind map, chapters, Maria/James/Aisha interviews)
-- `week4.html` Week 4 synthesis (quotation flowers, PoVs, HMW)
-- `week8.html` Week 8 final presentation prototype (10 slides + timed speaker notes)
-- `audio/week8-slide01.mp3` … `week8-slide10.mp3` Studio neural narration, one file per slide
-- `week6.html` Week 6 prototype
-- `index_week7.html` Updated prototype with feedback from testing
-- `wireframe_image.html` Wireframe overview Week 6
-- `wireframe_image_week7.html` Wireframe overview updated
-- `testing_board.html` Testing notes from Maria and James
-- `week7_reflection.md` Process reflection
-- `Help_Heroes_Week7_Iteration_Video.mp4` Short video walkthrough
+[Live case study](https://nyght-x-walker.github.io/help-heroes-mockup/) · [Week 8 finale](https://nyght-x-walker.github.io/help-heroes-mockup/week8.html) · [Reflection](week7_reflection.md)
+
+![Help Heroes overview with the Week 6 prototype, research metrics, and persona summary](docs/overview.webp)
+
+## What's inside
+
+- `index.html` — overview landing for Weeks 1–8
+- `week1.html` — wicked problem, factor knot, prism, iceberg, and risks
+- `week2.html` — team, T-shapes, tension diagram, and first impressions
+- `week3.html` — problem space, mind map, chapters, and interviews
+- `week4.html` — synthesis, quotation flowers, PoVs, and HMW questions
+- `week6.html` — first prototype
+- `index_week7.html` — prototype updated from testing feedback
+- `week8.html` — final presentation prototype with timed speaker notes
+- `audio/` — studio narration for the Week 8 slides
+- `testing_board.html` — testing notes from Maria and James
+- `week7_reflection.md` — process reflection
 
 ## View
-Open `index.html` for the overview, `week8.html` for the Week 8 finale deck, or `index_week7.html` in a browser. All links are relative, no build step needed.
+
+Open `index.html` for the overview, `week8.html` for the finale deck, or `index_week7.html` for the tested prototype. Everything is static HTML with relative links; there is no build step.
+
+## Process
+
+The case study follows a full Design Thinking arc: interviews, problem framing, synthesis, ideation, wireframing, prototyping, usability testing, iteration, and a narrated final presentation. The work focuses on first-generation students and the friction they meet when navigating support systems.
